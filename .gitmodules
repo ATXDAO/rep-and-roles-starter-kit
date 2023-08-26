@@ -1,0 +1,3 @@
+[submodule "lib/reputation"]
+	path = reputation-contracts/reputation
+	url = https://github.com/ATXDAO/reputation.git
