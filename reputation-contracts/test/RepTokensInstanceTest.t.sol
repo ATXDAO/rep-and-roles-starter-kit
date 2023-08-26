@@ -31,24 +31,3 @@ contract RepTokensInstanceTest is Test {
         assertEq(instance.uri(0), "ipfs://bafybeiaz55w6kf7ar2g5vzikfbft2qoexknstfouu524l7q3mliutns2u4/0");
     }
 }
-
-// import {Counter} from "../src/Counter.sol";
-
-// contract CounterTest is Test {
-//     Counter public counter;
-
-//     function setUp() public {
-//         counter = new Counter();
-//         counter.setNumber(0);
-//     }
-
-//     function testIncrement() public {
-//         counter.increment();
-//         assertEq(counter.number(), 1);
-//     }
-
-//     function testSetNumber(uint256 x) public {
-//         counter.setNumber(x);
-//         assertEq(counter.number(), x);
-//     }
-// }
