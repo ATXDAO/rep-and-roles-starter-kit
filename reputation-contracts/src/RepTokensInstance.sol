@@ -7,4 +7,8 @@ contract RepTokensInstance is RepTokens {
     constructor(address[] memory admins, uint256 maxMintAmountPerTx, string memory baseURI)
         RepTokens(admins, maxMintAmountPerTx, baseURI)
     {}
+
+    function imatest() external pure returns (uint256) {
+        return 5;
+    }
 }
