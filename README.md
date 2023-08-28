@@ -6,5 +6,5 @@
 # Run Webapp
 
 1. `cd reputation-react`
-2. `npm i`
-3. `npm start`
+2. `yarn install`
+3. `yarn start`
