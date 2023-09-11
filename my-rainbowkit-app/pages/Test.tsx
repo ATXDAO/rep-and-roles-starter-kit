@@ -4,18 +4,18 @@ import {abi} from  "../../smart-contracts/out/RepTokensInstance.sol/RepTokensIns
 
 function Test({  }) {
 
-    const contractRead = useContractRead({
-      address: repTokensInstance as '0x${string}',
-      abi: abi,
-      functionName: "symbol"
-    });
+    // const contractRead = useContractRead({
+    //   address: repTokensInstance as '0x${string}',
+    //   abi: abi,
+    //   functionName: "symbol"
+    // });
   
-    console.log(contractRead);
+    // console.log(contractRead);
   
-    return (
-        <>
-        </>
-    );
+    // return (
+    //     <>
+    //     </>
+    // );
   }
   
   export default Test;
