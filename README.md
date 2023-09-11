@@ -1,6 +1,6 @@
 # Run Local Environment
 
-1. `cd smart contracts`
+1. `cd smart-contracts`
 2. `make run-local`
 
 # Run Webapp
