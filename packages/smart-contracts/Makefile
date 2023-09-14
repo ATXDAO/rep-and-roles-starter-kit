@@ -44,6 +44,3 @@ deploy:
 
 begin:
 	anvil -m 'test test test test test test test test test test test junk' --steps-tracing --block-time 1;
-
-run-local:
-	make -j begin deploy
