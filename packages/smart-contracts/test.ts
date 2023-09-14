@@ -42,15 +42,15 @@ async function main() {
     console.log(fileContent);
 
 
-    const TARGET_DIR = "./";
+    const TARGET_DIR = "../nextjs/generated/";
     const TARGET_FILE_NAME = "deployedContracts.ts";
 
-    // if (!fs.existsSync(TARGET_DIR)) {
-    //     fs.mkdirSync(TARGET_DIR);
-    //   }
+    if (!fs.existsSync(TARGET_DIR)) {
+        fs.mkdirSync(TARGET_DIR);
+    }
 
     fs.writeFileSync(
-        `${TARGET_DIR}deployedContracts.ts`,
+        `${TARGET_DIR + TARGET_FILE_NAME}`,
         prettier.format(`const contracts = {${fileContent}} as const; \n\n export default contracts`, {
             parser: "typescript",
         }),
