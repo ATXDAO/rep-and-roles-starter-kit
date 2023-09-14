@@ -18,11 +18,13 @@ function loadAbiFromDirectory(abiDir: string) {
 
 async function main() {
 
+    const chainId = process.argv[2];
+
     const abi = loadAbiFromDirectory(ABI_DIR);
 
-    const TRANSACTIONS_PATH = "../smart-contracts/broadcast/DeployRepTokensInstanceWithData.s.sol/31337/run-latest.json";
+    const TRANSACTIONS_PATH = `../smart-contracts/broadcast/DeployRepTokensInstanceWithData.s.sol/${chainId}/run-latest.json`;
     if (!fs.existsSync(TRANSACTIONS_PATH)) {
-        throw Error("Please make deployments before attempting migration!");
+        throw Error(`Please make deployments to ${chainId} before attempting migration!`);
     }
 
     const broadcastString = fs.readFileSync(TRANSACTIONS_PATH, { encoding: 'utf8' });
@@ -41,12 +43,19 @@ async function main() {
 
     const output = {} as Record<string, any>;
 
-    output["31337"] = [
-        {
-            chainId: "31337",
-            name: "localhost",
-            contracts
+    let name;
+    if (chainId === "31337") {
+        name = "localhost";
+    }
+    else {
+        name = "Unidentified Network"
+    }
 
+    output[chainId] = [
+        {
+            chainId,
+            name,
+            contracts
         }
     ];
 
@@ -67,6 +76,8 @@ async function main() {
             parser: "typescript",
         }),
     );
+
+    console.log("Succesfully migrated deployments!");
 }
 
 main();
