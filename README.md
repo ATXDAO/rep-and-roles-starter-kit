@@ -20,10 +20,7 @@ yarn install
 
 2. Test commands
 
-```
-yarn compile
-```
-Compile smart contracts
+`yarn compile` - Compile smart contracts
 
 
 Deploy smart contracts to localhost
