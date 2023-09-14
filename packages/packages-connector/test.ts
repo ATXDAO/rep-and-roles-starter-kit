@@ -20,8 +20,6 @@ async function main() {
 
     const abi = loadAbiFromDirectory(ABI_DIR);
 
-    console.log(abi);
-
     const TRANSACTIONS_PATH = "../smart-contracts/broadcast/DeployRepTokensInstanceWithData.s.sol/31337/run-latest.json";
     if (!fs.existsSync(TRANSACTIONS_PATH)) {
         throw Error("Please make deployments before attempting migration!");
@@ -52,15 +50,9 @@ async function main() {
         }
     ];
 
-    console.log(output);
-
-
     const fileContent = Object.entries(output).reduce((content, [chainId, chainConfig]) => {
         return `${content}${parseInt(chainId).toFixed(0)}:${JSON.stringify(chainConfig, null, 2)},`;
     }, "");
-
-    console.log(fileContent);
-
 
     const TARGET_DIR = "../nextjs/generated/";
     const TARGET_FILE_NAME = "deployedContracts.ts";
