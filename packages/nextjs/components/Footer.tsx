@@ -44,21 +44,17 @@ export const Footer = () => {
             <span>·</span>
             <div>
               <p className="m-0 text-center">
-                Built with <HeartIcon className="inline-block h-4 w-4" /> at 🏰{" "}
-                <a
-                  href="https://buidlguidl.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="underline underline-offset-2"
-                >
-                  BuidlGuidl
-                </a>
+                Built with <HeartIcon className="inline-block h-4 w-4" /> by{" "}
+                <a href="https://atxdao.com/" target="_blank" rel="noreferrer" className="underline underline-offset-2">
+                  ATX DAO
+                </a>{" "}
+                and the community{" "}
               </p>
             </div>
             <span>·</span>
             <div className="text-center">
               <a
-                href="https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA"
+                href="https://discord.gg/z6uSEUhf"
                 target="_blank"
                 rel="noreferrer"
                 className="underline underline-offset-2"
