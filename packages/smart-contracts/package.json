@@ -2,6 +2,7 @@
     "name": "smart-contracts",
     "version": "0.0.1",
     "scripts": {
+        "compile": "forge compile",
         "deploy": "make run-local"
     },
     "packageManager": "yarn@3.2.3"

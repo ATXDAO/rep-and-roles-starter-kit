@@ -6,6 +6,7 @@
     "packages/*"
   ],
   "scripts": {
+    "compile": "yarn workspace smart-contracts compile",
     "deploy": "yarn workspace smart-contracts deploy"
   },
   "packageManager": "yarn@3.2.3"

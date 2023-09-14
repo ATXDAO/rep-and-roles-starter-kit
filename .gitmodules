@@ -4,3 +4,6 @@
 [submodule "packages/smart-contracts-2/lib/reputation"]
 	path = packages/smart-contracts-2/lib/reputation
 	url = https://github.com/ATXDAO/reputation
+[submodule "packages/smart-contracts/lib/reputation"]
+	path = packages/smart-contracts/lib/reputation
+	url = https://github.com/ATXDAO/reputation
