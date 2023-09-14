@@ -12,9 +12,9 @@
   },
   "scripts": {
     "compile": "cd packages/smart-contracts && forge compile",
-    "coverage": "yarn workspace smart-contracts coverage",
-    "run-local": "yarn workspace smart-contracts run-local",
-    "test": "yarn workspace smart-contracts test",
+    "coverage": "cd packages/smart-contracts && coverage",
+    "run-local": "cd packages/smart-contracts && make run-local",
+    "test": "cd packages/smart-contracts && test",
     "migrate-deployments": "yarn workspace packages-connector migrate-deployments",
     "": "",
     "account": "yarn workspace @se-2/hardhat account",

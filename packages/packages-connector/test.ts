@@ -18,7 +18,9 @@ function loadAbiFromDirectory(abiDir: string) {
 
 async function main() {
 
-    const { abi } = loadAbiFromDirectory(ABI_DIR);
+    const abi = loadAbiFromDirectory(ABI_DIR);
+
+    console.log(abi);
 
     const TRANSACTIONS_PATH = "../smart-contracts/broadcast/DeployRepTokensInstanceWithData.s.sol/31337/run-latest.json";
     if (!fs.existsSync(TRANSACTIONS_PATH)) {
