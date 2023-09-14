@@ -21,7 +21,9 @@ yarn
 2. Deploy Smart Contracts To Localhost
 
 1st Terminal: `yarn chain` - Run a local node
+
 2nd Terminal: `yarn deploy-local` - Deploy smart contracts to localhost
+
 2nd/3rd Terminal: `yarn start` - Runs the webapp
 
 ## Commands
