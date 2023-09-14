@@ -12179,6 +12179,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"smart-contracts@workspace:packages/smart-contracts":
+  version: 0.0.0-use.local
+  resolution: "smart-contracts@workspace:packages/smart-contracts"
+  languageName: unknown
+  linkType: soft
+
 "socks-proxy-agent@npm:^7.0.0":
   version: 7.0.0
   resolution: "socks-proxy-agent@npm:7.0.0"
