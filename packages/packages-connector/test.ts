@@ -46,23 +46,15 @@ async function main() {
 
     let name;
 
-    if (chainId === "31337") {
-        name = "localhost";
-    }
-    else {
-        name = "Unidentified Network"
-    }
-
-    if (chainName === "localhost") {
-        chainId = "31337";
-    } else {
-        chainId = "";
-    }
+    const names = {
+        "31337": "localhost",
+        "11155111": "sepolia"
+    } as any;
 
     output[chainId] = [
         {
             chainId,
-            name: chainName,
+            name: names[chainId],
             contracts
         }
     ];
@@ -85,41 +77,6 @@ async function main() {
         }),
     );
 
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
-    console.log("Succesfully migrated deployments!");
     console.log("Succesfully migrated deployments!");
 }
 
