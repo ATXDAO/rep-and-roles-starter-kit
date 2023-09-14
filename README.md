@@ -22,18 +22,8 @@ yarn install
 
 `yarn compile` - Compile smart contracts
 
+`yarn deploy-local` - Deploy smart contracts to localhost
 
-Deploy smart contracts to localhost
-```
-yarn deploy-local
-```
+`yarn test` - Test Smart Contracts
 
-Test Smart Contracts
-```
-yarn test
-```
-
-Check Testing Coverage of Smart Contracts
-```
-yarn coverage
-```
+`yarn coverage` - Check Testing Coverage of Smart Contracts
