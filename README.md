@@ -15,14 +15,17 @@ To get started with Reputation & Roles, follow the steps below:
 1. Install dependencies
 
 ```
-yarn install
+yarn
 ```
 
 2. Test commands
 
 `yarn compile` - Compile smart contracts
 
+`yarn chain` - Run a local node
+
 `yarn deploy-local` - Deploy smart contracts to localhost
+`yarn deploy-sepolia` - Deploy smart contracts to sepolia
 
 `yarn test` - Test Smart Contracts
 
