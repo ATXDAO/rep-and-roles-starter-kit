@@ -11,7 +11,7 @@
     ]
   },
   "scripts": {
-    "compile": "yarn workspace smart-contracts compile",
+    "compile": "cd packages/smart-contracts && forge compile",
     "coverage": "yarn workspace smart-contracts coverage",
     "run-local": "yarn workspace smart-contracts run-local",
     "test": "yarn workspace smart-contracts test",

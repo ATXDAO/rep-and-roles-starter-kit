@@ -1,13 +1,31 @@
 import * as fs from "fs";
 import prettier from "prettier";
 
-async function main() {
+
+const ABI_DIR = "../smart-contracts/out/RepTokensInstance.sol/RepTokensInstance.json";
+
+function loadAbiFromDirectory(abiDir: string) {
+    if (!fs.existsSync(abiDir)) {
+        throw Error("Please generate contract ABIs before attempting migration!");
+    }
 
     const { abi } = JSON.parse(
-        fs.readFileSync("../smart-contracts/out/RepTokensInstance.sol/RepTokensInstance.json").toString(),
+        fs.readFileSync(abiDir).toString(),
     );
 
-    const broadcastString = fs.readFileSync("../smart-contracts/broadcast/DeployRepTokensInstanceWithData.s.sol/31337/run-latest.json", { encoding: 'utf8' });
+    return abi;
+}
+
+async function main() {
+
+    const { abi } = loadAbiFromDirectory(ABI_DIR);
+
+    const TRANSACTIONS_PATH = "../smart-contracts/broadcast/DeployRepTokensInstanceWithData.s.sol/31337/run-latest.json";
+    if (!fs.existsSync(TRANSACTIONS_PATH)) {
+        throw Error("Please make deployments before attempting migration!");
+    }
+
+    const broadcastString = fs.readFileSync(TRANSACTIONS_PATH, { encoding: 'utf8' });
     const broadcast = JSON.parse(broadcastString);
 
     const contracts = {} as any;
