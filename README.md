@@ -18,15 +18,20 @@ To get started with Reputation & Roles, follow the steps below:
 yarn
 ```
 
+2. Deploy Smart Contracts To Localhost
+
+1st Terminal: `yarn chain` - Run a local node
+2nd Terminal: `yarn deploy-local` - Deploy smart contracts to localhost
+2nd/3rd Terminal: `yarn start` - Runs the webapp
+
+## Commands
 2. Test commands
 
 `yarn compile` - Compile smart contracts
+`yarn test` - Test Smart Contracts
+`yarn coverage` - Check Testing Coverage of Smart Contracts
 
 `yarn chain` - Run a local node
-
 `yarn deploy-local` - Deploy smart contracts to localhost
 `yarn deploy-sepolia` - Deploy smart contracts to sepolia
-
-`yarn test` - Test Smart Contracts
-
-`yarn coverage` - Check Testing Coverage of Smart Contracts
+`yarn start` - Runs the webapp
