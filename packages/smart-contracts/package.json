@@ -5,7 +5,8 @@
         "compile": "forge compile",
         "coverage": "forge coverage",
         "deploy-local": "make run-local",
-        "test": "forge test"
+        "test": "forge test",
+        "me": "node test.js"
     },
     "packageManager": "yarn@3.2.3"
 }
