@@ -12,7 +12,7 @@
   "scripts": {
     "compile": "yarn workspace smart-contracts compile",
     "coverage": "yarn workspace smart-contracts coverage",
-    "deploy-local": "yarn workspace smart-contracts deploy-local",
+    "run-local": "yarn workspace smart-contracts run-local",
     "test": "yarn workspace smart-contracts test",
     "": "",
     "account": "yarn workspace @se-2/hardhat account",

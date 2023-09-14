@@ -4,7 +4,7 @@
     "scripts": {
         "compile": "forge compile",
         "coverage": "forge coverage",
-        "deploy-local": "make run-local",
+        "run-local": "make run-local",
         "test": "forge test",
         "me": "node test.js"
     },
