@@ -6,7 +6,8 @@
     "packages": [
       "packages/hardhat",
       "packages/smart-contracts",
-      "packages/nextjs"
+      "packages/nextjs",
+      "packages/packages-connector"
     ]
   },
   "scripts": {
@@ -14,7 +15,7 @@
     "coverage": "yarn workspace smart-contracts coverage",
     "run-local": "yarn workspace smart-contracts run-local",
     "test": "yarn workspace smart-contracts test",
-    "migrate-deployments": "yarn workspace smart-contracts migrate-deployments",
+    "migrate-deployments": "yarn workspace packages-connector migrate-deployments",
     "": "",
     "account": "yarn workspace @se-2/hardhat account",
     "chain": "yarn workspace @se-2/hardhat chain",

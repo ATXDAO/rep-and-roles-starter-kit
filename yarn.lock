@@ -10548,6 +10548,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"packages-connector@workspace:packages/packages-connector":
+  version: 0.0.0-use.local
+  resolution: "packages-connector@workspace:packages/packages-connector"
+  dependencies:
+    "@types/node": ^7.0.5
+    "@types/prettier": ^2
+    prettier: ^2.8.4
+    ts-node: ^10.9.1
+    typescript: ^5.1.6
+  languageName: unknown
+  linkType: soft
+
 "parent-module@npm:^1.0.0":
   version: 1.0.1
   resolution: "parent-module@npm:1.0.1"
@@ -12185,18 +12197,6 @@ __metadata:
   checksum: b5167a7142c1da704c0e3af85c402002b597081dd9575031a90b4f229ca5678e9a36e8a374f1814c8156a725d17008ae3bde63b92f9cfd132526379e580bec8b
   languageName: node
   linkType: hard
-
-"smart-contracts@workspace:packages/smart-contracts":
-  version: 0.0.0-use.local
-  resolution: "smart-contracts@workspace:packages/smart-contracts"
-  dependencies:
-    "@types/node": ^7.0.5
-    "@types/prettier": ^2
-    prettier: ^2.8.4
-    ts-node: ^10.9.1
-    typescript: ^5.1.6
-  languageName: unknown
-  linkType: soft
 
 "socks-proxy-agent@npm:^7.0.0":
   version: 7.0.0

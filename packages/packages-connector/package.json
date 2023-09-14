@@ -1,11 +1,7 @@
 {
-    "name": "smart-contracts",
+    "name": "packages-connector",
     "version": "0.0.1",
     "scripts": {
-        "compile": "forge compile",
-        "coverage": "forge coverage",
-        "run-local": "make run-local",
-        "test": "forge test",
         "migrate-deployments": "ts-node test.ts"
     },
     "devDependencies": {

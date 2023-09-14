@@ -4,10 +4,10 @@ import prettier from "prettier";
 async function main() {
 
     const { abi } = JSON.parse(
-        fs.readFileSync("./out/RepTokensInstance.sol/RepTokensInstance.json").toString(),
+        fs.readFileSync("../smart-contracts/out/RepTokensInstance.sol/RepTokensInstance.json").toString(),
     );
 
-    const broadcastString = fs.readFileSync("./broadcast/DeployRepTokensInstanceWithData.s.sol/31337/run-latest.json", { encoding: 'utf8' });
+    const broadcastString = fs.readFileSync("../smart-contracts/broadcast/DeployRepTokensInstanceWithData.s.sol/31337/run-latest.json", { encoding: 'utf8' });
     const broadcast = JSON.parse(broadcastString);
 
     const contracts = {} as any;
