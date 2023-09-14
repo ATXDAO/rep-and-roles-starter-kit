@@ -8,6 +8,7 @@ on:
     branches:
       - main
 
+
 jobs:
   ci:
     runs-on: ${{ matrix.os }}
@@ -30,8 +31,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Run hardhat node, deploy contracts (& generate contracts typescript output)
-        run: yarn chain & yarn deploy-local
+      # - name: Run hardhat node, deploy contracts (& generate contracts typescript output)
+      #   run: yarn chain & yarn deploy-local
 
       - name: Run nextjs lint
         run: yarn next:lint --max-warnings=0
