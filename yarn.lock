@@ -2497,6 +2497,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^7.0.5":
+  version: 7.10.14
+  resolution: "@types/node@npm:7.10.14"
+  checksum: 37b95ff3a9eefd73fabcdbfb9736282859ed367b795d1562f8f65dbf18065b071e36fd31dca4b3e1a1a19374a7c238e97d44bcabb813a1c9a987af47255d0cff
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^8.0.0":
   version: 8.10.66
   resolution: "@types/node@npm:8.10.66"
@@ -12182,6 +12189,12 @@ __metadata:
 "smart-contracts@workspace:packages/smart-contracts":
   version: 0.0.0-use.local
   resolution: "smart-contracts@workspace:packages/smart-contracts"
+  dependencies:
+    "@types/node": ^7.0.5
+    "@types/prettier": ^2
+    prettier: ^2.8.4
+    ts-node: ^10.9.1
+    typescript: ^5.1.6
   languageName: unknown
   linkType: soft
 
