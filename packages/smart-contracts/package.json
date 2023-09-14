@@ -3,7 +3,9 @@
     "version": "0.0.1",
     "scripts": {
         "compile": "forge compile",
-        "deploy": "make run-local"
+        "coverage": "forge coverage",
+        "deploy-local": "make run-local",
+        "test": "forge test"
     },
     "packageManager": "yarn@3.2.3"
 }

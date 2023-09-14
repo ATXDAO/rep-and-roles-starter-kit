@@ -7,7 +7,9 @@
   ],
   "scripts": {
     "compile": "yarn workspace smart-contracts compile",
-    "deploy": "yarn workspace smart-contracts deploy"
+    "coverage": "yarn workspace smart-contracts coverage",
+    "deploy-local": "yarn workspace smart-contracts deploy-local",
+    "test": "yarn workspace smart-contracts test"
   },
   "packageManager": "yarn@3.2.3"
 }
