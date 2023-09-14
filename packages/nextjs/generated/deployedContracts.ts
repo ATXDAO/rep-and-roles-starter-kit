@@ -1,11 +1,11 @@
 const contracts = {
-  11155111: [
+  31337: [
     {
-      chainId: "11155111",
-      name: "sepolia",
+      chainId: "31337",
+      name: "localhost",
       contracts: {
         RepTokensInstance: {
-          address: "0xd5A14bA43c7B34CA524296854c609705D693D22f",
+          address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
           abi: [
             {
               inputs: [
