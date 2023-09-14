@@ -20,11 +20,6 @@ yarn install
 
 2. Test commands
 
-Install dependencies
-```
-yarn install
-```
-
 Compile smart contracts
 ```
 yarn compile
