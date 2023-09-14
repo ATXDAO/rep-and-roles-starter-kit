@@ -1,0 +1,15 @@
+{
+    "name": "rr-mr",
+    "version": "0.0.1",
+    "private": true,
+    "workspaces": {
+      "packages": [
+        "packages/*"
+      ]
+    },
+    "scripts": {
+      "deploy": "yarn workspace @rr-mr/smart-contracts make run-local"
+    },
+    "packageManager": "yarn@3.2.3"
+  }
+  
