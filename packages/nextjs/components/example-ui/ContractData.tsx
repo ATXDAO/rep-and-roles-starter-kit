@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 import axios from "axios";
 import { useAccount } from "wagmi";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
@@ -73,7 +74,7 @@ export const ContractData = () => {
           <div className="grid w-64 h-64 rounded bg-primary text-primary-content place-content-center">
             <div className="avatar">
               <div className="w-64 rounded">
-                <img src={json0Image} />
+                <Image src={json0Image} alt="Token 0 Image" width="512" height="512" />
               </div>
             </div>
           </div>
@@ -99,6 +100,7 @@ export const ContractData = () => {
           <div className="grid w-64 h-64 rounded bg-primary text-primary-content place-content-center">
             <div className="avatar">
               <div className="w-64 rounded">
+                <Image src={json1Image} alt="Token 1 Image" width="512" height="512" />
                 <img src={json1Image} />
               </div>
             </div>
