@@ -101,7 +101,6 @@ export const ContractData = () => {
             <div className="avatar">
               <div className="w-64 rounded">
                 <Image src={json1Image} alt="Token 1 Image" width="512" height="512" />
-                <img src={json1Image} />
               </div>
             </div>
           </div>
