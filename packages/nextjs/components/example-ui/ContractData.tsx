@@ -1,154 +1,118 @@
-import {
-  // useEffect,
-  useRef,
-  useState,
-} from "react";
-// import Marquee from "react-fast-marquee";
-// import { useAccount } from "wagmi";
-import {
-  useAnimationConfig, // useScaffoldContract,
-  useScaffoldContractRead, // useScaffoldEventHistory,
-  // useScaffoldEventSubscriber,
-} from "~~/hooks/scaffold-eth";
-
-// const MARQUEE_PERIOD_IN_SEC = 5;
+import { useState } from "react";
+import axios from "axios";
+import { useAccount } from "wagmi";
+import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
 export const ContractData = () => {
-  // const { address } = useAccount();
-  const [transitionEnabled, setTransitionEnabled] = useState(true);
-  const [isRightDirection, setIsRightDirection] = useState(false);
-  // const [marqueeSpeed, setMarqueeSpeed] = useState(0);
+  const { address } = useAccount();
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const greetingRef = useRef<HTMLDivElement>(null);
-
-  const { data: imatest } = useScaffoldContractRead({
+  const { data: uri0 } = useScaffoldContractRead({
     contractName: "RepTokensInstance",
-    functionName: "imatest",
+    functionName: "uri",
+    args: [BigInt(0)],
   });
 
-  //   const { data: currentGreeting, isLoading: isGreetingLoading } = useScaffoldContractRead({
-  //     contractName: "YourContract",
-  //     functionName: "greeting",
-  //   });
+  const { data: uri1 } = useScaffoldContractRead({
+    contractName: "RepTokensInstance",
+    functionName: "uri",
+    args: [BigInt(1)],
+  });
 
-  //   useScaffoldEventSubscriber({
-  //     contractName: "YourContract",
-  //     eventName: "GreetingChange",
-  //     listener: logs => {
-  //       logs.map(log => {
-  //         const { greetingSetter, value, premium, newGreeting } = log.args;
-  //         console.log("📡 GreetingChange event", greetingSetter, value, premium, newGreeting);
-  //       });
-  //     },
-  //   });
+  const { data: balanceOf0 } = useScaffoldContractRead({
+    contractName: "RepTokensInstance",
+    functionName: "balanceOf",
+    args: [address, BigInt(0)],
+  });
 
-  //   const {
-  //     data: myGreetingChangeEvents,
-  //     isLoading: isLoadingEvents,
-  //     error: errorReadingEvents,
-  //   } = useScaffoldEventHistory({
-  //     contractName: "YourContract",
-  //     eventName: "GreetingChange",
-  //     fromBlock: process.env.NEXT_PUBLIC_DEPLOY_BLOCK ? BigInt(process.env.NEXT_PUBLIC_DEPLOY_BLOCK) : 0n,
-  //     filters: { greetingSetter: address },
-  //     blockData: true,
-  //   });
+  const { data: balanceOf1 } = useScaffoldContractRead({
+    contractName: "RepTokensInstance",
+    functionName: "balanceOf",
+    args: [address, BigInt(1)],
+  });
 
-  //   console.log("Events:", isLoadingEvents, errorReadingEvents, myGreetingChangeEvents);
+  const [json0Name, setJson0Name] = useState("");
+  const [json0Description, setJson0Description] = useState("");
+  const [json0Image, setJson0Image] = useState("");
 
-  //   const { data: yourContract } = useScaffoldContract({ contractName: "YourContract" });
-  //   console.log("yourContract: ", yourContract);
+  const [json1Name, setJson1Name] = useState("");
+  const [json1Description, setJson1Description] = useState("");
+  const [json1Image, setJson1Image] = useState("");
 
-  const { showAnimation } = useAnimationConfig(imatest);
+  if (uri0 !== undefined && uri1 !== undefined) {
+    const finalURL0 = uri0.replace("ipfs://", "https://ipfs.io/ipfs/");
+    const finalURL1 = uri1.replace("ipfs://", "https://ipfs.io/ipfs/");
 
-  //   const showTransition = transitionEnabled && !!currentGreeting && !isGreetingLoading;
+    console.log(finalURL0);
+    console.log(finalURL1);
 
-  // useEffect(() => {
-  //     if (transitionEnabled && containerRef.current && greetingRef.current) {
-  //         setMarqueeSpeed(
-  //             Math.max(greetingRef.current.clientWidth, containerRef.current.clientWidth) / MARQUEE_PERIOD_IN_SEC,
-  //         );
-  //     }
-  // }, [transitionEnabled, containerRef, greetingRef]);
+    const getJsonData = async () => {
+      const finalJson0 = await axios.get(finalURL0);
+      setJson0Name(finalJson0.data.name);
+      setJson0Description(finalJson0.data.description);
+      setJson0Image(finalJson0.data.image.replace("ipfs://", "https://ipfs.io/ipfs/"));
+
+      const finalJson1 = await axios.get(finalURL1);
+      setJson1Name(finalJson1.data.name);
+      setJson1Description(finalJson1.data.description);
+      setJson1Image(finalJson1.data.image.replace("ipfs://", "https://ipfs.io/ipfs/"));
+    };
+
+    getJsonData();
+  }
 
   return (
     <div className="flex flex-col justify-center items-center bg-[url('/assets/gradient-bg.png')] bg-[length:100%_100%] py-10 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
-      <div className="bg-secondary border border-primary rounded-xl flex">
-        <div className="p-2 py-1 border-r border-primary flex items-end">Total count</div>
-        <div className="text-4xl text-right min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
-          {imatest?.toString() || "0"}
-        </div>
-      </div>
+      <div>
+        <div className="float-left px-2">
+          <div className="grid w-64 h-26 rounded text-secondary-content place-content-center">
+            <div className="text-4xl text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
+              {Number(balanceOf0)}
+            </div>
+          </div>
 
-      <div
-        className={`flex flex-col max-w-md bg-base-200 bg-opacity-70 rounded-2xl shadow-lg px-5 py-4 w-full ${
-          showAnimation ? "animate-zoom" : ""
-        }`}
-      >
-        <div className="flex justify-between w-full">
-          <button
-            className="btn btn-circle btn-ghost relative bg-center bg-[url('/assets/switch-button-on.png')] bg-no-repeat"
-            onClick={() => {
-              setTransitionEnabled(!transitionEnabled);
-            }}
-          >
-            <div
-              className={`absolute inset-0 bg-center bg-no-repeat bg-[url('/assets/switch-button-off.png')] transition-opacity ${
-                transitionEnabled ? "opacity-0" : "opacity-100"
-              }`}
-            />
-          </button>
-          <div className="bg-secondary border border-primary rounded-xl flex">
-            <div className="p-2 py-1 border-r border-primary flex items-end">Total count</div>
-            <div className="text-4xl text-right min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
-              {imatest?.toString() || "0"}
+          <div className="grid w-64 h-64 rounded bg-primary text-primary-content place-content-center">
+            <div className="avatar">
+              <div className="w-64 rounded">
+                <img src={json0Image} />
+              </div>
+            </div>
+          </div>
+          <div className="grid w-64 h-8 rounded text-accent-content place-content-center">
+            <div className="text-2xl text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
+              {json0Name}
+            </div>
+          </div>
+          <div className="grid w-64 h-26 rounded text-secondary-content place-content-center">
+            <div className="text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
+              {json0Description}
             </div>
           </div>
         </div>
 
-        <div className="mt-3 border border-primary bg-neutral rounded-3xl text-secondary  overflow-hidden text-[116px] whitespace-nowrap w-full uppercase tracking-tighter font-bai-jamjuree leading-tight">
-          <div className="relative overflow-x-hidden" ref={containerRef}>
-            {/* for speed calculating purposes */}
-            <div className="absolute -left-[9999rem]" ref={greetingRef}>
-              {/* <div className="px-4">{currentGreeting}</div> */}
+        <div className="float-left px-2">
+          <div className="grid w-64 h-26 rounded text-secondary-content place-content-center">
+            <div className="text-4xl text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
+              {Number(balanceOf1)}
             </div>
-            {/* {new Array(3).fill("").map((_, i) => {
-              const isLineRightDirection = i % 2 ? isRightDirection : !isRightDirection;
-              return (
-                <Marquee
-                  key={i}
-                  direction={isLineRightDirection ? "right" : "left"}
-                  gradient={false}
-                  play={showTransition}
-                  speed={marqueeSpeed}
-                  className={i % 2 ? "-my-10" : ""}
-                >
-                  <div className="px-4">{currentGreeting || " "}</div>
-                </Marquee>
-              );
-            })} */}
           </div>
-        </div>
 
-        <div className="mt-3 flex items-end justify-between">
-          <button
-            className={`btn btn-circle btn-ghost border border-primary hover:border-primary w-12 h-12 p-1 bg-neutral flex items-center ${
-              isRightDirection ? "justify-start" : "justify-end"
-            }`}
-            onClick={() => {
-              if (transitionEnabled) {
-                setIsRightDirection(!isRightDirection);
-              }
-            }}
-          >
-            <div className="border border-primary rounded-full bg-secondary w-2 h-2" />
-          </button>
-          <div className="w-44 p-0.5 flex items-center bg-neutral border border-primary rounded-full">
-            {/* <div
-              className="h-1.5 border border-primary rounded-full bg-secondary animate-grow"
-              style={{ animationPlayState: showTransition ? "running" : "paused" }}
-            /> */}
+          <div className="grid w-64 h-64 rounded bg-primary text-primary-content place-content-center">
+            <div className="avatar">
+              <div className="w-64 rounded">
+                <img src={json1Image} />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid w-64 h-8 rounded text-accent-content place-content-center">
+            <div className="text-2xl text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
+              {json1Name}
+            </div>
+          </div>
+          <div className="grid w-64 h-26 rounded text-secondary-content place-content-center">
+            <div className="text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
+              {json1Description}
+            </div>
           </div>
         </div>
       </div>
