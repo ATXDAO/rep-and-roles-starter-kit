@@ -43,14 +43,20 @@ export const TokenCardInternal = ({ imageUri, balance, name, description, toggle
                   ) : (
                     "Loading Image..."
                   )
+                ) : imageUri !== undefined ? (
+                  <Image src={imageUri} alt="Token 0 Image" width="512" height="512" />
                 ) : (
-                  <Image src={imageUri!} alt="Token 0 Image" width="512" height="512" />
+                  <></>
                 )
+              ) : imageUri !== undefined ? (
+                <Image src={imageUri} alt="Token 0 Image" width="512" height="512" />
               ) : (
-                <Image src={imageUri!} alt="Token 0 Image" width="512" height="512" />
+                <></>
               )
+            ) : imageUri !== undefined ? (
+              <Image src={imageUri} alt="Token 0 Image" width="512" height="512" />
             ) : (
-              <Image src={imageUri!} alt="Token 0 Image" width="512" height="512" />
+              <></>
             )}
           </div>
         </div>
