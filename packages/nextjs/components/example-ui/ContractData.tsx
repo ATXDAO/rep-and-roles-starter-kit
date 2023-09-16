@@ -1,6 +1,6 @@
 import { TTokenGroupCardToggleProps, TokenGroupCard } from "./TokenGroupCard";
 import { useBalanceOf, useUri } from "./TokenInteractions";
-import useAxios from "axios-hooks";
+import { useFetch } from "usehooks-ts";
 import { useAccount } from "wagmi";
 
 const propsConfig = {
@@ -16,6 +16,12 @@ const propsConfig = {
   },
 } as TTokenGroupCardToggleProps;
 
+interface Nft {
+  name: string;
+  description: string;
+  image: string;
+}
+
 export const ContractData = () => {
   const { address } = useAccount();
 
@@ -25,31 +31,23 @@ export const ContractData = () => {
   const { data: balanceOf0 } = useBalanceOf(address!, 0);
   const { data: balanceOf1 } = useBalanceOf(address!, 0);
 
-  const [{ data: jsonData0 }] = useAxios<any>({
-    url: uri0?.replace("ipfs://", "https://ipfs.io/ipfs/"),
-  });
-
-  const [{ data: jsonData1 }] = useAxios<any>({
-    url: uri1?.replace("ipfs://", "https://ipfs.io/ipfs/"),
-  });
+  const { data: json0 /* error: error0 */ } = useFetch<Nft>(uri0?.replace("ipfs://", "https://ipfs.io/ipfs/"));
+  const { data: json1 /* error: error1 */ } = useFetch<Nft>(uri1?.replace("ipfs://", "https://ipfs.io/ipfs/"));
 
   const tokenGroup = {
     token0: {
       balance: balanceOf0,
-      name: jsonData0.name,
-      imageUri: jsonData0.image.replace("ipfs://", "https://ipfs.io/ipfs/"),
-      description: jsonData0.description,
+      name: json0?.name,
+      imageUri: json0?.image?.replace("ipfs://", "https://ipfs.io/ipfs/"),
+      description: json0?.description,
     },
     token1: {
       balance: balanceOf1,
-      name: jsonData1.name,
-      imageUri: jsonData1.image.replace("ipfs://", "https://ipfs.io/ipfs/"),
-      description: jsonData1.description,
+      name: json1?.name,
+      imageUri: json1?.image?.replace("ipfs://", "https://ipfs.io/ipfs/"),
+      description: json1?.description,
     },
   } as any;
-
-  tokenGroup.token0.balance = balanceOf0;
-  tokenGroup.token1.balance = balanceOf1;
 
   return (
     <>
