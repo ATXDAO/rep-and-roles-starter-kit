@@ -67,7 +67,7 @@ export const ContractData = () => {
         <div className="float-left px-2">
           <div className="grid w-64 h-26 rounded text-secondary-content place-content-center">
             <div className="text-4xl text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
-              {Number(balanceOf0)}
+              {Number(balanceOf0) || 0}
             </div>
           </div>
 
@@ -93,7 +93,7 @@ export const ContractData = () => {
         <div className="float-left px-2">
           <div className="grid w-64 h-26 rounded text-secondary-content place-content-center">
             <div className="text-4xl text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
-              {Number(balanceOf1)}
+              {Number(balanceOf1) || 0}
             </div>
           </div>
 
