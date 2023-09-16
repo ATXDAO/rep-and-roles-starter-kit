@@ -4,7 +4,7 @@ import useAxios from "axios-hooks";
 import { useAccount } from "wagmi";
 
 const propsConfig = {
-  toggleTokenGroupCardChecking: false,
+  toggleTokenGroupCardChecking: true,
   tokenToggleProps: {
     toggleLoading: false,
     tokenInternalToggleProps: {
@@ -25,7 +25,7 @@ export const ContractData = () => {
   const { data: balanceOf0 } = useBalanceOf(address!, 0);
   const { data: balanceOf1 } = useBalanceOf(address!, 0);
 
-  const [{ data }] = useAxios<any>({
+  const [{ data: jsonData0 }] = useAxios<any>({
     url: uri0?.replace("ipfs://", "https://ipfs.io/ipfs/"),
   });
 
@@ -36,15 +36,15 @@ export const ContractData = () => {
   const tokenGroup = {
     token0: {
       balance: balanceOf0,
-      name: data?.name,
-      imageUri: data?.image.replace("ipfs://", "https://ipfs.io/ipfs/"),
-      description: data?.description,
+      name: jsonData0.name,
+      imageUri: jsonData0.image.replace("ipfs://", "https://ipfs.io/ipfs/"),
+      description: jsonData0.description,
     },
     token1: {
       balance: balanceOf1,
-      name: jsonData1?.name,
-      imageUri: jsonData1?.image.replace("ipfs://", "https://ipfs.io/ipfs/"),
-      description: jsonData1?.description,
+      name: jsonData1.name,
+      imageUri: jsonData1.image.replace("ipfs://", "https://ipfs.io/ipfs/"),
+      description: jsonData1.description,
     },
   } as any;
 
