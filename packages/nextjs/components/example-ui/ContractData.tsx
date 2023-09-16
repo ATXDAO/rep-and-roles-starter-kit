@@ -28,8 +28,8 @@ export const ContractData = () => {
   const { data: uri0 } = useUri(0);
   const { data: uri1 } = useUri(1);
 
-  const { data: balanceOf0 } = useBalanceOf(address!, 0);
-  const { data: balanceOf1 } = useBalanceOf(address!, 0);
+  const { data: balanceOf0 } = useBalanceOf(address, 0);
+  const { data: balanceOf1 } = useBalanceOf(address, 0);
 
   const { data: json0 /* error: error0 */ } = useFetch<Nft>(uri0?.replace("ipfs://", "https://ipfs.io/ipfs/"));
   const { data: json1 /* error: error1 */ } = useFetch<Nft>(uri1?.replace("ipfs://", "https://ipfs.io/ipfs/"));

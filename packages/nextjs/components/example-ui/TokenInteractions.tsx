@@ -8,10 +8,10 @@ export const useUri = (tokenId: number) => {
   });
 };
 
-export const useBalanceOf = (address: string, tokenId: number) => {
+export const useBalanceOf = (address?: string, tokenId?: number) => {
   return useScaffoldContractRead({
     contractName: "RepTokensInstance",
     functionName: "balanceOf",
-    args: [address, BigInt(tokenId)],
+    args: [address, BigInt(Number(tokenId))],
   });
 };
