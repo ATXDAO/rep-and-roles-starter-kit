@@ -22,13 +22,13 @@ export const TokenGroupCard = ({ tokenGroup, toggleProps }: TTokenGroupCardProps
         {toggleProps?.toggleTokenGroupCardChecking ? (
           toggleProps.toggleTokenGroupCardChecking ? (
             tokenGroup?.token0?.balance !== undefined &&
-            tokenGroup?.token0.name !== undefined &&
-            tokenGroup?.token0.description !== undefined &&
-            tokenGroup?.token0.imageUri !== undefined &&
+            tokenGroup?.token0?.name !== undefined &&
+            tokenGroup?.token0?.description !== undefined &&
+            tokenGroup?.token0?.imageUri !== undefined &&
             tokenGroup?.token1?.balance !== undefined &&
-            tokenGroup?.token1.name !== undefined &&
-            tokenGroup?.token1.description !== undefined &&
-            tokenGroup?.token1.imageUri !== undefined ? (
+            tokenGroup?.token1?.name !== undefined &&
+            tokenGroup?.token1?.description !== undefined &&
+            tokenGroup?.token1?.imageUri !== undefined ? (
               <>
                 <TokenCard token={tokenGroup.token0} toggleProps={toggleProps?.tokenToggleProps} />
                 <TokenCard token={tokenGroup.token1} toggleProps={toggleProps?.tokenToggleProps} />
