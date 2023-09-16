@@ -1,34 +1,76 @@
-import Image from "next/image";
+import { TTokenInternalToggleProps, TokenCardInternal } from "./TokenCardInternal";
 
-type TTokenProps = {
-  imageUri?: string;
-  balance?: number;
-  name?: string;
-  description?: string;
+export type Token = {
+  balance: bigint;
+  imageUri: string;
+  name: string;
+  description: string;
 };
 
-export const TokenCard = ({ imageUri, balance, name, description }: TTokenProps) => {
-  return (
-    <div className="float-left px-2">
-      <div className="grid w-64 h-26 rounded text-secondary-content place-content-center">
-        <div className="text-4xl text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
-          {Number(balance)}
-        </div>
-      </div>
+type TTokenProps = {
+  token?: Token;
+  toggleProps?: TTokenToggleProps;
+};
 
-      <div className="grid w-64 h-64 rounded bg-primary text-primary-content place-content-center">
-        <div className="avatar">
-          <div className="w-64 rounded">
-            <Image src={imageUri!} alt="Token 0 Image" width="512" height="512" />
-          </div>
-        </div>
-      </div>
-      <div className="grid w-64 h-8 rounded text-accent-content place-content-center">
-        <div className="text-2xl text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">{name}</div>
-      </div>
-      <div className="grid w-64 h-26 rounded text-secondary-content place-content-center">
-        <div className="text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">{description}</div>
-      </div>
-    </div>
+export type TTokenToggleProps = {
+  toggleLoading?: boolean;
+  tokenInternalToggleProps?: TTokenInternalToggleProps;
+};
+
+export const TokenCard = ({ token, toggleProps }: TTokenProps) => {
+  return (
+    <>
+      {toggleProps?.toggleLoading !== undefined ? (
+        toggleProps.toggleLoading !== undefined ? (
+          toggleProps.toggleLoading ? (
+            token?.imageUri !== undefined &&
+            token?.balance !== undefined &&
+            name !== undefined &&
+            token?.description !== undefined ? (
+              <>
+                <TokenCardInternal
+                  imageUri={token?.imageUri}
+                  balance={token?.balance}
+                  name={token?.name}
+                  description={token?.description}
+                  toggleProps={toggleProps.tokenInternalToggleProps}
+                />
+              </>
+            ) : (
+              <>Loading Token...</>
+            )
+          ) : (
+            <>
+              <TokenCardInternal
+                imageUri={token?.imageUri}
+                balance={token?.balance}
+                name={token?.name}
+                description={token?.description}
+                toggleProps={toggleProps.tokenInternalToggleProps}
+              />
+            </>
+          )
+        ) : (
+          <>
+            <TokenCardInternal
+              imageUri={token?.imageUri}
+              balance={token?.balance}
+              name={token?.name}
+              description={token?.description}
+              toggleProps={toggleProps.tokenInternalToggleProps}
+            />
+          </>
+        )
+      ) : (
+        <>
+          <TokenCardInternal
+            imageUri={token?.imageUri}
+            balance={token?.balance}
+            name={token?.name}
+            description={token?.description}
+          />
+        </>
+      )}
+    </>
   );
 };
