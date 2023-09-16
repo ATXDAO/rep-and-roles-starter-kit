@@ -1,10 +1,10 @@
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
-export const useUri = (tokenId: number) => {
+export const useUri = (tokenId?: number) => {
   return useScaffoldContractRead({
     contractName: "RepTokensInstance",
     functionName: "uri",
-    args: [BigInt(tokenId)],
+    args: [BigInt(Number(tokenId))],
   });
 };
 

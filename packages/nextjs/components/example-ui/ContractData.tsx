@@ -6,12 +6,12 @@ import { useAccount } from "wagmi";
 const propsConfig = {
   toggleTokenGroupCardChecking: true,
   tokenToggleProps: {
-    toggleLoading: false,
+    toggleLoading: true,
     tokenInternalToggleProps: {
-      toggleBalanceChecking: false,
-      toggleImageUriChecking: false,
-      toggleNameChecking: false,
-      toggleDescriptionChecking: false,
+      toggleBalanceChecking: true,
+      toggleImageUriChecking: true,
+      toggleNameChecking: true,
+      toggleDescriptionChecking: true,
     },
   },
 } as TTokenGroupCardToggleProps;
