@@ -1,20 +1,20 @@
-import { TTokenGroupCardToggleProps, TokenGroupCard } from "./TokenGroupCard";
+import { TTokenGroupCardPrettifyLoadingProps, TokenGroupCard } from "./TokenGroupCard";
 import { useBalanceOf, useUri } from "./TokenInteractions";
 import { useFetch } from "usehooks-ts";
 import { useAccount } from "wagmi";
 
-const propsConfig = {
-  toggleTokenGroupCardChecking: true,
-  tokenToggleProps: {
-    toggleLoading: true,
-    tokenInternalToggleProps: {
-      toggleBalanceChecking: true,
-      toggleImageUriChecking: true,
-      toggleNameChecking: true,
-      toggleDescriptionChecking: true,
+const prettifyLoadingProps = {
+  groupCard: false,
+  tokenCardPrettifyLoadingProps: {
+    card: false,
+    tokenCardInternalPrettifyLoadingProps: {
+      balance: false,
+      imageUri: false,
+      name: false,
+      description: false,
     },
   },
-} as TTokenGroupCardToggleProps;
+} as TTokenGroupCardPrettifyLoadingProps;
 
 interface Nft {
   name: string;
@@ -53,7 +53,7 @@ export const ContractData = () => {
     <>
       <div className="flex flex-col justify-center items-center bg-[url('/assets/gradient-bg.png')] bg-[length:100%_100%] py-10 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
-          <TokenGroupCard tokenGroup={tokenGroup} toggleProps={propsConfig} />
+          <TokenGroupCard tokenGroup={tokenGroup} prettifyLoadingProps={prettifyLoadingProps} />
         </div>
       </div>
     </>

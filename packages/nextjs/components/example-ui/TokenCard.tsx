@@ -1,4 +1,4 @@
-import { TTokenInternalToggleProps, TokenCardInternal } from "./TokenCardInternal";
+import { TTokenCardInternalPrettifyLoadingProps, TokenCardInternal } from "./TokenCardInternal";
 
 export type Token = {
   balance: bigint;
@@ -9,18 +9,18 @@ export type Token = {
 
 type TTokenProps = {
   token: Token;
-  toggleProps: TTokenToggleProps;
+  prettifyLoadingProps: TTokenCardPrettifyLoadingProps;
 };
 
-export type TTokenToggleProps = {
-  toggleLoading: boolean;
-  tokenInternalToggleProps: TTokenInternalToggleProps;
+export type TTokenCardPrettifyLoadingProps = {
+  card: boolean;
+  tokenCardInternalPrettifyLoadingProps: TTokenCardInternalPrettifyLoadingProps;
 };
 
-export const TokenCard = ({ token, toggleProps }: TTokenProps) => {
+export const TokenCard = ({ token, prettifyLoadingProps }: TTokenProps) => {
   return (
     <>
-      {toggleProps.toggleLoading ? (
+      {prettifyLoadingProps.card ? (
         token?.imageUri !== undefined &&
         token?.balance !== undefined &&
         token?.name !== undefined &&
@@ -31,7 +31,7 @@ export const TokenCard = ({ token, toggleProps }: TTokenProps) => {
               balance={token.balance}
               name={token.name}
               description={token.description}
-              toggleProps={toggleProps.tokenInternalToggleProps}
+              prettifyLoadingProps={prettifyLoadingProps.tokenCardInternalPrettifyLoadingProps}
             />
           </>
         ) : (
@@ -44,7 +44,7 @@ export const TokenCard = ({ token, toggleProps }: TTokenProps) => {
             balance={token.balance}
             name={token.name}
             description={token.description}
-            toggleProps={toggleProps.tokenInternalToggleProps}
+            prettifyLoadingProps={prettifyLoadingProps.tokenCardInternalPrettifyLoadingProps}
           />
         </>
       )}

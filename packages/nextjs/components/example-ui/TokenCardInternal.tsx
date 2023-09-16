@@ -5,22 +5,22 @@ type TTokenProps = {
   balance: bigint;
   name: string;
   description: string;
-  toggleProps: TTokenInternalToggleProps;
+  prettifyLoadingProps: TTokenCardInternalPrettifyLoadingProps;
 };
 
-export type TTokenInternalToggleProps = {
-  toggleBalanceChecking: boolean;
-  toggleImageUriChecking: boolean;
-  toggleNameChecking: boolean;
-  toggleDescriptionChecking: boolean;
+export type TTokenCardInternalPrettifyLoadingProps = {
+  balance: boolean;
+  imageUri: boolean;
+  name: boolean;
+  description: boolean;
 };
 
-export const TokenCardInternal = ({ imageUri, balance, name, description, toggleProps }: TTokenProps) => {
+export const TokenCardInternal = ({ imageUri, balance, name, description, prettifyLoadingProps }: TTokenProps) => {
   return (
     <div className="float-left px-2">
       <div className="grid w-64 h-26 rounded text-secondary-content place-content-center">
         <div className="text-4xl text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
-          {toggleProps.toggleBalanceChecking ? (
+          {prettifyLoadingProps.balance ? (
             balance !== undefined ? (
               Number(balance)
             ) : (
@@ -38,7 +38,7 @@ export const TokenCardInternal = ({ imageUri, balance, name, description, toggle
       <div className="grid w-64 h-64 rounded bg-primary text-primary-content place-content-center">
         <div className="avatar">
           <div className="w-64 rounded">
-            {toggleProps.toggleImageUriChecking ? (
+            {prettifyLoadingProps.imageUri ? (
               imageUri !== undefined ? (
                 <Image src={imageUri} alt="Token 0 Image" width="512" height="512" />
               ) : (
@@ -54,12 +54,12 @@ export const TokenCardInternal = ({ imageUri, balance, name, description, toggle
       </div>
       <div className="grid w-64 h-8 rounded text-accent-content place-content-center">
         <div className="text-2xl text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
-          {toggleProps.toggleNameChecking ? (name !== undefined ? name : "Loading name...") : name}
+          {prettifyLoadingProps.name ? (name !== undefined ? name : "Loading name...") : name}
         </div>
       </div>
       <div className="grid w-64 h-26 rounded text-secondary-content place-content-center">
         <div className="text-center min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
-          {toggleProps.toggleDescriptionChecking
+          {prettifyLoadingProps.description
             ? description !== undefined
               ? description
               : "Loading description..."
