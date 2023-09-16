@@ -2,7 +2,7 @@ import { TTokenCardPrettifyLoadingProps, Token, TokenCard } from "./TokenCard";
 
 type TTokenGroupCardProps = {
   tokenGroup: TokenGroup;
-  prettifyLoadingProps: TTokenGroupCardPrettifyLoadingProps;
+  prettifyLoadingProps?: TTokenGroupCardPrettifyLoadingProps;
 };
 
 export type TokenGroup = {
@@ -19,7 +19,7 @@ export const TokenGroupCard = ({ tokenGroup, prettifyLoadingProps }: TTokenGroup
   return (
     <div className="flex flex-col justify-center items-center bg-[url('/assets/gradient-bg.png')] bg-[length:100%_100%] py-10 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
       <div>
-        {prettifyLoadingProps.groupCard ? (
+        {prettifyLoadingProps?.groupCard ? (
           tokenGroup.token0.balance !== undefined &&
           tokenGroup.token0.name !== undefined &&
           tokenGroup.token0.description !== undefined &&
@@ -43,14 +43,8 @@ export const TokenGroupCard = ({ tokenGroup, prettifyLoadingProps }: TTokenGroup
           )
         ) : (
           <>
-            <TokenCard
-              token={tokenGroup?.token0}
-              prettifyLoadingProps={prettifyLoadingProps.tokenCardPrettifyLoadingProps}
-            />
-            <TokenCard
-              token={tokenGroup?.token1}
-              prettifyLoadingProps={prettifyLoadingProps.tokenCardPrettifyLoadingProps}
-            />
+            <TokenCard token={tokenGroup?.token0} />
+            <TokenCard token={tokenGroup?.token1} />
           </>
         )}
       </div>

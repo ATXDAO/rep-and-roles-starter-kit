@@ -4,14 +4,14 @@ import { useFetch } from "usehooks-ts";
 import { useAccount } from "wagmi";
 
 const prettifyLoadingProps = {
-  groupCard: false,
+  groupCard: true,
   tokenCardPrettifyLoadingProps: {
-    card: false,
+    card: true,
     tokenCardInternalPrettifyLoadingProps: {
-      balance: false,
-      imageUri: false,
-      name: false,
-      description: false,
+      balance: true,
+      imageUri: true,
+      name: true,
+      description: true,
     },
   },
 } as TTokenGroupCardPrettifyLoadingProps;

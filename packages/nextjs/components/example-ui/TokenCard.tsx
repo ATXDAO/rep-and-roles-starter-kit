@@ -9,7 +9,7 @@ export type Token = {
 
 type TTokenProps = {
   token: Token;
-  prettifyLoadingProps: TTokenCardPrettifyLoadingProps;
+  prettifyLoadingProps?: TTokenCardPrettifyLoadingProps;
 };
 
 export type TTokenCardPrettifyLoadingProps = {
@@ -20,7 +20,7 @@ export type TTokenCardPrettifyLoadingProps = {
 export const TokenCard = ({ token, prettifyLoadingProps }: TTokenProps) => {
   return (
     <>
-      {prettifyLoadingProps.card ? (
+      {prettifyLoadingProps?.card ? (
         token?.imageUri !== undefined &&
         token?.balance !== undefined &&
         token?.name !== undefined &&
@@ -44,7 +44,6 @@ export const TokenCard = ({ token, prettifyLoadingProps }: TTokenProps) => {
             balance={token.balance}
             name={token.name}
             description={token.description}
-            prettifyLoadingProps={prettifyLoadingProps.tokenCardInternalPrettifyLoadingProps}
           />
         </>
       )}
