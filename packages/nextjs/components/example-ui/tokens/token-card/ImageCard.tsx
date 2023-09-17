@@ -21,8 +21,6 @@ export class ImageProperties {
 }
 
 export const ImageCard = ({ imageProperties, prettifyLoading, propertyClasses }: TImageCardProps) => {
-  console.log(imageProperties.value);
-
   const output = (
     <>
       <Image
