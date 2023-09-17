@@ -1,6 +1,6 @@
 import { useBalanceOf, useUri } from "./tokens/TokenInteractions";
-import { TokenGroupCard } from "./tokens/token-group-card/TokenGroupCard";
-import { prettifyLoadingProps, propertyClasses } from "./tokens/token-group-card/TokenGroupCardConfig";
+import { TokenGroup, TokenGroupCard } from "./tokens/token-group-card/TokenGroupCard";
+import { prettifyLoadingProps, propertiesClasses } from "./tokens/token-group-card/TokenGroupCardConfig";
 import { useFetch } from "usehooks-ts";
 import { useAccount } from "wagmi";
 
@@ -26,40 +26,25 @@ export const ContractData = () => {
     token0: {
       balance: balanceOf0,
       name: json0?.name,
-      imageUri: json0?.image?.replace("ipfs://", "https://ipfs.io/ipfs/"),
+      image: json0?.image?.replace("ipfs://", "https://ipfs.io/ipfs/"),
       description: json0?.description,
     },
     token1: {
       balance: balanceOf1,
       name: json1?.name,
-      imageUri: json1?.image?.replace("ipfs://", "https://ipfs.io/ipfs/"),
+      image: json1?.image?.replace("ipfs://", "https://ipfs.io/ipfs/"),
       description: json1?.description,
     },
-  } as any;
+  } as TokenGroup;
 
   return (
     <>
-      {/* <div className="flex">
-        <div className="px-5">
-          <p>Hello 1</p>
-          <p>Hello 1</p>
-        </div>
-        <div className="px-5">
-          <p>Hello 2</p>
-          <p>Hello 2</p>
-        </div>
-        <TokenGroupCardSmall tokenGroup={tokenGroup} prettifyLoadingProps={prettifyLoadingProps} />
-      </div>
-      <div> */}
-
-      {/* </div> */}
-
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-10 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
           <TokenGroupCard
             tokenGroup={tokenGroup}
+            propertiesClasses={propertiesClasses}
             prettifyLoadingProps={prettifyLoadingProps}
-            propertyClasses={propertyClasses}
           />
         </div>
       </div>

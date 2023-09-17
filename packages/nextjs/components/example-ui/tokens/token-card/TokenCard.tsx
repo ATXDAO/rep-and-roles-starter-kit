@@ -1,59 +1,55 @@
-import { BaseTokenCard, TBaseTokenCardPropertyClasses, TTokenCardInternalPrettifyLoadingProps } from "./BaseTokenCard";
+import { BaseTokenCard, TBaseTokenCardPrettifyLoadingProps, TBaseTokenCardPropertiesClasses } from "./BaseTokenCard";
 
 type TTokenCardProps = {
   token: Token;
-  propertyClasses?: TTokenCardPropertyClasses;
+  propertiesClasses?: TTokenCardPropertiesClasses;
   prettifyLoadingProps?: TTokenCardPrettifyLoadingProps;
 };
 
 export type Token = {
   balance: bigint;
-  imageUri: string;
+  image: string;
   name: string;
   description: string;
 };
 
-export type TTokenCardPropertyClasses = {
+export type TTokenCardPropertiesClasses = {
   card: string;
-  baseTokenCardPropertyClasses?: TBaseTokenCardPropertyClasses;
+  baseTokenCardPropertyClasses?: TBaseTokenCardPropertiesClasses;
 };
 
 export type TTokenCardPrettifyLoadingProps = {
   card: boolean;
-  tokenCardInternalPrettifyLoadingProps: TTokenCardInternalPrettifyLoadingProps;
+  baseTokenCardPrettifyLoadingProps: TBaseTokenCardPrettifyLoadingProps;
 };
 
-export const TokenCard = ({ token, prettifyLoadingProps, propertyClasses }: TTokenCardProps) => {
+export const TokenCard = ({ token, prettifyLoadingProps, propertiesClasses }: TTokenCardProps) => {
+  const output = (
+    <>
+      <BaseTokenCard
+        image={token.image}
+        balance={token.balance}
+        name={token.name}
+        description={token.description}
+        propertiesClasses={propertiesClasses?.baseTokenCardPropertyClasses}
+        prettifyLoadingProps={prettifyLoadingProps?.baseTokenCardPrettifyLoadingProps}
+      />
+    </>
+  );
+
   return (
-    <div className={propertyClasses?.card}>
+    <div className={propertiesClasses?.card}>
       {prettifyLoadingProps?.card ? (
-        token?.imageUri !== undefined &&
+        token?.image !== undefined &&
         token?.balance !== undefined &&
         token?.name !== undefined &&
         token?.description !== undefined ? (
-          <div>
-            <BaseTokenCard
-              imageUri={token.imageUri}
-              balance={token.balance}
-              name={token.name}
-              description={token.description}
-              prettifyLoadingProps={prettifyLoadingProps.tokenCardInternalPrettifyLoadingProps}
-              propertyClasses={propertyClasses?.baseTokenCardPropertyClasses}
-            />
-          </div>
+          <div>{output}</div>
         ) : (
           <>Loading Token...</>
         )
       ) : (
-        <div>
-          <BaseTokenCard
-            imageUri={token.imageUri}
-            balance={token.balance}
-            name={token.name}
-            description={token.description}
-            propertyClasses={propertyClasses?.baseTokenCardPropertyClasses}
-          />
-        </div>
+        <div>{output}</div>
       )}
     </div>
   );

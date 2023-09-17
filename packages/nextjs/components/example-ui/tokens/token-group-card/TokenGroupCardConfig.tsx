@@ -1,7 +1,7 @@
 import { TTokenGroupCardPrettifyLoadingProps } from "./TokenGroupCard";
-import { TTokenCardGroupPropertyClasses } from "./TokenGroupCard";
+import { TTokenCardGroupPropertiesClasses } from "./TokenGroupCard";
 
-export const propertyClasses = {
+export const propertiesClasses = {
   card: "bg-base-300",
   container: "flex justify-center",
   tokenCardPropertyClasses: {
@@ -13,15 +13,15 @@ export const propertyClasses = {
       image: "w-64 rounded mx-auto",
     },
   },
-} as TTokenCardGroupPropertyClasses;
+} as TTokenCardGroupPropertiesClasses;
 
 export const prettifyLoadingProps = {
-  card: true,
+  card: false,
   tokenCardPrettifyLoadingProps: {
-    card: true,
-    tokenCardInternalPrettifyLoadingProps: {
+    card: false,
+    baseTokenCardPrettifyLoadingProps: {
       balance: true,
-      imageUri: true,
+      image: true,
       name: true,
       description: true,
     },

@@ -1,10 +1,10 @@
 import { TTokenCardPrettifyLoadingProps, Token, TokenCard } from "../token-card/TokenCard";
-import { TTokenCardPropertyClasses } from "../token-card/TokenCard";
+import { TTokenCardPropertiesClasses } from "../token-card/TokenCard";
 
 type TTokenGroupCardProps = {
   tokenGroup: TokenGroup;
+  propertiesClasses?: TTokenCardGroupPropertiesClasses;
   prettifyLoadingProps: TTokenGroupCardPrettifyLoadingProps;
-  propertyClasses?: TTokenCardGroupPropertyClasses;
 };
 
 export type TokenGroup = {
@@ -12,10 +12,10 @@ export type TokenGroup = {
   token1: Token;
 };
 
-export type TTokenCardGroupPropertyClasses = {
+export type TTokenCardGroupPropertiesClasses = {
   card: string;
   container: string;
-  tokenCardPropertyClasses?: TTokenCardPropertyClasses;
+  tokenCardPropertyClasses?: TTokenCardPropertiesClasses;
 };
 
 export type TTokenGroupCardPrettifyLoadingProps = {
@@ -23,38 +23,39 @@ export type TTokenGroupCardPrettifyLoadingProps = {
   tokenCardPrettifyLoadingProps: TTokenCardPrettifyLoadingProps;
 };
 
-export const TokenGroupCard = ({ tokenGroup, prettifyLoadingProps, propertyClasses }: TTokenGroupCardProps) => {
+export const TokenGroupCard = ({ tokenGroup, propertiesClasses, prettifyLoadingProps }: TTokenGroupCardProps) => {
+  const output = (
+    <>
+      <TokenCard
+        token={tokenGroup.token0}
+        propertiesClasses={propertiesClasses?.tokenCardPropertyClasses}
+        prettifyLoadingProps={prettifyLoadingProps.tokenCardPrettifyLoadingProps}
+      />
+      <TokenCard
+        token={tokenGroup.token1}
+        propertiesClasses={propertiesClasses?.tokenCardPropertyClasses}
+        prettifyLoadingProps={prettifyLoadingProps.tokenCardPrettifyLoadingProps}
+      />
+    </>
+  );
+
   return (
-    <div className={propertyClasses?.card}>
+    <div className={propertiesClasses?.card}>
       {prettifyLoadingProps.card ? (
         tokenGroup.token0.balance !== undefined &&
         tokenGroup.token0.name !== undefined &&
         tokenGroup.token0.description !== undefined &&
-        tokenGroup.token0.imageUri !== undefined &&
+        tokenGroup.token0.image !== undefined &&
         tokenGroup.token1.balance !== undefined &&
         tokenGroup.token1.name !== undefined &&
         tokenGroup.token1.description !== undefined &&
-        tokenGroup.token1.imageUri !== undefined ? (
-          <div className={propertyClasses?.container}>
-            <TokenCard
-              token={tokenGroup.token0}
-              prettifyLoadingProps={prettifyLoadingProps.tokenCardPrettifyLoadingProps}
-              propertyClasses={propertyClasses?.tokenCardPropertyClasses}
-            />
-            <TokenCard
-              token={tokenGroup.token1}
-              prettifyLoadingProps={prettifyLoadingProps.tokenCardPrettifyLoadingProps}
-              propertyClasses={propertyClasses?.tokenCardPropertyClasses}
-            />
-          </div>
+        tokenGroup.token1.image !== undefined ? (
+          <div className={propertiesClasses?.container}>{output}</div>
         ) : (
           <>Loading Reputation Tokens...</>
         )
       ) : (
-        <>
-          <TokenCard token={tokenGroup.token0} propertyClasses={propertyClasses?.tokenCardPropertyClasses} />
-          <TokenCard token={tokenGroup.token1} propertyClasses={propertyClasses?.tokenCardPropertyClasses} />
-        </>
+        <div className={propertiesClasses?.container}>{output}</div>
       )}
     </div>
   );

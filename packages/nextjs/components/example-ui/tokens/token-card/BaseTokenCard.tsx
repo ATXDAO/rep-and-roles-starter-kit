@@ -1,73 +1,60 @@
-import Image from "next/image";
+import { BalanceCard } from "./BalanceCard";
+import { ImageCard } from "./ImageCard";
+import { StringCard } from "./StringCard";
 
 type TTokenProps = {
-  imageUri: string;
   balance: bigint;
+  image: string;
   name: string;
   description: string;
-  propertyClasses?: TBaseTokenCardPropertyClasses;
-  prettifyLoadingProps?: TTokenCardInternalPrettifyLoadingProps;
+  propertiesClasses?: TBaseTokenCardPropertiesClasses;
+  prettifyLoadingProps?: TBaseTokenCardPrettifyLoadingProps;
 };
 
-export type TBaseTokenCardPropertyClasses = {
+export type TBaseTokenCardPropertiesClasses = {
   balance: string;
   name: string;
   description: string;
   image: string;
 };
 
-export type TTokenCardInternalPrettifyLoadingProps = {
+export type TBaseTokenCardPrettifyLoadingProps = {
   balance: boolean;
-  imageUri: boolean;
+  image: boolean;
   name: boolean;
   description: boolean;
 };
 
 export const BaseTokenCard = ({
-  imageUri,
   balance,
+  image,
   name,
   description,
+  propertiesClasses,
   prettifyLoadingProps,
-  propertyClasses,
 }: TTokenProps) => {
   return (
-    <div>
-      <div className={propertyClasses?.balance}>
-        {prettifyLoadingProps?.balance ? (
-          balance !== undefined ? (
-            Number(balance)
-          ) : (
-            <>Loading Balance...</>
-          )
-        ) : balance !== undefined ? (
-          Number(balance)
-        ) : (
-          0
-        )}
-        {}
-      </div>
-      {prettifyLoadingProps?.imageUri ? (
-        imageUri !== undefined ? (
-          <Image className={propertyClasses?.image} src={imageUri} alt="Token 0 Image" width="512" height="512" />
-        ) : (
-          <>Loading Image...</>
-        )
-      ) : imageUri !== undefined ? (
-        <Image className={propertyClasses?.image} src={imageUri} alt="Token 0 Image" width="512" height="512" />
-      ) : (
-        <></>
-      )}
-      <div className={propertyClasses?.name}>
-        {prettifyLoadingProps?.name ? (name !== undefined ? name : "Loading name...") : name}
-      </div>
-      <div className={propertyClasses?.description}>
-        {prettifyLoadingProps?.description
-          ? description !== undefined
-            ? description
-            : "Loading description..."
-          : description}
-      </div>
-    </div>
+    <>
+      <BalanceCard
+        value={balance}
+        propertyClasses={propertiesClasses?.balance}
+        prettifyLoading={prettifyLoadingProps?.balance}
+      ></BalanceCard>
+      <ImageCard
+        value={image}
+        propertyClasses={propertiesClasses?.image}
+        prettifyLoading={prettifyLoadingProps?.image}
+      ></ImageCard>
+      <StringCard
+        value={name}
+        propertyClasses={propertiesClasses?.name}
+        prettifyLoading={prettifyLoadingProps?.name}
+      ></StringCard>
+      <StringCard
+        value={description}
+        propertyClasses={propertiesClasses?.description}
+        prettifyLoading={prettifyLoadingProps?.description}
+      ></StringCard>
+    </>
   );
 };
