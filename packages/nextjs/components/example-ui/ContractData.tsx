@@ -1,29 +1,8 @@
-import { TInfoClasses } from "./TokenCardInternalSmall";
-import { TTokenGroupCardPrettifyLoadingProps, TokenGroupCard } from "./TokenGroupCard";
-import { TokenGroupCardSmall } from "./TokenGroupCardSmall";
-import { useBalanceOf, useUri } from "./TokenInteractions";
+import { useBalanceOf, useUri } from "./tokens/TokenInteractions";
+import { TokenGroupCard } from "./tokens/token-group-card/TokenGroupCard";
+import { prettifyLoadingProps, propertyClasses } from "./tokens/token-group-card/TokenGroupCardConfig";
 import { useFetch } from "usehooks-ts";
 import { useAccount } from "wagmi";
-
-const infoClasses = {
-  balance: "w-64 text-2xl mx-auto text-center",
-  name: "w-64 text-1xl text-center object-center mx-auto font-bold",
-  description: "w-64 text-1xl mx-auto text-center",
-  image: "w-64 rounded mx-auto",
-} as TInfoClasses;
-
-const prettifyLoadingProps = {
-  groupCard: true,
-  tokenCardPrettifyLoadingProps: {
-    card: true,
-    tokenCardInternalPrettifyLoadingProps: {
-      balance: true,
-      imageUri: true,
-      name: true,
-      description: true,
-    },
-  },
-} as TTokenGroupCardPrettifyLoadingProps;
 
 interface Nft {
   name: string;
@@ -77,11 +56,10 @@ export const ContractData = () => {
 
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-10 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
-          <TokenGroupCard tokenGroup={tokenGroup} prettifyLoadingProps={prettifyLoadingProps} />
-          <TokenGroupCardSmall
+          <TokenGroupCard
             tokenGroup={tokenGroup}
             prettifyLoadingProps={prettifyLoadingProps}
-            infoClasses={infoClasses}
+            propertyClasses={propertyClasses}
           />
         </div>
       </div>

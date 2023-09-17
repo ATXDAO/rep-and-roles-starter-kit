@@ -1,4 +1,10 @@
-import { TInfoClasses, TTokenCardInternalPrettifyLoadingProps, TokenCardInternalSmall } from "./TokenCardInternalSmall";
+import { BaseTokenCard, TBaseTokenCardPropertyClasses, TTokenCardInternalPrettifyLoadingProps } from "./BaseTokenCard";
+
+type TTokenCardProps = {
+  token: Token;
+  propertyClasses?: TTokenCardPropertyClasses;
+  prettifyLoadingProps?: TTokenCardPrettifyLoadingProps;
+};
 
 export type Token = {
   balance: bigint;
@@ -7,10 +13,9 @@ export type Token = {
   description: string;
 };
 
-type TTokenProps = {
-  token: Token;
-  prettifyLoadingProps?: TTokenCardPrettifyLoadingProps;
-  infoClasses?: TInfoClasses;
+export type TTokenCardPropertyClasses = {
+  card: string;
+  baseTokenCardPropertyClasses?: TBaseTokenCardPropertyClasses;
 };
 
 export type TTokenCardPrettifyLoadingProps = {
@@ -18,22 +23,22 @@ export type TTokenCardPrettifyLoadingProps = {
   tokenCardInternalPrettifyLoadingProps: TTokenCardInternalPrettifyLoadingProps;
 };
 
-export const TokenCardSmall = ({ token, prettifyLoadingProps, infoClasses }: TTokenProps) => {
+export const TokenCard = ({ token, prettifyLoadingProps, propertyClasses }: TTokenCardProps) => {
   return (
-    <div className="px-5">
+    <div className={propertyClasses?.card}>
       {prettifyLoadingProps?.card ? (
         token?.imageUri !== undefined &&
         token?.balance !== undefined &&
         token?.name !== undefined &&
         token?.description !== undefined ? (
           <div>
-            <TokenCardInternalSmall
+            <BaseTokenCard
               imageUri={token.imageUri}
               balance={token.balance}
               name={token.name}
               description={token.description}
               prettifyLoadingProps={prettifyLoadingProps.tokenCardInternalPrettifyLoadingProps}
-              infoClasses={infoClasses}
+              propertyClasses={propertyClasses?.baseTokenCardPropertyClasses}
             />
           </div>
         ) : (
@@ -41,12 +46,12 @@ export const TokenCardSmall = ({ token, prettifyLoadingProps, infoClasses }: TTo
         )
       ) : (
         <div>
-          <TokenCardInternalSmall
+          <BaseTokenCard
             imageUri={token.imageUri}
             balance={token.balance}
             name={token.name}
             description={token.description}
-            infoClasses={infoClasses}
+            propertyClasses={propertyClasses?.baseTokenCardPropertyClasses}
           />
         </div>
       )}

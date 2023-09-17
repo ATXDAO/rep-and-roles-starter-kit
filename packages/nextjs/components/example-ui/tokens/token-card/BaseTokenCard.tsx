@@ -5,11 +5,11 @@ type TTokenProps = {
   balance: bigint;
   name: string;
   description: string;
+  propertyClasses?: TBaseTokenCardPropertyClasses;
   prettifyLoadingProps?: TTokenCardInternalPrettifyLoadingProps;
-  infoClasses?: TInfoClasses;
 };
 
-export type TInfoClasses = {
+export type TBaseTokenCardPropertyClasses = {
   balance: string;
   name: string;
   description: string;
@@ -23,22 +23,17 @@ export type TTokenCardInternalPrettifyLoadingProps = {
   description: boolean;
 };
 
-export const TokenCardInternalSmall = ({
+export const BaseTokenCard = ({
   imageUri,
   balance,
   name,
   description,
   prettifyLoadingProps,
-  infoClasses,
+  propertyClasses,
 }: TTokenProps) => {
-  // const balanceTextClasses = "w-32 text-2xl mx-auto text-center";
-  // const nameTextClasses = "w-32 text-1xl text-center object-center mx-auto font-bold";
-  // const descriptionTextClasses = "w-32 text-1xl mx-auto text-center";
-  // const imageClasses = "w-32 rounded mx-auto";
-
   return (
     <div>
-      <div className={infoClasses?.balance}>
+      <div className={propertyClasses?.balance}>
         {prettifyLoadingProps?.balance ? (
           balance !== undefined ? (
             Number(balance)
@@ -54,19 +49,19 @@ export const TokenCardInternalSmall = ({
       </div>
       {prettifyLoadingProps?.imageUri ? (
         imageUri !== undefined ? (
-          <Image className={infoClasses?.image} src={imageUri} alt="Token 0 Image" width="512" height="512" />
+          <Image className={propertyClasses?.image} src={imageUri} alt="Token 0 Image" width="512" height="512" />
         ) : (
           <>Loading Image...</>
         )
       ) : imageUri !== undefined ? (
-        <Image className={infoClasses?.image} src={imageUri} alt="Token 0 Image" width="512" height="512" />
+        <Image className={propertyClasses?.image} src={imageUri} alt="Token 0 Image" width="512" height="512" />
       ) : (
         <></>
       )}
-      <div className={infoClasses?.name}>
+      <div className={propertyClasses?.name}>
         {prettifyLoadingProps?.name ? (name !== undefined ? name : "Loading name...") : name}
       </div>
-      <div className={infoClasses?.description}>
+      <div className={propertyClasses?.description}>
         {prettifyLoadingProps?.description
           ? description !== undefined
             ? description

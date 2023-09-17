@@ -1,10 +1,10 @@
-import { TInfoClasses } from "./TokenCardInternalSmall";
-import { TTokenCardPrettifyLoadingProps, Token, TokenCardSmall } from "./TokenCardSmall";
+import { TTokenCardPrettifyLoadingProps, Token, TokenCard } from "../token-card/TokenCard";
+import { TTokenCardPropertyClasses } from "../token-card/TokenCard";
 
 type TTokenGroupCardProps = {
   tokenGroup: TokenGroup;
   prettifyLoadingProps: TTokenGroupCardPrettifyLoadingProps;
-  infoClasses?: TInfoClasses;
+  propertyClasses?: TTokenCardGroupPropertyClasses;
 };
 
 export type TokenGroup = {
@@ -12,15 +12,21 @@ export type TokenGroup = {
   token1: Token;
 };
 
+export type TTokenCardGroupPropertyClasses = {
+  card: string;
+  container: string;
+  tokenCardPropertyClasses?: TTokenCardPropertyClasses;
+};
+
 export type TTokenGroupCardPrettifyLoadingProps = {
-  groupCard: boolean;
+  card: boolean;
   tokenCardPrettifyLoadingProps: TTokenCardPrettifyLoadingProps;
 };
 
-export const TokenGroupCardSmall = ({ tokenGroup, prettifyLoadingProps, infoClasses }: TTokenGroupCardProps) => {
+export const TokenGroupCard = ({ tokenGroup, prettifyLoadingProps, propertyClasses }: TTokenGroupCardProps) => {
   return (
-    <div className="bg-base-300">
-      {prettifyLoadingProps.groupCard ? (
+    <div className={propertyClasses?.card}>
+      {prettifyLoadingProps.card ? (
         tokenGroup.token0.balance !== undefined &&
         tokenGroup.token0.name !== undefined &&
         tokenGroup.token0.description !== undefined &&
@@ -29,16 +35,16 @@ export const TokenGroupCardSmall = ({ tokenGroup, prettifyLoadingProps, infoClas
         tokenGroup.token1.name !== undefined &&
         tokenGroup.token1.description !== undefined &&
         tokenGroup.token1.imageUri !== undefined ? (
-          <div className="flex justify-center">
-            <TokenCardSmall
+          <div className={propertyClasses?.container}>
+            <TokenCard
               token={tokenGroup.token0}
               prettifyLoadingProps={prettifyLoadingProps.tokenCardPrettifyLoadingProps}
-              infoClasses={infoClasses}
+              propertyClasses={propertyClasses?.tokenCardPropertyClasses}
             />
-            <TokenCardSmall
+            <TokenCard
               token={tokenGroup.token1}
               prettifyLoadingProps={prettifyLoadingProps.tokenCardPrettifyLoadingProps}
-              infoClasses={infoClasses}
+              propertyClasses={propertyClasses?.tokenCardPropertyClasses}
             />
           </div>
         ) : (
@@ -46,8 +52,8 @@ export const TokenGroupCardSmall = ({ tokenGroup, prettifyLoadingProps, infoClas
         )
       ) : (
         <>
-          <TokenCardSmall token={tokenGroup.token0} infoClasses={infoClasses} />
-          <TokenCardSmall token={tokenGroup.token1} infoClasses={infoClasses} />
+          <TokenCard token={tokenGroup.token0} propertyClasses={propertyClasses?.tokenCardPropertyClasses} />
+          <TokenCard token={tokenGroup.token1} propertyClasses={propertyClasses?.tokenCardPropertyClasses} />
         </>
       )}
     </div>
