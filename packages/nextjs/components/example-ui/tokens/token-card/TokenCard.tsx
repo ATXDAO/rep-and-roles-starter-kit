@@ -1,4 +1,5 @@
 import { BaseTokenCard, TBaseTokenCardPrettifyLoadingProps, TBaseTokenCardPropertiesClasses } from "./BaseTokenCard";
+import { ImageProperties } from "./ImageCard";
 
 type TTokenCardProps = {
   token: Token;
@@ -8,7 +9,7 @@ type TTokenCardProps = {
 
 export type Token = {
   balance: bigint;
-  image: string;
+  imageProperties: ImageProperties;
   name: string;
   description: string;
 };
@@ -27,7 +28,7 @@ export const TokenCard = ({ token, prettifyLoadingProps, propertiesClasses }: TT
   const output = (
     <>
       <BaseTokenCard
-        image={token.image}
+        imageProperties={token.imageProperties}
         balance={token.balance}
         name={token.name}
         description={token.description}
@@ -40,7 +41,7 @@ export const TokenCard = ({ token, prettifyLoadingProps, propertiesClasses }: TT
   return (
     <div className={propertiesClasses?.card}>
       {prettifyLoadingProps?.card ? (
-        token?.image !== undefined &&
+        token?.imageProperties.value !== undefined &&
         token?.balance !== undefined &&
         token?.name !== undefined &&
         token?.description !== undefined ? (

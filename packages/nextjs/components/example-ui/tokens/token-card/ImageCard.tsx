@@ -2,21 +2,46 @@ import Image from "next/image";
 
 type TImageCardProps = {
   value: string;
+  imageProperties: ImageProperties;
   propertyClasses?: string;
   prettifyLoading?: boolean;
 };
 
-export const ImageCard = ({ value, prettifyLoading, propertyClasses }: TImageCardProps) => {
+export class ImageProperties {
+  value: string;
+  alt: string;
+  height: number;
+  width: number;
+  constructor(value: string | undefined, alt = "", width = 512, height = 512) {
+    this.value = value!;
+    this.alt = alt;
+    this.width = width;
+    this.height = height;
+  }
+}
+
+export const ImageCard = ({ imageProperties, prettifyLoading, propertyClasses }: TImageCardProps) => {
+  const output = (
+    <>
+      <Image
+        className={propertyClasses}
+        src={imageProperties.value}
+        alt={imageProperties.alt}
+        width={imageProperties.width}
+        height={imageProperties.height}
+      />
+    </>
+  );
   return (
     <div>
       {prettifyLoading ? (
-        value !== undefined ? (
-          <Image className={propertyClasses} src={value} alt="Token 0 Image" width="512" height="512" />
+        imageProperties.value !== undefined ? (
+          output
         ) : (
           <>Loading Image...</>
         )
-      ) : value !== undefined ? (
-        <Image className={propertyClasses} src={value} alt="Token 0 Image" width="512" height="512" />
+      ) : imageProperties.value !== undefined ? (
+        output
       ) : (
         <></>
       )}

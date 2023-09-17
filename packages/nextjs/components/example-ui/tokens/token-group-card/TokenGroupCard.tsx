@@ -4,7 +4,7 @@ import { TTokenCardPropertiesClasses } from "../token-card/TokenCard";
 type TTokenGroupCardProps = {
   tokenGroup: TokenGroup;
   propertiesClasses?: TTokenCardGroupPropertiesClasses;
-  prettifyLoadingProps: TTokenGroupCardPrettifyLoadingProps;
+  prettifyLoadingProps?: TTokenGroupCardPrettifyLoadingProps;
 };
 
 export type TokenGroup = {
@@ -29,27 +29,27 @@ export const TokenGroupCard = ({ tokenGroup, propertiesClasses, prettifyLoadingP
       <TokenCard
         token={tokenGroup.token0}
         propertiesClasses={propertiesClasses?.tokenCardPropertyClasses}
-        prettifyLoadingProps={prettifyLoadingProps.tokenCardPrettifyLoadingProps}
+        prettifyLoadingProps={prettifyLoadingProps?.tokenCardPrettifyLoadingProps}
       />
       <TokenCard
         token={tokenGroup.token1}
         propertiesClasses={propertiesClasses?.tokenCardPropertyClasses}
-        prettifyLoadingProps={prettifyLoadingProps.tokenCardPrettifyLoadingProps}
+        prettifyLoadingProps={prettifyLoadingProps?.tokenCardPrettifyLoadingProps}
       />
     </>
   );
 
   return (
     <div className={propertiesClasses?.card}>
-      {prettifyLoadingProps.card ? (
+      {prettifyLoadingProps?.card ? (
         tokenGroup.token0.balance !== undefined &&
         tokenGroup.token0.name !== undefined &&
         tokenGroup.token0.description !== undefined &&
-        tokenGroup.token0.image !== undefined &&
+        tokenGroup.token0.imageProperties.value !== undefined &&
         tokenGroup.token1.balance !== undefined &&
         tokenGroup.token1.name !== undefined &&
         tokenGroup.token1.description !== undefined &&
-        tokenGroup.token1.image !== undefined ? (
+        tokenGroup.token1.imageProperties.value !== undefined ? (
           <div className={propertiesClasses?.container}>{output}</div>
         ) : (
           <>Loading Reputation Tokens...</>

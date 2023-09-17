@@ -1,10 +1,11 @@
 import { BalanceCard } from "./BalanceCard";
 import { ImageCard } from "./ImageCard";
+import { ImageProperties } from "./ImageCard";
 import { StringCard } from "./StringCard";
 
 type TTokenProps = {
   balance: bigint;
-  image: string;
+  imageProperties: ImageProperties;
   name: string;
   description: string;
   propertiesClasses?: TBaseTokenCardPropertiesClasses;
@@ -27,7 +28,7 @@ export type TBaseTokenCardPrettifyLoadingProps = {
 
 export const BaseTokenCard = ({
   balance,
-  image,
+  imageProperties,
   name,
   description,
   propertiesClasses,
@@ -41,7 +42,8 @@ export const BaseTokenCard = ({
         prettifyLoading={prettifyLoadingProps?.balance}
       ></BalanceCard>
       <ImageCard
-        value={image}
+        value={imageProperties.value}
+        imageProperties={imageProperties}
         propertyClasses={propertiesClasses?.image}
         prettifyLoading={prettifyLoadingProps?.image}
       ></ImageCard>

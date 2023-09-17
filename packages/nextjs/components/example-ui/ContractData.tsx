@@ -1,4 +1,5 @@
 import { useBalanceOf, useUri } from "./tokens/TokenInteractions";
+import { ImageProperties } from "./tokens/token-card/ImageCard";
 import { TokenGroup, TokenGroupCard } from "./tokens/token-group-card/TokenGroupCard";
 import { prettifyLoadingProps, propertiesClasses } from "./tokens/token-group-card/TokenGroupCardConfig";
 import { useFetch } from "usehooks-ts";
@@ -26,13 +27,13 @@ export const ContractData = () => {
     token0: {
       balance: balanceOf0,
       name: json0?.name,
-      image: json0?.image?.replace("ipfs://", "https://ipfs.io/ipfs/"),
+      imageProperties: new ImageProperties(json0?.image?.replace("ipfs://", "https://ipfs.io/ipfs/"), "Token 0"),
       description: json0?.description,
     },
     token1: {
       balance: balanceOf1,
       name: json1?.name,
-      image: json1?.image?.replace("ipfs://", "https://ipfs.io/ipfs/"),
+      imageProperties: new ImageProperties(json1?.image?.replace("ipfs://", "https://ipfs.io/ipfs/"), "Token 1"),
       description: json1?.description,
     },
   } as TokenGroup;
@@ -43,8 +44,8 @@ export const ContractData = () => {
         <div>
           <TokenGroupCard
             tokenGroup={tokenGroup}
-            propertiesClasses={propertiesClasses}
             prettifyLoadingProps={prettifyLoadingProps}
+            propertiesClasses={propertiesClasses}
           />
         </div>
       </div>
