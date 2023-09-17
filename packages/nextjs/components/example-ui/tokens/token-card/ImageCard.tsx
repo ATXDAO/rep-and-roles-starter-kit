@@ -12,8 +12,8 @@ export class ImageProperties {
   alt: string;
   height: number;
   width: number;
-  constructor(value: string | undefined, alt = "", width = 512, height = 512) {
-    this.value = value!;
+  constructor(value = "", alt = "", width = 512, height = 512) {
+    this.value = value;
     this.alt = alt;
     this.width = width;
     this.height = height;
@@ -21,6 +21,8 @@ export class ImageProperties {
 }
 
 export const ImageCard = ({ imageProperties, prettifyLoading, propertyClasses }: TImageCardProps) => {
+  console.log(imageProperties.value);
+
   const output = (
     <>
       <Image
@@ -35,12 +37,12 @@ export const ImageCard = ({ imageProperties, prettifyLoading, propertyClasses }:
   return (
     <div>
       {prettifyLoading ? (
-        imageProperties.value !== undefined ? (
+        imageProperties.value !== undefined && imageProperties.value !== "" ? (
           output
         ) : (
           <>Loading Image...</>
         )
-      ) : imageProperties.value !== undefined ? (
+      ) : imageProperties.value !== undefined && imageProperties.value !== "" ? (
         output
       ) : (
         <></>
