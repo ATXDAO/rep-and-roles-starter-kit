@@ -9,6 +9,7 @@ type TStringCardProps = {
 export const StringCard = ({ value, prettifyLoading, propertyClasses }: TStringCardProps) => {
   let output;
   prettifyLoading ? (value !== undefined ? (output = value) : (output = "Loading...")) : (output = value);
+  console.log("adding for sake");
 
   return (
     <div className={propertyClasses?.container}>
