@@ -1,28 +1,25 @@
+import { TContainerAndValuePair } from "./BaseTokenCard";
+
 type TBalanceCardProps = {
   value: bigint;
-  propertyClasses?: TBalanceCardPropertiesClasses;
+  propertyClasses?: TContainerAndValuePair;
   prettifyLoading?: boolean;
 };
 
-export type TBalanceCardPropertiesClasses = {
-  container: string;
-  balance: string;
-};
-
 export const BalanceCard = ({ value, prettifyLoading, propertyClasses }: TBalanceCardProps) => {
+  let output;
+
+  prettifyLoading
+    ? value !== undefined
+      ? (output = Number(value))
+      : (output = "Loading Balance...")
+    : value !== undefined
+    ? (output = Number(value))
+    : (output = 0);
+
   return (
     <div className={propertyClasses?.container}>
-      {prettifyLoading ? (
-        value !== undefined ? (
-          <p className={propertyClasses?.balance}>{Number(value)}</p>
-        ) : (
-          <p className={propertyClasses?.balance}>Loading Balance...</p>
-        )
-      ) : value !== undefined ? (
-        <p className={propertyClasses?.balance}> {Number(value)} </p>
-      ) : (
-        <p className={propertyClasses?.balance}>0</p>
-      )}
+      <p className={propertyClasses?.value}>{output}</p>
     </div>
   );
 };

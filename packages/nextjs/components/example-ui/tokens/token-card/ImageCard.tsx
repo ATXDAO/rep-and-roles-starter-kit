@@ -1,9 +1,10 @@
 import Image from "next/image";
+import { TContainerAndValuePair } from "./BaseTokenCard";
 
 type TImageCardProps = {
   value: string;
   imageProperties?: ImageProperties;
-  propertyClasses?: string;
+  propertyClasses?: TContainerAndValuePair;
   prettifyLoading?: boolean;
 };
 
@@ -20,28 +21,28 @@ export class ImageProperties {
 
 export const ImageCard = ({ value, imageProperties, prettifyLoading, propertyClasses }: TImageCardProps) => {
   const output = (
-    <>
+    <div className={propertyClasses?.container}>
       <Image
-        className={propertyClasses}
+        className={propertyClasses?.value}
         src={value}
         alt={imageProperties?.alt || "Image"}
         width={imageProperties?.width}
         height={imageProperties?.height}
       />
-    </>
+    </div>
   );
   return (
-    <div>
+    <div className={propertyClasses?.container}>
       {prettifyLoading ? (
         value !== undefined && value !== "" ? (
           output
         ) : (
-          <>Loading Image...</>
+          <p>Loading Image...</p>
         )
       ) : value !== undefined && value !== "" ? (
         output
       ) : (
-        <></>
+        <p></p>
       )}
     </div>
   );

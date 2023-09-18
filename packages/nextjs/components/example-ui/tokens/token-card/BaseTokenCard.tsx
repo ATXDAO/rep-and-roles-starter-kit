@@ -1,9 +1,13 @@
 import { Token } from "../TokenInteractions";
 import { BalanceCard } from "./BalanceCard";
-import { TBalanceCardPropertiesClasses } from "./BalanceCard";
 import { ImageCard } from "./ImageCard";
 import { ImageProperties } from "./ImageCard";
 import { StringCard } from "./StringCard";
+
+export type TContainerAndValuePair = {
+  container: string;
+  value: string;
+};
 
 type TTokenProps = {
   token: Token;
@@ -14,10 +18,10 @@ type TTokenProps = {
 };
 
 export type TBaseTokenCardPropertiesClasses = {
-  balanceClasses: TBalanceCardPropertiesClasses;
-  name: string;
-  description: string;
-  image: string;
+  balance: TContainerAndValuePair;
+  name: TContainerAndValuePair;
+  description: TContainerAndValuePair;
+  image: TContainerAndValuePair;
 };
 
 export type TBaseTokenCardBooleanSet = {
@@ -39,7 +43,7 @@ export const BaseTokenCard = ({
       {renderProps.balance ? (
         <BalanceCard
           value={token.balance}
-          propertyClasses={propertiesClasses?.balanceClasses}
+          propertyClasses={propertiesClasses?.balance}
           prettifyLoading={prettifyLoadingProps?.balance}
         ></BalanceCard>
       ) : (
