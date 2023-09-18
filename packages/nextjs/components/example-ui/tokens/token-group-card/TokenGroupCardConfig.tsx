@@ -1,5 +1,20 @@
+import { TBaseTokenCardRenderSettings } from "../token-card/BaseTokenCard";
 import { TTokenGroupCardPrettifyLoadingProps } from "./DefaultTokenGroupCard";
 import { TTokenCardGroupPropertiesClasses } from "./DefaultTokenGroupCard";
+
+export const navBarRenderProps = {
+  balance: true,
+  image: true,
+  name: false,
+  description: false,
+} as TBaseTokenCardRenderSettings;
+
+export const mainCardRenderProps = {
+  balance: true,
+  image: true,
+  name: true,
+  description: true,
+} as TBaseTokenCardRenderSettings;
 
 export const navBarPropertiesClasses = {
   card: "bg-base-300",

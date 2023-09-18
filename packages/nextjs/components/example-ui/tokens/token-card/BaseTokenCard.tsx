@@ -11,6 +11,7 @@ type TTokenProps = {
   description: string;
   propertiesClasses?: TBaseTokenCardPropertiesClasses;
   prettifyLoadingProps?: TBaseTokenCardPrettifyLoadingProps;
+  renderProps?: TBaseTokenCardRenderSettings;
 };
 
 export type TBaseTokenCardPropertiesClasses = {
@@ -28,10 +29,10 @@ export type TBaseTokenCardPrettifyLoadingProps = {
 };
 
 export type TBaseTokenCardRenderSettings = {
-  renderBalance: boolean;
-  renderImage: boolean;
-  renderName: boolean;
-  renderDescription: boolean;
+  balance: boolean;
+  image: boolean;
+  name: boolean;
+  description: boolean;
 };
 
 export const BaseTokenCard = ({
@@ -41,15 +42,11 @@ export const BaseTokenCard = ({
   description,
   propertiesClasses,
   prettifyLoadingProps,
+  renderProps = { balance: true, image: true, name: true, description: true },
 }: TTokenProps) => {
-  const renderBalance = true;
-  const renderImage = true;
-  const renderName = true;
-  const renderDescription = true;
-
   return (
     <>
-      {renderBalance ? (
+      {renderProps.balance ? (
         <BalanceCard
           value={balance}
           propertyClasses={propertiesClasses?.balanceClasses}
@@ -58,7 +55,7 @@ export const BaseTokenCard = ({
       ) : (
         <></>
       )}
-      {renderImage ? (
+      {renderProps.image ? (
         <ImageCard
           value={imageProperties.value}
           imageProperties={imageProperties}
@@ -68,7 +65,7 @@ export const BaseTokenCard = ({
       ) : (
         <></>
       )}
-      {renderName ? (
+      {renderProps.name ? (
         <StringCard
           value={name}
           propertyClasses={propertiesClasses?.name}
@@ -77,7 +74,7 @@ export const BaseTokenCard = ({
       ) : (
         <></>
       )}
-      {renderDescription ? (
+      {renderProps.description ? (
         <StringCard
           value={description}
           propertyClasses={propertiesClasses?.description}

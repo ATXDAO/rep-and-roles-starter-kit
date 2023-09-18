@@ -1,3 +1,4 @@
+import { TBaseTokenCardRenderSettings } from "../token-card/BaseTokenCard";
 import { DefaultTokenCard, TTokenCardPrettifyLoadingProps, Token } from "../token-card/DefaultTokenCard";
 import { TTokenCardPropertiesClasses } from "../token-card/DefaultTokenCard";
 
@@ -5,6 +6,7 @@ type TTokenGroupCardProps = {
   tokenGroup: TokenGroup;
   propertiesClasses?: TTokenCardGroupPropertiesClasses;
   prettifyLoadingProps?: TTokenGroupCardPrettifyLoadingProps;
+  renderProps?: TBaseTokenCardRenderSettings;
 };
 
 export type TokenGroup = {
@@ -27,6 +29,7 @@ export const DefaultTokenGroupCard = ({
   tokenGroup,
   propertiesClasses,
   prettifyLoadingProps,
+  renderProps,
 }: TTokenGroupCardProps) => {
   const output = (
     <>
@@ -34,11 +37,13 @@ export const DefaultTokenGroupCard = ({
         token={tokenGroup.token0}
         propertiesClasses={propertiesClasses?.tokenCardPropertyClasses}
         prettifyLoadingProps={prettifyLoadingProps?.tokenCardPrettifyLoadingProps}
+        renderProps={renderProps}
       />
       <DefaultTokenCard
         token={tokenGroup.token1}
         propertiesClasses={propertiesClasses?.tokenCardPropertyClasses}
         prettifyLoadingProps={prettifyLoadingProps?.tokenCardPrettifyLoadingProps}
+        renderProps={renderProps}
       />
     </>
   );
