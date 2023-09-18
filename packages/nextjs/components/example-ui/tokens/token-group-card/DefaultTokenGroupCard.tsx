@@ -1,5 +1,6 @@
-import { TBaseTokenCardRenderSettings } from "../token-card/BaseTokenCard";
-import { DefaultTokenCard, TTokenCardPrettifyLoadingProps, Token } from "../token-card/DefaultTokenCard";
+import { TokenGroup } from "../TokenInteractions";
+import { TBaseTokenCardBooleanSet } from "../token-card/BaseTokenCard";
+import { DefaultTokenCard, TTokenCardPrettifyLoadingProps } from "../token-card/DefaultTokenCard";
 import { TTokenCardPropertiesClasses } from "../token-card/DefaultTokenCard";
 import { ImageProperties } from "../token-card/ImageCard";
 
@@ -9,12 +10,7 @@ type TTokenGroupCardProps = {
   imageProperties1: ImageProperties;
   propertiesClasses?: TTokenCardGroupPropertiesClasses;
   prettifyLoadingProps?: TTokenGroupCardPrettifyLoadingProps;
-  renderProps?: TBaseTokenCardRenderSettings;
-};
-
-export type TokenGroup = {
-  token0: Token;
-  token1: Token;
+  renderProps?: TBaseTokenCardBooleanSet;
 };
 
 export type TTokenCardGroupPropertiesClasses = {

@@ -1,8 +1,19 @@
-import { TokenGroup } from "./token-group-card/DefaultTokenGroupCard";
 import { useFetch } from "usehooks-ts";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
-interface Nft {
+export type TokenGroup = {
+  token0: Token;
+  token1: Token;
+};
+
+export type Token = {
+  balance: bigint;
+  image: string;
+  name: string;
+  description: string;
+};
+
+export interface Nft {
   name: string;
   description: string;
   image: string;

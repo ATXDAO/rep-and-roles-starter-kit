@@ -1,4 +1,4 @@
-import { TBaseTokenCardRenderSettings } from "../token-card/BaseTokenCard";
+import { TBaseTokenCardBooleanSet } from "../token-card/BaseTokenCard";
 import { TTokenGroupCardPrettifyLoadingProps } from "./DefaultTokenGroupCard";
 import { TTokenCardGroupPropertiesClasses } from "./DefaultTokenGroupCard";
 
@@ -7,14 +7,14 @@ export const navBarRenderProps = {
   image: true,
   name: false,
   description: false,
-} as TBaseTokenCardRenderSettings;
+} as TBaseTokenCardBooleanSet;
 
 export const mainCardRenderProps = {
   balance: true,
   image: true,
   name: true,
   description: true,
-} as TBaseTokenCardRenderSettings;
+} as TBaseTokenCardBooleanSet;
 
 export const navBarPropertiesClasses = {
   card: "bg-base-300",

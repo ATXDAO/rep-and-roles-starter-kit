@@ -1,3 +1,4 @@
+import { Token } from "../TokenInteractions";
 import { BalanceCard } from "./BalanceCard";
 import { TBalanceCardPropertiesClasses } from "./BalanceCard";
 import { ImageCard } from "./ImageCard";
@@ -5,14 +6,11 @@ import { ImageProperties } from "./ImageCard";
 import { StringCard } from "./StringCard";
 
 type TTokenProps = {
-  balance: bigint;
-  image: string;
+  token: Token;
   imageProperties?: ImageProperties;
-  name: string;
-  description: string;
   propertiesClasses?: TBaseTokenCardPropertiesClasses;
-  prettifyLoadingProps?: TBaseTokenCardPrettifyLoadingProps;
-  renderProps?: TBaseTokenCardRenderSettings;
+  prettifyLoadingProps?: TBaseTokenCardBooleanSet;
+  renderProps?: TBaseTokenCardBooleanSet;
 };
 
 export type TBaseTokenCardPropertiesClasses = {
@@ -22,26 +20,16 @@ export type TBaseTokenCardPropertiesClasses = {
   image: string;
 };
 
-export type TBaseTokenCardPrettifyLoadingProps = {
+export type TBaseTokenCardBooleanSet = {
   balance: boolean;
-  image: boolean;
   name: boolean;
   description: boolean;
-};
-
-export type TBaseTokenCardRenderSettings = {
-  balance: boolean;
   image: boolean;
-  name: boolean;
-  description: boolean;
 };
 
 export const BaseTokenCard = ({
-  balance,
-  image,
+  token,
   imageProperties,
-  name,
-  description,
   propertiesClasses,
   prettifyLoadingProps,
   renderProps = { balance: true, image: true, name: true, description: true },
@@ -50,7 +38,7 @@ export const BaseTokenCard = ({
     <>
       {renderProps.balance ? (
         <BalanceCard
-          value={balance}
+          value={token.balance}
           propertyClasses={propertiesClasses?.balanceClasses}
           prettifyLoading={prettifyLoadingProps?.balance}
         ></BalanceCard>
@@ -59,7 +47,7 @@ export const BaseTokenCard = ({
       )}
       {renderProps.image ? (
         <ImageCard
-          value={image}
+          value={token.image}
           imageProperties={imageProperties}
           propertyClasses={propertiesClasses?.image}
           prettifyLoading={prettifyLoadingProps?.image}
@@ -69,7 +57,7 @@ export const BaseTokenCard = ({
       )}
       {renderProps.name ? (
         <StringCard
-          value={name}
+          value={token.name}
           propertyClasses={propertiesClasses?.name}
           prettifyLoading={prettifyLoadingProps?.name}
         ></StringCard>
@@ -78,7 +66,7 @@ export const BaseTokenCard = ({
       )}
       {renderProps.description ? (
         <StringCard
-          value={description}
+          value={token.description}
           propertyClasses={propertiesClasses?.description}
           prettifyLoading={prettifyLoadingProps?.description}
         ></StringCard>

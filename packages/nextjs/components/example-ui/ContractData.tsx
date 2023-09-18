@@ -1,6 +1,6 @@
 import { useERC1155Information } from "./tokens/TokenInteractions";
 import { ImageProperties } from "./tokens/token-card/ImageCard";
-import { DefaultTokenGroupCard, TokenGroup } from "./tokens/token-group-card/DefaultTokenGroupCard";
+import { DefaultTokenGroupCard } from "./tokens/token-group-card/DefaultTokenGroupCard";
 import {
   mainCardPropertiesClasses,
   mainCardRenderProps,
@@ -22,7 +22,7 @@ export const ContractData = () => {
   const tokenGroup = {
     token0: token0,
     token1: token1,
-  } as TokenGroup;
+  };
 
   const navBarCardImageProperties0 = new ImageProperties("Token 0", 64, 64);
   const navBarCardImageProperties1 = new ImageProperties("Token 1", 64, 64);

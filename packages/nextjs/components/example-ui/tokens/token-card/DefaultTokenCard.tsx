@@ -1,8 +1,8 @@
+import { Token } from "../TokenInteractions";
 import {
   BaseTokenCard,
-  TBaseTokenCardPrettifyLoadingProps,
+  TBaseTokenCardBooleanSet, // TBaseTokenCardRenderSettings, // TBaseTokenCardPrettifyLoadingProps,
   TBaseTokenCardPropertiesClasses,
-  TBaseTokenCardRenderSettings,
 } from "./BaseTokenCard";
 import { ImageProperties } from "./ImageCard";
 
@@ -11,14 +11,7 @@ type TTokenCardProps = {
   imageProperties?: ImageProperties;
   propertiesClasses?: TTokenCardPropertiesClasses;
   prettifyLoadingProps?: TTokenCardPrettifyLoadingProps;
-  renderProps?: TBaseTokenCardRenderSettings;
-};
-
-export type Token = {
-  balance: bigint;
-  image: string;
-  name: string;
-  description: string;
+  renderProps?: TBaseTokenCardBooleanSet;
 };
 
 export type TTokenCardPropertiesClasses = {
@@ -28,7 +21,7 @@ export type TTokenCardPropertiesClasses = {
 
 export type TTokenCardPrettifyLoadingProps = {
   card: boolean;
-  baseTokenCardPrettifyLoadingProps: TBaseTokenCardPrettifyLoadingProps;
+  baseTokenCardPrettifyLoadingProps: TBaseTokenCardBooleanSet;
 };
 
 export const DefaultTokenCard = ({
@@ -41,11 +34,8 @@ export const DefaultTokenCard = ({
   const output = (
     <>
       <BaseTokenCard
+        token={token}
         imageProperties={imageProperties}
-        balance={token.balance}
-        image={token.image}
-        name={token.name}
-        description={token.description}
         propertiesClasses={propertiesClasses?.baseTokenCardPropertyClasses}
         prettifyLoadingProps={prettifyLoadingProps?.baseTokenCardPrettifyLoadingProps}
         renderProps={renderProps}
