@@ -1,4 +1,5 @@
 import { BalanceCard } from "./BalanceCard";
+import { TBalanceCardPropertiesClasses } from "./BalanceCard";
 import { ImageCard } from "./ImageCard";
 import { ImageProperties } from "./ImageCard";
 import { StringCard } from "./StringCard";
@@ -13,7 +14,7 @@ type TTokenProps = {
 };
 
 export type TBaseTokenCardPropertiesClasses = {
-  balance: string;
+  balanceClasses: TBalanceCardPropertiesClasses;
   name: string;
   description: string;
   image: string;
@@ -26,6 +27,13 @@ export type TBaseTokenCardPrettifyLoadingProps = {
   description: boolean;
 };
 
+export type TBaseTokenCardRenderSettings = {
+  renderBalance: boolean;
+  renderImage: boolean;
+  renderName: boolean;
+  renderDescription: boolean;
+};
+
 export const BaseTokenCard = ({
   balance,
   imageProperties,
@@ -34,29 +42,50 @@ export const BaseTokenCard = ({
   propertiesClasses,
   prettifyLoadingProps,
 }: TTokenProps) => {
+  const renderBalance = true;
+  const renderImage = true;
+  const renderName = true;
+  const renderDescription = true;
+
   return (
     <>
-      <BalanceCard
-        value={balance}
-        propertyClasses={propertiesClasses?.balance}
-        prettifyLoading={prettifyLoadingProps?.balance}
-      ></BalanceCard>
-      <ImageCard
-        value={imageProperties.value}
-        imageProperties={imageProperties}
-        propertyClasses={propertiesClasses?.image}
-        prettifyLoading={prettifyLoadingProps?.image}
-      ></ImageCard>
-      <StringCard
-        value={name}
-        propertyClasses={propertiesClasses?.name}
-        prettifyLoading={prettifyLoadingProps?.name}
-      ></StringCard>
-      <StringCard
-        value={description}
-        propertyClasses={propertiesClasses?.description}
-        prettifyLoading={prettifyLoadingProps?.description}
-      ></StringCard>
+      {renderBalance ? (
+        <BalanceCard
+          value={balance}
+          propertyClasses={propertiesClasses?.balanceClasses}
+          prettifyLoading={prettifyLoadingProps?.balance}
+        ></BalanceCard>
+      ) : (
+        <></>
+      )}
+      {renderImage ? (
+        <ImageCard
+          value={imageProperties.value}
+          imageProperties={imageProperties}
+          propertyClasses={propertiesClasses?.image}
+          prettifyLoading={prettifyLoadingProps?.image}
+        ></ImageCard>
+      ) : (
+        <></>
+      )}
+      {renderName ? (
+        <StringCard
+          value={name}
+          propertyClasses={propertiesClasses?.name}
+          prettifyLoading={prettifyLoadingProps?.name}
+        ></StringCard>
+      ) : (
+        <></>
+      )}
+      {renderDescription ? (
+        <StringCard
+          value={description}
+          propertyClasses={propertiesClasses?.description}
+          prettifyLoading={prettifyLoadingProps?.description}
+        ></StringCard>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

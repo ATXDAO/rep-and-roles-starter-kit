@@ -1,5 +1,5 @@
-import { TTokenCardPrettifyLoadingProps, Token, TokenCard } from "../token-card/TokenCard";
-import { TTokenCardPropertiesClasses } from "../token-card/TokenCard";
+import { DefaultNavBarTokenCard, TTokenCardPrettifyLoadingProps, Token } from "../token-card/DefaultNavBarTokenCard";
+import { TTokenCardPropertiesClasses } from "../token-card/DefaultNavBarTokenCard";
 
 type TTokenGroupCardProps = {
   tokenGroup: TokenGroup;
@@ -23,15 +23,19 @@ export type TTokenGroupCardPrettifyLoadingProps = {
   tokenCardPrettifyLoadingProps: TTokenCardPrettifyLoadingProps;
 };
 
-export const TokenGroupCard = ({ tokenGroup, propertiesClasses, prettifyLoadingProps }: TTokenGroupCardProps) => {
+export const DefaultNavBarTokenGroupCard = ({
+  tokenGroup,
+  propertiesClasses,
+  prettifyLoadingProps,
+}: TTokenGroupCardProps) => {
   const output = (
     <>
-      <TokenCard
+      <DefaultNavBarTokenCard
         token={tokenGroup.token0}
         propertiesClasses={propertiesClasses?.tokenCardPropertyClasses}
         prettifyLoadingProps={prettifyLoadingProps?.tokenCardPrettifyLoadingProps}
       />
-      <TokenCard
+      <DefaultNavBarTokenCard
         token={tokenGroup.token1}
         propertiesClasses={propertiesClasses?.tokenCardPropertyClasses}
         prettifyLoadingProps={prettifyLoadingProps?.tokenCardPrettifyLoadingProps}
@@ -43,12 +47,8 @@ export const TokenGroupCard = ({ tokenGroup, propertiesClasses, prettifyLoadingP
     <div className={propertiesClasses?.card}>
       {prettifyLoadingProps?.card ? (
         tokenGroup.token0.balance !== undefined &&
-        tokenGroup.token0.name !== undefined &&
-        tokenGroup.token0.description !== undefined &&
         tokenGroup.token0.imageProperties.value !== undefined &&
         tokenGroup.token1.balance !== undefined &&
-        tokenGroup.token1.name !== undefined &&
-        tokenGroup.token1.description !== undefined &&
         tokenGroup.token1.imageProperties.value !== undefined ? (
           <div className={propertiesClasses?.container}>{output}</div>
         ) : (

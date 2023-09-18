@@ -1,4 +1,8 @@
-import { BaseTokenCard, TBaseTokenCardPrettifyLoadingProps, TBaseTokenCardPropertiesClasses } from "./BaseTokenCard";
+import {
+  BaseNavBarTokenCard,
+  TBaseTokenCardPrettifyLoadingProps,
+  TBaseTokenCardPropertiesClasses,
+} from "./BaseNavBarTokenCard";
 import { ImageProperties } from "./ImageCard";
 
 type TTokenCardProps = {
@@ -10,8 +14,6 @@ type TTokenCardProps = {
 export type Token = {
   balance: bigint;
   imageProperties: ImageProperties;
-  name: string;
-  description: string;
 };
 
 export type TTokenCardPropertiesClasses = {
@@ -24,14 +26,12 @@ export type TTokenCardPrettifyLoadingProps = {
   baseTokenCardPrettifyLoadingProps: TBaseTokenCardPrettifyLoadingProps;
 };
 
-export const TokenCard = ({ token, prettifyLoadingProps, propertiesClasses }: TTokenCardProps) => {
+export const DefaultNavBarTokenCard = ({ token, prettifyLoadingProps, propertiesClasses }: TTokenCardProps) => {
   const output = (
     <>
-      <BaseTokenCard
+      <BaseNavBarTokenCard
         imageProperties={token.imageProperties}
         balance={token.balance}
-        name={token.name}
-        description={token.description}
         propertiesClasses={propertiesClasses?.baseTokenCardPropertyClasses}
         prettifyLoadingProps={prettifyLoadingProps?.baseTokenCardPrettifyLoadingProps}
       />
@@ -41,10 +41,7 @@ export const TokenCard = ({ token, prettifyLoadingProps, propertiesClasses }: TT
   return (
     <div className={propertiesClasses?.card}>
       {prettifyLoadingProps?.card ? (
-        token?.imageProperties.value !== undefined &&
-        token?.balance !== undefined &&
-        token?.name !== undefined &&
-        token?.description !== undefined ? (
+        token?.imageProperties.value !== undefined && token?.balance !== undefined ? (
           <div>{output}</div>
         ) : (
           <>Loading Token...</>

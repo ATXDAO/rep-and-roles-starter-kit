@@ -1,22 +1,27 @@
 type TBalanceCardProps = {
   value: bigint;
-  propertyClasses?: string;
+  propertyClasses?: TBalanceCardPropertiesClasses;
   prettifyLoading?: boolean;
+};
+
+export type TBalanceCardPropertiesClasses = {
+  container: string;
+  balance: string;
 };
 
 export const BalanceCard = ({ value, prettifyLoading, propertyClasses }: TBalanceCardProps) => {
   return (
-    <div className={propertyClasses}>
+    <div className={propertyClasses?.container}>
       {prettifyLoading ? (
         value !== undefined ? (
-          Number(value)
+          <p className={propertyClasses?.balance}>{Number(value)}</p>
         ) : (
-          <>Loading Balance...</>
+          <p className={propertyClasses?.balance}>Loading Balance...</p>
         )
       ) : value !== undefined ? (
-        Number(value)
+        <p className={propertyClasses?.balance}> {Number(value)} </p>
       ) : (
-        0
+        <p className={propertyClasses?.balance}>0</p>
       )}
     </div>
   );
