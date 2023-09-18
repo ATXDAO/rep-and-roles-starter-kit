@@ -1,9 +1,12 @@
 import { TBaseTokenCardRenderSettings } from "../token-card/BaseTokenCard";
 import { DefaultTokenCard, TTokenCardPrettifyLoadingProps, Token } from "../token-card/DefaultTokenCard";
 import { TTokenCardPropertiesClasses } from "../token-card/DefaultTokenCard";
+import { ImageProperties } from "../token-card/ImageCard";
 
 type TTokenGroupCardProps = {
   tokenGroup: TokenGroup;
+  imageProperties0: ImageProperties;
+  imageProperties1: ImageProperties;
   propertiesClasses?: TTokenCardGroupPropertiesClasses;
   prettifyLoadingProps?: TTokenGroupCardPrettifyLoadingProps;
   renderProps?: TBaseTokenCardRenderSettings;
@@ -27,6 +30,8 @@ export type TTokenGroupCardPrettifyLoadingProps = {
 
 export const DefaultTokenGroupCard = ({
   tokenGroup,
+  imageProperties0,
+  imageProperties1,
   propertiesClasses,
   prettifyLoadingProps,
   renderProps,
@@ -35,12 +40,14 @@ export const DefaultTokenGroupCard = ({
     <>
       <DefaultTokenCard
         token={tokenGroup.token0}
+        imageProperties={imageProperties0}
         propertiesClasses={propertiesClasses?.tokenCardPropertyClasses}
         prettifyLoadingProps={prettifyLoadingProps?.tokenCardPrettifyLoadingProps}
         renderProps={renderProps}
       />
       <DefaultTokenCard
         token={tokenGroup.token1}
+        imageProperties={imageProperties1}
         propertiesClasses={propertiesClasses?.tokenCardPropertyClasses}
         prettifyLoadingProps={prettifyLoadingProps?.tokenCardPrettifyLoadingProps}
         renderProps={renderProps}
@@ -54,11 +61,11 @@ export const DefaultTokenGroupCard = ({
         tokenGroup.token0.balance !== undefined &&
         tokenGroup.token0.name !== undefined &&
         tokenGroup.token0.description !== undefined &&
-        tokenGroup.token0.imageProperties.value !== undefined &&
+        tokenGroup.token0.image !== undefined &&
         tokenGroup.token1.balance !== undefined &&
         tokenGroup.token1.name !== undefined &&
         tokenGroup.token1.description !== undefined &&
-        tokenGroup.token1.imageProperties.value !== undefined ? (
+        tokenGroup.token1.image !== undefined ? (
           <div className={propertiesClasses?.container}>{output}</div>
         ) : (
           <>Loading Reputation Tokens...</>

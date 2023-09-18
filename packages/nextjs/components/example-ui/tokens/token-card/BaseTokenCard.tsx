@@ -6,7 +6,8 @@ import { StringCard } from "./StringCard";
 
 type TTokenProps = {
   balance: bigint;
-  imageProperties: ImageProperties;
+  image: string;
+  imageProperties?: ImageProperties;
   name: string;
   description: string;
   propertiesClasses?: TBaseTokenCardPropertiesClasses;
@@ -37,6 +38,7 @@ export type TBaseTokenCardRenderSettings = {
 
 export const BaseTokenCard = ({
   balance,
+  image,
   imageProperties,
   name,
   description,
@@ -57,7 +59,7 @@ export const BaseTokenCard = ({
       )}
       {renderProps.image ? (
         <ImageCard
-          value={imageProperties.value}
+          value={image}
           imageProperties={imageProperties}
           propertyClasses={propertiesClasses?.image}
           prettifyLoading={prettifyLoadingProps?.image}

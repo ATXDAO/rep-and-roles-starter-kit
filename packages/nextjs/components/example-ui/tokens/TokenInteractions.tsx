@@ -1,3 +1,4 @@
+import { TokenGroup } from "./token-group-card/DefaultTokenGroupCard";
 import { useFetch } from "usehooks-ts";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
@@ -35,18 +36,16 @@ export const useERC1155Information = (address?: string) => {
 
   return {
     token0: {
-      uri: uri0,
-      balanceOf: balanceOf0,
+      balance: balanceOf0,
       name: json0?.name,
       description: json0?.description,
       image: json0?.image,
     },
     token1: {
-      uri: uri1,
-      balanceOf: balanceOf1,
+      balance: balanceOf1,
       name: json1?.name,
       description: json1?.description,
       image: json1?.image,
     },
-  };
+  } as TokenGroup;
 };
