@@ -13,6 +13,7 @@ contract DeployRepTokensInstanceWithData is Script {
     function run() public returns (RepTokensInstance) {
         vm.startBroadcast();
         RepTokensInstance instance = new RepTokensInstance(
+            _admins[0],
             _admins,
             maxMintAmount,
             baseURI

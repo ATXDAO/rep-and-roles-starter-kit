@@ -5,10 +5,15 @@ const contracts = {
       name: "localhost",
       contracts: {
         RepTokensInstance: {
-          address: "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+          address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
           abi: [
             {
               inputs: [
+                {
+                  internalType: "address",
+                  name: "ownerNominee",
+                  type: "address",
+                },
                 {
                   internalType: "address[]",
                   name: "admins",
@@ -27,6 +32,116 @@ const contracts = {
               ],
               stateMutability: "nonpayable",
               type: "constructor",
+            },
+            {
+              inputs: [],
+              name: "ERC1155Base__ArrayLengthMismatch",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ERC1155Base__BalanceQueryZeroAddress",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ERC1155Base__BurnExceedsBalance",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ERC1155Base__BurnFromZeroAddress",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ERC1155Base__ERC1155ReceiverNotImplemented",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ERC1155Base__ERC1155ReceiverRejected",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ERC1155Base__MintToZeroAddress",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ERC1155Base__NotOwnerOrApproved",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ERC1155Base__SelfApproval",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ERC1155Base__TransferExceedsBalance",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ERC1155Base__TransferToZeroAddress",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ERC165Base__InvalidInterfaceId",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "EnumerableSet__IndexOutOfBounds",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "Ownable__NotOwner",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "Ownable__NotTransitiveOwner",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ReputationTokens__AttemptingToMintToNonDistributor",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ReputationTokens__AttemptingToMintTooManyTokens",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ReputationTokens__AttemptingToSendIllegalyAsDistributor",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ReputationTokens__AttemptingToSendNonRedeemableTokens",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "ReputationTokens__AttemptingToSendToNonBurner",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "SafeOwnable__NotNomineeOwner",
+              type: "error",
+            },
+            {
+              inputs: [],
+              name: "UintUtils__InsufficientHexLength",
+              type: "error",
             },
             {
               anonymous: false,
@@ -57,13 +172,13 @@ const contracts = {
               anonymous: false,
               inputs: [
                 {
-                  indexed: false,
+                  indexed: true,
                   internalType: "address",
                   name: "from",
                   type: "address",
                 },
                 {
-                  indexed: false,
+                  indexed: true,
                   internalType: "address",
                   name: "to",
                   type: "address",
@@ -82,13 +197,13 @@ const contracts = {
               anonymous: false,
               inputs: [
                 {
-                  indexed: false,
+                  indexed: true,
                   internalType: "address",
                   name: "coreAddress",
                   type: "address",
                 },
                 {
-                  indexed: false,
+                  indexed: true,
                   internalType: "address",
                   name: "destination",
                   type: "address",
@@ -101,13 +216,13 @@ const contracts = {
               anonymous: false,
               inputs: [
                 {
-                  indexed: false,
+                  indexed: true,
                   internalType: "address",
                   name: "from",
                   type: "address",
                 },
                 {
-                  indexed: false,
+                  indexed: true,
                   internalType: "address",
                   name: "to",
                   type: "address",
@@ -126,19 +241,19 @@ const contracts = {
               anonymous: false,
               inputs: [
                 {
-                  indexed: false,
+                  indexed: true,
                   internalType: "address",
                   name: "minter",
                   type: "address",
                 },
                 {
-                  indexed: false,
+                  indexed: true,
                   internalType: "address",
                   name: "to",
                   type: "address",
                 },
                 {
-                  indexed: false,
+                  indexed: true,
                   internalType: "uint256",
                   name: "amount",
                   type: "uint256",
@@ -151,13 +266,13 @@ const contracts = {
               anonymous: false,
               inputs: [
                 {
-                  indexed: false,
+                  indexed: true,
                   internalType: "address",
                   name: "from",
                   type: "address",
                 },
                 {
-                  indexed: false,
+                  indexed: true,
                   internalType: "address",
                   name: "to",
                   type: "address",
@@ -195,19 +310,6 @@ const contracts = {
                 },
               ],
               name: "OwnershipTransferred",
-              type: "event",
-            },
-            {
-              anonymous: false,
-              inputs: [
-                {
-                  indexed: false,
-                  internalType: "address",
-                  name: "account",
-                  type: "address",
-                },
-              ],
-              name: "Paused",
               type: "event",
             },
             {
@@ -371,24 +473,11 @@ const contracts = {
                 {
                   indexed: true,
                   internalType: "uint256",
-                  name: "id",
+                  name: "tokenId",
                   type: "uint256",
                 },
               ],
               name: "URI",
-              type: "event",
-            },
-            {
-              anonymous: false,
-              inputs: [
-                {
-                  indexed: false,
-                  internalType: "address",
-                  name: "account",
-                  type: "address",
-                },
-              ],
-              name: "Unpaused",
               type: "event",
             },
             {
@@ -401,7 +490,7 @@ const contracts = {
                   type: "bytes32",
                 },
               ],
-              stateMutability: "view",
+              stateMutability: "pure",
               type: "function",
             },
             {
@@ -414,7 +503,7 @@ const contracts = {
                   type: "bytes32",
                 },
               ],
-              stateMutability: "view",
+              stateMutability: "pure",
               type: "function",
             },
             {
@@ -427,7 +516,7 @@ const contracts = {
                   type: "bytes32",
                 },
               ],
-              stateMutability: "view",
+              stateMutability: "pure",
               type: "function",
             },
             {
@@ -440,7 +529,7 @@ const contracts = {
                   type: "bytes32",
                 },
               ],
-              stateMutability: "view",
+              stateMutability: "pure",
               type: "function",
             },
             {
@@ -451,6 +540,32 @@ const contracts = {
                   internalType: "bytes32",
                   name: "",
                   type: "bytes32",
+                },
+              ],
+              stateMutability: "pure",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "acceptOwnership",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+              ],
+              name: "accountsByToken",
+              outputs: [
+                {
+                  internalType: "address[]",
+                  name: "",
+                  type: "address[]",
                 },
               ],
               stateMutability: "view",
@@ -499,25 +614,6 @@ const contracts = {
                   internalType: "uint256[]",
                   name: "",
                   type: "uint256[]",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "address",
-                  name: "",
-                  type: "address",
-                },
-              ],
-              name: "destinationWallets",
-              outputs: [
-                {
-                  internalType: "address",
-                  name: "",
-                  type: "address",
                 },
               ],
               stateMutability: "view",
@@ -580,59 +676,27 @@ const contracts = {
               type: "function",
             },
             {
-              inputs: [],
-              name: "getBaseURI",
-              outputs: [
-                {
-                  internalType: "string",
-                  name: "",
-                  type: "string",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "getMaxMintAmountPerTransaciton",
-              outputs: [
-                {
-                  internalType: "uint256",
-                  name: "",
-                  type: "uint256",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
               inputs: [
                 {
-                  internalType: "uint256",
-                  name: "tokenID",
-                  type: "uint256",
+                  internalType: "address",
+                  name: "addr",
+                  type: "address",
                 },
               ],
-              name: "getOwnersOfTokenID",
+              name: "getDestinationWallet",
               outputs: [
                 {
-                  internalType: "address[]",
+                  internalType: "address",
                   name: "",
-                  type: "address[]",
+                  type: "address",
                 },
               ],
               stateMutability: "view",
               type: "function",
             },
             {
-              inputs: [
-                {
-                  internalType: "uint256",
-                  name: "tokenID",
-                  type: "uint256",
-                },
-              ],
-              name: "getOwnersOfTokenIDLength",
+              inputs: [],
+              name: "getMaxMintPerTx",
               outputs: [
                 {
                   internalType: "uint256",
@@ -657,6 +721,49 @@ const contracts = {
                   internalType: "bytes32",
                   name: "",
                   type: "bytes32",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "bytes32",
+                  name: "role",
+                  type: "bytes32",
+                },
+                {
+                  internalType: "uint256",
+                  name: "index",
+                  type: "uint256",
+                },
+              ],
+              name: "getRoleMember",
+              outputs: [
+                {
+                  internalType: "address",
+                  name: "",
+                  type: "address",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "bytes32",
+                  name: "role",
+                  type: "bytes32",
+                },
+              ],
+              name: "getRoleMemberCount",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
                 },
               ],
               stateMutability: "view",
@@ -807,6 +914,19 @@ const contracts = {
             },
             {
               inputs: [],
+              name: "nomineeOwner",
+              outputs: [
+                {
+                  internalType: "address",
+                  name: "",
+                  type: "address",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [],
               name: "owner",
               outputs: [
                 {
@@ -819,36 +939,11 @@ const contracts = {
               type: "function",
             },
             {
-              inputs: [],
-              name: "paused",
-              outputs: [
-                {
-                  internalType: "bool",
-                  name: "",
-                  type: "bool",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "renounceOwnership",
-              outputs: [],
-              stateMutability: "nonpayable",
-              type: "function",
-            },
-            {
               inputs: [
                 {
                   internalType: "bytes32",
                   name: "role",
                   type: "bytes32",
-                },
-                {
-                  internalType: "address",
-                  name: "account",
-                  type: "address",
                 },
               ],
               name: "renounceRole",
@@ -949,7 +1044,7 @@ const contracts = {
                 },
                 {
                   internalType: "bool",
-                  name: "approved",
+                  name: "status",
                   type: "bool",
                 },
               ],
@@ -974,19 +1069,6 @@ const contracts = {
             {
               inputs: [
                 {
-                  internalType: "uint256",
-                  name: "value",
-                  type: "uint256",
-                },
-              ],
-              name: "setMaxMintAmount",
-              outputs: [],
-              stateMutability: "nonpayable",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
                   internalType: "bytes4",
                   name: "interfaceId",
                   type: "bytes4",
@@ -1004,17 +1086,67 @@ const contracts = {
               type: "function",
             },
             {
-              inputs: [],
-              name: "togglePause",
-              outputs: [],
-              stateMutability: "nonpayable",
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "account",
+                  type: "address",
+                },
+              ],
+              name: "tokensByAccount",
+              outputs: [
+                {
+                  internalType: "uint256[]",
+                  name: "",
+                  type: "uint256[]",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+              ],
+              name: "totalHolders",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+              ],
+              name: "totalSupply",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
               type: "function",
             },
             {
               inputs: [
                 {
                   internalType: "address",
-                  name: "newOwner",
+                  name: "account",
                   type: "address",
                 },
               ],
