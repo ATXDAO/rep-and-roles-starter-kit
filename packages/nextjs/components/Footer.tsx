@@ -57,12 +57,12 @@ export const Footer = () => {
               </p>
               <a
                 className="flex justify-center items-center gap-1"
-                href="https://buidlguidl.com/"
+                href="https://atxdao.com/"
                 target="_blank"
                 rel="noreferrer"
               >
-                <BuidlGuidlLogo className="w-3 h-5 pb-1" />
-                <span className="link">BuidlGuidl</span>
+                {/* <BuidlGuidlLogo className="w-3 h-5 pb-1" /> */}
+                <span className="link">ATX DAO</span>
               </a>
             </div>
             <span>·</span>
