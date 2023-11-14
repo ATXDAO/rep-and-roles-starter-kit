@@ -14,8 +14,8 @@ type MetaHeaderProps = {
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/` : "/";
 
 export const MetaHeader = ({
-  title = "ATX DAO - R & R",
-  description = "Built with ATX DAO R & R",
+  title = "Scaffold-ETH 2 App",
+  description = "Built with 🏗 Scaffold-ETH 2",
   image = "thumbnail.jpg",
   twitterCard = "summary_large_image",
   children,
@@ -45,7 +45,7 @@ export const MetaHeader = ({
         </>
       )}
       {twitterCard && <meta name="twitter:card" content={twitterCard} />}
-      <link rel="icon" type="image/png" sizes="32x32" href="/atxdao-logo.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
       {children}
     </Head>
   );

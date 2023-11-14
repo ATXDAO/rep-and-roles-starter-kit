@@ -4,7 +4,7 @@ import fs from "fs";
 import { GetServerSideProps } from "next";
 import path from "path";
 import { createPublicClient, http } from "viem";
-import { hardhat } from "wagmi/chains";
+import { hardhat } from "viem/chains";
 import {
   AddressCodeTab,
   AddressLogsTab,
@@ -13,8 +13,9 @@ import {
   TransactionsTable,
 } from "~~/components/blockexplorer/";
 import { Address, Balance } from "~~/components/scaffold-eth";
-import deployedContracts from "~~/generated/deployedContracts";
+import deployedContracts from "~~/contracts/deployedContracts";
 import { useFetchBlocks } from "~~/hooks/scaffold-eth";
+import { getTargetNetwork } from "~~/utils/scaffold-eth";
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 type AddressCodeTabProps = {
@@ -34,7 +35,7 @@ const publicClient = createPublicClient({
 
 const AddressPage = ({ address, contractData }: PageProps) => {
   const router = useRouter();
-  const { blocks, transactionReceipts, currentPage, totalBlocks, setCurrentPage, isLoading } = useFetchBlocks();
+  const { blocks, transactionReceipts, currentPage, totalBlocks, setCurrentPage } = useFetchBlocks();
   const [activeTab, setActiveTab] = useState("transactions");
   const [isContract, setIsContract] = useState(false);
 
@@ -108,7 +109,7 @@ const AddressPage = ({ address, contractData }: PageProps) => {
       )}
       {activeTab === "transactions" && (
         <div className="pt-4">
-          <TransactionsTable blocks={filteredBlocks} transactionReceipts={transactionReceipts} isLoading={isLoading} />
+          <TransactionsTable blocks={filteredBlocks} transactionReceipts={transactionReceipts} />
           <PaginationButton
             currentPage={currentPage}
             totalItems={Number(totalBlocks)}
@@ -154,6 +155,7 @@ async function fetchByteCodeAndAssembly(buildInfoDirectory: string, contractPath
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
+  const configuredNetwork = getTargetNetwork();
   const address = (context.params?.address as string).toLowerCase();
   const contracts = deployedContracts as GenericContractsDeclaration | null;
   const chainId = hardhat.id;
@@ -167,8 +169,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
     "..",
     "..",
     "..",
-    "hardhat",
-    "artifacts",
+    `${configuredNetwork.network}`,
+    `${configuredNetwork.network === "hardhat" ? "artifacts" : "out"}`,
     "build-info",
   );
 
@@ -176,7 +178,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     throw new Error(`Directory ${buildInfoDirectory} not found.`);
   }
 
-  const deployedContractsOnChain = contracts ? contracts[chainId][0].contracts : {};
+  const deployedContractsOnChain = contracts ? contracts[chainId] : {};
   for (const [contractName, contractInfo] of Object.entries(deployedContractsOnChain)) {
     if (contractInfo.address.toLowerCase() === address) {
       contractPath = `contracts/${contractName}.sol`;
