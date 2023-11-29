@@ -7,16 +7,8 @@ contract RepTokensInstance is ReputationTokensStandalone {
     constructor(
         address ownerNominee,
         address[] memory admins,
-        uint256 maxMintAmountPerTx,
         string memory baseURI
-    )
-        ReputationTokensStandalone(
-            ownerNominee,
-            admins,
-            maxMintAmountPerTx,
-            baseURI
-        )
-    {}
+    ) ReputationTokensStandalone(ownerNominee, admins, baseURI) {}
 
     function imatest() external pure returns (uint256) {
         return 5;

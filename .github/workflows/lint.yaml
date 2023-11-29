@@ -33,6 +33,15 @@ jobs:
      # - name: Run hardhat node, deploy contracts (& generate contracts typescript output)
      #   run: yarn chain & yarn deploy 
 
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Run tests
+        run: forge test -vvv
+
+      - name: Run snapshot
+        run: forge snapshot
+
       - name: Run nextjs lint
         run: yarn next:lint --max-warnings=0
 

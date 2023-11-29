@@ -17,7 +17,6 @@ contract DeployRepTokensInstanceWithData is Script {
         RepTokensInstance instance = new RepTokensInstance(
             _admins[0],
             _admins,
-            maxMintAmount,
             baseURI
         );
         vm.stopBroadcast();

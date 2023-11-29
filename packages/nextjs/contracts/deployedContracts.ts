@@ -22,11 +22,6 @@ const deployedContracts = {
               type: "address[]",
             },
             {
-              internalType: "uint256",
-              name: "maxMintAmountPerTx",
-              type: "uint256",
-            },
-            {
               internalType: "string",
               name: "baseURI",
               type: "string",
@@ -108,6 +103,11 @@ const deployedContracts = {
         {
           inputs: [],
           name: "Ownable__NotTransitiveOwner",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "ReentrancyGuard__ReentrantCall",
           type: "error",
         },
         {
@@ -230,10 +230,22 @@ const deployedContracts = {
               type: "address",
             },
             {
-              indexed: false,
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              indexed: true,
+              internalType: "struct IReputationTokensInternal.TokenOperation[]",
+              name: "tokens",
+              type: "tuple[]",
             },
           ],
           name: "Distributed",
@@ -245,7 +257,7 @@ const deployedContracts = {
             {
               indexed: true,
               internalType: "address",
-              name: "minter",
+              name: "from",
               type: "address",
             },
             {
@@ -255,10 +267,22 @@ const deployedContracts = {
               type: "address",
             },
             {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
               indexed: true,
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
+              internalType: "struct IReputationTokensInternal.TokenOperation[]",
+              name: "tokens",
+              type: "tuple[]",
             },
           ],
           name: "Mint",
@@ -492,20 +516,7 @@ const deployedContracts = {
               type: "bytes32",
             },
           ],
-          stateMutability: "pure",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "DEFAULT_ADMIN_ROLE",
-          outputs: [
-            {
-              internalType: "bytes32",
-              name: "",
-              type: "bytes32",
-            },
-          ],
-          stateMutability: "pure",
+          stateMutability: "view",
           type: "function",
         },
         {
@@ -518,7 +529,7 @@ const deployedContracts = {
               type: "bytes32",
             },
           ],
-          stateMutability: "pure",
+          stateMutability: "view",
           type: "function",
         },
         {
@@ -531,7 +542,7 @@ const deployedContracts = {
               type: "bytes32",
             },
           ],
-          stateMutability: "pure",
+          stateMutability: "view",
           type: "function",
         },
         {
@@ -544,7 +555,20 @@ const deployedContracts = {
               type: "bytes32",
             },
           ],
-          stateMutability: "pure",
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "TOKEN_TYPE_CREATOR_ROLE",
+          outputs: [
+            {
+              internalType: "bytes32",
+              name: "",
+              type: "bytes32",
+            },
+          ],
+          stateMutability: "view",
           type: "function",
         },
         {
@@ -624,6 +648,56 @@ const deployedContracts = {
         {
           inputs: [
             {
+              components: [
+                {
+                  internalType: "bool",
+                  name: "isTradeable",
+                  type: "bool",
+                },
+                {
+                  internalType: "uint256",
+                  name: "maxMintAmountPerTx",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct TokenTypesStorage.TokenType[]",
+              name: "tokenTypes",
+              type: "tuple[]",
+            },
+          ],
+          name: "batchCreateTokenTypes",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              components: [
+                {
+                  internalType: "bool",
+                  name: "isTradeable",
+                  type: "bool",
+                },
+                {
+                  internalType: "uint256",
+                  name: "maxMintAmountPerTx",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct TokenTypesStorage.TokenType",
+              name: "tokenType",
+              type: "tuple",
+            },
+          ],
+          name: "createTokenType",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
               internalType: "address",
               name: "from",
               type: "address",
@@ -634,9 +708,21 @@ const deployedContracts = {
               type: "address",
             },
             {
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct IReputationTokensInternal.TokenOperation[]",
+              name: "tokens",
+              type: "tuple[]",
             },
             {
               internalType: "bytes",
@@ -657,14 +743,33 @@ const deployedContracts = {
               type: "address",
             },
             {
-              internalType: "address[]",
-              name: "to",
-              type: "address[]",
-            },
-            {
-              internalType: "uint256[]",
-              name: "amount",
-              type: "uint256[]",
+              components: [
+                {
+                  internalType: "address",
+                  name: "to",
+                  type: "address",
+                },
+                {
+                  components: [
+                    {
+                      internalType: "uint256",
+                      name: "id",
+                      type: "uint256",
+                    },
+                    {
+                      internalType: "uint256",
+                      name: "amount",
+                      type: "uint256",
+                    },
+                  ],
+                  internalType: "struct IReputationTokensInternal.TokenOperation[]",
+                  name: "tokens",
+                  type: "tuple[]",
+                },
+              ],
+              internalType: "struct IReputationTokensInternal.BatchTokenOperation[]",
+              name: "batchMint",
+              type: "tuple[]",
             },
             {
               internalType: "bytes",
@@ -697,8 +802,27 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [],
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "index",
+              type: "uint256",
+            },
+          ],
           name: "getMaxMintPerTx",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getNumOfTokenTypes",
           outputs: [
             {
               internalType: "uint256",
@@ -876,9 +1000,21 @@ const deployedContracts = {
               type: "address",
             },
             {
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct IReputationTokensInternal.TokenOperation[]",
+              name: "tokens",
+              type: "tuple[]",
             },
             {
               internalType: "bytes",
@@ -894,14 +1030,33 @@ const deployedContracts = {
         {
           inputs: [
             {
-              internalType: "address[]",
-              name: "to",
-              type: "address[]",
-            },
-            {
-              internalType: "uint256[]",
-              name: "amount",
-              type: "uint256[]",
+              components: [
+                {
+                  internalType: "address",
+                  name: "to",
+                  type: "address",
+                },
+                {
+                  components: [
+                    {
+                      internalType: "uint256",
+                      name: "id",
+                      type: "uint256",
+                    },
+                    {
+                      internalType: "uint256",
+                      name: "amount",
+                      type: "uint256",
+                    },
+                  ],
+                  internalType: "struct IReputationTokensInternal.TokenOperation[]",
+                  name: "tokens",
+                  type: "tuple[]",
+                },
+              ],
+              internalType: "struct IReputationTokensInternal.BatchTokenOperation[]",
+              name: "batchMint",
+              type: "tuple[]",
             },
             {
               internalType: "bytes",

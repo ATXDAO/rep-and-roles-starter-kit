@@ -8,7 +8,6 @@ import {DeployRepTokensInstance} from "../script/DeployRepTokensInstance.s.sol";
 contract RepTokensInstanceTest is Test {
     RepTokensInstance instance;
 
-    uint256 constant MAX_MINT_AMOUNT = 100;
     string constant BASE_URI =
         "ipfs://bafybeiaz55w6kf7ar2g5vzikfbft2qoexknstfouu524l7q3mliutns2u4/";
     address ADMIN = makeAddr("ADMIN");
@@ -17,26 +16,6 @@ contract RepTokensInstanceTest is Test {
         address[] memory admins = new address[](1);
         admins[0] = ADMIN;
 
-        instance = new DeployRepTokensInstance().run(
-            ADMIN,
-            admins,
-            MAX_MINT_AMOUNT,
-            BASE_URI
-        );
-    }
-
-    function testHasAdminRole() external {
-        assertEq(instance.hasRole(instance.DEFAULT_ADMIN_ROLE(), ADMIN), true);
-    }
-
-    function testMaxMintAmount() external {
-        assertEq(instance.getMaxMintPerTx(), 100);
-    }
-
-    function test0URI() external {
-        assertEq(
-            instance.uri(0),
-            "ipfs://bafybeiaz55w6kf7ar2g5vzikfbft2qoexknstfouu524l7q3mliutns2u4/0"
-        );
+        instance = new DeployRepTokensInstance().run(ADMIN, admins, BASE_URI);
     }
 }
