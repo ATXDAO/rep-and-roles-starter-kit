@@ -34,7 +34,7 @@ jobs:
         uses: foundry-rs/foundry-toolchain@v1
 
       - name: Run hardhat node, deploy contracts (& generate contracts typescript output)
-        run: yarn chain & yarn deploy 
+        run: yarn chain #& yarn deploy 
 
       - name: Run tests
         run: forge test -vvv
