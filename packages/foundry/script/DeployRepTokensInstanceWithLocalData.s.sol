@@ -2,6 +2,8 @@
 pragma solidity ^0.8.13;
 
 import {RepTokensInstance} from "../contracts/RepTokensInstance.sol";
+import {Hats} from "../contracts/Hats/Hats.sol";
+
 import {Script, console} from "../lib/forge-std/src/Script.sol";
 
 contract DeployRepTokensInstanceWithLocalData is Script {
@@ -20,6 +22,7 @@ contract DeployRepTokensInstanceWithLocalData is Script {
             baseURI
         );
 
+        Hats hatsInstance = new Hats("Hats", "");
         vm.stopBroadcast();
         return instance;
     }
