@@ -21,7 +21,7 @@ export interface Nft {
 
 export const useUri = (tokenId?: number) => {
   return useScaffoldContractRead({
-    contractName: "RepTokensInstance",
+    contractName: "ReputationTokensInstance",
     functionName: "uri",
     args: [BigInt(Number(tokenId))],
   });
@@ -29,7 +29,7 @@ export const useUri = (tokenId?: number) => {
 
 export const useBalanceOf = (address?: string, tokenId?: number) => {
   return useScaffoldContractRead({
-    contractName: "RepTokensInstance",
+    contractName: "ReputationTokensInstance",
     functionName: "balanceOf",
     args: [address, BigInt(Number(tokenId))],
   });

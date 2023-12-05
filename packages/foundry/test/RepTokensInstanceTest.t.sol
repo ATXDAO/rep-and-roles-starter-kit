@@ -2,11 +2,11 @@
 pragma solidity ^0.8.13;
 
 import {Test, console2} from "../lib/forge-std/src/Test.sol";
-import {RepTokensInstance} from "../contracts/RepTokensInstance.sol";
+import {ReputationTokensInstance} from "../contracts/ReputationTokensInstance.sol";
 import {DeployRepTokensInstance} from "../script/DeployRepTokensInstance.s.sol";
 
 contract RepTokensInstanceTest is Test {
-    RepTokensInstance instance;
+    ReputationTokensInstance instance;
 
     string constant BASE_URI =
         "ipfs://bafybeiaz55w6kf7ar2g5vzikfbft2qoexknstfouu524l7q3mliutns2u4/";

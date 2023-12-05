@@ -4,7 +4,7 @@ pragma solidity ^0.8.19;
 import "../contracts/YourContract.sol";
 import {ScaffoldETHDeploy} from "./DeployHelpers.s.sol";
 import {DeployRepTokensInstanceWithData} from "./DeployRepTokensInstanceWithData.s.sol";
-import {RepTokensInstance} from "./DeployRepTokensInstance.s.sol";
+import {ReputationTokensInstance} from "../contracts/ReputationTokensInstance.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
@@ -18,7 +18,7 @@ contract DeployScript is ScaffoldETHDeploy {
         // }
 
         DeployRepTokensInstanceWithData deploy = new DeployRepTokensInstanceWithData();
-        RepTokensInstance instance = deploy.run();
+        ReputationTokensInstance instance = deploy.run();
 
         // vm.startBroadcast(deployerPrivateKey);
         // YourContract yourContract = new YourContract(

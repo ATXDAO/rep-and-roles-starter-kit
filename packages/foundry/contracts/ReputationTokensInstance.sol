@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import {ReputationTokensStandalone} from "@atxdao/contracts/reputation/ReputationTokensStandalone.sol";
 
-contract RepTokensInstance is ReputationTokensStandalone {
+contract ReputationTokensInstance is ReputationTokensStandalone {
     constructor(
         address ownerNominee,
         address[] memory admins,

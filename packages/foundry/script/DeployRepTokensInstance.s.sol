@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {RepTokensInstance} from "../contracts/RepTokensInstance.sol";
+import {ReputationTokensInstance} from "../contracts/ReputationTokensInstance.sol";
 import {Script, console} from "../lib/forge-std/src/Script.sol";
 
 contract DeployRepTokensInstance is Script {
@@ -9,9 +9,9 @@ contract DeployRepTokensInstance is Script {
         address ownerNominee,
         address[] memory admins,
         string memory baseURI
-    ) public returns (RepTokensInstance) {
+    ) public returns (ReputationTokensInstance) {
         vm.startBroadcast();
-        RepTokensInstance instance = new RepTokensInstance(
+        ReputationTokensInstance instance = new ReputationTokensInstance(
             ownerNominee,
             admins,
             baseURI

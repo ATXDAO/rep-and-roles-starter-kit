@@ -1,0 +1,53 @@
+type Greeting @entity {
+  id: ID!
+  sender: Sender!
+  greeting: String!
+  premium: Boolean
+  value: BigInt
+  createdAt: BigInt!
+  transactionHash: String!
+}
+
+type Sender @entity {
+  id: ID!
+  address: Bytes!
+  greetings: [Greeting!] @derivedFrom(field: "sender")
+  createdAt: BigInt!
+  greetingCount: BigInt!
+}
+
+type Message @entity {
+  id: ID!
+  _from: Messenger!
+  _to: Receiver!
+  message: String!
+  createdAt: BigInt!
+  transactionHash: String!
+}
+
+type Messenger @entity {
+  id: ID!
+  address: Bytes!
+  messages: [Message!] @derivedFrom(field: "_from")
+  createdAt: BigInt!
+  messageCount: BigInt!
+}
+
+type Receiver @entity {
+  id: ID!
+  address: Bytes!
+  createdAt: BigInt!
+  messageCount: BigInt!
+}
+
+type Token @entity {
+  id: ID!
+  isTradeable: Boolean!
+  maxMintAmount: BigInt!
+  TotalMinted: BigInt!
+}
+
+type Tokens @entity {
+  id: ID!
+  tokens: [Token!]
+}

@@ -1,0 +1,29 @@
+specVersion: 0.0.4
+description: ReputationTokensInstance
+repository: https://github.com/scaffold-eth/se-2/packages/subgraph/
+schema:
+  file: ./src/schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ReputationTokensInstance
+    network: localhost
+    source:
+      abi: ReputationTokensInstance
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Greeting
+        - Sender
+        - Message
+        - Messenger
+        - Receiver
+      abis:
+        - name: ReputationTokensInstance
+          file: ./abis/31337_ReputationTokensInstance.json
+      eventHandlers:
+        - event: Mint(indexed address,indexed address,(indexed uint256,uint256)[])
+          handler: handleMint
+      file: ./src/mapping.ts
