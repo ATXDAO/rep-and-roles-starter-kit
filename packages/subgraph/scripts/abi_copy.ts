@@ -4,13 +4,14 @@ import chalk from "chalk";
 const graphDir = "./";
 
 function publishContract() {
-  let networkName = "31337";
+  let networkName = "localhost";
+  let networkId = "31337";
 
   const { abi } = JSON.parse(
     fs.readFileSync("../foundry/out/RepTokensInstance.sol/RepTokensInstance.json").toString(),
   );
 
-  const broadcastString = fs.readFileSync(`../foundry/broadcast/Deploy.s.sol/${networkName}/run-latest.json`, { encoding: 'utf8' });
+  const broadcastString = fs.readFileSync(`../foundry/broadcast/Deploy.s.sol/${networkId}/run-latest.json`, { encoding: 'utf8' });
   const broadcast = JSON.parse(broadcastString);
 
   const contracts = {} as any;

@@ -39,3 +39,15 @@ type Receiver @entity {
   createdAt: BigInt!
   messageCount: BigInt!
 }
+
+type Token @entity {
+  id: ID!
+  isTradeable: Boolean!
+  maxMintAmount: BigInt!
+  TotalMinted: BigInt!
+}
+
+type Tokens @entity {
+  id: ID!
+  tokens: [Token!]
+}

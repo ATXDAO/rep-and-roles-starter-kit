@@ -41,6 +41,7 @@ export function handleGreetingChange(event: GreetingChange): void {
 }
 
 export function handleMint(event: Mint): void {
+  console.log(event.params.tokens);
 
 }
 
