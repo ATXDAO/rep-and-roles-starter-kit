@@ -7,7 +7,6 @@ import {TokensPropertiesStorage} from "@atxdao/contracts/reputation/storage/Toke
 import {IReputationTokensInternal} from "@atxdao/contracts/reputation/interfaces/IReputationTokensInternal.sol";
 
 contract DeployRepTokensInstanceWithData is Script {
-    address deployer = 0xc4f6578c24c599F195c0758aD3D4861758d703A3; // testnet/mainnet
     // address deployer = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266; // localhost
 
     uint256 maxMintAmount = 100;
@@ -15,17 +14,22 @@ contract DeployRepTokensInstanceWithData is Script {
         "ipfs://bafybeiaz55w6kf7ar2g5vzikfbft2qoexknstfouu524l7q3mliutns2u4/";
 
     function run() public returns (RepTokensInstance) {
-        address[] memory admins = new address[](1);
-        admins[0] = deployer;
+        address deployer;
 
         if (block.chainid == 31337) {
+            deployer = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
+
             vm.startBroadcast(
                 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
             );
         } else {
+            deployer = 0xc4f6578c24c599F195c0758aD3D4861758d703A3; // testnet/mainnet
             uint256 deployerPrivateKey = vm.envUint("DEPLOYER_PRIVATE_KEY");
             vm.startBroadcast(deployerPrivateKey);
         }
+
+        address[] memory admins = new address[](1);
+        admins[0] = deployer;
 
         RepTokensInstance instance = new RepTokensInstance(
             deployer,
