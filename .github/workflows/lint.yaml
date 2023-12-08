@@ -35,9 +35,8 @@ jobs:
 
       - name: Run foundry node, deploy contracts (& generate contracts typescript output)
         env:
-          DEPLOYER_PRIVATE_KEY: ${{ secrets.DEPLOYER_PRIVATE_KEY }}
           ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
-        run: yarn chain & yarn deploy
+        run: yarn chain & yarn deploy-local
         id: build
 
       - name: Run tests
