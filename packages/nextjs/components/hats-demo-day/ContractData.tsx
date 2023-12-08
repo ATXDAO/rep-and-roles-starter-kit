@@ -1,3 +1,5 @@
+import { useClaimReputation, useGetRemainingTime } from "./hooks/CadentReputationDistributorHooks";
+import { useClaimHat, useHatsCanClaim, useHatsClient } from "./hooks/hatsHooks";
 import { useERC1155Information } from "./tokens/TokenInteractions";
 import { ImageProperties } from "./tokens/token-card/ImageCard";
 import { DefaultTokenGroupCard } from "./tokens/token-group-card/DefaultTokenGroupCard";
@@ -7,33 +9,20 @@ import {
   prettifyLoadingProps,
 } from "./tokens/token-group-card/TokenGroupCardConfig";
 import { useAccount } from "wagmi";
-import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 const hatId = "9921260784893851876474358771529355516659303059594999436885558443376640";
 
 export const ContractData = () => {
   const { address } = useAccount();
 
+  const { hatsClient } = useHatsClient(5);
+  const { canClaim, getCanClaim } = useHatsCanClaim(hatsClient, hatId, address);
+  const { claimHat } = useClaimHat(hatsClient, hatId, address);
+
+  const remainingTime = useGetRemainingTime(address);
+  const claimReputation = useClaimReputation();
+
   const { token0, token1 } = useERC1155Information(address);
-  const { writeAsync } = useScaffoldContractWrite({
-    contractName: "Hats",
-    functionName: "mintHat",
-    args: [BigInt(hatId), address],
-    blockConfirmations: 1,
-  });
-
-  const { data: remainingTime } = useScaffoldContractRead({
-    contractName: "CadentRepDistributor",
-    functionName: "getRemainingTime",
-    args: [address],
-  });
-
-  const { writeAsync: writeClaimRep } = useScaffoldContractWrite({
-    contractName: "CadentRepDistributor",
-    functionName: "claim",
-    blockConfirmations: 1,
-  });
-
   token0.image = token0.image?.replace("ipfs://", "https://ipfs.io/ipfs/");
   token1.image = token1.image?.replace("ipfs://", "https://ipfs.io/ipfs/");
 
@@ -47,12 +36,20 @@ export const ContractData = () => {
 
   let remainingTimeOutput;
   if (remainingTime !== undefined) {
-    if (remainingTime!.toString() > "0") {
-      remainingTimeOutput = (
-        <span className="text-2xl text-white">You can claim more rep in: {remainingTime?.toString()} seconds</span>
-      );
+    if (remainingTime.toString() > "0") {
+      remainingTimeOutput = <span className="text-2xl text-white">Please check back later to redeem more tokens!</span>;
     } else {
-      remainingTimeOutput = <div></div>;
+      remainingTimeOutput = (
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-1"
+          onClick={async () => {
+            await claimReputation();
+            await getCanClaim(hatsClient, hatId, address);
+          }}
+        >
+          Claim Rep
+        </button>
+      );
     }
   } else {
     remainingTimeOutput = <div></div>;
@@ -64,12 +61,6 @@ export const ContractData = () => {
         <p className="text-2xl text-white">Hats Demo Day</p>
 
         {remainingTimeOutput}
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-1"
-          onClick={() => writeClaimRep()}
-        >
-          Claim Rep
-        </button>
 
         <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
           <div>
@@ -83,13 +74,19 @@ export const ContractData = () => {
             />
           </div>
         </div>
-
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-1"
-          onClick={() => writeAsync()}
-        >
-          Mint Hat
-        </button>
+        {canClaim ? (
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-1"
+            onClick={async () => {
+              await claimHat();
+              await getCanClaim(hatsClient, hatId, address);
+            }}
+          >
+            Claim Hat
+          </button>
+        ) : (
+          <div></div>
+        )}
       </div>
     </>
   );
