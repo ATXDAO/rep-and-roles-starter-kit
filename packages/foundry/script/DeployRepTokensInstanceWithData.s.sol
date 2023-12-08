@@ -18,7 +18,7 @@ contract DeployRepTokensInstanceWithData is Script {
         address[] memory admins = new address[](1);
         admins[0] = deployer;
 
-        if (block.chainId == 31337) {
+        if (block.chainid == 31337) {
             vm.startBroadcast(
                 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
             );
