@@ -28,13 +28,16 @@ const deepMergeContracts = <D extends Record<PropertyKey, any>, S extends Record
   source: S,
 ) => {
   const result: Record<PropertyKey, any> = {};
+
   const allKeys = Array.from(new Set([...Object.keys(source), ...Object.keys(destination)]));
   for (const key of allKeys) {
     result[key] = { ...destination[key], ...source[key] };
   }
+
   return result as MergeDeepRecord<D, S, { arrayMergeMode: "replace" }>;
 };
-const contractsData = deepMergeContracts(externalContractsData, deployedContractsData);
+
+const contractsData = deepMergeContracts(deployedContractsData, externalContractsData);
 
 export type GenericContractsDeclaration = {
   [chainId: number]: {
