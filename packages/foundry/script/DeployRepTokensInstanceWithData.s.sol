@@ -7,8 +7,6 @@ import {TokensPropertiesStorage} from "@atxdao/contracts/reputation/storage/Toke
 import {IReputationTokensInternal} from "@atxdao/contracts/reputation/interfaces/IReputationTokensInternal.sol";
 
 contract DeployRepTokensInstanceWithData is Script {
-    // address deployer = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266; // localhost
-
     uint256 maxMintAmount = 100;
     string baseURI =
         "ipfs://bafybeiaz55w6kf7ar2g5vzikfbft2qoexknstfouu524l7q3mliutns2u4/";

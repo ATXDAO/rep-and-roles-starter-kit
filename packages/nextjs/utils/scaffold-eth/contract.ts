@@ -34,7 +34,7 @@ const deepMergeContracts = <D extends Record<PropertyKey, any>, S extends Record
   }
   return result as MergeDeepRecord<D, S, { arrayMergeMode: "replace" }>;
 };
-const contractsData = deepMergeContracts(deployedContractsData, externalContractsData);
+const contractsData = deepMergeContracts(externalContractsData, deployedContractsData);
 
 export type GenericContractsDeclaration = {
   [chainId: number]: {
