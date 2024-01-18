@@ -54,9 +54,12 @@ export const useERC1155Information = (address?: string) => {
   const addressArr = [];
   const tokenIdsArr: bigint[] = [];
 
-  for (let i = 0; i < numOfTokens!; i++) {
-    addressArr.push(address!);
-    tokenIdsArr.push(BigInt(i));
+  const iterator = numOfTokens ?? 0;
+  for (let i = 0; i < iterator; i++) {
+    if (address) {
+      addressArr.push(address);
+      tokenIdsArr.push(BigInt(i));
+    }
   }
 
   const { data: balanceOfBatch } = useScaffoldContractRead({
@@ -86,7 +89,7 @@ export const useERC1155Information = (address?: string) => {
     if (uris.length === 0) {
       getUris();
     }
-  }, [address, repTokensInstance, tokenIdsArr]); // Empty dependency array to run the effect only once
+  }, [address, repTokensInstance, tokenIdsArr, uris.length]); // Empty dependency array to run the effect only once
 
   console.log(uris);
 
@@ -107,7 +110,7 @@ export const useERC1155Information = (address?: string) => {
     }
 
     if (responses.length === 0) getJson();
-  }, [uris]);
+  }, [uris.length, responses.length]);
 
   console.log(responses);
 
@@ -116,9 +119,13 @@ export const useERC1155Information = (address?: string) => {
 
   const tokens: Token[] = [];
   for (let i = 0; i < responses.length; i++) {
+    let balance = BigInt(0);
+    if (balanceOfBatch) {
+      balance = balanceOfBatch[i];
+    }
     const obj = {
       id: i,
-      balance: balanceOfBatch![i],
+      balance: balance,
       name: responses[i]?.name,
       description: responses[i]?.description,
       image: responses[i]?.image,
