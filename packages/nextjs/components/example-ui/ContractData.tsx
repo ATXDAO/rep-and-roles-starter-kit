@@ -1,38 +1,63 @@
-import { useERC1155Information } from "./tokens/TokenInteractions";
-import { ImageProperties } from "./tokens/token-card/ImageCard";
-import { DefaultTokenGroupCard } from "./tokens/token-group-card/DefaultTokenGroupCard";
-import {
-  mainCardPropertiesClasses,
-  mainCardRenderProps,
-  mainCardWithNumberOverlayPropertiesClasses,
-  navBarPropertiesClasses,
-  navBarRenderProps,
-  prettifyLoadingProps,
-} from "./tokens/token-group-card/TokenGroupCardConfig";
+// import { useERC1155Information } from "./tokens/TokenInteractions";
+// import { ImageProperties } from "./tokens/token-card/ImageCard";
+// import { DefaultTokenGroupCard } from "./tokens/token-group-card/DefaultTokenGroupCard";
+// import {
+//   mainCardPropertiesClasses,
+//   mainCardRenderProps,
+//   mainCardWithNumberOverlayPropertiesClasses,
+//   navBarPropertiesClasses,
+//   navBarRenderProps,
+//   prettifyLoadingProps,
+// } from "./tokens/token-group-card/TokenGroupCardConfig";
+import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
+import { useScaffoldContract } from "~~/hooks/scaffold-eth";
 
 export const ContractData = () => {
   const { address } = useAccount();
 
-  const { token0, token1 } = useERC1155Information(address);
+  const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokensStandalone" });
+  const tokenIds = [0, 1, 2];
 
-  token0.image = token0.image?.replace("ipfs://", "https://ipfs.io/ipfs/");
-  token1.image = token1.image?.replace("ipfs://", "https://ipfs.io/ipfs/");
+  const [result, setResult] = useState<bigint[]>([]);
 
-  const tokenGroup = {
-    token0: token0,
-    token1: token1,
-  };
+  useEffect(() => {
+    async function getBalances() {
+      if (!address) return;
 
-  const navBarCardImageProperties0 = new ImageProperties("Token 0", 64, 64);
-  const navBarCardImageProperties1 = new ImageProperties("Token 1", 64, 64);
+      const arr = [];
+      for (let i = 0; i < tokenIds.length; i++) {
+        const balanceOf = await repTokensInstance?.read.balanceOf([address, BigInt(tokenIds[i])]);
+        if (balanceOf) arr.push(balanceOf);
+      }
 
-  const mainCardImageProperties0 = new ImageProperties("Token 0", 256, 256);
-  const mainCardImageProperties1 = new ImageProperties("Token 1", 256, 256);
+      setResult([...arr!]);
+    }
+
+    if (repTokensInstance) getBalances();
+  }, [address, repTokensInstance]);
+
+  console.log(result);
+
+  // const { token0, token1 } = useERC1155Information(address);
+
+  // token0.image = token0.image?.replace("ipfs://", "https://ipfs.io/ipfs/");
+  // token1.image = token1.image?.replace("ipfs://", "https://ipfs.io/ipfs/");
+
+  // const tokenGroup = {
+  //   token0: token0,
+  //   token1: token1,
+  // };
+
+  // const navBarCardImageProperties0 = new ImageProperties("Token 0", 64, 64);
+  // const navBarCardImageProperties1 = new ImageProperties("Token 1", 64, 64);
+
+  // const mainCardImageProperties0 = new ImageProperties("Token 0", 256, 256);
+  // const mainCardImageProperties1 = new ImageProperties("Token 1", 256, 256);
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
+      {/* <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
           <DefaultTokenGroupCard
             tokenGroup={tokenGroup}
@@ -69,7 +94,7 @@ export const ContractData = () => {
             renderProps={mainCardRenderProps}
           />
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
