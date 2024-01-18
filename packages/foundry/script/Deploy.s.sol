@@ -24,10 +24,6 @@ contract DeployScript is ScaffoldETHDeploy {
         }
 
         vm.startBroadcast(deployerPrivateKey);
-        YourContract yourContract = new YourContract(
-            vm.addr(deployerPrivateKey)
-        );
-
         address[] memory admins = new address[](2);
         admins[0] = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
         admins[1] = 0x62286D694F89a1B12c0214bfcD567bb6c2951491;

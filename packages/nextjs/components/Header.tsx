@@ -27,16 +27,6 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/example-ui",
     icon: <SparklesIcon className="h-4 w-4" />,
   },
-  {
-    label: "Hats Demo Day",
-    href: "/hats-demo-day",
-    icon: <SparklesIcon className="h-4 w-4" />,
-  },
-  {
-    label: "Gala Rep Claim",
-    href: "/gala",
-    icon: <SparklesIcon className="h-4 w-4" />,
-  },
 ];
 
 export const HeaderMenuLinks = () => {
