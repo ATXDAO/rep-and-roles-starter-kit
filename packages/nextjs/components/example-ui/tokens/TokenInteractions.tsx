@@ -64,7 +64,7 @@ export const useERC1155Information = (address?: string) => {
     }
 
     return { addressArr, tokenIdsArr };
-  }, [numOfTokens]);
+  }, [numOfTokens, address]);
 
   const { data: balanceOfBatch } = useScaffoldContractRead({
     contractName: "ReputationTokensStandalone",
