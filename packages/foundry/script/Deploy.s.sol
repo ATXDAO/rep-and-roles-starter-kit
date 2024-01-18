@@ -96,8 +96,7 @@ contract DeployScript is ScaffoldETHDeploy {
             1,
             90
         );
-
-        instance.mint(mintOperations, "");
+        instance.mint(mintOperations);
 
         Hats hatsInstance = new Hats("Hats", "");
 
