@@ -7,6 +7,7 @@ import {ScaffoldETHDeploy} from "./DeployHelpers.s.sol";
 import {ReputationTokensStandalone} from "@atxdao/contracts/reputation/ReputationTokensStandalone.sol";
 import {TokensPropertiesStorage} from "@atxdao/contracts/reputation/storage/TokensPropertiesStorage.sol";
 import {IReputationTokensInternal} from "@atxdao/contracts/reputation/interfaces/IReputationTokensInternal.sol";
+import {Hats} from "../contracts/Hats/Hats.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
@@ -98,19 +99,16 @@ contract DeployScript is ScaffoldETHDeploy {
 
         instance.mint(mintOperations, "");
 
-        // console.logString(
-        //     string.concat(
-        //         "YourContract deployed at: ",
-        //         vm.toString(address(instance))
-        //     )
-        // );
+        Hats hatsInstance = new Hats("Hats", "");
+
+        hatsInstance.mintTopHat(
+            0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,
+            "",
+            ""
+        );
+
         vm.stopBroadcast();
 
-        /**
-         * This function generates the file containing the contracts Abi definitions.
-         * These definitions are used to derive the types needed in the custom scaffold-eth hooks, for example.
-         * This function should be called last.
-         */
         exportDeployments();
     }
 
