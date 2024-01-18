@@ -13,7 +13,7 @@ contract DeployScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
 
     uint256 maxMintAmount = 100;
-    string baseURI =
+    string BASE_URI =
         "ipfs://bafybeiaz55w6kf7ar2g5vzikfbft2qoexknstfouu524l7q3mliutns2u4/";
 
     function run() external {
@@ -45,6 +45,11 @@ contract DeployScript is ScaffoldETHDeploy {
         );
 
         instance.grantRole(
+            instance.TOKEN_URI_SETTER_ROLE(),
+            0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+        );
+
+        instance.grantRole(
             instance.MINTER_ROLE(),
             0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
         );
@@ -65,6 +70,11 @@ contract DeployScript is ScaffoldETHDeploy {
         );
 
         instance.grantRole(
+            instance.TOKEN_URI_SETTER_ROLE(),
+            0x62286D694F89a1B12c0214bfcD567bb6c2951491
+        );
+
+        instance.grantRole(
             instance.MINTER_ROLE(),
             0x62286D694F89a1B12c0214bfcD567bb6c2951491
         );
@@ -73,6 +83,9 @@ contract DeployScript is ScaffoldETHDeploy {
             instance.DISTRIBUTOR_ROLE(),
             0x62286D694F89a1B12c0214bfcD567bb6c2951491
         );
+
+        instance.setTokenURI(0, string.concat(BASE_URI, "0"));
+        instance.setTokenURI(1, string.concat(BASE_URI, "1"));
 
         TokensPropertiesStorage.TokenProperties
             memory tokenProperties = TokensPropertiesStorage.TokenProperties(

@@ -6,9 +6,8 @@ import {ReputationTokensStandalone} from "@atxdao/contracts/reputation/Reputatio
 contract RepTokensInstance is ReputationTokensStandalone {
     constructor(
         address ownerNominee,
-        address[] memory admins,
-        string memory baseURI
-    ) ReputationTokensStandalone(ownerNominee, admins, baseURI) {}
+        address[] memory admins
+    ) ReputationTokensStandalone(ownerNominee, admins) {}
 
     function imatest() external pure returns (uint256) {
         return 5;

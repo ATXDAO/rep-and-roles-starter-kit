@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokensStandalone: {
-      address: "0x70e0bA845a1A0F2DA3359C97E0285013525FFC49",
+      address: "0x21dF544947ba3E8b3c32561399E88B52Dc8b2823",
       abi: [
         {
           type: "constructor",
@@ -21,11 +21,6 @@ const deployedContracts = {
               name: "admins",
               type: "address[]",
               internalType: "address[]",
-            },
-            {
-              name: "baseUri",
-              type: "string",
-              internalType: "string",
             },
           ],
           stateMutability: "nonpayable",
@@ -98,6 +93,19 @@ const deployedContracts = {
         {
           type: "function",
           name: "TOKEN_UPDATER_ROLE",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "bytes32",
+              internalType: "bytes32",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "TOKEN_URI_SETTER_ROLE",
           inputs: [],
           outputs: [
             {
@@ -814,6 +822,24 @@ const deployedContracts = {
         },
         {
           type: "function",
+          name: "setTokenURI",
+          inputs: [
+            {
+              name: "tokenId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "tokenURI",
+              type: "string",
+              internalType: "string",
+            },
+          ],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
           name: "supportsInterface",
           inputs: [
             {
@@ -1490,7 +1516,7 @@ const deployedContracts = {
       ],
     },
     Hats: {
-      address: "0xb7278A61aa25c888815aFC32Ad3cC52fF24fE575",
+      address: "0x46b142DD1E924FAb83eCc3c08e4D46E82f005e0E",
       abi: [
         {
           type: "constructor",
