@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useFetch } from "usehooks-ts";
+// import { useFetch } from "usehooks-ts";
 import { useScaffoldContract, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
 export type TokenGroup = {
@@ -12,6 +12,7 @@ export type Token = {
   image: string;
   name: string;
   description: string;
+  id: number;
 };
 
 export interface Nft {
@@ -37,11 +38,11 @@ export const useBalanceOf = (address?: string, tokenId?: number) => {
 };
 
 export const useERC1155Information = (address?: string) => {
-  const { data: uri0 } = useUri(0);
-  const { data: uri1 } = useUri(1);
+  // const { data: uri0 } = useUri(0);
+  // const { data: uri1 } = useUri(1);
 
-  const { data: balanceOf0 } = useBalanceOf(address, 0);
-  const { data: balanceOf1 } = useBalanceOf(address, 1);
+  // const { data: balanceOf0 } = useBalanceOf(address, 0);
+  // const { data: balanceOf1 } = useBalanceOf(address, 1);
 
   const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokensStandalone" });
 
@@ -110,21 +111,35 @@ export const useERC1155Information = (address?: string) => {
 
   console.log(responses);
 
-  const { data: json0 /* error: error0 */ } = useFetch<Nft>(uri0?.replace("ipfs://", "https://ipfs.io/ipfs/"));
-  const { data: json1 /* error: error1 */ } = useFetch<Nft>(uri1?.replace("ipfs://", "https://ipfs.io/ipfs/"));
+  // const { data: json0 /* error: error0 */ } = useFetch<Nft>(uri0?.replace("ipfs://", "https://ipfs.io/ipfs/"));
+  // const { data: json1 /* error: error1 */ } = useFetch<Nft>(uri1?.replace("ipfs://", "https://ipfs.io/ipfs/"));
 
-  return {
-    token0: {
-      balance: balanceOf0,
-      name: json0?.name,
-      description: json0?.description,
-      image: json0?.image,
-    },
-    token1: {
-      balance: balanceOf1,
-      name: json1?.name,
-      description: json1?.description,
-      image: json1?.image,
-    },
-  } as TokenGroup;
+  const tokens: Token[] = [];
+  for (let i = 0; i < responses.length; i++) {
+    const obj = {
+      id: i,
+      balance: balanceOfBatch![i],
+      name: responses[i]?.name,
+      description: responses[i]?.description,
+      image: responses[i]?.image,
+    };
+    tokens.push(obj);
+  }
+
+  return { tokens };
+
+  // return {
+  //   token0: {
+  //     balance: balanceOf0,
+  //     name: json0?.name,
+  //     description: json0?.description,
+  //     image: json0?.image,
+  //   },
+  //   token1: {
+  //     balance: balanceOf1,
+  //     name: json1?.name,
+  //     description: json1?.description,
+  //     image: json1?.image,
+  //   },
+  // } as TokenGroup;
 };
