@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 // import { useFetch } from "usehooks-ts";
 import { useScaffoldContract, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
@@ -51,21 +51,25 @@ export const useERC1155Information = (address?: string) => {
     functionName: "getNumOfTokenTypes",
   });
 
-  const addressArr = [];
-  const tokenIdsArr: bigint[] = [];
+  const AllArr = useMemo(() => {
+    const addressArr: string[] = [];
+    const tokenIdsArr: bigint[] = [];
 
-  const iterator = numOfTokens ?? 0;
-  for (let i = 0; i < iterator; i++) {
-    if (address) {
-      addressArr.push(address);
-      tokenIdsArr.push(BigInt(i));
+    const iterator = numOfTokens ?? 0;
+    for (let i = 0; i < iterator; i++) {
+      if (address) {
+        addressArr.push(address);
+        tokenIdsArr.push(BigInt(i));
+      }
     }
-  }
+
+    return { addressArr, tokenIdsArr };
+  }, [numOfTokens]);
 
   const { data: balanceOfBatch } = useScaffoldContractRead({
     contractName: "ReputationTokensStandalone",
     functionName: "balanceOfBatch",
-    args: [addressArr, tokenIdsArr],
+    args: [AllArr.addressArr, AllArr.tokenIdsArr],
   });
   console.log(balanceOfBatch);
 
@@ -73,11 +77,11 @@ export const useERC1155Information = (address?: string) => {
 
   useEffect(() => {
     async function getUris() {
-      if (!address || !repTokensInstance || tokenIdsArr.length === 0) return;
+      if (!address || !repTokensInstance || AllArr.tokenIdsArr.length === 0) return;
 
       const arr = [];
-      for (let i = 0; i < tokenIdsArr.length; i++) {
-        const result = await repTokensInstance.read.uri([tokenIdsArr[i]]);
+      for (let i = 0; i < AllArr.tokenIdsArr.length; i++) {
+        const result = await repTokensInstance.read.uri([AllArr.tokenIdsArr[i]]);
         if (result !== undefined) arr.push(result);
       }
 
@@ -89,7 +93,7 @@ export const useERC1155Information = (address?: string) => {
     if (uris.length === 0) {
       getUris();
     }
-  }, [address, repTokensInstance, tokenIdsArr, uris.length]); // Empty dependency array to run the effect only once
+  }, [address, repTokensInstance, AllArr.tokenIdsArr, uris.length]); // Empty dependency array to run the effect only once
 
   console.log(uris);
 
@@ -110,7 +114,7 @@ export const useERC1155Information = (address?: string) => {
     }
 
     if (responses.length === 0) getJson();
-  }, [uris.length, responses.length]);
+  }, [uris, uris.length, responses.length]);
 
   console.log(responses);
 
