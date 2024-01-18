@@ -1,7 +1,6 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import "../contracts/YourContract.sol";
 import {ScaffoldETHDeploy} from "./DeployHelpers.s.sol";
 // import {DeployRepTokensInstanceWithData} from "./DeployRepTokensInstanceWithData.s.sol";
 import {ReputationTokensStandalone} from "@atxdao/contracts/reputation/ReputationTokensStandalone.sol";
