@@ -69,33 +69,46 @@ export const useERC1155Information = (address?: string) => {
 
   useEffect(() => {
     async function getUris() {
-      if (!address) return;
-      if (!repTokensInstance) return;
+      if (!address || !repTokensInstance || tokenIdsArr.length === 0) return;
 
       const arr = [];
       for (let i = 0; i < tokenIdsArr.length; i++) {
         const result = await repTokensInstance.read.uri([tokenIdsArr[i]]);
-        if (result != undefined) arr.push(result);
+        if (result !== undefined) arr.push(result);
       }
 
       console.log(arr);
       setUris([...arr]);
     }
 
-    getUris();
-  }, [address, repTokensInstance]);
+    // Run the effect only once when the component mounts
+    if (uris.length === 0) {
+      getUris();
+    }
+  }, [address, repTokensInstance, tokenIdsArr]); // Empty dependency array to run the effect only once
 
   console.log(uris);
 
-  // useEffect(()=> {
-  //   async function getJson() {
-  //     const response = await fetch("http://example.com/movies.json");
-  //     const movies = await response.json();
-  //   }
+  const [responses, setResponses] = useState<Nft[]>([]);
 
-  //   getJson();
+  useEffect(() => {
+    async function getJson() {
+      if (uris.length === 0) return;
 
-  // }, [])
+      const arr = [];
+      for (let i = 0; i < uris.length; i++) {
+        const response = await fetch(uris[i].replace("ipfs://", "https://ipfs.io/ipfs/"));
+        const responseJson = await response.json();
+        arr.push(responseJson);
+      }
+
+      setResponses([...arr]);
+    }
+
+    if (responses.length === 0) getJson();
+  }, [uris]);
+
+  console.log(responses);
 
   const { data: json0 /* error: error0 */ } = useFetch<Nft>(uri0?.replace("ipfs://", "https://ipfs.io/ipfs/"));
   const { data: json1 /* error: error1 */ } = useFetch<Nft>(uri1?.replace("ipfs://", "https://ipfs.io/ipfs/"));

@@ -1,4 +1,4 @@
-// import { useERC1155Information } from "./tokens/TokenInteractions";
+import { useERC1155Information } from "./tokens/TokenInteractions";
 // import { ImageProperties } from "./tokens/token-card/ImageCard";
 // import { DefaultTokenGroupCard } from "./tokens/token-group-card/DefaultTokenGroupCard";
 // import {
@@ -10,10 +10,11 @@
 //   prettifyLoadingProps,
 // } from "./tokens/token-group-card/TokenGroupCardConfig";
 // import { useEffect, useState } from "react";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
+
 // import { useScaffoldContract, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
-import { useScaffoldContract, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
+// import { useScaffoldContract, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
 export const ContractData = () => {
   const { address } = useAccount();
@@ -76,51 +77,54 @@ export const ContractData = () => {
   //   getUris();
   // }, [address, repTokensInstance]);
 
-  // const { token0, token1 } = useERC1155Information(address);
+  //const { token0, token1 } =
+  useERC1155Information(address);
 
-  const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokensStandalone" });
+  // const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokensStandalone" });
 
-  const { data: numOfTokens } = useScaffoldContractRead({
-    contractName: "ReputationTokensStandalone",
-    functionName: "getNumOfTokenTypes",
-  });
+  // const { data: numOfTokens } = useScaffoldContractRead({
+  //   contractName: "ReputationTokensStandalone",
+  //   functionName: "getNumOfTokenTypes",
+  // });
 
-  const addressArr = [];
-  const tokenIdsArr: bigint[] = [];
+  // const addressArr = [];
+  // const tokenIdsArr: bigint[] = [];
 
-  for (let i = 0; i < numOfTokens!; i++) {
-    addressArr.push(address!);
-    tokenIdsArr.push(BigInt(i));
-  }
+  // for (let i = 0; i < numOfTokens!; i++) {
+  //   addressArr.push(address!);
+  //   tokenIdsArr.push(BigInt(i));
+  // }
 
-  const { data: balanceOfBatch } = useScaffoldContractRead({
-    contractName: "ReputationTokensStandalone",
-    functionName: "balanceOfBatch",
-    args: [addressArr, tokenIdsArr],
-  });
-  console.log(balanceOfBatch);
+  // const { data: balanceOfBatch } = useScaffoldContractRead({
+  //   contractName: "ReputationTokensStandalone",
+  //   functionName: "balanceOfBatch",
+  //   args: [addressArr, tokenIdsArr],
+  // });
+  // console.log(balanceOfBatch);
 
-  const [uris, setUris] = useState<string[]>([]);
+  // const [uris, setUris] = useState<string[]>([]);
 
-  useEffect(() => {
-    async function getUris() {
-      if (!address) return;
-      if (!repTokensInstance) return;
+  // useEffect(() => {
+  //   async function getUris() {
+  //     if (!address || !repTokensInstance || tokenIdsArr.length === 0) return;
 
-      const arr = [];
-      for (let i = 0; i < tokenIdsArr.length; i++) {
-        const result = await repTokensInstance.read.uri([tokenIdsArr[i]]);
-        if (result != undefined) arr.push(result);
-      }
+  //     const arr = [];
+  //     for (let i = 0; i < tokenIdsArr.length; i++) {
+  //       const result = await repTokensInstance.read.uri([tokenIdsArr[i]]);
+  //       if (result !== undefined) arr.push(result);
+  //     }
 
-      console.log(arr);
-      setUris([...arr]);
-    }
+  //     console.log(arr);
+  //     setUris([...arr]);
+  //   }
 
-    getUris();
-  }, [address, repTokensInstance]);
+  //   // Run the effect only once when the component mounts
+  //   if (uris.length === 0) {
+  //     getUris();
+  //   }
+  // }, [address, repTokensInstance, tokenIdsArr]); // Empty dependency array to run the effect only once
 
-  console.log(uris);
+  // console.log(uris);
 
   // token0.image = token0.image?.replace("ipfs://", "https://ipfs.io/ipfs/");
   // token1.image = token1.image?.replace("ipfs://", "https://ipfs.io/ipfs/");

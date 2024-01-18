@@ -31,8 +31,7 @@ contract DeployScript is ScaffoldETHDeploy {
 
         ReputationTokensStandalone instance = new ReputationTokensStandalone(
             0x62286D694F89a1B12c0214bfcD567bb6c2951491,
-            admins,
-            baseURI
+            admins
         );
 
         instance.grantRole(
