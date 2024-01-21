@@ -37,39 +37,54 @@ export const useBalanceOf = (address?: string, tokenId?: number) => {
   });
 };
 
-export function useGetUris(repTokensInstance: any, AllArr: any) {
+export function useUris(repTokensInstance: any, tokenIds: bigint[]) {
   const [uris, setUris] = useState<string[]>([]);
 
   useEffect(() => {
-    async function getUris() {
-      if (!repTokensInstance || AllArr.tokenIdsArr.length === 0) return;
+    async function get() {
+      if (!repTokensInstance || tokenIds.length === 0) return;
 
       const arr = [];
-      for (let i = 0; i < AllArr.tokenIdsArr.length; i++) {
-        const result = await repTokensInstance.read.uri([AllArr.tokenIdsArr[i]]);
+      for (let i = 0; i < tokenIds.length; i++) {
+        const result = await repTokensInstance.read.uri([tokenIds[i]]);
         if (result !== undefined) arr.push(result);
       }
 
-      console.log(arr);
       setUris([...arr]);
     }
 
-    // Run the effect only once when the component mounts
     if (uris.length === 0) {
-      getUris();
+      get();
     }
-  }, [repTokensInstance, AllArr.tokenIdsArr, uris.length]); // Empty dependency array to run the effect only once
+  }, [repTokensInstance, tokenIds, uris.length]);
 
   return { uris, setUris };
 }
 
+export function useFetches(uris: string[]) {
+  const [responses, setResponses] = useState<Nft[]>([]);
+
+  useEffect(() => {
+    async function getJson() {
+      if (uris.length === 0) return;
+
+      const arr = [];
+      for (let i = 0; i < uris.length; i++) {
+        const response = await fetch(uris[i]);
+        const responseJson = await response.json();
+        arr.push(responseJson);
+      }
+
+      setResponses([...arr]);
+    }
+
+    if (responses.length === 0) getJson();
+  }, [uris, uris.length, responses.length]);
+
+  return { responses };
+}
+
 export const useERC1155Information = (address?: string) => {
-  // const { data: uri0 } = useUri(0);
-  // const { data: uri1 } = useUri(1);
-
-  // const { data: balanceOf0 } = useBalanceOf(address, 0);
-  // const { data: balanceOf1 } = useBalanceOf(address, 1);
-
   const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokensStandalone" });
 
   const { data: numOfTokens } = useScaffoldContractRead({
@@ -97,50 +112,14 @@ export const useERC1155Information = (address?: string) => {
     functionName: "balanceOfBatch",
     args: [AllArr.addressArr, AllArr.tokenIdsArr],
   });
-  console.log(balanceOfBatch);
 
-  const { uris } = useGetUris(repTokensInstance, AllArr);
+  const { uris } = useUris(repTokensInstance, AllArr.tokenIdsArr);
 
-  // const [uris, setUris] = useState<string[]>([]);
+  for (let i = 0; i < uris.length; i++) {
+    uris[i] = uris[i].replace("ipfs://", "https://ipfs.io/ipfs/");
+  }
 
-  // useEffect(() => {
-  //   async function getUris() {
-  //     if (!address || !repTokensInstance || AllArr.tokenIdsArr.length === 0) return;
-
-  //     const arr = [];
-  //     for (let i = 0; i < AllArr.tokenIdsArr.length; i++) {
-  //       const result = await repTokensInstance.read.uri([AllArr.tokenIdsArr[i]]);
-  //       if (result !== undefined) arr.push(result);
-  //     }
-
-  //     console.log(arr);
-  //     setUris([...arr]);
-  //   }
-
-  //   // Run the effect only once when the component mounts
-  //   if (uris.length === 0) {
-  //     getUris();
-  //   }
-  // }, [address, repTokensInstance, AllArr.tokenIdsArr, uris.length]); // Empty dependency array to run the effect only once
-
-  const [responses, setResponses] = useState<Nft[]>([]);
-
-  useEffect(() => {
-    async function getJson() {
-      if (uris.length === 0) return;
-
-      const arr = [];
-      for (let i = 0; i < uris.length; i++) {
-        const response = await fetch(uris[i].replace("ipfs://", "https://ipfs.io/ipfs/"));
-        const responseJson = await response.json();
-        arr.push(responseJson);
-      }
-
-      setResponses([...arr]);
-    }
-
-    if (responses.length === 0) getJson();
-  }, [uris, uris.length, responses.length]);
+  const { responses } = useFetches(uris);
 
   const tokens: Token[] = [];
   for (let i = 0; i < responses.length; i++) {
