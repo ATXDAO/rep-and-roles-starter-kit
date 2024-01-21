@@ -1,4 +1,4 @@
-import { useERC1155Information } from "./tokens/TokenInteractions";
+import { useRepTokens } from "./tokens/TokenInteractions";
 import { ImageProperties } from "./tokens/token-card/ImageCard";
 import { DefaultTokenGroupCard } from "./tokens/token-group-card/DefaultTokenGroupCard";
 import {
@@ -13,24 +13,14 @@ import { useAccount } from "wagmi";
 export const ContractData = () => {
   const { address } = useAccount();
 
-  const { tokens } = useERC1155Information(address);
+  const { tokens } = useRepTokens(address);
 
   for (let i = 0; i < tokens.length; i++) {
     tokens[i].image = tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
   }
 
-  console.log(tokens);
-
-  // const tokenGroup = {
-  //   token0: token0,
-  //   token1: token1,
-  // };
-
   const navBarCardImageProperties0 = new ImageProperties("Token 0", 64, 64);
-  // const navBarCardImageProperties1 = new ImageProperties("Token 1", 64, 64);
-
   const mainCardImageProperties0 = new ImageProperties("Token 0", 256, 256);
-  // const mainCardImageProperties1 = new ImageProperties("Token 1", 256, 256);
 
   return (
     <>

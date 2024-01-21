@@ -61,6 +61,30 @@ export function useUris(repTokensInstance: any, tokenIds: bigint[]) {
   return { uris, setUris };
 }
 
+export function useGetTokensProperties(repTokensInstance: any, tokenIds: bigint[]) {
+  const [tokensProperties, setTokensProperties] = useState<string[]>([]);
+
+  useEffect(() => {
+    async function get() {
+      if (!repTokensInstance || tokenIds.length === 0) return;
+
+      const arr = [];
+      for (let i = 0; i < tokenIds.length; i++) {
+        const result = await repTokensInstance.read.getTokenProperties([tokenIds[i]]);
+        if (result !== undefined) arr.push(result);
+      }
+
+      setTokensProperties([...arr]);
+    }
+
+    if (tokensProperties.length === 0) {
+      get();
+    }
+  }, [repTokensInstance, tokenIds, tokensProperties.length]);
+
+  return { tokensProperties, setTokensProperties };
+}
+
 export function useFetches(uris: string[]) {
   const [responses, setResponses] = useState<Nft[]>([]);
 
@@ -84,36 +108,48 @@ export function useFetches(uris: string[]) {
   return { responses };
 }
 
-export const useERC1155Information = (address?: string) => {
+export const useRepTokens = (address?: string) => {
   const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokensStandalone" });
-
   const { data: numOfTokens } = useScaffoldContractRead({
     contractName: "ReputationTokensStandalone",
     functionName: "getNumOfTokenTypes",
   });
 
-  const AllArr = useMemo(() => {
-    const addressArr: string[] = [];
-    const tokenIdsArr: bigint[] = [];
+  const { addresses } = useMemo(() => {
+    const addresses: string[] = [];
 
-    const iterator = numOfTokens ?? 0;
-    for (let i = 0; i < iterator; i++) {
-      if (address) {
-        addressArr.push(address);
-        tokenIdsArr.push(BigInt(i));
+    if (numOfTokens) {
+      for (let i = 0; i < numOfTokens; i++) {
+        if (address) {
+          addresses.push(address);
+        }
       }
     }
 
-    return { addressArr, tokenIdsArr };
+    return { addresses };
   }, [numOfTokens, address]);
+
+  const { tokenIds } = useMemo(() => {
+    const tokenIds: bigint[] = [];
+
+    if (numOfTokens) {
+      for (let i = 0; i < numOfTokens; i++) {
+        tokenIds.push(BigInt(i));
+      }
+    }
+
+    return { tokenIds };
+  }, [numOfTokens]);
 
   const { data: balanceOfBatch } = useScaffoldContractRead({
     contractName: "ReputationTokensStandalone",
     functionName: "balanceOfBatch",
-    args: [AllArr.addressArr, AllArr.tokenIdsArr],
+    args: [addresses, tokenIds],
   });
 
-  const { uris } = useUris(repTokensInstance, AllArr.tokenIdsArr);
+  const { tokensProperties } = useGetTokensProperties(repTokensInstance, tokenIds);
+
+  const { uris } = useUris(repTokensInstance, tokenIds);
 
   for (let i = 0; i < uris.length; i++) {
     uris[i] = uris[i].replace("ipfs://", "https://ipfs.io/ipfs/");
@@ -133,6 +169,7 @@ export const useERC1155Information = (address?: string) => {
       name: responses[i]?.name,
       description: responses[i]?.description,
       image: responses[i]?.image,
+      properties: tokensProperties[i],
     };
     tokens.push(token);
   }
