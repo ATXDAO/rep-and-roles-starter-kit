@@ -37,6 +37,32 @@ export const useBalanceOf = (address?: string, tokenId?: number) => {
   });
 };
 
+export function useGetUris(repTokensInstance: any, AllArr: any) {
+  const [uris, setUris] = useState<string[]>([]);
+
+  useEffect(() => {
+    async function getUris() {
+      if (!repTokensInstance || AllArr.tokenIdsArr.length === 0) return;
+
+      const arr = [];
+      for (let i = 0; i < AllArr.tokenIdsArr.length; i++) {
+        const result = await repTokensInstance.read.uri([AllArr.tokenIdsArr[i]]);
+        if (result !== undefined) arr.push(result);
+      }
+
+      console.log(arr);
+      setUris([...arr]);
+    }
+
+    // Run the effect only once when the component mounts
+    if (uris.length === 0) {
+      getUris();
+    }
+  }, [repTokensInstance, AllArr.tokenIdsArr, uris.length]); // Empty dependency array to run the effect only once
+
+  return { uris, setUris };
+}
+
 export const useERC1155Information = (address?: string) => {
   // const { data: uri0 } = useUri(0);
   // const { data: uri1 } = useUri(1);
@@ -73,29 +99,29 @@ export const useERC1155Information = (address?: string) => {
   });
   console.log(balanceOfBatch);
 
-  const [uris, setUris] = useState<string[]>([]);
+  const { uris } = useGetUris(repTokensInstance, AllArr);
 
-  useEffect(() => {
-    async function getUris() {
-      if (!address || !repTokensInstance || AllArr.tokenIdsArr.length === 0) return;
+  // const [uris, setUris] = useState<string[]>([]);
 
-      const arr = [];
-      for (let i = 0; i < AllArr.tokenIdsArr.length; i++) {
-        const result = await repTokensInstance.read.uri([AllArr.tokenIdsArr[i]]);
-        if (result !== undefined) arr.push(result);
-      }
+  // useEffect(() => {
+  //   async function getUris() {
+  //     if (!address || !repTokensInstance || AllArr.tokenIdsArr.length === 0) return;
 
-      console.log(arr);
-      setUris([...arr]);
-    }
+  //     const arr = [];
+  //     for (let i = 0; i < AllArr.tokenIdsArr.length; i++) {
+  //       const result = await repTokensInstance.read.uri([AllArr.tokenIdsArr[i]]);
+  //       if (result !== undefined) arr.push(result);
+  //     }
 
-    // Run the effect only once when the component mounts
-    if (uris.length === 0) {
-      getUris();
-    }
-  }, [address, repTokensInstance, AllArr.tokenIdsArr, uris.length]); // Empty dependency array to run the effect only once
+  //     console.log(arr);
+  //     setUris([...arr]);
+  //   }
 
-  console.log(uris);
+  //   // Run the effect only once when the component mounts
+  //   if (uris.length === 0) {
+  //     getUris();
+  //   }
+  // }, [address, repTokensInstance, AllArr.tokenIdsArr, uris.length]); // Empty dependency array to run the effect only once
 
   const [responses, setResponses] = useState<Nft[]>([]);
 
@@ -116,41 +142,21 @@ export const useERC1155Information = (address?: string) => {
     if (responses.length === 0) getJson();
   }, [uris, uris.length, responses.length]);
 
-  console.log(responses);
-
-  // const { data: json0 /* error: error0 */ } = useFetch<Nft>(uri0?.replace("ipfs://", "https://ipfs.io/ipfs/"));
-  // const { data: json1 /* error: error1 */ } = useFetch<Nft>(uri1?.replace("ipfs://", "https://ipfs.io/ipfs/"));
-
   const tokens: Token[] = [];
   for (let i = 0; i < responses.length; i++) {
     let balance = BigInt(0);
     if (balanceOfBatch) {
       balance = balanceOfBatch[i];
     }
-    const obj = {
+    const token = {
       id: i,
       balance: balance,
       name: responses[i]?.name,
       description: responses[i]?.description,
       image: responses[i]?.image,
     };
-    tokens.push(obj);
+    tokens.push(token);
   }
 
   return { tokens };
-
-  // return {
-  //   token0: {
-  //     balance: balanceOf0,
-  //     name: json0?.name,
-  //     description: json0?.description,
-  //     image: json0?.image,
-  //   },
-  //   token1: {
-  //     balance: balanceOf1,
-  //     name: json1?.name,
-  //     description: json1?.description,
-  //     image: json1?.image,
-  //   },
-  // } as TokenGroup;
 };
