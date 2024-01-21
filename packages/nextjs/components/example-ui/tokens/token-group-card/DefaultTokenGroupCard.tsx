@@ -8,7 +8,7 @@ type TTokenGroupCardProps = {
   tokens: Token[];
   imageProperties: ImageProperties;
   propertiesClasses?: TTokenCardGroupPropertiesClasses;
-  // prettifyLoadingProps?: TTokenGroupCardPrettifyLoadingProps;
+  prettifyLoadingProps?: TTokenGroupCardPrettifyLoadingProps;
   renderProps?: TBaseTokenCardBooleanSet;
 };
 
@@ -27,7 +27,7 @@ export const DefaultTokenGroupCard = ({
   tokens,
   imageProperties,
   propertiesClasses,
-  // prettifyLoadingProps,
+  prettifyLoadingProps,
   renderProps,
 }: TTokenGroupCardProps) => {
   const components = tokens.map((token, index) => (
@@ -36,15 +36,49 @@ export const DefaultTokenGroupCard = ({
       token={token}
       imageProperties={imageProperties}
       propertiesClasses={propertiesClasses?.tokenCardPropertyClasses}
-      // prettifyLoadingProps={prettifyLoadingProps?.tokenCardPrettifyLoadingProps}
+      prettifyLoadingProps={prettifyLoadingProps?.tokenCardPrettifyLoadingProps}
       renderProps={renderProps}
     ></DefaultTokenCard>
   ));
 
+  let output;
+
+  if (prettifyLoadingProps) {
+    if (prettifyLoadingProps?.card) {
+      let isLoaded = true;
+      for (let i = 0; i < tokens.length; i++) {
+        if (
+          tokens[i].balance === undefined &&
+          tokens[i].name === undefined &&
+          tokens[i].description === undefined &&
+          tokens[i].image === undefined &&
+          tokens[i].properties === undefined
+        ) {
+          isLoaded = false;
+          break;
+        }
+      }
+
+      if (tokens.length === 0) isLoaded = !isLoaded;
+
+      if (!isLoaded) {
+        output = <>Loading Reputation Tokens...</>;
+        console.log("output set");
+      } else output = components;
+    } else {
+      output = components;
+    }
+  } else {
+    output = components;
+  }
+
   return (
     <div className={propertiesClasses?.card}>
-      <div className={propertiesClasses?.container}>{components}</div>
+      <div className={propertiesClasses?.container}>{output}</div>
     </div>
+    // <div className={propertiesClasses?.card}>
+    //   <div className={propertiesClasses?.container}>{components}</div>
+    // </div>
     // <div className={propertiesClasses?.card}>
     //   {prettifyLoadingProps?.card ? (
     //     tokenGroup.token0.balance !== undefined &&
