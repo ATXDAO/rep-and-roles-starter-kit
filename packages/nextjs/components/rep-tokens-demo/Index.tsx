@@ -1,6 +1,6 @@
-import { useRepTokens } from "./tokens/TokenInteractions";
+import { useRepTokens } from "./tokens/Hooks";
 import { ImageProperties } from "./tokens/token-card/ImageCard";
-import { DefaultTokenGroupCard } from "./tokens/token-group-card/DefaultTokenGroupCard";
+import { TokensCard } from "./tokens/tokens-card/TokensCard";
 import {
   mainCardPropertiesClasses,
   mainCardRenderProps,
@@ -8,27 +8,27 @@ import {
   navBarPropertiesClasses,
   navBarRenderProps,
   prettifyLoadingProps,
-} from "./tokens/token-group-card/TokenGroupCardConfig";
+} from "./tokens/tokens-card/TokensCardConfig";
 import { useAccount } from "wagmi";
 
-export const ContractData = () => {
+export const Index = () => {
   const { address } = useAccount();
 
-  const { tokens } = useRepTokens(address);
+  const { tokensData } = useRepTokens(address);
 
-  for (let i = 0; i < tokens.length; i++) {
-    tokens[i].image = tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
+  for (let i = 0; i < tokensData.tokens.length; i++) {
+    tokensData.tokens[i].image = tokensData.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
   }
 
-  const navBarCardImageProperties = new ImageProperties("Token 0", 64, 64);
-  const mainCardImageProperties = new ImageProperties("Token 0", 256, 256);
+  const navBarCardImageProperties = new ImageProperties("Token", 64, 64);
+  const mainCardImageProperties = new ImageProperties("Token", 256, 256);
 
   return (
     <>
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
-          <DefaultTokenGroupCard
-            tokens={tokens}
+          <TokensCard
+            tokensData={tokensData}
             imageProperties={navBarCardImageProperties}
             prettifyLoadingProps={prettifyLoadingProps}
             propertiesClasses={navBarPropertiesClasses}
@@ -39,8 +39,8 @@ export const ContractData = () => {
 
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
-          <DefaultTokenGroupCard
-            tokens={tokens}
+          <TokensCard
+            tokensData={tokensData}
             imageProperties={mainCardImageProperties}
             prettifyLoadingProps={prettifyLoadingProps}
             propertiesClasses={mainCardPropertiesClasses}
@@ -51,8 +51,8 @@ export const ContractData = () => {
 
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
-          <DefaultTokenGroupCard
-            tokens={tokens}
+          <TokensCard
+            tokensData={tokensData}
             imageProperties={mainCardImageProperties}
             prettifyLoadingProps={prettifyLoadingProps}
             propertiesClasses={mainCardWithNumberOverlayPropertiesClasses}

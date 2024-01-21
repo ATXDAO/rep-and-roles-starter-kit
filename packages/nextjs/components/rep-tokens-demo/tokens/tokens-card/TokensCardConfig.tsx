@@ -1,23 +1,28 @@
-import { TBaseTokenCardBooleanSet } from "../token-card/BaseTokenCard";
-import { TTokenGroupCardPrettifyLoadingProps } from "./DefaultTokenGroupCard";
-import { TTokenCardGroupPropertiesClasses } from "./DefaultTokenGroupCard";
+import { TTokenGroupCardPrettifyLoadingProps, TTokensCardRenderProps } from "./TokensCard";
+import { TTokenCardGroupPropertiesClasses } from "./TokensCard";
 
 export const navBarRenderProps = {
-  balance: true,
-  image: true,
-  name: false,
-  description: false,
-} as TBaseTokenCardBooleanSet;
+  address: true,
+  tokenCardRenderProps: {
+    balance: true,
+    image: true,
+    name: false,
+    description: false,
+  },
+} as TTokensCardRenderProps;
 
 export const mainCardRenderProps = {
-  balance: true,
-  image: true,
-  name: true,
-  description: true,
-} as TBaseTokenCardBooleanSet;
+  address: true,
+  tokenCardRenderProps: {
+    balance: true,
+    image: true,
+    name: true,
+    description: true,
+  },
+} as TTokensCardRenderProps;
 
 export const navBarPropertiesClasses = {
-  card: "bg-base-300",
+  card: "bg-base-300 flex flex-col items-center",
   container: "flex justify-center",
   tokenCardPropertyClasses: {
     card: "px-1 py-1 relative w-20",
@@ -34,7 +39,7 @@ export const navBarPropertiesClasses = {
 } as TTokenCardGroupPropertiesClasses;
 
 export const mainCardWithNumberOverlayPropertiesClasses = {
-  card: "bg-base-300",
+  card: "bg-base-300 flex flex-col items-center",
   container: "flex justify-center",
   tokenCardPropertyClasses: {
     card: "px-5 py-5 relative w-64",
@@ -57,7 +62,7 @@ export const mainCardWithNumberOverlayPropertiesClasses = {
 } as TTokenCardGroupPropertiesClasses;
 
 export const mainCardPropertiesClasses = {
-  card: "bg-base-300",
+  card: "bg-base-300 flex flex-col items-center",
   container: "flex justify-center",
   tokenCardPropertyClasses: {
     card: "px-5 py-5 w-64",

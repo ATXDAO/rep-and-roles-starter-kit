@@ -175,5 +175,7 @@ export const useRepTokens = (address?: string) => {
     tokens.push(token);
   }
 
-  return { tokens };
+  const addr = repTokensInstance?.address ?? "";
+
+  return { tokensData: { address: addr, tokens: tokens } };
 };

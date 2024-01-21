@@ -1,4 +1,4 @@
-import { Token } from "../TokenInteractions";
+import { Token } from "../Hooks";
 import {
   BaseTokenCard,
   TBaseTokenCardBooleanSet, // TBaseTokenCardRenderSettings, // TBaseTokenCardPrettifyLoadingProps,

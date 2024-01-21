@@ -1,4 +1,4 @@
-import { Token } from "../TokenInteractions";
+import { Token } from "../Hooks";
 import { BalanceCard } from "./BalanceCard";
 import { ImageCard } from "./ImageCard";
 import { ImageProperties } from "./ImageCard";

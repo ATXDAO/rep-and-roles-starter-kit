@@ -1,22 +1,19 @@
 import type { NextPage } from "next";
 import { MetaHeader } from "~~/components/MetaHeader";
-import { ContractData } from "~~/components/example-ui/ContractData";
+import { Index } from "~~/components/rep-tokens-demo/Index";
 
-// import { ContractInteraction } from "~~/components/example-ui/ContractInteraction";
-
-const ExampleUI: NextPage = () => {
+const RepTokensDemo: NextPage = () => {
   return (
     <>
       <MetaHeader
-        title="Example UI | Reputation & Roles"
+        title="Rep Demo | Reputation & Roles"
         description="Example UI created with Reputation & Roles, showcasing some of its features."
       />
       <div className="grid lg:grid-cols-1 flex-grow" data-theme="exampleUi">
-        {/* <ContractInteraction /> */}
-        <ContractData />
+        <Index />
       </div>
     </>
   );
 };
 
-export default ExampleUI;
+export default RepTokensDemo;
