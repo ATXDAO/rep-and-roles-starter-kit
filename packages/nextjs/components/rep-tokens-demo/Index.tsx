@@ -1,61 +1,32 @@
 import { ImageProperties } from "../rep-tokens/cards/property-cards/ImageCard";
-import { BaseTokenCardPropertiesBooleanSet } from "../rep-tokens/cards/token-card/BaseTokenCard";
-import { TTokenCardPrettifyLoadingProps } from "../rep-tokens/cards/token-card/TokenCard";
-import { TTokenCardPropertiesClasses } from "../rep-tokens/cards/token-card/TokenCard";
-import { TTokenCardProps } from "../rep-tokens/cards/token-card/TokenCard";
-import { TokensCard } from "../rep-tokens/cards/tokens-card/TokensCard";
+import { TokenGroupCard } from "../rep-tokens/cards/token-group-card/TokenGroupCard";
 import { useRepTokens } from "../rep-tokens/hooks/Hooks";
-import { Token } from "../rep-tokens/hooks/Hooks";
+import { buildTokenGroupCard } from "../rep-tokens/utils/buildTokensCard";
 import {
-  tokenCardPrettifyLoadingProps as mainTokenCardPrettifyLoadingProps,
+  tokenCardPrettifyLoadingProps as isBeautifyingMainTokenCardLoadingProps,
+  tokensCardPrettifyLoadingProps as isBeautifyingMainTokenGroupCardLoadingProps,
+  isRenderingTokenCardProps as isRenderingMainTokenCardProps,
+  tokensCardRenderProps as isRenderingMainTokenGroupCardProps,
   tokenCardPropertiesClasses as mainTokenCardPropertiesClasses,
-  tokenCardRenderProps as mainTokenCardRenderProps,
-  tokensCardPrettifyLoadingProps as mainTokensCardPrettifyLoadingProps,
-  tokensCardPropertiesClasses as mainTokensCardPropertiesClassess,
-  tokensCardRenderProps as mainTokensCardRenderProps,
+  tokensCardPropertiesClasses as mainTokenGroupCardElementsClassess,
 } from "./MainTokensCardConfig";
 import {
-  tokenCardPrettifyLoadingProps as mainNumberOverlayTokenCardPrettifyLoadingProps,
+  tokenCardPrettifyLoadingProps as isBeautifyingMainTokenCardOverlayLoadingProps,
+  isRenderingTokenCardProps as isRenderingMainTokenCardOverlayProps,
   tokenCardPropertiesClasses as mainNumberOverlayTokenCardPropertiesClasses,
-  tokenCardRenderProps as mainNumberOverlayTokenCardRenderProps,
+  tokensCardPropertiesClasses as mainNumberOverlayTokensCardElementsClasses,
   tokensCardPrettifyLoadingProps as mainNumberOverlayTokensCardPrettifyLoadingProps,
-  tokensCardPropertiesClasses as mainNumberOverlayTokensCardPropertiesClassess,
   tokensCardRenderProps as mainNumberOverlayTokensCardRenderProps,
 } from "./MainTokensCardWithNumberOverlayConfig";
 import {
-  tokenCardPrettifyLoadingProps as navBarTokenCardPrettifyLoadingProps,
-  tokenCardPropertiesClasses as navBarTokenCardPropertiesClasses,
-  tokenCardRenderProps as navBarTokenCardRenderProps,
-  tokensCardPrettifyLoadingProps as navBarTokensCardPrettifyLoadingProps,
-  tokensCardPropertiesClasses as navBarTokensCardPropertiesClassess,
-  tokensCardRenderProps as navBarTokensCardRenderProps,
+  tokenCardPrettifyLoadingProps as isBeautifyingNavBarLoadingProps,
+  tokensCardPrettifyLoadingProps as isBeuatyingNavBarTokenGroupCardLoadingProps,
+  isRenderingTokenCardProps as isRenderingNavBarCardProps,
+  tokensCardRenderProps as isRenderingNavBarTokenGroupCardProps,
+  tokenCardPropertiesClasses as navBarElementsClasses,
+  tokensCardPropertiesClasses as navBarTokenGroupCardElementsClasses,
 } from "./NavBarCardConfig";
 import { useAccount } from "wagmi";
-
-function buildTokensCard(
-  tokens: Token[],
-  address?: string,
-  imageProperties?: ImageProperties,
-  propertiesClasses?: TTokenCardPropertiesClasses,
-  renderProps?: BaseTokenCardPropertiesBooleanSet,
-  prettifyLoadingProps?: TTokenCardPrettifyLoadingProps,
-) {
-  const arr = [];
-  for (let i = 0; i < tokens.length; i++) {
-    const tokenCardProp: TTokenCardProps = {
-      token: tokens[i],
-      address,
-      imageProperties,
-      prettifyLoadingProps: prettifyLoadingProps,
-      propertiesClasses,
-      renderProps,
-    };
-
-    arr.push(tokenCardProp);
-  }
-
-  return arr;
-}
 
 export const Index = () => {
   const navBarCardImageProperties = new ImageProperties("Token", 64, 64);
@@ -69,67 +40,67 @@ export const Index = () => {
     tokensData.tokens[i].image = tokensData.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
   }
 
-  const navBarTokenCard = buildTokensCard(
+  const navBarTokenCard = buildTokenGroupCard(
     tokensData.tokens,
     tokensData.address,
     navBarCardImageProperties,
-    navBarTokenCardPropertiesClasses,
-    navBarTokenCardRenderProps,
-    navBarTokenCardPrettifyLoadingProps,
+    navBarElementsClasses,
+    isRenderingNavBarCardProps,
+    isBeautifyingNavBarLoadingProps,
   );
 
-  const mainTokenCard = buildTokensCard(
+  const mainTokenGroupCard = buildTokenGroupCard(
     tokensData.tokens,
     tokensData.address,
     mainCardImageProperties,
     mainTokenCardPropertiesClasses,
-    mainTokenCardRenderProps,
-    mainTokenCardPrettifyLoadingProps,
+    isRenderingMainTokenCardProps,
+    isBeautifyingMainTokenCardLoadingProps,
   );
 
-  const mainNumberOverlayTokenCard = buildTokensCard(
+  const mainNumberOverlayTokenCard = buildTokenGroupCard(
     tokensData.tokens,
     tokensData.address,
     mainCardImageProperties,
     mainNumberOverlayTokenCardPropertiesClasses,
-    mainNumberOverlayTokenCardRenderProps,
-    mainNumberOverlayTokenCardPrettifyLoadingProps,
+    isRenderingMainTokenCardOverlayProps,
+    isBeautifyingMainTokenCardOverlayLoadingProps,
   );
 
   return (
     <>
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
-          <TokensCard
+          <TokenGroupCard
             address={tokensData.address}
-            tokensProps={navBarTokenCard}
-            propertiesClasses={navBarTokensCardPropertiesClassess}
-            renderProps={navBarTokensCardRenderProps}
-            prettifyLoadingProps={navBarTokensCardPrettifyLoadingProps}
+            tokenCardsProps={navBarTokenCard}
+            elementsClasses={navBarTokenGroupCardElementsClasses}
+            isRenderingTokenGroupCardProps={isRenderingNavBarTokenGroupCardProps}
+            isBeautifyingTokenGroupCardLoadingProps={isBeuatyingNavBarTokenGroupCardLoadingProps}
           />
         </div>
       </div>
 
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
-          <TokensCard
+          <TokenGroupCard
             address={tokensData.address}
-            tokensProps={mainTokenCard}
-            propertiesClasses={mainTokensCardPropertiesClassess}
-            renderProps={mainTokensCardRenderProps}
-            prettifyLoadingProps={mainTokensCardPrettifyLoadingProps}
+            tokenCardsProps={mainTokenGroupCard}
+            elementsClasses={mainTokenGroupCardElementsClassess}
+            isRenderingTokenGroupCardProps={isRenderingMainTokenGroupCardProps}
+            isBeautifyingTokenGroupCardLoadingProps={isBeautifyingMainTokenGroupCardLoadingProps}
           />
         </div>
       </div>
 
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
-          <TokensCard
+          <TokenGroupCard
             address={tokensData.address}
-            tokensProps={mainNumberOverlayTokenCard}
-            propertiesClasses={mainNumberOverlayTokensCardPropertiesClassess}
-            renderProps={mainNumberOverlayTokensCardRenderProps}
-            prettifyLoadingProps={mainNumberOverlayTokensCardPrettifyLoadingProps}
+            tokenCardsProps={mainNumberOverlayTokenCard}
+            elementsClasses={mainNumberOverlayTokensCardElementsClasses}
+            isRenderingTokenGroupCardProps={mainNumberOverlayTokensCardRenderProps}
+            isBeautifyingTokenGroupCardLoadingProps={mainNumberOverlayTokensCardPrettifyLoadingProps}
           />
         </div>
       </div>

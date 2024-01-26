@@ -1,18 +1,17 @@
-import { PropertyClasses } from "../types/Types";
+import { ElementClasses } from "../types/Types";
 
 type TStringCardProps = {
   value: string;
-  propertyClasses?: PropertyClasses;
+  elementClasses?: ElementClasses;
   prettifyLoading?: boolean;
 };
 
-export const StringCard = ({ value, prettifyLoading, propertyClasses }: TStringCardProps) => {
-  let output;
-  prettifyLoading ? (value !== undefined ? (output = value) : (output = "Loading...")) : (output = value);
+export const StringCard = ({ value, prettifyLoading, elementClasses }: TStringCardProps) => {
+  const output = prettifyLoading ? (value !== undefined ? value : "Loading...") : value;
 
   return (
-    <div className={propertyClasses?.container}>
-      <p className={propertyClasses?.value}>{output}</p>
+    <div className={elementClasses?.container}>
+      <p className={elementClasses?.value}>{output}</p>
     </div>
   );
 };

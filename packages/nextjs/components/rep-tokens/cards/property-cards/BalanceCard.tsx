@@ -1,12 +1,12 @@
-import { PropertyClasses } from "../types/Types";
+import { ElementClasses } from "../types/Types";
 
 type TBalanceCardProps = {
   value: bigint;
-  propertyClasses?: PropertyClasses;
+  elementClasses?: ElementClasses;
   prettifyLoading?: boolean;
 };
 
-export const BalanceCard = ({ value, prettifyLoading, propertyClasses }: TBalanceCardProps) => {
+export const BalanceCard = ({ value, prettifyLoading, elementClasses }: TBalanceCardProps) => {
   let output;
 
   prettifyLoading
@@ -18,8 +18,8 @@ export const BalanceCard = ({ value, prettifyLoading, propertyClasses }: TBalanc
     : (output = 0);
 
   return (
-    <div className={propertyClasses?.container}>
-      <p className={propertyClasses?.value}>{output}</p>
+    <div className={elementClasses?.container}>
+      <p className={elementClasses?.value}>{output}</p>
     </div>
   );
 };

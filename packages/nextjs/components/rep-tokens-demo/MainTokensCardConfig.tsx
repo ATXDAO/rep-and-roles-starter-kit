@@ -1,22 +1,13 @@
-import { BaseTokenCardPropertiesBooleanSet } from "../rep-tokens/cards/token-card/BaseTokenCard";
-import { TTokenCardPrettifyLoadingProps, TTokenCardPropertiesClasses } from "../rep-tokens/cards/token-card/TokenCard";
 import {
-  TTokenGroupCardPrettifyLoadingProps,
-  TTokensCardRenderProps,
-} from "../rep-tokens/cards/tokens-card/TokensCard";
-import { TTokenCardGroupPropertiesClasses } from "../rep-tokens/cards/tokens-card/TokensCard";
-
-export const tokensCardRenderProps = {
-  address: true,
-} as TTokensCardRenderProps;
-
-export const tokenCardRenderProps = {
-  balance: true,
-  image: true,
-  name: true,
-  description: true,
-  address: true,
-} as BaseTokenCardPropertiesBooleanSet;
+  IsBeautifyingTokenCardLoadingProps,
+  IsRenderingTokenCardProps,
+  TokenCardElementsClasses,
+} from "../rep-tokens/cards/token-card/TokenCard";
+import {
+  IsBeautifyingTokenGroupCardLoadingProps,
+  IsRenderingTokenGroupCardProps,
+} from "../rep-tokens/cards/token-group-card/TokenGroupCard";
+import { TokenGroupCardElementsClasses } from "../rep-tokens/cards/token-group-card/TokenGroupCard";
 
 export const tokensCardPropertiesClasses = {
   container: "flex justify-center",
@@ -25,11 +16,11 @@ export const tokensCardPropertiesClasses = {
     container: "flex items-center justify-center bg-slate-600",
     value: "ml-1.5 text-${size} font-normal text-white",
   },
-} as TTokenCardGroupPropertiesClasses;
+} as TokenGroupCardElementsClasses;
 
 export const tokenCardPropertiesClasses = {
   card: "bg-slate-600 p-5 m-4 w-64",
-  baseTokenCardPropertyClasses: {
+  baseTokenCardElementsClasses: {
     balance: {
       container: "bg-slate-300",
       value: "text-4xl mx-auto text-center",
@@ -51,19 +42,35 @@ export const tokenCardPropertiesClasses = {
       value: "rounded mx-auto",
     },
   },
-} as TTokenCardPropertiesClasses;
+} as TokenCardElementsClasses;
+
+export const tokensCardRenderProps = {
+  card: true,
+  address: true,
+} as IsRenderingTokenGroupCardProps;
+
+export const isRenderingTokenCardProps = {
+  card: true,
+  isRenderingElementsProps: {
+    balance: true,
+    image: true,
+    name: true,
+    description: true,
+    address: true,
+  },
+} as IsRenderingTokenCardProps;
 
 export const tokensCardPrettifyLoadingProps = {
   card: true,
-} as TTokenGroupCardPrettifyLoadingProps;
+} as IsBeautifyingTokenGroupCardLoadingProps;
 
 export const tokenCardPrettifyLoadingProps = {
   card: false,
-  baseTokenCardPrettifyLoadingProps: {
+  isBeautifyLoadingElementsProps: {
     balance: false,
     image: false,
     name: false,
     description: false,
     address: false,
   },
-} as TTokenCardPrettifyLoadingProps;
+} as IsBeautifyingTokenCardLoadingProps;
