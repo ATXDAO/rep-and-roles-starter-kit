@@ -7,7 +7,7 @@ export interface TokenGroupProps {
   address?: string;
   tokenCardsProps: TokenCardProps[];
   elementsClasses?: TokenGroupCardElementsClasses;
-  isRenderingTokenGroupCardProps?: IsRenderingTokenGroupCardProps;
+  // isRenderingTokenGroupCardProps?: IsRenderingTokenGroupCardProps;
   isBeautifyingTokenGroupCardLoadingProps?: IsBeautifyingTokenGroupCardLoadingProps;
 }
 
@@ -15,11 +15,6 @@ export interface TokenGroupCardElementsClasses {
   card: string;
   container: string;
   address: ElementClasses;
-}
-
-export interface IsRenderingTokenGroupCardProps {
-  card: boolean;
-  address: boolean;
 }
 
 export interface IsBeautifyingTokenGroupCardLoadingProps {
@@ -30,7 +25,6 @@ export const TokenGroupCard = ({
   address,
   tokenCardsProps,
   elementsClasses,
-  isRenderingTokenGroupCardProps,
   isBeautifyingTokenGroupCardLoadingProps,
 }: TokenGroupProps) => {
   const components = tokenCardsProps.map((props, index) => (
@@ -40,8 +34,12 @@ export const TokenGroupCard = ({
       address={props.address}
       imageProperties={props.imageProperties}
       elementsClasses={props.elementsClasses}
-      isRenderingTokenCardProps={props.isRenderingTokenCardProps}
       isBeautifyingTokenCardLoadingProps={props.isBeautifyingTokenCardLoadingProps}
+      balanceProp={props.balanceProp}
+      nameProp={props.nameProp}
+      descriptionProp={props.descriptionProp}
+      imageProp={props.imageProp}
+      addressProp={props.addressProp}
     ></TokenCard>
   ));
 
@@ -77,18 +75,10 @@ export const TokenGroupCard = ({
 
   return (
     <>
-      {isRenderingTokenGroupCardProps?.card ? (
-        <div className={elementsClasses?.card}>
-          {isRenderingTokenGroupCardProps?.address ? (
-            <Address address={address} propertyClasses={elementsClasses?.address}></Address>
-          ) : (
-            <></>
-          )}
-          <div className={elementsClasses?.container}>{output}</div>
-        </div>
-      ) : (
-        <></>
-      )}
+      <div className={elementsClasses?.card}>
+        <Address address={address} propertyClasses={elementsClasses?.address}></Address>
+        <div className={elementsClasses?.container}>{output}</div>
+      </div>
     </>
   );
 };

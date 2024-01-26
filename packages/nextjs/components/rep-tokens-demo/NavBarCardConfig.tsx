@@ -4,8 +4,7 @@ import {
   TokenCardElementsClasses,
 } from "../rep-tokens/cards/token-card/TokenCard";
 import {
-  IsBeautifyingTokenGroupCardLoadingProps,
-  IsRenderingTokenGroupCardProps,
+  IsBeautifyingTokenGroupCardLoadingProps, // IsRenderingTokenGroupCardProps,
 } from "../rep-tokens/cards/token-group-card/TokenGroupCard";
 import { TokenGroupCardElementsClasses } from "../rep-tokens/cards/token-group-card/TokenGroupCard";
 
@@ -31,10 +30,10 @@ export const tokenCardPropertiesClasses = {
   },
 } as TokenCardElementsClasses;
 
-export const tokensCardRenderProps = {
-  card: true,
-  address: true,
-} as IsRenderingTokenGroupCardProps;
+// export const tokensCardRenderProps = {
+//   card: true,
+//   address: true,
+// } as IsRenderingTokenGroupCardProps;
 
 export const isRenderingTokenCardProps = {
   card: true,
