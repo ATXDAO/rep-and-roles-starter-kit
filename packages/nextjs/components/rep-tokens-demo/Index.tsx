@@ -1,10 +1,11 @@
-import { useRepTokens } from "./tokens/Hooks";
-import { Token } from "./tokens/Hooks";
-import { ImageProperties } from "./tokens/token-card/ImageCard";
-import { TBaseTokenCardBooleanSet } from "./tokens/token-card/TokenCard";
-import { TTokenCardPrettifyLoadingProps } from "./tokens/token-card/TokenCardWithContainer";
-import { TTokenCardPropertiesClasses } from "./tokens/token-card/TokenCardWithContainer";
-import { TTokenCardProps } from "./tokens/token-card/TokenCardWithContainer";
+import { ImageProperties } from "../rep-tokens/cards/property-cards/ImageCard";
+import { BaseTokenCardPropertiesBooleanSet } from "../rep-tokens/cards/token-card/BaseTokenCard";
+import { TTokenCardPrettifyLoadingProps } from "../rep-tokens/cards/token-card/TokenCard";
+import { TTokenCardPropertiesClasses } from "../rep-tokens/cards/token-card/TokenCard";
+import { TTokenCardProps } from "../rep-tokens/cards/token-card/TokenCard";
+import { TokensCard } from "../rep-tokens/cards/tokens-card/TokensCard";
+import { useRepTokens } from "../rep-tokens/hooks/Hooks";
+import { Token } from "../rep-tokens/hooks/Hooks";
 import {
   tokenCardPrettifyLoadingProps as mainTokenCardPrettifyLoadingProps,
   tokenCardPropertiesClasses as mainTokenCardPropertiesClasses,
@@ -12,7 +13,7 @@ import {
   tokensCardPrettifyLoadingProps as mainTokensCardPrettifyLoadingProps,
   tokensCardPropertiesClasses as mainTokensCardPropertiesClassess,
   tokensCardRenderProps as mainTokensCardRenderProps,
-} from "./tokens/tokens-card/MainTokensCardConfig";
+} from "./MainTokensCardConfig";
 import {
   tokenCardPrettifyLoadingProps as mainNumberOverlayTokenCardPrettifyLoadingProps,
   tokenCardPropertiesClasses as mainNumberOverlayTokenCardPropertiesClasses,
@@ -20,7 +21,7 @@ import {
   tokensCardPrettifyLoadingProps as mainNumberOverlayTokensCardPrettifyLoadingProps,
   tokensCardPropertiesClasses as mainNumberOverlayTokensCardPropertiesClassess,
   tokensCardRenderProps as mainNumberOverlayTokensCardRenderProps,
-} from "./tokens/tokens-card/MainTokensCardWithNumberOverlayConfig";
+} from "./MainTokensCardWithNumberOverlayConfig";
 import {
   tokenCardPrettifyLoadingProps as navBarTokenCardPrettifyLoadingProps,
   tokenCardPropertiesClasses as navBarTokenCardPropertiesClasses,
@@ -28,8 +29,7 @@ import {
   tokensCardPrettifyLoadingProps as navBarTokensCardPrettifyLoadingProps,
   tokensCardPropertiesClasses as navBarTokensCardPropertiesClassess,
   tokensCardRenderProps as navBarTokensCardRenderProps,
-} from "./tokens/tokens-card/NavBarCardConfig";
-import { TokensCard } from "./tokens/tokens-card/TokensCard";
+} from "./NavBarCardConfig";
 import { useAccount } from "wagmi";
 
 function buildTokensCard(
@@ -37,7 +37,7 @@ function buildTokensCard(
   address?: string,
   imageProperties?: ImageProperties,
   propertiesClasses?: TTokenCardPropertiesClasses,
-  renderProps?: TBaseTokenCardBooleanSet,
+  renderProps?: BaseTokenCardPropertiesBooleanSet,
   prettifyLoadingProps?: TTokenCardPrettifyLoadingProps,
 ) {
   const arr = [];

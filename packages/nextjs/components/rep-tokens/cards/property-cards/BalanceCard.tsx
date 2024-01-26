@@ -1,8 +1,8 @@
-import { TContainerAndValuePair } from "./TokenCard";
+import { PropertyClasses } from "../types/Types";
 
 type TBalanceCardProps = {
   value: bigint;
-  propertyClasses?: TContainerAndValuePair;
+  propertyClasses?: PropertyClasses;
   prettifyLoading?: boolean;
 };
 

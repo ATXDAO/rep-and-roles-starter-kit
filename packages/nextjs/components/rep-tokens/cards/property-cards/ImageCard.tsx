@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { TContainerAndValuePair } from "./TokenCard";
+import { PropertyClasses } from "../types/Types";
 
 type TImageCardProps = {
   value: string;
   imageProperties?: ImageProperties;
-  propertyClasses?: TContainerAndValuePair;
+  propertyClasses?: PropertyClasses;
   prettifyLoading?: boolean;
 };
 

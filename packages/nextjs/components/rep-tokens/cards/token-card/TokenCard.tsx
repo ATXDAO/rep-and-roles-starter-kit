@@ -1,6 +1,6 @@
-import { Token } from "../Hooks";
-import { ImageProperties } from "./ImageCard";
-import { BaseTokenCard, TBaseTokenCardBooleanSet, TBaseTokenCardPropertiesClasses } from "./TokenCard";
+import { Token } from "../../hooks/Hooks";
+import { ImageProperties } from "../property-cards/ImageCard";
+import { BaseTokenCard, BaseTokenCardPropertiesBooleanSet, BaseTokenCardPropertiesClasses } from "./BaseTokenCard";
 
 export interface TTokenCardProps {
   token: Token;
@@ -8,17 +8,17 @@ export interface TTokenCardProps {
   imageProperties?: ImageProperties;
   propertiesClasses?: TTokenCardPropertiesClasses;
   prettifyLoadingProps?: TTokenCardPrettifyLoadingProps;
-  renderProps?: TBaseTokenCardBooleanSet;
+  renderProps?: BaseTokenCardPropertiesBooleanSet;
 }
 
 export type TTokenCardPropertiesClasses = {
   card: string;
-  baseTokenCardPropertyClasses?: TBaseTokenCardPropertiesClasses;
+  baseTokenCardPropertyClasses?: BaseTokenCardPropertiesClasses;
 };
 
 export type TTokenCardPrettifyLoadingProps = {
   card: boolean;
-  baseTokenCardPrettifyLoadingProps: TBaseTokenCardBooleanSet;
+  baseTokenCardPrettifyLoadingProps: BaseTokenCardPropertiesBooleanSet;
 };
 
 export const DefaultTokenCard = ({

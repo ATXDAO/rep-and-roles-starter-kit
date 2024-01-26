@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { TContainerAndValuePair } from "../rep-tokens-demo/tokens/token-card/TokenCard";
+import { PropertyClasses } from "../rep-tokens/cards/types/Types";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { isAddress } from "viem";
 import { hardhat } from "viem/chains";
@@ -14,7 +14,7 @@ type TAddressProps = {
   disableAddressLink?: boolean;
   format?: "short" | "long";
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
-  propertyClasses?: TContainerAndValuePair;
+  propertyClasses?: PropertyClasses;
 };
 
 const blockieSizeMap = {

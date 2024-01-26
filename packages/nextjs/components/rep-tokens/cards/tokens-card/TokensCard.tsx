@@ -1,6 +1,6 @@
-import { TContainerAndValuePair } from "../token-card/TokenCard";
-import { DefaultTokenCard, TTokenCardPrettifyLoadingProps } from "../token-card/TokenCardWithContainer";
-import { TTokenCardProps } from "../token-card/TokenCardWithContainer";
+import { DefaultTokenCard, TTokenCardPrettifyLoadingProps } from "../token-card/TokenCard";
+import { TTokenCardProps } from "../token-card/TokenCard";
+import { PropertyClasses } from "../types/Types";
 import { Address } from "~~/components/scaffold-eth";
 
 export type TTokensCardProps = {
@@ -14,7 +14,7 @@ export type TTokensCardProps = {
 export type TTokenCardGroupPropertiesClasses = {
   card: string;
   container: string;
-  address: TContainerAndValuePair;
+  address: PropertyClasses;
 };
 
 export type TTokenGroupCardPrettifyLoadingProps = {

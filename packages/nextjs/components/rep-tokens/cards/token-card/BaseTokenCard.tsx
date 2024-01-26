@@ -1,39 +1,40 @@
-import { Token } from "../Hooks";
-import { BalanceCard } from "./BalanceCard";
-import { ImageCard } from "./ImageCard";
-import { ImageProperties } from "./ImageCard";
-import { StringCard } from "./StringCard";
+import { Token } from "../../hooks/Hooks";
+import { BalanceCard } from "../property-cards/BalanceCard";
+import { ImageCard } from "../property-cards/ImageCard";
+import { ImageProperties } from "../property-cards/ImageCard";
+import { StringCard } from "../property-cards/StringCard";
+import { PropertyClasses } from "../types/Types";
 import { Address } from "~~/components/scaffold-eth";
 
-export type TContainerAndValuePair = {
-  container: string;
-  value: string;
-};
+// export interface PropertyClasses {
+//   container: string;
+//   value: string;
+// };
 
-type TTokenProps = {
+export interface BaseTokenCardProps {
   token: Token;
   address?: string;
   imageProperties?: ImageProperties;
-  propertiesClasses?: TBaseTokenCardPropertiesClasses;
-  prettifyLoadingProps?: TBaseTokenCardBooleanSet;
-  renderProps?: TBaseTokenCardBooleanSet;
-};
+  propertiesClasses?: BaseTokenCardPropertiesClasses;
+  prettifyLoadingProps?: BaseTokenCardPropertiesBooleanSet;
+  renderProps?: BaseTokenCardPropertiesBooleanSet;
+}
 
-export type TBaseTokenCardPropertiesClasses = {
-  balance: TContainerAndValuePair;
-  name: TContainerAndValuePair;
-  description: TContainerAndValuePair;
-  image: TContainerAndValuePair;
-  address: TContainerAndValuePair;
-};
+export interface BaseTokenCardPropertiesClasses {
+  balance: PropertyClasses;
+  name: PropertyClasses;
+  description: PropertyClasses;
+  image: PropertyClasses;
+  address: PropertyClasses;
+}
 
-export type TBaseTokenCardBooleanSet = {
+export interface BaseTokenCardPropertiesBooleanSet {
   balance: boolean;
   name: boolean;
   description: boolean;
   image: boolean;
   address: boolean;
-};
+}
 
 export const BaseTokenCard = ({
   token,
@@ -42,7 +43,7 @@ export const BaseTokenCard = ({
   propertiesClasses,
   prettifyLoadingProps,
   renderProps = { balance: true, image: true, name: true, description: true, address: true },
-}: TTokenProps) => {
+}: BaseTokenCardProps) => {
   return (
     <>
       {renderProps.balance ? (
@@ -50,7 +51,7 @@ export const BaseTokenCard = ({
           value={token.balance}
           propertyClasses={propertiesClasses?.balance}
           prettifyLoading={prettifyLoadingProps?.balance}
-        ></BalanceCard>
+        />
       ) : (
         <></>
       )}
@@ -60,7 +61,7 @@ export const BaseTokenCard = ({
           imageProperties={imageProperties}
           propertyClasses={propertiesClasses?.image}
           prettifyLoading={prettifyLoadingProps?.image}
-        ></ImageCard>
+        />
       ) : (
         <></>
       )}
@@ -69,7 +70,7 @@ export const BaseTokenCard = ({
           value={token.name}
           propertyClasses={propertiesClasses?.name}
           prettifyLoading={prettifyLoadingProps?.name}
-        ></StringCard>
+        />
       ) : (
         <></>
       )}
@@ -78,11 +79,11 @@ export const BaseTokenCard = ({
           value={token.description}
           propertyClasses={propertiesClasses?.description}
           prettifyLoading={prettifyLoadingProps?.description}
-        ></StringCard>
+        />
       ) : (
         <></>
       )}
-      {renderProps.address ? <Address address={address} propertyClasses={propertiesClasses?.address}></Address> : <></>}
+      {renderProps.address ? <Address address={address} propertyClasses={propertiesClasses?.address} /> : <></>}
     </>
   );
 };

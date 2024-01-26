@@ -1,7 +1,10 @@
-import { TBaseTokenCardBooleanSet } from "../token-card/TokenCard";
-import { TTokenCardPrettifyLoadingProps, TTokenCardPropertiesClasses } from "../token-card/TokenCardWithContainer";
-import { TTokenGroupCardPrettifyLoadingProps, TTokensCardRenderProps } from "./TokensCard";
-import { TTokenCardGroupPropertiesClasses } from "./TokensCard";
+import { BaseTokenCardPropertiesBooleanSet } from "../rep-tokens/cards/token-card/BaseTokenCard";
+import { TTokenCardPrettifyLoadingProps, TTokenCardPropertiesClasses } from "../rep-tokens/cards/token-card/TokenCard";
+import {
+  TTokenGroupCardPrettifyLoadingProps,
+  TTokensCardRenderProps,
+} from "../rep-tokens/cards/tokens-card/TokensCard";
+import { TTokenCardGroupPropertiesClasses } from "../rep-tokens/cards/tokens-card/TokensCard";
 
 export const tokensCardRenderProps = {
   address: true,
@@ -12,7 +15,7 @@ export const tokenCardRenderProps = {
   image: true,
   name: true,
   description: true,
-} as TBaseTokenCardBooleanSet;
+} as BaseTokenCardPropertiesBooleanSet;
 
 export const tokensCardPropertiesClasses = {
   card: "bg-base-300 flex flex-col items-center",

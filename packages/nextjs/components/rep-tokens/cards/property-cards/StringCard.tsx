@@ -1,8 +1,8 @@
-import { TContainerAndValuePair } from "./TokenCard";
+import { PropertyClasses } from "../types/Types";
 
 type TStringCardProps = {
   value: string;
-  propertyClasses?: TContainerAndValuePair;
+  propertyClasses?: PropertyClasses;
   prettifyLoading?: boolean;
 };
 
