@@ -6,7 +6,15 @@ import {
 } from "./BaseTokenCard";
 import { ImageProperties } from "./ImageCard";
 
-type TTokenCardProps = {
+export interface TTokenCardPropss {
+  token: Token;
+  imageProperties?: ImageProperties;
+  propertiesClasses?: TTokenCardPropertiesClasses;
+  prettifyLoadingProps?: TTokenCardPrettifyLoadingProps;
+  renderProps?: TBaseTokenCardBooleanSet;
+}
+
+export type TTokenCardProps = {
   token: Token;
   imageProperties?: ImageProperties;
   propertiesClasses?: TTokenCardPropertiesClasses;

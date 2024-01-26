@@ -1,6 +1,8 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
+import {console} from "forge-std/console.sol";
+
 import {ScaffoldETHDeploy} from "./DeployHelpers.s.sol";
 // import {DeployRepTokensInstanceWithData} from "./DeployRepTokensInstanceWithData.s.sol";
 import {ReputationTokensStandalone} from "@atxdao/contracts/reputation/ReputationTokensStandalone.sol";
@@ -105,22 +107,33 @@ contract DeployScript is ScaffoldETHDeploy {
         );
         mintOperations.operations[1] = IReputationTokensInternal.TokenOperation(
             1,
-            90
+            45
         );
         instance.mint(mintOperations);
 
-        Hats hatsInstance = new Hats("Hats", "");
+        // Hats hatsInstance = new Hats("Hats", "ipfs");
 
-        hatsInstance.mintTopHat(
-            0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,
-            "",
-            ""
-        );
+        // uint256 topHatId = hatsInstance.mintTopHat(
+        //     0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,
+        //     "",
+        //     ""
+        // );
+
+        // uint256 newHatId = hatsInstance.createHat(
+        //     topHatId,
+        //     "Details...",
+        //     100,
+        //     0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,
+        //     0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,
+        //     true,
+        //     ""
+        // );
+
+        // console.log(topHatId);
+        // console.log(newHatId);
 
         vm.stopBroadcast();
 
         exportDeployments();
     }
-
-    function test() public {}
 }

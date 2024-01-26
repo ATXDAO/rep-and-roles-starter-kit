@@ -1,23 +1,23 @@
-import { Token } from "../Hooks";
-import { TBaseTokenCardBooleanSet } from "../token-card/BaseTokenCard";
-import { DefaultTokenCard, TTokenCardPrettifyLoadingProps } from "../token-card/DefaultTokenCard";
-import { TTokenCardPropertiesClasses } from "../token-card/DefaultTokenCard";
-import { ImageProperties } from "../token-card/ImageCard";
+// import { Token } from "../Hooks";
+// import { TBaseTokenCardBooleanSet } from "../token-card/BaseTokenCard";
+import { DefaultTokenCard, TTokenCardPrettifyLoadingProps } from "../token-card/TokenCard";
+import { TTokenCardProps } from "../token-card/TokenCard";
+// import { TTokenCardPropertiesClasses } from "../token-card/TokenCard";
+// import { ImageProperties } from "../token-card/ImageCard";
 import { Address } from "~~/components/scaffold-eth";
 
-type TTokenGroupCardProps = {
-  tokensData: { address: string; tokens: Token[] };
-  imageProperties: ImageProperties;
+export type TTokensCardProps = {
+  address?: string;
+  tokensProps: TTokenCardProps[];
   propertiesClasses?: TTokenCardGroupPropertiesClasses;
-  prettifyLoadingProps?: TTokenGroupCardPrettifyLoadingProps;
   renderProps?: TTokensCardRenderProps;
+  prettifyLoadingProps?: TTokenGroupCardPrettifyLoadingProps;
 };
 
 export type TTokenCardGroupPropertiesClasses = {
   card: string;
   container: string;
   adddress: string;
-  tokenCardPropertyClasses?: TTokenCardPropertiesClasses;
 };
 
 export type TTokenGroupCardPrettifyLoadingProps = {
@@ -27,24 +27,23 @@ export type TTokenGroupCardPrettifyLoadingProps = {
 
 export type TTokensCardRenderProps = {
   address: boolean;
-  tokenCardRenderProps: TBaseTokenCardBooleanSet;
 };
 
 export const TokensCard = ({
-  tokensData,
-  imageProperties,
+  address,
+  tokensProps,
   propertiesClasses,
-  prettifyLoadingProps,
   renderProps,
-}: TTokenGroupCardProps) => {
-  const components = tokensData.tokens.map((token, index) => (
+  prettifyLoadingProps,
+}: TTokensCardProps) => {
+  const components = tokensProps.map((tokenProp, index) => (
     <DefaultTokenCard
-      key={`${token.id}+${index}`}
-      token={token}
-      imageProperties={imageProperties}
-      propertiesClasses={propertiesClasses?.tokenCardPropertyClasses}
-      prettifyLoadingProps={prettifyLoadingProps?.tokenCardPrettifyLoadingProps}
-      renderProps={renderProps?.tokenCardRenderProps}
+      key={`${tokenProp.token.id}+${index}`}
+      token={tokenProp.token}
+      imageProperties={tokenProp.imageProperties}
+      propertiesClasses={tokenProp.propertiesClasses}
+      prettifyLoadingProps={tokenProp.prettifyLoadingProps}
+      renderProps={tokenProp.renderProps}
     ></DefaultTokenCard>
   ));
 
@@ -53,20 +52,20 @@ export const TokensCard = ({
   if (prettifyLoadingProps) {
     if (prettifyLoadingProps?.card) {
       let isLoaded = true;
-      for (let i = 0; i < tokensData.tokens.length; i++) {
+      for (let i = 0; i < tokensProps.length; i++) {
         if (
-          tokensData.tokens[i].balance === undefined &&
-          tokensData.tokens[i].name === undefined &&
-          tokensData.tokens[i].description === undefined &&
-          tokensData.tokens[i].image === undefined &&
-          tokensData.tokens[i].properties === undefined
+          tokensProps[i].token.balance === undefined &&
+          tokensProps[i].token.name === undefined &&
+          tokensProps[i].token.description === undefined &&
+          tokensProps[i].token.image === undefined &&
+          tokensProps[i].token.properties === undefined
         ) {
           isLoaded = false;
           break;
         }
       }
 
-      if (tokensData.tokens.length === 0) isLoaded = !isLoaded;
+      if (tokensProps.length === 0) isLoaded = !isLoaded;
 
       if (!isLoaded) {
         output = <>Loading Reputation Tokens...</>;
@@ -81,8 +80,7 @@ export const TokensCard = ({
   return (
     <>
       <div className={propertiesClasses?.card}>
-        {renderProps?.address ? <Address address={tokensData.address}></Address> : <></>}
-
+        {renderProps?.address ? <Address address={address}></Address> : <></>}
         <div className={propertiesClasses?.container}>{output}</div>
       </div>
     </>
