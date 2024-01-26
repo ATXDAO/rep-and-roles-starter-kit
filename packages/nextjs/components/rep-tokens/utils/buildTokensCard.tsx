@@ -1,15 +1,36 @@
-import { ImageProperties } from "../cards/property-cards/ImageCard";
 import { IsBeautifyingTokenCardLoadingProps } from "../cards/token-card/TokenCard";
 import { TokenCardElementsClasses } from "../cards/token-card/TokenCard";
 import { TokenCardProps } from "../cards/token-card/TokenCard";
 import { Token } from "../hooks/Hooks";
+import { ElementClasses } from "../types/Types";
+import { TokenCardConfigProps } from "~~/components/rep-tokens-demo/MainTokensCardConfig";
+
+export interface TokenProps {
+  renderProps?: RenderProps;
+  elementsClasses?: TokenElementsClasses;
+}
+
+export interface RenderProps {
+  renderBalance?: boolean;
+  renderImage?: boolean;
+  renderName?: boolean;
+  renderDescription?: boolean;
+  renderAddress?: boolean;
+}
+
+export interface TokenElementsClasses {
+  balanceClasses?: ElementClasses;
+  imageClasses?: ElementClasses;
+  nameClasses?: ElementClasses;
+  descriptionClasses?: ElementClasses;
+  addressClasses?: ElementClasses;
+}
 
 export function buildTokenGroupCard(
   tokens: Token[],
   address?: string,
-  imageProperties?: ImageProperties,
+  tokenCardProps?: TokenCardConfigProps,
   elementsClasses?: TokenCardElementsClasses,
-  //   isRenderingTokenCardProps?: IsRenderingTokenCardProps,
   isBeautifyingTokenCardLoadingProps?: IsBeautifyingTokenCardLoadingProps,
 ) {
   const arr = [];
@@ -17,36 +38,44 @@ export function buildTokenGroupCard(
   for (let i = 0; i < tokens.length; i++) {
     const tokenCardProp: TokenCardProps = {
       token: tokens[i],
-      address,
-      imageProperties,
       isBeautifyingTokenCardLoadingProps,
       elementsClasses,
-      balanceProp: {
-        value: tokens[i].balance,
-        classes: elementsClasses?.baseTokenCardElementsClasses?.balance,
-        isBeautifyLoading: isBeautifyingTokenCardLoadingProps?.isBeautifyLoadingElementsProps.balance,
-      },
-      nameProp: {
-        value: tokens[i].name,
-        classes: elementsClasses?.baseTokenCardElementsClasses?.name,
-        isBeautifyLoading: isBeautifyingTokenCardLoadingProps?.isBeautifyLoadingElementsProps.name,
-      },
-      descriptionProp: {
-        value: tokens[i].description,
-        classes: elementsClasses?.baseTokenCardElementsClasses?.description,
-        isBeautifyLoading: isBeautifyingTokenCardLoadingProps?.isBeautifyLoadingElementsProps.description,
-      },
-      imageProp: {
-        value: tokens[i].image,
-        properties: imageProperties,
-        classes: elementsClasses?.baseTokenCardElementsClasses?.image,
-        isBeautifyLoading: isBeautifyingTokenCardLoadingProps?.isBeautifyLoadingElementsProps.image,
-      },
-      addressProp: {
-        value: address,
-        classes: elementsClasses?.baseTokenCardElementsClasses?.address,
-        isBeautifyLoading: isBeautifyingTokenCardLoadingProps?.isBeautifyLoadingElementsProps.address,
-      },
+      balanceProp: tokenCardProps?.balanceProps?.isRendering
+        ? {
+            value: tokens[i].balance,
+            classes: tokenCardProps?.balanceProps?.classes,
+            // isBeautifyLoading: isBeautifyingTokenCardLoadingProps?.isBeautifyLoadingElementsProps.balance,
+          }
+        : undefined,
+      nameProp: tokenCardProps?.nameProps?.isRendering
+        ? {
+            value: tokens[i].name,
+            classes: tokenCardProps?.nameProps?.classes,
+            // isBeautifyLoading: isBeautifyingTokenCardLoadingProps?.isBeautifyLoadingElementsProps.name,
+          }
+        : undefined,
+      descriptionProp: tokenCardProps?.descriptionProps?.isRendering
+        ? {
+            value: tokens[i].description,
+            classes: tokenCardProps?.descriptionProps?.classes,
+            // isBeautifyLoading: isBeautifyingTokenCardLoadingProps?.isBeautifyLoadingElementsProps.description,
+          }
+        : undefined,
+      imageProp: tokenCardProps?.imageProps?.isRendering
+        ? {
+            value: tokens[i].image,
+            properties: tokenCardProps?.imageProps?.imageProperties,
+            classes: tokenCardProps?.imageProps?.classes,
+            // isBeautifyLoading: isBeautifyingTokenCardLoadingProps?.isBeautifyLoadingElementsProps.image,
+          }
+        : undefined,
+      addressProp: tokenCardProps?.addressProps?.isRendering
+        ? {
+            value: address,
+            classes: tokenCardProps?.addressProps?.classes,
+            // isBeautifyLoading: isBeautifyingTokenCardLoadingProps?.isBeautifyLoadingElementsProps.address,
+          }
+        : undefined,
     };
 
     arr.push(tokenCardProp);

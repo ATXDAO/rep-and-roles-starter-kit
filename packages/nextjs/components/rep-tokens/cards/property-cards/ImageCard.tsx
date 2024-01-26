@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ElementClasses } from "../types/Types";
+import { ElementClasses } from "../../types/Types";
 
 type TImageCardProps = {
   value: string;

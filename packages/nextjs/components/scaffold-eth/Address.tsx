@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ElementClasses } from "../rep-tokens/cards/types/Types";
+import { ElementClasses } from "../rep-tokens/types/Types";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { isAddress } from "viem";
 import { hardhat } from "viem/chains";

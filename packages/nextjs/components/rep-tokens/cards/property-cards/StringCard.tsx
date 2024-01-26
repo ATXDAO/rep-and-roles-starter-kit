@@ -1,4 +1,4 @@
-import { ElementClasses } from "../types/Types";
+import { ElementClasses } from "../../types/Types";
 
 type TStringCardProps = {
   value: string;

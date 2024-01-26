@@ -1,23 +1,19 @@
 import { Token } from "../../hooks/Hooks";
-import { ImageProperties } from "../property-cards/ImageCard";
+// import { ImageProperties } from "../property-cards/ImageCard";
 import {
   AddressProp,
   BalanceProp,
-  BaseTokenCard,
-  BaseTokenCardElementsClasses,
-  BaseTokenCardElementsSetOfBooleans,
+  BaseTokenCard, // BaseTokenCardElementsClasses,
+  // BaseTokenCardElementsSetOfBooleans,
   DescriptionProp,
   ImageProp,
-  NameProp,
+  NameProp, // BaseTokenCardElementsProps
 } from "./BaseTokenCard";
 
 export interface TokenCardProps {
   token: Token;
-  address?: string;
-  imageProperties?: ImageProperties;
   elementsClasses?: TokenCardElementsClasses;
   isBeautifyingTokenCardLoadingProps?: IsBeautifyingTokenCardLoadingProps;
-  // isRenderingTokenCardProps?: IsRenderingTokenCardProps;
   balanceProp?: BalanceProp;
   nameProp?: NameProp;
   descriptionProp?: DescriptionProp;
@@ -27,31 +23,25 @@ export interface TokenCardProps {
 
 export interface TokenCardElementsClasses {
   card: string;
-  baseTokenCardElementsClasses?: BaseTokenCardElementsClasses;
+  // baseTokenCardElementsClasses?: BaseTokenCardElementsClasses;
 }
 
 export interface IsRenderingTokenCardProps {
   card: boolean;
-  isRenderingElementsProps: BaseTokenCardElementsSetOfBooleans;
+  // isRenderingElementsProps: BaseTokenCardElementsSetOfBooleans;
 }
 
 export interface IsBeautifyingTokenCardLoadingProps {
   card: boolean;
-  isBeautifyLoadingElementsProps: BaseTokenCardElementsSetOfBooleans;
+  // isBeautifyLoadingElementsProps: BaseTokenCardElementsSetOfBooleans;
 }
 
 export const TokenCard = ({
   token,
-  address,
-  imageProperties,
   elementsClasses,
-  // isRenderingTokenCardProps = {
-  //   card: true,
-  //   isRenderingElementsProps: { balance: true, image: true, name: true, description: true, address: true },
-  // },
   isBeautifyingTokenCardLoadingProps = {
     card: false,
-    isBeautifyLoadingElementsProps: { balance: false, image: false, name: false, description: false, address: false },
+    // isBeautifyLoadingElementsProps: { balance: false, image: false, name: false, description: false, address: false },
   },
   balanceProp,
   nameProp,
@@ -63,10 +53,6 @@ export const TokenCard = ({
     <>
       <BaseTokenCard
         token={token}
-        address={address}
-        imageProperties={imageProperties}
-        elementsClasses={elementsClasses?.baseTokenCardElementsClasses}
-        isBeautifyLoadingElementsProps={isBeautifyingTokenCardLoadingProps?.isBeautifyLoadingElementsProps}
         balanceProp={balanceProp}
         nameProp={nameProp}
         descriptionProp={descriptionProp}
@@ -84,7 +70,7 @@ export const TokenCard = ({
           token?.balance !== undefined &&
           token?.name !== undefined &&
           token?.description !== undefined &&
-          address !== undefined ? (
+          addressProp?.value !== undefined ? (
             <div>{output}</div>
           ) : (
             <>Loading Token...</>

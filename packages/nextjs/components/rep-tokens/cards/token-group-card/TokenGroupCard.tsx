@@ -1,13 +1,12 @@
+import { ElementClasses } from "../../types/Types";
 import { TokenCard } from "../token-card/TokenCard";
 import { TokenCardProps } from "../token-card/TokenCard";
-import { ElementClasses } from "../types/Types";
 import { Address } from "~~/components/scaffold-eth";
 
 export interface TokenGroupProps {
   address?: string;
   tokenCardsProps: TokenCardProps[];
   elementsClasses?: TokenGroupCardElementsClasses;
-  // isRenderingTokenGroupCardProps?: IsRenderingTokenGroupCardProps;
   isBeautifyingTokenGroupCardLoadingProps?: IsBeautifyingTokenGroupCardLoadingProps;
 }
 
@@ -27,12 +26,12 @@ export const TokenGroupCard = ({
   elementsClasses,
   isBeautifyingTokenGroupCardLoadingProps,
 }: TokenGroupProps) => {
+  console.log(tokenCardsProps);
+
   const components = tokenCardsProps.map((props, index) => (
     <TokenCard
       key={`${props.token.id}+${index}`}
       token={props.token}
-      address={props.address}
-      imageProperties={props.imageProperties}
       elementsClasses={props.elementsClasses}
       isBeautifyingTokenCardLoadingProps={props.isBeautifyingTokenCardLoadingProps}
       balanceProp={props.balanceProp}

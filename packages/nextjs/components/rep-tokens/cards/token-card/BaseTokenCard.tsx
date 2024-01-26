@@ -1,18 +1,21 @@
 import { Token } from "../../hooks/Hooks";
+import { ElementClasses } from "../../types/Types";
 import { BalanceCard } from "../property-cards/BalanceCard";
 import { ImageCard } from "../property-cards/ImageCard";
 import { ImageProperties } from "../property-cards/ImageCard";
 import { StringCard } from "../property-cards/StringCard";
-import { ElementClasses } from "../types/Types";
 import { Address } from "~~/components/scaffold-eth";
 
 export interface BaseTokenCardProps {
   token: Token;
-  address?: string;
-  imageProperties?: ImageProperties;
-  elementsClasses?: BaseTokenCardElementsClasses;
-  isBeautifyLoadingElementsProps?: BaseTokenCardElementsSetOfBooleans;
-  // isRenderingElementsProps?: BaseTokenCardElementsSetOfBooleans;
+  balanceProp?: BalanceProp;
+  nameProp?: NameProp;
+  descriptionProp?: DescriptionProp;
+  imageProp?: ImageProp;
+  addressProp?: AddressProp;
+}
+
+export interface BaseTokenCardElementsProps {
   balanceProp?: BalanceProp;
   nameProp?: NameProp;
   descriptionProp?: DescriptionProp;
@@ -51,28 +54,7 @@ export interface AddressProp {
   isBeautifyLoading?: boolean;
 }
 
-export interface BaseTokenCardElementsClasses {
-  balance: ElementClasses;
-  name: ElementClasses;
-  description: ElementClasses;
-  image: ElementClasses;
-  address: ElementClasses;
-}
-
-export interface BaseTokenCardElementsSetOfBooleans {
-  balance: boolean;
-  name: boolean;
-  description: boolean;
-  image: boolean;
-  address: boolean;
-}
-
 export const BaseTokenCard = ({
-  // token,
-  address,
-  // imageProperties,
-  elementsClasses,
-  // isBeautifyLoadingElementsProps = { balance: false, image: false, name: false, description: false, address: false },
   balanceProp,
   nameProp,
   descriptionProp,
@@ -118,51 +100,7 @@ export const BaseTokenCard = ({
       ) : (
         <></>
       )}
-      {addressProp ? <Address address={address} propertyClasses={elementsClasses?.address} /> : <></>}
-
-      {/* {isRenderingElementsProps.balance ? (
-        <BalanceCard
-          value={token.balance}
-          elementClasses={elementsClasses?.balance}
-          prettifyLoading={isBeautifyLoadingElementsProps?.balance}
-        />
-      ) : (
-        <></>
-      )} */}
-
-      {/* {isRenderingElementsProps.image ? (
-        <ImageCard
-          value={token.image}
-          imageProperties={imageProperties}
-          elementClasses={elementsClasses?.image}
-          prettifyLoading={isBeautifyLoadingElementsProps?.image}
-        />
-      ) : (
-        <></>
-      )}
-      {isRenderingElementsProps.name ? (
-        <StringCard
-          value={token.name}
-          elementClasses={elementsClasses?.name}
-          prettifyLoading={isBeautifyLoadingElementsProps?.name}
-        />
-      ) : (
-        <></>
-      )}
-      {isRenderingElementsProps.description ? (
-        <StringCard
-          value={token.description}
-          elementClasses={elementsClasses?.description}
-          prettifyLoading={isBeautifyLoadingElementsProps?.description}
-        />
-      ) : (
-        <></>
-      )}
-      {isRenderingElementsProps.address ? (
-        <Address address={address} propertyClasses={elementsClasses?.address} />
-      ) : (
-        <></>
-      )} */}
+      {addressProp ? <Address address={addressProp.value} propertyClasses={addressProp?.classes} /> : <></>}
     </>
   );
 };
