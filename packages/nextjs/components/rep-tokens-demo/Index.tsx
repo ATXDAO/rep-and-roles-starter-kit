@@ -1,10 +1,10 @@
 import { useRepTokens } from "./tokens/Hooks";
 import { Token } from "./tokens/Hooks";
-import { TBaseTokenCardBooleanSet } from "./tokens/token-card/BaseTokenCard";
 import { ImageProperties } from "./tokens/token-card/ImageCard";
-import { TTokenCardPrettifyLoadingProps } from "./tokens/token-card/TokenCard";
-import { TTokenCardPropss } from "./tokens/token-card/TokenCard";
-import { TTokenCardPropertiesClasses } from "./tokens/token-card/TokenCard";
+import { TBaseTokenCardBooleanSet } from "./tokens/token-card/TokenCard";
+import { TTokenCardPrettifyLoadingProps } from "./tokens/token-card/TokenCardWithContainer";
+import { TTokenCardPropertiesClasses } from "./tokens/token-card/TokenCardWithContainer";
+import { TTokenCardProps } from "./tokens/token-card/TokenCardWithContainer";
 import {
   tokenCardPrettifyLoadingProps as mainTokenCardPrettifyLoadingProps,
   tokenCardPropertiesClasses as mainTokenCardPropertiesClasses,
@@ -34,6 +34,7 @@ import { useAccount } from "wagmi";
 
 function buildTokensCard(
   tokens: Token[],
+  address?: string,
   imageProperties?: ImageProperties,
   propertiesClasses?: TTokenCardPropertiesClasses,
   renderProps?: TBaseTokenCardBooleanSet,
@@ -41,8 +42,9 @@ function buildTokensCard(
 ) {
   const arr = [];
   for (let i = 0; i < tokens.length; i++) {
-    const tokenCardProp: TTokenCardPropss = {
+    const tokenCardProp: TTokenCardProps = {
       token: tokens[i],
+      address,
       imageProperties,
       prettifyLoadingProps: prettifyLoadingProps,
       propertiesClasses,
@@ -69,6 +71,7 @@ export const Index = () => {
 
   const navBarTokenCard = buildTokensCard(
     tokensData.tokens,
+    tokensData.address,
     navBarCardImageProperties,
     navBarTokenCardPropertiesClasses,
     navBarTokenCardRenderProps,
@@ -77,6 +80,7 @@ export const Index = () => {
 
   const mainTokenCard = buildTokensCard(
     tokensData.tokens,
+    tokensData.address,
     mainCardImageProperties,
     mainTokenCardPropertiesClasses,
     mainTokenCardRenderProps,
@@ -85,6 +89,7 @@ export const Index = () => {
 
   const mainNumberOverlayTokenCard = buildTokensCard(
     tokensData.tokens,
+    tokensData.address,
     mainCardImageProperties,
     mainNumberOverlayTokenCardPropertiesClasses,
     mainNumberOverlayTokenCardRenderProps,

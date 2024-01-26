@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { TContainerAndValuePair } from "../rep-tokens-demo/tokens/token-card/TokenCard";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { isAddress } from "viem";
 import { hardhat } from "viem/chains";
@@ -13,6 +14,7 @@ type TAddressProps = {
   disableAddressLink?: boolean;
   format?: "short" | "long";
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
+  propertyClasses?: TContainerAndValuePair;
 };
 
 const blockieSizeMap = {
@@ -28,7 +30,13 @@ const blockieSizeMap = {
 /**
  * Displays an address (or ENS) with a Blockie image and option to copy address.
  */
-export const Address = ({ address, disableAddressLink, format, size = "base" }: TAddressProps) => {
+export const Address = ({
+  address,
+  disableAddressLink,
+  format,
+  size = "base",
+  propertyClasses = { container: "flex items-center", value: "ml-1.5 text-${size} font-normal" },
+}: TAddressProps) => {
   const [ens, setEns] = useState<string | null>();
   const [ensAvatar, setEnsAvatar] = useState<string | null>();
   const [addressCopied, setAddressCopied] = useState(false);
@@ -75,8 +83,10 @@ export const Address = ({ address, disableAddressLink, format, size = "base" }: 
     displayAddress = address;
   }
 
+  // let textClass = `ml-1.5 text-${size} font-normal text-white`;
+
   return (
-    <div className="flex items-center">
+    <div className={propertyClasses?.container}>
       <div className="flex-shrink-0">
         <BlockieAvatar
           address={address}
@@ -85,18 +95,13 @@ export const Address = ({ address, disableAddressLink, format, size = "base" }: 
         />
       </div>
       {disableAddressLink ? (
-        <span className={`ml-1.5 text-${size} font-normal`}>{displayAddress}</span>
+        <span className={propertyClasses?.value}>{displayAddress}</span>
       ) : getTargetNetwork().id === hardhat.id ? (
-        <span className={`ml-1.5 text-${size} font-normal`}>
+        <span className={propertyClasses?.value}>
           <Link href={blockExplorerAddressLink}>{displayAddress}</Link>
         </span>
       ) : (
-        <a
-          className={`ml-1.5 text-${size} font-normal`}
-          target="_blank"
-          href={blockExplorerAddressLink}
-          rel="noopener noreferrer"
-        >
+        <a className={propertyClasses?.value} target="_blank" href={blockExplorerAddressLink} rel="noopener noreferrer">
           {displayAddress}
         </a>
       )}

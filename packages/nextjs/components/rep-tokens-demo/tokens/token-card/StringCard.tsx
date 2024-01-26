@@ -1,4 +1,4 @@
-import { TContainerAndValuePair } from "./BaseTokenCard";
+import { TContainerAndValuePair } from "./TokenCard";
 
 type TStringCardProps = {
   value: string;

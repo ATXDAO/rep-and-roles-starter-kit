@@ -1,9 +1,6 @@
-// import { Token } from "../Hooks";
-// import { TBaseTokenCardBooleanSet } from "../token-card/BaseTokenCard";
-import { DefaultTokenCard, TTokenCardPrettifyLoadingProps } from "../token-card/TokenCard";
-import { TTokenCardProps } from "../token-card/TokenCard";
-// import { TTokenCardPropertiesClasses } from "../token-card/TokenCard";
-// import { ImageProperties } from "../token-card/ImageCard";
+import { TContainerAndValuePair } from "../token-card/TokenCard";
+import { DefaultTokenCard, TTokenCardPrettifyLoadingProps } from "../token-card/TokenCardWithContainer";
+import { TTokenCardProps } from "../token-card/TokenCardWithContainer";
 import { Address } from "~~/components/scaffold-eth";
 
 export type TTokensCardProps = {
@@ -17,7 +14,7 @@ export type TTokensCardProps = {
 export type TTokenCardGroupPropertiesClasses = {
   card: string;
   container: string;
-  adddress: string;
+  address: TContainerAndValuePair;
 };
 
 export type TTokenGroupCardPrettifyLoadingProps = {
@@ -40,6 +37,7 @@ export const TokensCard = ({
     <DefaultTokenCard
       key={`${tokenProp.token.id}+${index}`}
       token={tokenProp.token}
+      address={tokenProp.address}
       imageProperties={tokenProp.imageProperties}
       propertiesClasses={tokenProp.propertiesClasses}
       prettifyLoadingProps={tokenProp.prettifyLoadingProps}
@@ -80,7 +78,11 @@ export const TokensCard = ({
   return (
     <>
       <div className={propertiesClasses?.card}>
-        {renderProps?.address ? <Address address={address}></Address> : <></>}
+        {renderProps?.address ? (
+          <Address address={address} propertyClasses={propertiesClasses?.address}></Address>
+        ) : (
+          <></>
+        )}
         <div className={propertiesClasses?.container}>{output}</div>
       </div>
     </>

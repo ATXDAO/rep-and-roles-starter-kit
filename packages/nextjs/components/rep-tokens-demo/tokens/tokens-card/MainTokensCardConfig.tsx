@@ -1,5 +1,5 @@
-import { TBaseTokenCardBooleanSet } from "../token-card/BaseTokenCard";
-import { TTokenCardPrettifyLoadingProps, TTokenCardPropertiesClasses } from "../token-card/TokenCard";
+import { TBaseTokenCardBooleanSet } from "../token-card/TokenCard";
+import { TTokenCardPrettifyLoadingProps, TTokenCardPropertiesClasses } from "../token-card/TokenCardWithContainer";
 import { TTokenGroupCardPrettifyLoadingProps, TTokensCardRenderProps } from "./TokensCard";
 import { TTokenCardGroupPropertiesClasses } from "./TokensCard";
 
@@ -12,26 +12,39 @@ export const tokenCardRenderProps = {
   image: true,
   name: true,
   description: true,
+  address: true,
 } as TBaseTokenCardBooleanSet;
 
 export const tokensCardPropertiesClasses = {
-  card: "bg-base-300 flex flex-col items-center",
   container: "flex justify-center",
+  card: "bg-slate-800 flex flex-col items-center",
+  address: {
+    container: "flex items-center justify-center bg-slate-600",
+    value: "ml-1.5 text-${size} font-normal text-white",
+  },
 } as TTokenCardGroupPropertiesClasses;
 
 export const tokenCardPropertiesClasses = {
-  card: "px-5 py-5 w-64",
+  card: "bg-slate-600 p-5 m-4 w-64",
   baseTokenCardPropertyClasses: {
     balance: {
+      container: "bg-slate-300",
       value: "text-4xl mx-auto text-center",
     },
+    image: {
+      container: "bg-slate-300 p-1",
+      value: "rounded mx-auto",
+    },
     name: {
+      container: "bg-slate-300",
       value: "text-1xl text-center object-center mx-auto font-bold break-all",
     },
     description: {
+      container: "bg-slate-300",
       value: "text-1xl mx-auto text-center break-words",
     },
-    image: {
+    address: {
+      container: "flex items-center justify-center bg-slate-300",
       value: "rounded mx-auto",
     },
   },
@@ -48,5 +61,6 @@ export const tokenCardPrettifyLoadingProps = {
     image: false,
     name: false,
     description: false,
+    address: false,
   },
 } as TTokenCardPrettifyLoadingProps;

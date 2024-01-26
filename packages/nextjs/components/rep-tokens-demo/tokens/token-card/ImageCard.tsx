@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { TContainerAndValuePair } from "./BaseTokenCard";
+import { TContainerAndValuePair } from "./TokenCard";
 
 type TImageCardProps = {
   value: string;

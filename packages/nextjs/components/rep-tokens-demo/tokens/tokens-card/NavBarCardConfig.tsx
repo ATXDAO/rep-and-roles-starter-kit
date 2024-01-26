@@ -1,5 +1,5 @@
-import { TBaseTokenCardBooleanSet } from "../token-card/BaseTokenCard";
-import { TTokenCardPrettifyLoadingProps, TTokenCardPropertiesClasses } from "../token-card/TokenCard";
+import { TBaseTokenCardBooleanSet } from "../token-card/TokenCard";
+import { TTokenCardPrettifyLoadingProps, TTokenCardPropertiesClasses } from "../token-card/TokenCardWithContainer";
 import { TTokenGroupCardPrettifyLoadingProps, TTokensCardRenderProps } from "./TokensCard";
 import { TTokenCardGroupPropertiesClasses } from "./TokensCard";
 

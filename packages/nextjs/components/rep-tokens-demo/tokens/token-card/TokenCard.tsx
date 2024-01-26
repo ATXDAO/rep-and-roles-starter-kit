@@ -1,70 +1,88 @@
 import { Token } from "../Hooks";
-import {
-  BaseTokenCard,
-  TBaseTokenCardBooleanSet, // TBaseTokenCardRenderSettings, // TBaseTokenCardPrettifyLoadingProps,
-  TBaseTokenCardPropertiesClasses,
-} from "./BaseTokenCard";
+import { BalanceCard } from "./BalanceCard";
+import { ImageCard } from "./ImageCard";
 import { ImageProperties } from "./ImageCard";
+import { StringCard } from "./StringCard";
+import { Address } from "~~/components/scaffold-eth";
 
-export interface TTokenCardPropss {
+export type TContainerAndValuePair = {
+  container: string;
+  value: string;
+};
+
+type TTokenProps = {
   token: Token;
+  address?: string;
   imageProperties?: ImageProperties;
-  propertiesClasses?: TTokenCardPropertiesClasses;
-  prettifyLoadingProps?: TTokenCardPrettifyLoadingProps;
-  renderProps?: TBaseTokenCardBooleanSet;
-}
-
-export type TTokenCardProps = {
-  token: Token;
-  imageProperties?: ImageProperties;
-  propertiesClasses?: TTokenCardPropertiesClasses;
-  prettifyLoadingProps?: TTokenCardPrettifyLoadingProps;
+  propertiesClasses?: TBaseTokenCardPropertiesClasses;
+  prettifyLoadingProps?: TBaseTokenCardBooleanSet;
   renderProps?: TBaseTokenCardBooleanSet;
 };
 
-export type TTokenCardPropertiesClasses = {
-  card: string;
-  baseTokenCardPropertyClasses?: TBaseTokenCardPropertiesClasses;
+export type TBaseTokenCardPropertiesClasses = {
+  balance: TContainerAndValuePair;
+  name: TContainerAndValuePair;
+  description: TContainerAndValuePair;
+  image: TContainerAndValuePair;
+  address: TContainerAndValuePair;
 };
 
-export type TTokenCardPrettifyLoadingProps = {
-  card: boolean;
-  baseTokenCardPrettifyLoadingProps: TBaseTokenCardBooleanSet;
+export type TBaseTokenCardBooleanSet = {
+  balance: boolean;
+  name: boolean;
+  description: boolean;
+  image: boolean;
+  address: boolean;
 };
 
-export const DefaultTokenCard = ({
+export const BaseTokenCard = ({
   token,
+  address,
   imageProperties,
-  prettifyLoadingProps,
   propertiesClasses,
-  renderProps,
-}: TTokenCardProps) => {
-  const output = (
-    <>
-      <BaseTokenCard
-        token={token}
-        imageProperties={imageProperties}
-        propertiesClasses={propertiesClasses?.baseTokenCardPropertyClasses}
-        prettifyLoadingProps={prettifyLoadingProps?.baseTokenCardPrettifyLoadingProps}
-        renderProps={renderProps}
-      />
-    </>
-  );
-
+  prettifyLoadingProps,
+  renderProps = { balance: true, image: true, name: true, description: true, address: true },
+}: TTokenProps) => {
   return (
-    <div className={propertiesClasses?.card}>
-      {prettifyLoadingProps?.card ? (
-        token?.image !== undefined &&
-        token?.balance !== undefined &&
-        token?.name !== undefined &&
-        token?.description !== undefined ? (
-          <div>{output}</div>
-        ) : (
-          <>Loading Token...</>
-        )
+    <>
+      {renderProps.balance ? (
+        <BalanceCard
+          value={token.balance}
+          propertyClasses={propertiesClasses?.balance}
+          prettifyLoading={prettifyLoadingProps?.balance}
+        ></BalanceCard>
       ) : (
-        <div>{output}</div>
+        <></>
       )}
-    </div>
+      {renderProps.image ? (
+        <ImageCard
+          value={token.image}
+          imageProperties={imageProperties}
+          propertyClasses={propertiesClasses?.image}
+          prettifyLoading={prettifyLoadingProps?.image}
+        ></ImageCard>
+      ) : (
+        <></>
+      )}
+      {renderProps.name ? (
+        <StringCard
+          value={token.name}
+          propertyClasses={propertiesClasses?.name}
+          prettifyLoading={prettifyLoadingProps?.name}
+        ></StringCard>
+      ) : (
+        <></>
+      )}
+      {renderProps.description ? (
+        <StringCard
+          value={token.description}
+          propertyClasses={propertiesClasses?.description}
+          prettifyLoading={prettifyLoadingProps?.description}
+        ></StringCard>
+      ) : (
+        <></>
+      )}
+      {renderProps.address ? <Address address={address} propertyClasses={propertiesClasses?.address}></Address> : <></>}
+    </>
   );
 };
