@@ -2,13 +2,17 @@ import Image from "next/image";
 import { ElementClasses } from "../../types/Types";
 
 export interface ImageCardProps {
+  props: ImageProps;
+}
+
+export interface ImageProps {
   value: string;
-  properties?: ImageProperties;
+  properties?: BaseImageProps;
   classes?: ElementClasses;
   isPrettyLoading?: boolean;
 }
 
-export class ImageProperties {
+export class BaseImageProps {
   alt: string;
   height: number;
   width: number;
@@ -19,27 +23,27 @@ export class ImageProperties {
   }
 }
 
-export const ImageCard = ({ value, properties, classes, isPrettyLoading }: ImageCardProps) => {
+export const ImageCard = ({ props }: ImageCardProps) => {
   const output = (
-    <div className={classes?.container}>
+    <div className={props?.classes?.container}>
       <Image
-        className={classes?.value}
-        src={value}
-        alt={properties?.alt || "Image"}
-        width={properties?.width}
-        height={properties?.height}
+        className={props?.classes?.value}
+        src={props?.value}
+        alt={props?.properties?.alt || "Image"}
+        width={props?.properties?.width}
+        height={props?.properties?.height}
       />
     </div>
   );
   return (
-    <div className={classes?.container}>
-      {isPrettyLoading ? (
-        value !== undefined && value !== "" ? (
+    <div className={props?.classes?.container}>
+      {props?.isPrettyLoading ? (
+        props?.value !== undefined && props?.value !== "" ? (
           output
         ) : (
           <p>Loading Image...</p>
         )
-      ) : value !== undefined && value !== "" ? (
+      ) : props?.value !== undefined && props?.value !== "" ? (
         output
       ) : (
         <p></p>

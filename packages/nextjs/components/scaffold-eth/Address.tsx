@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { StringCardProps } from "../rep-tokens/cards/property-cards/StringCard";
+import { StringProps } from "../rep-tokens/cards/property-cards/StringCard";
 // import { ElementClasses } from "../rep-tokens/types/Types";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { isAddress } from "viem";
@@ -16,7 +16,7 @@ type TAddressProps = {
   format?: "short" | "long";
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
   // classes?: ElementClasses;
-  props?: StringCardProps;
+  props?: StringProps;
 };
 
 const blockieSizeMap = {

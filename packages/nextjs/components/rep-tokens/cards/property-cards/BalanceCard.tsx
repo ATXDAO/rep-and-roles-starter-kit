@@ -1,29 +1,29 @@
 import { ElementClasses } from "../../types/Types";
 
 export interface BalanceCardProps {
-  props: BigIntProps;
+  props: BigIntCardProps;
 }
 
-export interface BigIntProps {
+export interface BigIntCardProps {
   value: bigint;
   classes?: ElementClasses;
   isPrettyLoading?: boolean;
 }
 
-export const BalanceCard = ({ value, classes, isPrettyLoading }: BigIntProps) => {
+export const BalanceCard = ({ props }: BalanceCardProps) => {
   let output;
 
-  isPrettyLoading
-    ? value !== undefined
-      ? (output = Number(value))
+  props?.isPrettyLoading
+    ? props?.value !== undefined
+      ? (output = Number(props?.value))
       : (output = "Loading Balance...")
-    : value !== undefined
-    ? (output = Number(value))
+    : props?.value !== undefined
+    ? (output = Number(props?.value))
     : (output = 0);
 
   return (
-    <div className={classes?.container}>
-      <p className={classes?.value}>{output}</p>
+    <div className={props?.classes?.container}>
+      <p className={props?.classes?.value}>{output}</p>
     </div>
   );
 };

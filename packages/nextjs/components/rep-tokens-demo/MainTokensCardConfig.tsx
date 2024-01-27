@@ -1,4 +1,4 @@
-import { ImageProperties } from "../rep-tokens/cards/property-cards/ImageCard";
+import { BaseImageProps } from "../rep-tokens/cards/property-cards/ImageCard";
 import {
   BaseElementConfigProp,
   ImageElementConfigProp,
@@ -21,7 +21,7 @@ export const imageProps = {
     container: "bg-slate-300 p-1",
     value: "rounded mx-auto",
   },
-  imageProperties: new ImageProperties("Token", 256, 256),
+  imageProperties: new BaseImageProps("Token", 256, 256),
   isPrettyLoading: true,
 } as ImageElementConfigProp;
 
