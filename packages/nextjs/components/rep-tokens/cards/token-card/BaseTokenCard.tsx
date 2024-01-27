@@ -1,11 +1,6 @@
-// import { Token } from "../../hooks/Hooks";
-// import { ElementClasses } from "../../types/Types";
-import { BalanceCard } from "../property-cards/BalanceCard";
-import { BigIntCardProps } from "../property-cards/BalanceCard";
-import { ImageCard } from "../property-cards/ImageCard";
-import { ImageProps } from "../property-cards/ImageCard";
-// import { ImageProperties } from "../property-cards/ImageCard";
-import { StringCard, StringProps } from "../property-cards/StringCard";
+import { BalanceCard, BigIntCardProps } from "../property-cards/BalanceCard";
+import { ImageCard, ImageCardProps } from "../property-cards/ImageCard";
+import { StringCard, StringCardProps } from "../property-cards/StringCard";
 import { Address } from "~~/components/scaffold-eth";
 
 export interface BaseTokenCardProps {
@@ -14,10 +9,10 @@ export interface BaseTokenCardProps {
 
 export interface BaseTokenCardElementsProps {
   balanceProp?: BigIntCardProps;
-  nameProp?: StringProps;
-  descriptionProp?: StringProps;
-  imageProp?: ImageProps;
-  addressProp?: StringProps;
+  nameProp?: StringCardProps;
+  descriptionProp?: StringCardProps;
+  imageProp?: ImageCardProps;
+  addressProp?: StringCardProps;
 }
 
 export const BaseTokenCard = ({ elementsProps }: BaseTokenCardProps) => {

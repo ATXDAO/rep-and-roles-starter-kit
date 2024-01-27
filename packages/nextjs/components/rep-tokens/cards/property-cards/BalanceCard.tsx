@@ -1,6 +1,6 @@
 import { ElementClasses } from "../../types/Types";
 
-export interface BalanceCardProps {
+export interface BigIntCardPropsInternal {
   props: BigIntCardProps;
 }
 
@@ -10,7 +10,7 @@ export interface BigIntCardProps {
   isPrettyLoading?: boolean;
 }
 
-export const BalanceCard = ({ props }: BalanceCardProps) => {
+export const BalanceCard = ({ props }: BigIntCardPropsInternal) => {
   let output;
 
   props?.isPrettyLoading

@@ -1,18 +1,18 @@
 import Image from "next/image";
 import { ElementClasses } from "../../types/Types";
 
-export interface ImageCardProps {
-  props: ImageProps;
+export interface ImageCardPropsInternal {
+  props: ImageCardProps;
 }
 
-export interface ImageProps {
+export interface ImageCardProps {
   value: string;
-  properties?: BaseImageProps;
+  properties?: ImageProps;
   classes?: ElementClasses;
   isPrettyLoading?: boolean;
 }
 
-export class BaseImageProps {
+export class ImageProps {
   alt: string;
   height: number;
   width: number;
@@ -23,7 +23,7 @@ export class BaseImageProps {
   }
 }
 
-export const ImageCard = ({ props }: ImageCardProps) => {
+export const ImageCard = ({ props }: ImageCardPropsInternal) => {
   const output = (
     <div className={props?.classes?.container}>
       <Image

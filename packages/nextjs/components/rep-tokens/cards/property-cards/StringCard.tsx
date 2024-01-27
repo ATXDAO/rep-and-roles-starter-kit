@@ -1,16 +1,16 @@
 import { ElementClasses } from "../../types/Types";
 
-export interface StringCardProps {
-  props: StringProps;
+export interface StringCardPropsInternal {
+  props: StringCardProps;
 }
 
-export interface StringProps {
+export interface StringCardProps {
   value?: string;
   classes?: ElementClasses;
   isPrettyLoading?: boolean;
 }
 
-export const StringCard = ({ props }: StringCardProps) => {
+export const StringCard = ({ props }: StringCardPropsInternal) => {
   const output = props?.isPrettyLoading ? (props?.value !== undefined ? props?.value : "Loading...") : props?.value;
 
   return (

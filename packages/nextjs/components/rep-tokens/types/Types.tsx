@@ -1,4 +1,4 @@
-import { BaseImageProps } from "../cards/property-cards/ImageCard";
+import { ImageProps } from "../cards/property-cards/ImageCard";
 
 export interface ElementClasses {
   container?: string;
@@ -12,7 +12,7 @@ export interface BaseElementConfigProp {
 }
 
 export interface ImageElementConfigProp extends BaseElementConfigProp {
-  imageProperties: BaseImageProps;
+  imageProperties: ImageProps;
 }
 
 export interface TokenElementsConfigProps {
