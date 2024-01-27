@@ -22,3 +22,12 @@ export interface TokenElementsConfigProps {
   descriptionProps?: BaseElementConfigProp;
   addressProps?: BaseElementConfigProp;
 }
+
+export interface TokenCardConfigProps {
+  isRendering: true;
+  classes: {
+    card: string;
+  };
+  elementsProps: TokenElementsConfigProps;
+  isPrettyLoading: true;
+}

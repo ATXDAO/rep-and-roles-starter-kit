@@ -16,10 +16,6 @@ export interface TokenGroupCardElementsClasses {
   address: ElementClasses;
 }
 
-export interface IsBeautifyingTokenGroupCardLoadingProps {
-  card: boolean;
-}
-
 export const TokenGroupCard = ({
   address,
   tokenCardsProps,
@@ -32,11 +28,7 @@ export const TokenGroupCard = ({
       token={props.token}
       elementsClasses={props.elementsClasses}
       isBeautifyingTokenCardLoadingProps={props.isBeautifyingTokenCardLoadingProps}
-      balanceProp={props.balanceProp}
-      nameProp={props.nameProp}
-      descriptionProp={props.descriptionProp}
-      imageProp={props.imageProp}
-      addressProp={props.addressProp}
+      elementsProps={props.elementsProps}
     ></TokenCard>
   ));
 

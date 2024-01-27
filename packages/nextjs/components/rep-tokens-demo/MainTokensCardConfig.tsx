@@ -1,23 +1,10 @@
 import { ImageProperties } from "../rep-tokens/cards/property-cards/ImageCard";
-// import {
-//   IsBeautifyingTokenCardLoadingProps,
-//   IsRenderingTokenCardProps,
-//   TokenCardElementsClasses,
-// } from "../rep-tokens/cards/token-card/TokenCard";
-// import {
-//   IsBeautifyingTokenGroupCardLoadingProps
-// } from "../rep-tokens/cards/token-group-card/TokenGroupCard";
-import { TokenGroupCardElementsClasses } from "../rep-tokens/cards/token-group-card/TokenGroupCard";
-import { BaseElementConfigProp, ImageElementConfigProp, TokenElementsConfigProps } from "../rep-tokens/types/Types";
-
-export const tokensCardPropertiesClasses = {
-  container: "flex justify-center",
-  card: "bg-slate-800 flex flex-col items-center",
-  address: {
-    container: "flex items-center justify-center bg-slate-600",
-    value: "ml-1.5 text-${size} font-normal text-white",
-  },
-} as TokenGroupCardElementsClasses;
+import {
+  BaseElementConfigProp,
+  ImageElementConfigProp,
+  TokenCardConfigProps,
+  TokenElementsConfigProps,
+} from "../rep-tokens/types/Types";
 
 export const balanceProps = {
   isRendering: true,
@@ -94,12 +81,3 @@ export const tokenGroupCardProps = {
   isPrettyLoading: true,
   tokenCardProps,
 };
-
-export interface TokenCardConfigProps {
-  isRendering: true;
-  classes: {
-    card: string;
-  };
-  elementsProps: TokenElementsConfigProps;
-  isPrettyLoading: true;
-}

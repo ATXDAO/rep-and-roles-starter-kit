@@ -8,11 +8,7 @@ import { Address } from "~~/components/scaffold-eth";
 
 export interface BaseTokenCardProps {
   token: Token;
-  balanceProp?: BalanceProp;
-  nameProp?: NameProp;
-  descriptionProp?: DescriptionProp;
-  imageProp?: ImageProp;
-  addressProp?: AddressProp;
+  elementsProps: BaseTokenCardElementsProps;
 }
 
 export interface BaseTokenCardElementsProps {
@@ -54,53 +50,51 @@ export interface AddressProp {
   isPrettyLoading?: boolean;
 }
 
-export const BaseTokenCard = ({
-  balanceProp,
-  nameProp,
-  descriptionProp,
-  imageProp,
-  addressProp,
-}: BaseTokenCardProps) => {
+export const BaseTokenCard = ({ elementsProps }: BaseTokenCardProps) => {
   return (
     <>
-      {balanceProp ? (
+      {elementsProps?.balanceProp ? (
         <BalanceCard
-          value={balanceProp.value}
-          elementClasses={balanceProp.classes}
-          prettifyLoading={balanceProp.isPrettyLoading}
+          value={elementsProps?.balanceProp?.value}
+          elementClasses={elementsProps?.balanceProp?.classes}
+          prettifyLoading={elementsProps?.balanceProp?.isPrettyLoading}
         />
       ) : (
         <></>
       )}
-      {imageProp ? (
+      {elementsProps?.imageProp ? (
         <ImageCard
-          value={imageProp.value}
-          imageProperties={imageProp.properties}
-          elementClasses={imageProp.classes}
-          prettifyLoading={imageProp.isPrettyLoading}
+          value={elementsProps?.imageProp?.value}
+          imageProperties={elementsProps?.imageProp?.properties}
+          elementClasses={elementsProps?.imageProp?.classes}
+          prettifyLoading={elementsProps?.imageProp?.isPrettyLoading}
         />
       ) : (
         <></>
       )}
-      {nameProp ? (
+      {elementsProps?.nameProp ? (
         <StringCard
-          value={nameProp.value}
-          elementClasses={nameProp.classes}
-          prettifyLoading={nameProp.isPrettyLoading}
+          value={elementsProps?.nameProp?.value}
+          elementClasses={elementsProps?.nameProp?.classes}
+          prettifyLoading={elementsProps?.nameProp?.isPrettyLoading}
         />
       ) : (
         <></>
       )}
-      {descriptionProp ? (
+      {elementsProps?.descriptionProp ? (
         <StringCard
-          value={descriptionProp.value}
-          elementClasses={descriptionProp.classes}
-          prettifyLoading={descriptionProp.isPrettyLoading}
+          value={elementsProps?.descriptionProp?.value}
+          elementClasses={elementsProps?.descriptionProp?.classes}
+          prettifyLoading={elementsProps?.descriptionProp?.isPrettyLoading}
         />
       ) : (
         <></>
       )}
-      {addressProp ? <Address address={addressProp.value} propertyClasses={addressProp?.classes} /> : <></>}
+      {elementsProps?.addressProp ? (
+        <Address address={elementsProps?.addressProp?.value} propertyClasses={elementsProps?.addressProp?.classes} />
+      ) : (
+        <></>
+      )}
     </>
   );
 };

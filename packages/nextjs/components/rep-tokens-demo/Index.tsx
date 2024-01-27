@@ -1,14 +1,7 @@
-// import { ImageProperties } from "../rep-tokens/cards/property-cards/ImageCard";
 import { TokenGroupCard } from "../rep-tokens/cards/token-group-card/TokenGroupCard";
 import { useRepTokens } from "../rep-tokens/hooks/Hooks";
-import {
-  buildTokenCards, //  RenderProps, TokenElementsClasses
-} from "../rep-tokens/utils/buildTokensCard";
-import {
-  // tokensCardPropertiesClasses as mainTokenGroupCardElementsClassess,
-  tokenCardProps,
-  tokenGroupCardProps,
-} from "./MainTokensCardConfig";
+import { buildTokenCards } from "../rep-tokens/utils/buildTokensCard";
+import { tokenGroupCardProps } from "./MainTokensCardConfig";
 // import {
 //   tokenCardPrettifyLoadingProps as isBeautifyingMainTokenCardOverlayLoadingProps,
 //   tokenCardPropertiesClasses as mainNumberOverlayTokenCardPropertiesClasses,
@@ -46,9 +39,7 @@ export const Index = () => {
 
   // );
 
-  // console.log(tokenCardElementsProps);
-
-  const mainTokenCards = buildTokenCards(tokensData.tokens, tokensData.address, tokenCardProps);
+  const mainTokenCards = buildTokenCards(tokensData.tokens, tokensData.address, tokenGroupCardProps.tokenCardProps);
 
   // const mainNumberOverlayTokenCard = buildTokenGroupCard(
   //   tokensData.tokens,
