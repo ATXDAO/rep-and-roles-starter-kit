@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ElementClasses } from "../rep-tokens/types/Types";
+import { StringCardProps } from "../rep-tokens/cards/property-cards/StringCard";
+// import { ElementClasses } from "../rep-tokens/types/Types";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { isAddress } from "viem";
 import { hardhat } from "viem/chains";
@@ -14,7 +15,8 @@ type TAddressProps = {
   disableAddressLink?: boolean;
   format?: "short" | "long";
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
-  propertyClasses?: ElementClasses;
+  // classes?: ElementClasses;
+  props?: StringCardProps;
 };
 
 const blockieSizeMap = {
@@ -31,17 +33,22 @@ const blockieSizeMap = {
  * Displays an address (or ENS) with a Blockie image and option to copy address.
  */
 export const Address = ({
-  address,
+  // address,
   disableAddressLink,
   format,
   size = "base",
-  propertyClasses = { container: "flex items-center", value: "ml-1.5 text-${size} font-normal" },
+  // classes = { container: "flex items-center", value: "ml-1.5 text-${size} font-normal" },
+  props,
 }: TAddressProps) => {
   const [ens, setEns] = useState<string | null>();
   const [ensAvatar, setEnsAvatar] = useState<string | null>();
   const [addressCopied, setAddressCopied] = useState(false);
 
-  const { data: fetchedEns } = useEnsName({ address, enabled: isAddress(address ?? ""), chainId: 1 });
+  const { data: fetchedEns } = useEnsName({
+    address: props?.value,
+    enabled: isAddress(props?.value ?? ""),
+    chainId: 1,
+  });
   const { data: fetchedEnsAvatar } = useEnsAvatar({
     name: fetchedEns,
     enabled: Boolean(fetchedEns),
@@ -59,7 +66,7 @@ export const Address = ({
   }, [fetchedEnsAvatar]);
 
   // Skeleton UI
-  if (!address) {
+  if (!props?.value) {
     return (
       <div className="animate-pulse flex space-x-4">
         <div className="rounded-md bg-slate-300 h-6 w-6"></div>
@@ -70,38 +77,38 @@ export const Address = ({
     );
   }
 
-  if (!isAddress(address)) {
+  if (!isAddress(props?.value)) {
     return <span className="text-error">Wrong address</span>;
   }
 
-  const blockExplorerAddressLink = getBlockExplorerAddressLink(getTargetNetwork(), address);
-  let displayAddress = address?.slice(0, 5) + "..." + address?.slice(-4);
+  const blockExplorerAddressLink = getBlockExplorerAddressLink(getTargetNetwork(), props?.value);
+  let displayAddress = props?.value?.slice(0, 5) + "..." + props?.value?.slice(-4);
 
   if (ens) {
     displayAddress = ens;
   } else if (format === "long") {
-    displayAddress = address;
+    displayAddress = props?.value;
   }
 
   // let textClass = `ml-1.5 text-${size} font-normal text-white`;
 
   return (
-    <div className={propertyClasses?.container}>
+    <div className={props?.classes?.container}>
       <div className="flex-shrink-0">
         <BlockieAvatar
-          address={address}
+          address={props?.value}
           ensImage={ensAvatar}
           size={(blockieSizeMap[size] * 24) / blockieSizeMap["base"]}
         />
       </div>
       {disableAddressLink ? (
-        <span className={propertyClasses?.value}>{displayAddress}</span>
+        <span className={props?.classes?.value}>{displayAddress}</span>
       ) : getTargetNetwork().id === hardhat.id ? (
-        <span className={propertyClasses?.value}>
+        <span className={props?.classes?.value}>
           <Link href={blockExplorerAddressLink}>{displayAddress}</Link>
         </span>
       ) : (
-        <a className={propertyClasses?.value} target="_blank" href={blockExplorerAddressLink} rel="noopener noreferrer">
+        <a className={props?.classes?.value} target="_blank" href={blockExplorerAddressLink} rel="noopener noreferrer">
           {displayAddress}
         </a>
       )}
@@ -112,7 +119,7 @@ export const Address = ({
         />
       ) : (
         <CopyToClipboard
-          text={address}
+          text={props?.value}
           onCopy={() => {
             setAddressCopied(true);
             setTimeout(() => {

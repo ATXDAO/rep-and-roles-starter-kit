@@ -1,17 +1,17 @@
 import { ElementClasses } from "../../types/Types";
 
-type TStringCardProps = {
-  value: string;
-  elementClasses?: ElementClasses;
-  prettifyLoading?: boolean;
-};
+export interface StringCardProps {
+  value?: string;
+  classes?: ElementClasses;
+  isPrettyLoading?: boolean;
+}
 
-export const StringCard = ({ value, prettifyLoading, elementClasses }: TStringCardProps) => {
-  const output = prettifyLoading ? (value !== undefined ? value : "Loading...") : value;
+export const StringCard = ({ value, classes, isPrettyLoading }: StringCardProps) => {
+  const output = isPrettyLoading ? (value !== undefined ? value : "Loading...") : value;
 
   return (
-    <div className={elementClasses?.container}>
-      <p className={elementClasses?.value}>{output}</p>
+    <div className={classes?.container}>
+      <p className={classes?.value}>{output}</p>
     </div>
   );
 };

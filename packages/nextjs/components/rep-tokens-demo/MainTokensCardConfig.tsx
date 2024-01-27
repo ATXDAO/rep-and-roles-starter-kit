@@ -78,6 +78,7 @@ export const tokenGroupCardProps = {
       value: "ml-1.5 text-${size} font-normal text-white",
     },
   },
+
   isPrettyLoading: true,
   tokenCardProps,
 };

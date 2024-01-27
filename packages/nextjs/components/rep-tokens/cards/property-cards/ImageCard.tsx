@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { ElementClasses } from "../../types/Types";
 
-type TImageCardProps = {
+export interface ImageCardProps {
   value: string;
-  imageProperties?: ImageProperties;
-  elementClasses?: ElementClasses;
-  prettifyLoading?: boolean;
-};
+  properties?: ImageProperties;
+  classes?: ElementClasses;
+  isPrettyLoading?: boolean;
+}
 
 export class ImageProperties {
   alt: string;
@@ -19,21 +19,21 @@ export class ImageProperties {
   }
 }
 
-export const ImageCard = ({ value, imageProperties, prettifyLoading, elementClasses }: TImageCardProps) => {
+export const ImageCard = ({ value, properties, classes, isPrettyLoading }: ImageCardProps) => {
   const output = (
-    <div className={elementClasses?.container}>
+    <div className={classes?.container}>
       <Image
-        className={elementClasses?.value}
+        className={classes?.value}
         src={value}
-        alt={imageProperties?.alt || "Image"}
-        width={imageProperties?.width}
-        height={imageProperties?.height}
+        alt={properties?.alt || "Image"}
+        width={properties?.width}
+        height={properties?.height}
       />
     </div>
   );
   return (
-    <div className={elementClasses?.container}>
-      {prettifyLoading ? (
+    <div className={classes?.container}>
+      {isPrettyLoading ? (
         value !== undefined && value !== "" ? (
           output
         ) : (

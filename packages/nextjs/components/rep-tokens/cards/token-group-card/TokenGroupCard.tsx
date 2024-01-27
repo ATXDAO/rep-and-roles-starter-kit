@@ -1,7 +1,8 @@
 import { ElementClasses } from "../../types/Types";
 import { TokenCard } from "../token-card/TokenCard";
 import { TokenCardProps } from "../token-card/TokenCard";
-import { Address } from "~~/components/scaffold-eth";
+
+// import { Address } from "~~/components/scaffold-eth";
 
 export interface TokenGroupProps {
   address?: string;
@@ -11,21 +12,21 @@ export interface TokenGroupProps {
 }
 
 export interface TokenGroupCardElementsClasses {
-  card: string;
-  container: string;
-  address: ElementClasses;
+  card?: string;
+  container?: string;
+  address?: ElementClasses;
 }
 
 export const TokenGroupCard = ({
-  address,
+  // address,
   tokenCardsProps,
   elementsClasses,
   isBeautifyingTokenGroupCardLoadingProps,
 }: TokenGroupProps) => {
   const components = tokenCardsProps.map((props, index) => (
     <TokenCard
-      key={`${props.token.id}+${index}`}
-      token={props.token}
+      key={`${props.id}+${index}`}
+      id={props.id}
       elementsClasses={props.elementsClasses}
       isBeautifyingTokenCardLoadingProps={props.isBeautifyingTokenCardLoadingProps}
       elementsProps={props.elementsProps}
@@ -34,7 +35,7 @@ export const TokenGroupCard = ({
 
   const loadedOutput = (
     <>
-      <Address address={address} propertyClasses={elementsClasses?.address}></Address>
+      {/* <Address valu classes={elementsClasses?.address}></Address> */}
       <div className={elementsClasses?.container}>{components}</div>
     </>
   );
@@ -45,11 +46,10 @@ export const TokenGroupCard = ({
     let isLoaded = true;
     for (let i = 0; i < tokenCardsProps.length; i++) {
       if (
-        tokenCardsProps[i].token.balance === undefined &&
-        tokenCardsProps[i].token.name === undefined &&
-        tokenCardsProps[i].token.description === undefined &&
-        tokenCardsProps[i].token.image === undefined &&
-        tokenCardsProps[i].token.properties === undefined
+        tokenCardsProps[i].elementsProps.balanceProp?.value === undefined &&
+        tokenCardsProps[i].elementsProps.nameProp?.value === undefined &&
+        tokenCardsProps[i].elementsProps.descriptionProp?.value === undefined &&
+        tokenCardsProps[i].elementsProps.imageProp?.value === undefined
       ) {
         isLoaded = false;
         break;

@@ -7,7 +7,7 @@ export function buildTokenCards(tokens: Token[], address?: string, tokenCardProp
 
   for (let i = 0; i < tokens.length; i++) {
     const tokenCardProp: TokenCardProps = {
-      token: tokens[i],
+      id: i,
       isBeautifyingTokenCardLoadingProps: tokenCardProps?.isPrettyLoading,
       elementsClasses: tokenCardProps?.classes,
       elementsProps: {

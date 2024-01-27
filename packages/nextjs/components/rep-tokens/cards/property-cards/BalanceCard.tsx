@@ -1,15 +1,19 @@
 import { ElementClasses } from "../../types/Types";
 
-type TBalanceCardProps = {
-  value: bigint;
-  elementClasses?: ElementClasses;
-  prettifyLoading?: boolean;
-};
+export interface BalanceCardProps {
+  props: BigIntProps;
+}
 
-export const BalanceCard = ({ value, prettifyLoading, elementClasses }: TBalanceCardProps) => {
+export interface BigIntProps {
+  value: bigint;
+  classes?: ElementClasses;
+  isPrettyLoading?: boolean;
+}
+
+export const BalanceCard = ({ value, classes, isPrettyLoading }: BigIntProps) => {
   let output;
 
-  prettifyLoading
+  isPrettyLoading
     ? value !== undefined
       ? (output = Number(value))
       : (output = "Loading Balance...")
@@ -18,8 +22,8 @@ export const BalanceCard = ({ value, prettifyLoading, elementClasses }: TBalance
     : (output = 0);
 
   return (
-    <div className={elementClasses?.container}>
-      <p className={elementClasses?.value}>{output}</p>
+    <div className={classes?.container}>
+      <p className={classes?.value}>{output}</p>
     </div>
   );
 };

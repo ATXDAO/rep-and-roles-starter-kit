@@ -1,53 +1,24 @@
-import { Token } from "../../hooks/Hooks";
-import { ElementClasses } from "../../types/Types";
+// import { Token } from "../../hooks/Hooks";
+// import { ElementClasses } from "../../types/Types";
 import { BalanceCard } from "../property-cards/BalanceCard";
+import { BigIntProps } from "../property-cards/BalanceCard";
 import { ImageCard } from "../property-cards/ImageCard";
-import { ImageProperties } from "../property-cards/ImageCard";
+import { ImageCardProps } from "../property-cards/ImageCard";
+// import { ImageProperties } from "../property-cards/ImageCard";
 import { StringCard } from "../property-cards/StringCard";
+import { StringCardProps } from "../property-cards/StringCard";
 import { Address } from "~~/components/scaffold-eth";
 
 export interface BaseTokenCardProps {
-  token: Token;
   elementsProps: BaseTokenCardElementsProps;
 }
 
 export interface BaseTokenCardElementsProps {
-  balanceProp?: BalanceProp;
-  nameProp?: NameProp;
-  descriptionProp?: DescriptionProp;
-  imageProp?: ImageProp;
-  addressProp?: AddressProp;
-}
-
-export interface BalanceProp {
-  value: bigint;
-  classes?: ElementClasses;
-  isPrettyLoading?: boolean;
-}
-
-export interface NameProp {
-  value: string;
-  classes?: ElementClasses;
-  isPrettyLoading?: boolean;
-}
-
-export interface DescriptionProp {
-  value: string;
-  classes?: ElementClasses;
-  isPrettyLoading?: boolean;
-}
-
-export interface ImageProp {
-  value: string;
-  properties?: ImageProperties;
-  classes?: ElementClasses;
-  isPrettyLoading?: boolean;
-}
-
-export interface AddressProp {
-  value: string | undefined;
-  classes?: ElementClasses;
-  isPrettyLoading?: boolean;
+  balanceProp?: BigIntProps;
+  nameProp?: StringCardProps;
+  descriptionProp?: StringCardProps;
+  imageProp?: ImageCardProps;
+  addressProp?: StringCardProps;
 }
 
 export const BaseTokenCard = ({ elementsProps }: BaseTokenCardProps) => {
@@ -56,8 +27,8 @@ export const BaseTokenCard = ({ elementsProps }: BaseTokenCardProps) => {
       {elementsProps?.balanceProp ? (
         <BalanceCard
           value={elementsProps?.balanceProp?.value}
-          elementClasses={elementsProps?.balanceProp?.classes}
-          prettifyLoading={elementsProps?.balanceProp?.isPrettyLoading}
+          classes={elementsProps?.balanceProp?.classes}
+          isPrettyLoading={elementsProps?.balanceProp?.isPrettyLoading}
         />
       ) : (
         <></>
@@ -65,9 +36,9 @@ export const BaseTokenCard = ({ elementsProps }: BaseTokenCardProps) => {
       {elementsProps?.imageProp ? (
         <ImageCard
           value={elementsProps?.imageProp?.value}
-          imageProperties={elementsProps?.imageProp?.properties}
-          elementClasses={elementsProps?.imageProp?.classes}
-          prettifyLoading={elementsProps?.imageProp?.isPrettyLoading}
+          properties={elementsProps?.imageProp?.properties}
+          classes={elementsProps?.imageProp?.classes}
+          isPrettyLoading={elementsProps?.imageProp?.isPrettyLoading}
         />
       ) : (
         <></>
@@ -75,8 +46,8 @@ export const BaseTokenCard = ({ elementsProps }: BaseTokenCardProps) => {
       {elementsProps?.nameProp ? (
         <StringCard
           value={elementsProps?.nameProp?.value}
-          elementClasses={elementsProps?.nameProp?.classes}
-          prettifyLoading={elementsProps?.nameProp?.isPrettyLoading}
+          classes={elementsProps?.nameProp?.classes}
+          isPrettyLoading={elementsProps?.nameProp?.isPrettyLoading}
         />
       ) : (
         <></>
@@ -84,17 +55,13 @@ export const BaseTokenCard = ({ elementsProps }: BaseTokenCardProps) => {
       {elementsProps?.descriptionProp ? (
         <StringCard
           value={elementsProps?.descriptionProp?.value}
-          elementClasses={elementsProps?.descriptionProp?.classes}
-          prettifyLoading={elementsProps?.descriptionProp?.isPrettyLoading}
+          classes={elementsProps?.descriptionProp?.classes}
+          isPrettyLoading={elementsProps?.descriptionProp?.isPrettyLoading}
         />
       ) : (
         <></>
       )}
-      {elementsProps?.addressProp ? (
-        <Address address={elementsProps?.addressProp?.value} propertyClasses={elementsProps?.addressProp?.classes} />
-      ) : (
-        <></>
-      )}
+      {elementsProps?.addressProp ? <Address props={elementsProps?.addressProp} /> : <></>}
     </>
   );
 };

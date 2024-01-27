@@ -1,8 +1,9 @@
-import { Token } from "../../hooks/Hooks";
-import { BaseTokenCard, BaseTokenCardElementsProps } from "./BaseTokenCard";
+// import { Token } from "../../hooks/Hooks";
+import { BaseTokenCard } from "./BaseTokenCard";
+import { BaseTokenCardElementsProps } from "./BaseTokenCard";
 
 export interface TokenCardProps {
-  token: Token;
+  id: number;
   elementsClasses?: TokenCardClasses;
   isBeautifyingTokenCardLoadingProps?: boolean;
   elementsProps: BaseTokenCardElementsProps;
@@ -13,14 +14,13 @@ export interface TokenCardClasses {
 }
 
 export const TokenCard = ({
-  token,
   elementsClasses,
   isBeautifyingTokenCardLoadingProps = false,
   elementsProps,
 }: TokenCardProps) => {
   const output = (
     <>
-      <BaseTokenCard token={token} elementsProps={elementsProps} />
+      <BaseTokenCard elementsProps={elementsProps} />
     </>
   );
 
@@ -28,10 +28,10 @@ export const TokenCard = ({
     <>
       <div className={elementsClasses?.card}>
         {isBeautifyingTokenCardLoadingProps ? (
-          token?.image !== undefined &&
-          token?.balance !== undefined &&
-          token?.name !== undefined &&
-          token?.description !== undefined &&
+          elementsProps.imageProp?.value !== undefined &&
+          elementsProps.balanceProp?.value !== undefined &&
+          elementsProps.nameProp?.value !== undefined &&
+          elementsProps.descriptionProp?.value !== undefined &&
           elementsProps?.addressProp?.value !== undefined ? (
             <div>{output}</div>
           ) : (
