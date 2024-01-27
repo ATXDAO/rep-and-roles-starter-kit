@@ -1,14 +1,31 @@
 import { TokenCardProps } from "../cards/token-card/TokenCard";
+import { TokenGroupProps } from "../cards/token-group-card/TokenGroupCard";
 import { Token } from "../hooks/Hooks";
 import { TokenCardConfigProps } from "../types/Types";
+import { TokenGroupCardConfigProps } from "../types/Types";
+
+export function buildTokenGroupCard(config: TokenGroupCardConfigProps, tokenCards: TokenCardProps[], address?: string) {
+  const tokenGroupCard: TokenGroupProps = {
+    tokenCardsProps: tokenCards,
+    classes: config.classes,
+    address: {
+      value: address,
+      classes: config.address.classes,
+      isPrettyLoading: config.isPrettyLoading,
+    },
+    isPrettyLoading: config.isPrettyLoading,
+  };
+
+  return tokenGroupCard;
+}
 
 export function buildTokenCards(tokens: Token[], address?: string, tokenCardProps?: TokenCardConfigProps) {
   const arr = [];
 
   for (let i = 0; i < tokens.length; i++) {
     const tokenCardProp: TokenCardProps = {
-      isBeautifyingTokenCardLoadingProps: tokenCardProps?.isPrettyLoading,
-      elementsClasses: tokenCardProps?.classes,
+      isPrettyLoading: tokenCardProps?.isPrettyLoading,
+      cardClasses: tokenCardProps?.cardClasses,
       elementsProps: {
         balanceProp: tokenCardProps?.elementsProps?.balanceProps?.isRendering
           ? {

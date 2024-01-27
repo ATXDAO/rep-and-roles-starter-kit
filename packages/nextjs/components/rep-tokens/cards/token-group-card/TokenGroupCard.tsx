@@ -23,12 +23,7 @@ export interface TokenGroupCardElementsClasses {
 
 export const TokenGroupCard = ({ props }: TokenGroupCardInternalProps) => {
   const components = props?.tokenCardsProps.map((cardProps, index) => (
-    <TokenCard
-      key={`tokenCard+${index}`}
-      elementsClasses={cardProps.elementsClasses}
-      isBeautifyingTokenCardLoadingProps={cardProps.isBeautifyingTokenCardLoadingProps}
-      elementsProps={cardProps.elementsProps}
-    ></TokenCard>
+    <TokenCard key={`tokenCard+${index}`} props={cardProps}></TokenCard>
   ));
 
   let output = (
@@ -42,10 +37,10 @@ export const TokenGroupCard = ({ props }: TokenGroupCardInternalProps) => {
     let isLoaded = true;
     for (let i = 0; i < props?.tokenCardsProps.length; i++) {
       if (
-        props?.tokenCardsProps[i].elementsProps.balanceProp?.value === undefined &&
-        props?.tokenCardsProps[i].elementsProps.nameProp?.value === undefined &&
-        props?.tokenCardsProps[i].elementsProps.descriptionProp?.value === undefined &&
-        props?.tokenCardsProps[i].elementsProps.imageProp?.value === undefined
+        props?.tokenCardsProps[i].elementsProps?.balanceProp?.value === undefined &&
+        props?.tokenCardsProps[i].elementsProps?.nameProp?.value === undefined &&
+        props?.tokenCardsProps[i].elementsProps?.descriptionProp?.value === undefined &&
+        props?.tokenCardsProps[i].elementsProps?.imageProp?.value === undefined
       ) {
         isLoaded = false;
         break;

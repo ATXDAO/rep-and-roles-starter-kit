@@ -5,6 +5,7 @@ import {
   TokenCardConfigProps,
   TokenElementsConfigProps,
 } from "../rep-tokens/types/Types";
+import { TokenGroupCardConfigProps } from "../rep-tokens/types/Types";
 
 export const balanceProps = {
   isRendering: true,
@@ -62,21 +63,15 @@ export const elementsProps = {
 
 export const tokenCardProps = {
   isRendering: true,
-  classes: {
-    card: "bg-slate-600 p-5 m-4 w-64",
-  },
+  cardClasses: "bg-slate-600 p-5 m-4 w-64",
   elementsProps,
 } as TokenCardConfigProps;
 
-export const tokenGroupCardProps = {
+export const tokenGroupCardConfigProps = {
   isRendering: true,
   classes: {
     container: "flex justify-center bg bg-slate-1000 p-3",
     card: "bg-slate-800 flex flex-col items-center",
-    address: {
-      container: "flex items-center justify-center bg-slate-600",
-      value: "ml-1.5 text-${size} font-normal text-white",
-    },
   },
   address: {
     isRendering: true,
@@ -89,4 +84,4 @@ export const tokenGroupCardProps = {
 
   isPrettyLoading: true,
   tokenCardProps,
-};
+} as TokenGroupCardConfigProps;
