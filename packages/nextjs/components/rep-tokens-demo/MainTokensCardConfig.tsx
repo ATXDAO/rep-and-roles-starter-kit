@@ -78,6 +78,14 @@ export const tokenGroupCardProps = {
       value: "ml-1.5 text-${size} font-normal text-white",
     },
   },
+  address: {
+    isRendering: true,
+    classes: {
+      container: "flex items-center justify-center bg-slate-300",
+      value: "rounded mx-auto",
+    },
+    isPrettyLoading: true,
+  },
 
   isPrettyLoading: true,
   tokenCardProps,

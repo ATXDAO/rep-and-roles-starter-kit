@@ -1,14 +1,18 @@
 import { ElementClasses } from "../../types/Types";
+import { StringCardProps } from "../property-cards/StringCard";
 import { TokenCard } from "../token-card/TokenCard";
 import { TokenCardProps } from "../token-card/TokenCard";
+import { Address } from "~~/components/scaffold-eth";
 
-// import { Address } from "~~/components/scaffold-eth";
+export interface TokenGroupCardInternalProps {
+  props: TokenGroupProps;
+}
 
 export interface TokenGroupProps {
-  address?: string;
+  address: StringCardProps;
   tokenCardsProps: TokenCardProps[];
-  elementsClasses?: TokenGroupCardElementsClasses;
-  isBeautifyingTokenGroupCardLoadingProps?: boolean;
+  classes?: TokenGroupCardElementsClasses;
+  isPrettyLoading?: boolean;
 }
 
 export interface TokenGroupCardElementsClasses {
@@ -17,54 +21,49 @@ export interface TokenGroupCardElementsClasses {
   address?: ElementClasses;
 }
 
-export const TokenGroupCard = ({
-  // address,
-  tokenCardsProps,
-  elementsClasses,
-  isBeautifyingTokenGroupCardLoadingProps,
-}: TokenGroupProps) => {
-  const components = tokenCardsProps.map((props, index) => (
+export const TokenGroupCard = ({ props }: TokenGroupCardInternalProps) => {
+  const components = props?.tokenCardsProps.map((cardProps, index) => (
     <TokenCard
-      key={`${props.id}+${index}`}
-      id={props.id}
-      elementsClasses={props.elementsClasses}
-      isBeautifyingTokenCardLoadingProps={props.isBeautifyingTokenCardLoadingProps}
-      elementsProps={props.elementsProps}
+      key={`tokenCard+${index}`}
+      elementsClasses={cardProps.elementsClasses}
+      isBeautifyingTokenCardLoadingProps={cardProps.isBeautifyingTokenCardLoadingProps}
+      elementsProps={cardProps.elementsProps}
     ></TokenCard>
   ));
 
-  const loadedOutput = (
+  let output = (
     <>
-      {/* <Address valu classes={elementsClasses?.address}></Address> */}
-      <div className={elementsClasses?.container}>{components}</div>
+      <Address props={props.address}></Address>
+      <div className={props.classes?.container}>{components}</div>
     </>
   );
 
-  let output = loadedOutput;
-
-  if (isBeautifyingTokenGroupCardLoadingProps) {
+  if (props.isPrettyLoading) {
     let isLoaded = true;
-    for (let i = 0; i < tokenCardsProps.length; i++) {
+    for (let i = 0; i < props?.tokenCardsProps.length; i++) {
       if (
-        tokenCardsProps[i].elementsProps.balanceProp?.value === undefined &&
-        tokenCardsProps[i].elementsProps.nameProp?.value === undefined &&
-        tokenCardsProps[i].elementsProps.descriptionProp?.value === undefined &&
-        tokenCardsProps[i].elementsProps.imageProp?.value === undefined
+        props?.tokenCardsProps[i].elementsProps.balanceProp?.value === undefined &&
+        props?.tokenCardsProps[i].elementsProps.nameProp?.value === undefined &&
+        props?.tokenCardsProps[i].elementsProps.descriptionProp?.value === undefined &&
+        props?.tokenCardsProps[i].elementsProps.imageProp?.value === undefined
       ) {
         isLoaded = false;
         break;
       }
     }
 
-    if (tokenCardsProps.length === 0) isLoaded = !isLoaded;
+    if (props?.tokenCardsProps.length === 0) {
+      isLoaded = !isLoaded;
+    }
 
-    if (!isLoaded) output = <p>Loading Reputation Tokens...</p>;
-    else output = loadedOutput;
+    if (!isLoaded) {
+      output = <p>Loading Reputation Tokens...</p>;
+    }
   }
 
   return (
     <>
-      <div className={elementsClasses?.card}>{output}</div>
+      <div className={props?.classes?.card}>{output}</div>
     </>
   );
 };

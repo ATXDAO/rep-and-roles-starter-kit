@@ -1,9 +1,8 @@
-// import { Token } from "../../hooks/Hooks";
 import { BaseTokenCard } from "./BaseTokenCard";
 import { BaseTokenCardElementsProps } from "./BaseTokenCard";
 
 export interface TokenCardProps {
-  id: number;
+  // id: number;
   elementsClasses?: TokenCardClasses;
   isBeautifyingTokenCardLoadingProps?: boolean;
   elementsProps: BaseTokenCardElementsProps;

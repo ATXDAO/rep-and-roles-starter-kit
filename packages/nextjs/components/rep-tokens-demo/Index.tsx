@@ -1,4 +1,4 @@
-import { TokenGroupCard } from "../rep-tokens/cards/token-group-card/TokenGroupCard";
+import { TokenGroupCard, TokenGroupProps } from "../rep-tokens/cards/token-group-card/TokenGroupCard";
 import { useRepTokens } from "../rep-tokens/hooks/Hooks";
 import { buildTokenCards } from "../rep-tokens/utils/buildTokensCard";
 import { tokenGroupCardProps } from "./MainTokensCardConfig";
@@ -41,6 +41,8 @@ export const Index = () => {
 
   const mainTokenCards = buildTokenCards(tokensData.tokens, tokensData.address, tokenGroupCardProps.tokenCardProps);
 
+  // tokenGroupCardProps.address = tokensData.address;
+
   // const mainNumberOverlayTokenCard = buildTokenGroupCard(
   //   tokensData.tokens,
   //   true,
@@ -50,6 +52,17 @@ export const Index = () => {
   //   mainNumberOverlayTokenCardPropertiesClasses,
   //   isBeautifyingMainTokenCardOverlayLoadingProps,
   // );
+
+  const tokenGroupCard: TokenGroupProps = {
+    tokenCardsProps: mainTokenCards,
+    classes: tokenGroupCardProps.classes,
+    address: {
+      value: tokensData.address,
+      classes: tokenGroupCardProps.address.classes,
+      isPrettyLoading: tokenGroupCardProps.isPrettyLoading,
+    },
+    isPrettyLoading: tokenGroupCardProps.isPrettyLoading,
+  };
 
   return (
     <>
@@ -67,10 +80,11 @@ export const Index = () => {
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
           <TokenGroupCard
-            address={tokensData.address}
-            tokenCardsProps={mainTokenCards}
-            elementsClasses={tokenGroupCardProps.classes}
-            isBeautifyingTokenGroupCardLoadingProps={tokenGroupCardProps.isPrettyLoading}
+            props={tokenGroupCard}
+            // address={tokenGroupCard.address}
+            // tokenCardsProps={tokenGroupCard.tokenCardsProps}
+            // classes={tokenGroupCard.classes}
+            // isPrettyLoading={tokenGroupCard.isPrettyLoading}
           />
         </div>
       </div>
