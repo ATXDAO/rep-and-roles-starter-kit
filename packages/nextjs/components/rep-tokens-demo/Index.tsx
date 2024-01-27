@@ -2,14 +2,12 @@
 import { TokenGroupCard } from "../rep-tokens/cards/token-group-card/TokenGroupCard";
 import { useRepTokens } from "../rep-tokens/hooks/Hooks";
 import {
-  buildTokenGroupCard, //  RenderProps, TokenElementsClasses
+  buildTokenCards, //  RenderProps, TokenElementsClasses
 } from "../rep-tokens/utils/buildTokensCard";
 import {
-  tokenCardPrettifyLoadingProps as isBeautifyingMainTokenCardLoadingProps,
-  tokensCardPrettifyLoadingProps as isBeautifyingMainTokenGroupCardLoadingProps, // isRenderingTokenCardProps as isRenderingMainTokenCardProps,
-  tokenCardPropertiesClasses as mainTokenCardPropertiesClasses,
-  tokensCardPropertiesClasses as mainTokenGroupCardElementsClassess,
-  tokenCardElementsProps,
+  // tokensCardPropertiesClasses as mainTokenGroupCardElementsClassess,
+  tokenCardProps,
+  tokenGroupCardProps,
 } from "./MainTokensCardConfig";
 // import {
 //   tokenCardPrettifyLoadingProps as isBeautifyingMainTokenCardOverlayLoadingProps,
@@ -48,15 +46,9 @@ export const Index = () => {
 
   // );
 
-  console.log(tokenCardElementsProps);
+  // console.log(tokenCardElementsProps);
 
-  const mainTokenGroupCard = buildTokenGroupCard(
-    tokensData.tokens,
-    tokensData.address,
-    tokenCardElementsProps,
-    mainTokenCardPropertiesClasses,
-    isBeautifyingMainTokenCardLoadingProps,
-  );
+  const mainTokenCards = buildTokenCards(tokensData.tokens, tokensData.address, tokenCardProps);
 
   // const mainNumberOverlayTokenCard = buildTokenGroupCard(
   //   tokensData.tokens,
@@ -85,9 +77,9 @@ export const Index = () => {
         <div>
           <TokenGroupCard
             address={tokensData.address}
-            tokenCardsProps={mainTokenGroupCard}
-            elementsClasses={mainTokenGroupCardElementsClassess}
-            isBeautifyingTokenGroupCardLoadingProps={isBeautifyingMainTokenGroupCardLoadingProps}
+            tokenCardsProps={mainTokenCards}
+            elementsClasses={tokenGroupCardProps.classes}
+            isBeautifyingTokenGroupCardLoadingProps={tokenGroupCardProps.isPrettyLoading}
           />
         </div>
       </div>

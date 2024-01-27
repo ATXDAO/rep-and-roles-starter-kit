@@ -7,7 +7,7 @@ export interface TokenGroupProps {
   address?: string;
   tokenCardsProps: TokenCardProps[];
   elementsClasses?: TokenGroupCardElementsClasses;
-  isBeautifyingTokenGroupCardLoadingProps?: IsBeautifyingTokenGroupCardLoadingProps;
+  isBeautifyingTokenGroupCardLoadingProps?: boolean;
 }
 
 export interface TokenGroupCardElementsClasses {
@@ -26,8 +26,6 @@ export const TokenGroupCard = ({
   elementsClasses,
   isBeautifyingTokenGroupCardLoadingProps,
 }: TokenGroupProps) => {
-  console.log(tokenCardsProps);
-
   const components = tokenCardsProps.map((props, index) => (
     <TokenCard
       key={`${props.token.id}+${index}`}
@@ -42,42 +40,39 @@ export const TokenGroupCard = ({
     ></TokenCard>
   ));
 
-  let output;
+  const loadedOutput = (
+    <>
+      <Address address={address} propertyClasses={elementsClasses?.address}></Address>
+      <div className={elementsClasses?.container}>{components}</div>
+    </>
+  );
+
+  let output = loadedOutput;
 
   if (isBeautifyingTokenGroupCardLoadingProps) {
-    if (isBeautifyingTokenGroupCardLoadingProps?.card) {
-      let isLoaded = true;
-      for (let i = 0; i < tokenCardsProps.length; i++) {
-        if (
-          tokenCardsProps[i].token.balance === undefined &&
-          tokenCardsProps[i].token.name === undefined &&
-          tokenCardsProps[i].token.description === undefined &&
-          tokenCardsProps[i].token.image === undefined &&
-          tokenCardsProps[i].token.properties === undefined
-        ) {
-          isLoaded = false;
-          break;
-        }
+    let isLoaded = true;
+    for (let i = 0; i < tokenCardsProps.length; i++) {
+      if (
+        tokenCardsProps[i].token.balance === undefined &&
+        tokenCardsProps[i].token.name === undefined &&
+        tokenCardsProps[i].token.description === undefined &&
+        tokenCardsProps[i].token.image === undefined &&
+        tokenCardsProps[i].token.properties === undefined
+      ) {
+        isLoaded = false;
+        break;
       }
-
-      if (tokenCardsProps.length === 0) isLoaded = !isLoaded;
-
-      if (!isLoaded) {
-        output = <>Loading Reputation Tokens...</>;
-      } else output = components;
-    } else {
-      output = components;
     }
-  } else {
-    output = components;
+
+    if (tokenCardsProps.length === 0) isLoaded = !isLoaded;
+
+    if (!isLoaded) output = <p>Loading Reputation Tokens...</p>;
+    else output = loadedOutput;
   }
 
   return (
     <>
-      <div className={elementsClasses?.card}>
-        <Address address={address} propertyClasses={elementsClasses?.address}></Address>
-        <div className={elementsClasses?.container}>{output}</div>
-      </div>
+      <div className={elementsClasses?.card}>{output}</div>
     </>
   );
 };

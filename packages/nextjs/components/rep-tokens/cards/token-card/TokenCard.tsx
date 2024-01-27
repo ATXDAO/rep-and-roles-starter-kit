@@ -13,7 +13,7 @@ import {
 export interface TokenCardProps {
   token: Token;
   elementsClasses?: TokenCardElementsClasses;
-  isBeautifyingTokenCardLoadingProps?: IsBeautifyingTokenCardLoadingProps;
+  isBeautifyingTokenCardLoadingProps?: boolean;
   balanceProp?: BalanceProp;
   nameProp?: NameProp;
   descriptionProp?: DescriptionProp;
@@ -39,10 +39,7 @@ export interface IsBeautifyingTokenCardLoadingProps {
 export const TokenCard = ({
   token,
   elementsClasses,
-  isBeautifyingTokenCardLoadingProps = {
-    card: false,
-    // isBeautifyLoadingElementsProps: { balance: false, image: false, name: false, description: false, address: false },
-  },
+  isBeautifyingTokenCardLoadingProps = false,
   balanceProp,
   nameProp,
   descriptionProp,
@@ -65,7 +62,7 @@ export const TokenCard = ({
   return (
     <>
       <div className={elementsClasses?.card}>
-        {isBeautifyingTokenCardLoadingProps?.card ? (
+        {isBeautifyingTokenCardLoadingProps ? (
           token?.image !== undefined &&
           token?.balance !== undefined &&
           token?.name !== undefined &&

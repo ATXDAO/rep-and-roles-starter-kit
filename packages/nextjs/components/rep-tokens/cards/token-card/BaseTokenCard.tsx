@@ -26,32 +26,32 @@ export interface BaseTokenCardElementsProps {
 export interface BalanceProp {
   value: bigint;
   classes?: ElementClasses;
-  isBeautifyLoading?: boolean;
+  isPrettyLoading?: boolean;
 }
 
 export interface NameProp {
   value: string;
   classes?: ElementClasses;
-  isBeautifyLoading?: boolean;
+  isPrettyLoading?: boolean;
 }
 
 export interface DescriptionProp {
   value: string;
   classes?: ElementClasses;
-  isBeautifyLoading?: boolean;
+  isPrettyLoading?: boolean;
 }
 
 export interface ImageProp {
   value: string;
   properties?: ImageProperties;
   classes?: ElementClasses;
-  isBeautifyLoading?: boolean;
+  isPrettyLoading?: boolean;
 }
 
 export interface AddressProp {
   value: string | undefined;
   classes?: ElementClasses;
-  isBeautifyLoading?: boolean;
+  isPrettyLoading?: boolean;
 }
 
 export const BaseTokenCard = ({
@@ -67,7 +67,7 @@ export const BaseTokenCard = ({
         <BalanceCard
           value={balanceProp.value}
           elementClasses={balanceProp.classes}
-          prettifyLoading={balanceProp.isBeautifyLoading}
+          prettifyLoading={balanceProp.isPrettyLoading}
         />
       ) : (
         <></>
@@ -77,7 +77,7 @@ export const BaseTokenCard = ({
           value={imageProp.value}
           imageProperties={imageProp.properties}
           elementClasses={imageProp.classes}
-          prettifyLoading={imageProp.isBeautifyLoading}
+          prettifyLoading={imageProp.isPrettyLoading}
         />
       ) : (
         <></>
@@ -86,7 +86,7 @@ export const BaseTokenCard = ({
         <StringCard
           value={nameProp.value}
           elementClasses={nameProp.classes}
-          prettifyLoading={nameProp.isBeautifyLoading}
+          prettifyLoading={nameProp.isPrettyLoading}
         />
       ) : (
         <></>
@@ -95,7 +95,7 @@ export const BaseTokenCard = ({
         <StringCard
           value={descriptionProp.value}
           elementClasses={descriptionProp.classes}
-          prettifyLoading={descriptionProp.isBeautifyLoading}
+          prettifyLoading={descriptionProp.isPrettyLoading}
         />
       ) : (
         <></>

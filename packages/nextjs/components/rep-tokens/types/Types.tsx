@@ -1,4 +1,24 @@
+import { ImageProperties } from "../cards/property-cards/ImageCard";
+
 export interface ElementClasses {
-  container: string;
-  value: string;
+  container?: string;
+  value?: string;
+}
+
+export interface BaseElementConfigProp {
+  isRendering?: boolean;
+  classes?: ElementClasses;
+  isPrettyLoading?: boolean;
+}
+
+export interface ImageElementConfigProp extends BaseElementConfigProp {
+  imageProperties: ImageProperties;
+}
+
+export interface TokenElementsConfigProps {
+  balanceProps?: BaseElementConfigProp;
+  imageProps?: ImageElementConfigProp;
+  nameProps?: BaseElementConfigProp;
+  descriptionProps?: BaseElementConfigProp;
+  addressProps?: BaseElementConfigProp;
 }
