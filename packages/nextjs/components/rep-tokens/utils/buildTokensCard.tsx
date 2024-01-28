@@ -26,41 +26,41 @@ export function buildTokenCards(tokens: Token[], address?: string, tokenCardProp
     const tokenCardProp: TokenCardProps = {
       isPrettyLoading: tokenCardProps?.isPrettyLoading,
       cardClasses: tokenCardProps?.cardClasses,
-      componentsProps: {
-        balanceProps: tokenCardProps?.elementsProps?.balanceProps?.isRendering
+      valuesProps: {
+        balanceProps: tokenCardProps?.valuesProps?.balanceProps?.isRendering
           ? {
               value: tokens[i].balance,
-              classes: tokenCardProps?.elementsProps?.balanceProps?.classes,
-              isPrettyLoading: tokenCardProps?.elementsProps?.balanceProps?.isPrettyLoading,
+              classes: tokenCardProps?.valuesProps?.balanceProps?.classes,
+              isPrettyLoading: tokenCardProps?.valuesProps?.balanceProps?.isPrettyLoading,
             }
           : undefined,
-        nameProps: tokenCardProps?.elementsProps?.nameProps?.isRendering
+        nameProps: tokenCardProps?.valuesProps?.nameProps?.isRendering
           ? {
               value: tokens[i].name,
-              classes: tokenCardProps?.elementsProps?.nameProps?.classes,
-              isPrettyLoading: tokenCardProps?.elementsProps?.nameProps?.isPrettyLoading,
+              classes: tokenCardProps?.valuesProps?.nameProps?.classes,
+              isPrettyLoading: tokenCardProps?.valuesProps?.nameProps?.isPrettyLoading,
             }
           : undefined,
-        descriptionProps: tokenCardProps?.elementsProps?.descriptionProps?.isRendering
+        descriptionProps: tokenCardProps?.valuesProps?.descriptionProps?.isRendering
           ? {
               value: tokens[i].description,
-              classes: tokenCardProps?.elementsProps?.descriptionProps?.classes,
-              isPrettyLoading: tokenCardProps?.elementsProps?.descriptionProps?.isPrettyLoading,
+              classes: tokenCardProps?.valuesProps?.descriptionProps?.classes,
+              isPrettyLoading: tokenCardProps?.valuesProps?.descriptionProps?.isPrettyLoading,
             }
           : undefined,
-        imageProps: tokenCardProps?.elementsProps?.imageProps?.isRendering
+        imageProps: tokenCardProps?.valuesProps?.imageProps?.isRendering
           ? {
               value: tokens[i].image,
-              properties: tokenCardProps?.elementsProps?.imageProps?.imageProperties,
-              classes: tokenCardProps?.elementsProps?.imageProps?.classes,
-              isPrettyLoading: tokenCardProps?.elementsProps?.imageProps?.isPrettyLoading,
+              properties: tokenCardProps?.valuesProps?.imageProps?.imageProperties,
+              classes: tokenCardProps?.valuesProps?.imageProps?.classes,
+              isPrettyLoading: tokenCardProps?.valuesProps?.imageProps?.isPrettyLoading,
             }
           : undefined,
-        addressProps: tokenCardProps?.elementsProps?.addressProps?.isRendering
+        addressProps: tokenCardProps?.valuesProps?.addressProps?.isRendering
           ? {
               value: address,
-              classes: tokenCardProps?.elementsProps?.addressProps?.classes,
-              isPrettyLoading: tokenCardProps?.elementsProps?.addressProps?.isPrettyLoading,
+              classes: tokenCardProps?.valuesProps?.addressProps?.classes,
+              isPrettyLoading: tokenCardProps?.valuesProps?.addressProps?.isPrettyLoading,
             }
           : undefined,
       },

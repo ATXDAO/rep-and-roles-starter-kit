@@ -1,7 +1,7 @@
 import { CardClasses } from "../../types/Types";
-import { StringCardProps } from "../property-cards/StringCard";
 import { TokenCard } from "../token-card/TokenCard";
 import { TokenCardProps } from "../token-card/TokenCard";
+import { StringCardProps } from "../value-cards/StringCard";
 import { Address } from "~~/components/scaffold-eth";
 
 export interface TokenGroupProps {
@@ -37,10 +37,10 @@ export const TokenGroupCard = ({ props }: TokenGroupCardInternalProps) => {
     let isLoaded = true;
     for (let i = 0; i < props?.tokenCardsProps.length; i++) {
       if (
-        props?.tokenCardsProps[i].componentsProps?.balanceProps?.value === undefined &&
-        props?.tokenCardsProps[i].componentsProps?.nameProps?.value === undefined &&
-        props?.tokenCardsProps[i].componentsProps?.descriptionProps?.value === undefined &&
-        props?.tokenCardsProps[i].componentsProps?.imageProps?.value === undefined
+        props?.tokenCardsProps[i].valuesProps?.balanceProps?.value === undefined &&
+        props?.tokenCardsProps[i].valuesProps?.nameProps?.value === undefined &&
+        props?.tokenCardsProps[i].valuesProps?.descriptionProps?.value === undefined &&
+        props?.tokenCardsProps[i].valuesProps?.imageProps?.value === undefined
       ) {
         isLoaded = false;
         break;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { StringCardProps } from "../rep-tokens/cards/property-cards/StringCard";
+import { StringCardProps } from "../rep-tokens/cards/value-cards/StringCard";
 // import { ElementClasses } from "../rep-tokens/types/Types";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { isAddress } from "viem";

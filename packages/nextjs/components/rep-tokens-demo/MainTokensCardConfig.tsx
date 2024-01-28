@@ -1,9 +1,9 @@
-import { ImageProps } from "../rep-tokens/cards/property-cards/ImageCard";
+import { ImageProps } from "../rep-tokens/cards/value-cards/ImageCard";
 import {
-  BaseElementConfigProp,
-  ImageElementConfigProp,
+  ImageValueCardConfigProp,
   TokenCardConfigProps,
-  TokenElementsConfigProps,
+  TokenCardValuesConfigProps,
+  ValueCardConfigProps,
 } from "../rep-tokens/types/Types";
 import { TokenGroupCardConfigProps } from "../rep-tokens/types/Types";
 
@@ -14,7 +14,7 @@ export const balanceProps = {
     value: "text-4xl mx-auto text-center",
   },
   isPrettyLoading: true,
-} as BaseElementConfigProp;
+} as ValueCardConfigProps;
 
 export const imageProps = {
   isRendering: true,
@@ -24,7 +24,7 @@ export const imageProps = {
   },
   imageProperties: new ImageProps("Token", 256, 256),
   isPrettyLoading: true,
-} as ImageElementConfigProp;
+} as ImageValueCardConfigProp;
 
 export const nameProps = {
   isRendering: true,
@@ -33,7 +33,7 @@ export const nameProps = {
     value: "text-1xl text-center object-center mx-auto font-bold break-all",
   },
   isPrettyLoading: true,
-} as BaseElementConfigProp;
+} as ValueCardConfigProps;
 
 export const descriptionProps = {
   isRendering: true,
@@ -42,7 +42,7 @@ export const descriptionProps = {
     value: "text-1xl mx-auto text-center break-words",
   },
   isPrettyLoading: true,
-} as BaseElementConfigProp;
+} as ValueCardConfigProps;
 
 export const addressProps = {
   isRendering: true,
@@ -51,20 +51,20 @@ export const addressProps = {
     value: "rounded mx-auto",
   },
   isPrettyLoading: true,
-} as BaseElementConfigProp;
+} as ValueCardConfigProps;
 
-export const elementsProps = {
+export const tokenCardValuesProps = {
   balanceProps,
   imageProps,
   nameProps,
   descriptionProps,
   addressProps,
-} as TokenElementsConfigProps;
+} as TokenCardValuesConfigProps;
 
 export const tokenCardProps = {
   isRendering: true,
   cardClasses: "bg-slate-600 p-5 m-4 w-64",
-  elementsProps,
+  valuesProps: tokenCardValuesProps,
 } as TokenCardConfigProps;
 
 export const tokenGroupCardConfigProps = {

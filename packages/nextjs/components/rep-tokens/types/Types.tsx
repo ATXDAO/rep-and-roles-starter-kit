@@ -1,33 +1,33 @@
-import { ImageProps } from "../cards/property-cards/ImageCard";
-import { StringCardProps } from "../cards/property-cards/StringCard";
+import { ImageProps } from "../cards/value-cards/ImageCard";
+import { StringCardProps } from "../cards/value-cards/StringCard";
 
 export interface CardClasses {
   card?: string;
   value?: string;
 }
 
-export interface BaseElementConfigProp {
+export interface ValueCardConfigProps {
   isRendering?: boolean;
   classes?: CardClasses;
   isPrettyLoading?: boolean;
 }
 
-export interface ImageElementConfigProp extends BaseElementConfigProp {
+export interface ImageValueCardConfigProp extends ValueCardConfigProps {
   imageProperties: ImageProps;
 }
 
-export interface TokenElementsConfigProps {
-  balanceProps?: BaseElementConfigProp;
-  imageProps?: ImageElementConfigProp;
-  nameProps?: BaseElementConfigProp;
-  descriptionProps?: BaseElementConfigProp;
-  addressProps?: BaseElementConfigProp;
+export interface TokenCardValuesConfigProps {
+  balanceProps?: ValueCardConfigProps;
+  imageProps?: ImageValueCardConfigProp;
+  nameProps?: ValueCardConfigProps;
+  descriptionProps?: ValueCardConfigProps;
+  addressProps?: ValueCardConfigProps;
 }
 
 export interface TokenCardConfigProps {
   isRendering: true;
   cardClasses: string;
-  elementsProps: TokenElementsConfigProps;
+  valuesProps: TokenCardValuesConfigProps;
   isPrettyLoading: true;
 }
 

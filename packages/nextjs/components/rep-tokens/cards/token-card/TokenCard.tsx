@@ -1,9 +1,9 @@
-import { BalanceCard, BigIntCardProps } from "../property-cards/BalanceCard";
-import { ImageCard, ImageCardProps } from "../property-cards/ImageCard";
-import { StringCard, StringCardProps } from "../property-cards/StringCard";
+import { BalanceCard, BigIntCardProps } from "../value-cards/BalanceCard";
+import { ImageCard, ImageCardProps } from "../value-cards/ImageCard";
+import { StringCard, StringCardProps } from "../value-cards/StringCard";
 import { Address } from "~~/components/scaffold-eth";
 
-export interface ComponentsProps {
+export interface ValuesProps {
   balanceProps?: BigIntCardProps;
   nameProps?: StringCardProps;
   descriptionProps?: StringCardProps;
@@ -14,7 +14,7 @@ export interface ComponentsProps {
 export interface TokenCardProps {
   cardClasses?: string;
   isPrettyLoading?: boolean;
-  componentsProps: ComponentsProps;
+  valuesProps: ValuesProps;
 }
 
 export interface TokenCardInternalProps {
@@ -24,16 +24,11 @@ export interface TokenCardInternalProps {
 export const TokenCard = ({ props }: TokenCardInternalProps) => {
   const output = (
     <>
-      {props?.componentsProps?.balanceProps ? <BalanceCard props={props?.componentsProps?.balanceProps} /> : <></>}
-      {props?.componentsProps?.imageProps ? <ImageCard props={props?.componentsProps?.imageProps} /> : <></>}
-      {props?.componentsProps?.nameProps ? <StringCard props={props?.componentsProps?.nameProps} /> : <></>}
-      {props?.componentsProps?.descriptionProps ? (
-        <StringCard props={props?.componentsProps?.descriptionProps} />
-      ) : (
-        <></>
-      )}
-      {props?.componentsProps?.addressProps ? <Address props={props?.componentsProps?.addressProps} /> : <></>}
-      {/* <BaseTokenCard props={props?.baseComponentsProps} /> */}
+      {props?.valuesProps?.balanceProps ? <BalanceCard props={props?.valuesProps?.balanceProps} /> : <></>}
+      {props?.valuesProps?.imageProps ? <ImageCard props={props?.valuesProps?.imageProps} /> : <></>}
+      {props?.valuesProps?.nameProps ? <StringCard props={props?.valuesProps?.nameProps} /> : <></>}
+      {props?.valuesProps?.descriptionProps ? <StringCard props={props?.valuesProps?.descriptionProps} /> : <></>}
+      {props?.valuesProps?.addressProps ? <Address props={props?.valuesProps?.addressProps} /> : <></>}
     </>
   );
 
@@ -41,11 +36,11 @@ export const TokenCard = ({ props }: TokenCardInternalProps) => {
     <>
       <div className={props?.cardClasses}>
         {props?.isPrettyLoading ? (
-          props?.componentsProps?.imageProps?.value !== undefined &&
-          props?.componentsProps?.balanceProps?.value !== undefined &&
-          props?.componentsProps?.nameProps?.value !== undefined &&
-          props?.componentsProps?.descriptionProps?.value !== undefined &&
-          props?.componentsProps?.addressProps?.value !== undefined ? (
+          props?.valuesProps?.imageProps?.value !== undefined &&
+          props?.valuesProps?.balanceProps?.value !== undefined &&
+          props?.valuesProps?.nameProps?.value !== undefined &&
+          props?.valuesProps?.descriptionProps?.value !== undefined &&
+          props?.valuesProps?.addressProps?.value !== undefined ? (
             <div>{output}</div>
           ) : (
             <>Loading Token...</>
