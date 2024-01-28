@@ -10,7 +10,7 @@ import { TokenGroupCardConfigProps } from "../rep-tokens/types/Types";
 export const balanceProps = {
   isRendering: true,
   classes: {
-    container: "bg-slate-300",
+    card: "bg-slate-300",
     value: "text-4xl mx-auto text-center",
   },
   isPrettyLoading: true,
@@ -19,7 +19,7 @@ export const balanceProps = {
 export const imageProps = {
   isRendering: true,
   classes: {
-    container: "bg-slate-300 p-1",
+    card: "bg-slate-300 p-1",
     value: "rounded mx-auto",
   },
   imageProperties: new ImageProps("Token", 256, 256),
@@ -29,7 +29,7 @@ export const imageProps = {
 export const nameProps = {
   isRendering: true,
   classes: {
-    container: "bg-slate-300",
+    card: "bg-slate-300",
     value: "text-1xl text-center object-center mx-auto font-bold break-all",
   },
   isPrettyLoading: true,
@@ -38,7 +38,7 @@ export const nameProps = {
 export const descriptionProps = {
   isRendering: true,
   classes: {
-    container: "bg-slate-300",
+    card: "bg-slate-300",
     value: "text-1xl mx-auto text-center break-words",
   },
   isPrettyLoading: true,
@@ -47,7 +47,7 @@ export const descriptionProps = {
 export const addressProps = {
   isRendering: true,
   classes: {
-    container: "flex items-center justify-center bg-slate-300",
+    card: "flex items-center justify-center bg-slate-300",
     value: "rounded mx-auto",
   },
   isPrettyLoading: true,
@@ -70,13 +70,13 @@ export const tokenCardProps = {
 export const tokenGroupCardConfigProps = {
   isRendering: true,
   classes: {
-    container: "flex justify-center bg bg-slate-1000 p-3",
+    tokenCardsContainer: "flex justify-center bg bg-slate-1000 p-3",
     card: "bg-slate-800 flex flex-col items-center",
   },
   address: {
     isRendering: true,
     classes: {
-      container: "flex items-center justify-center bg-slate-300",
+      card: "flex items-center justify-center bg-slate-300",
       value: "rounded mx-auto",
     },
     isPrettyLoading: true,

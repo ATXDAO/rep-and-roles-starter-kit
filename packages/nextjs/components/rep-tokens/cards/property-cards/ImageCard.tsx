@@ -1,16 +1,5 @@
 import Image from "next/image";
-import { ElementClasses } from "../../types/Types";
-
-export interface ImageCardPropsInternal {
-  props: ImageCardProps;
-}
-
-export interface ImageCardProps {
-  value: string;
-  properties?: ImageProps;
-  classes?: ElementClasses;
-  isPrettyLoading?: boolean;
-}
+import { CardClasses } from "../../types/Types";
 
 export class ImageProps {
   alt: string;
@@ -23,9 +12,20 @@ export class ImageProps {
   }
 }
 
+export interface ImageCardProps {
+  value: string;
+  properties?: ImageProps;
+  classes?: CardClasses;
+  isPrettyLoading?: boolean;
+}
+
+export interface ImageCardPropsInternal {
+  props: ImageCardProps;
+}
+
 export const ImageCard = ({ props }: ImageCardPropsInternal) => {
   const output = (
-    <div className={props?.classes?.container}>
+    <div className={props?.classes?.card}>
       <Image
         className={props?.classes?.value}
         src={props?.value}
@@ -36,7 +36,7 @@ export const ImageCard = ({ props }: ImageCardPropsInternal) => {
     </div>
   );
   return (
-    <div className={props?.classes?.container}>
+    <div className={props?.classes?.card}>
       {props?.isPrettyLoading ? (
         props?.value !== undefined && props?.value !== "" ? (
           output

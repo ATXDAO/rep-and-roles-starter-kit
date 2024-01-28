@@ -1,20 +1,39 @@
-import { BaseTokenCard } from "./BaseTokenCard";
-import { BaseTokenCardElementsProps } from "./BaseTokenCard";
+import { BalanceCard, BigIntCardProps } from "../property-cards/BalanceCard";
+import { ImageCard, ImageCardProps } from "../property-cards/ImageCard";
+import { StringCard, StringCardProps } from "../property-cards/StringCard";
+import { Address } from "~~/components/scaffold-eth";
 
-export interface TokenCardInternalProps {
-  props: TokenCardProps;
+export interface ComponentsProps {
+  balanceProps?: BigIntCardProps;
+  nameProps?: StringCardProps;
+  descriptionProps?: StringCardProps;
+  imageProps?: ImageCardProps;
+  addressProps?: StringCardProps;
 }
 
 export interface TokenCardProps {
   cardClasses?: string;
   isPrettyLoading?: boolean;
-  elementsProps: BaseTokenCardElementsProps;
+  componentsProps: ComponentsProps;
+}
+
+export interface TokenCardInternalProps {
+  props: TokenCardProps;
 }
 
 export const TokenCard = ({ props }: TokenCardInternalProps) => {
   const output = (
     <>
-      <BaseTokenCard elementsProps={props?.elementsProps} />
+      {props?.componentsProps?.balanceProps ? <BalanceCard props={props?.componentsProps?.balanceProps} /> : <></>}
+      {props?.componentsProps?.imageProps ? <ImageCard props={props?.componentsProps?.imageProps} /> : <></>}
+      {props?.componentsProps?.nameProps ? <StringCard props={props?.componentsProps?.nameProps} /> : <></>}
+      {props?.componentsProps?.descriptionProps ? (
+        <StringCard props={props?.componentsProps?.descriptionProps} />
+      ) : (
+        <></>
+      )}
+      {props?.componentsProps?.addressProps ? <Address props={props?.componentsProps?.addressProps} /> : <></>}
+      {/* <BaseTokenCard props={props?.baseComponentsProps} /> */}
     </>
   );
 
@@ -22,11 +41,11 @@ export const TokenCard = ({ props }: TokenCardInternalProps) => {
     <>
       <div className={props?.cardClasses}>
         {props?.isPrettyLoading ? (
-          props?.elementsProps?.imageProp?.value !== undefined &&
-          props?.elementsProps?.balanceProp?.value !== undefined &&
-          props?.elementsProps?.nameProp?.value !== undefined &&
-          props?.elementsProps?.descriptionProp?.value !== undefined &&
-          props?.elementsProps?.addressProp?.value !== undefined ? (
+          props?.componentsProps?.imageProps?.value !== undefined &&
+          props?.componentsProps?.balanceProps?.value !== undefined &&
+          props?.componentsProps?.nameProps?.value !== undefined &&
+          props?.componentsProps?.descriptionProps?.value !== undefined &&
+          props?.componentsProps?.addressProps?.value !== undefined ? (
             <div>{output}</div>
           ) : (
             <>Loading Token...</>

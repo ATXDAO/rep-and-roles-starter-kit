@@ -93,7 +93,7 @@ export const Address = ({
   // let textClass = `ml-1.5 text-${size} font-normal text-white`;
 
   return (
-    <div className={props?.classes?.container}>
+    <div className={props?.classes?.card}>
       <div className="flex-shrink-0">
         <BlockieAvatar
           address={props?.value}

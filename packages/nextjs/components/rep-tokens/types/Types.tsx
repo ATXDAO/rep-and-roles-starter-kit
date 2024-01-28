@@ -1,14 +1,14 @@
 import { ImageProps } from "../cards/property-cards/ImageCard";
 import { StringCardProps } from "../cards/property-cards/StringCard";
 
-export interface ElementClasses {
-  container?: string;
+export interface CardClasses {
+  card?: string;
   value?: string;
 }
 
 export interface BaseElementConfigProp {
   isRendering?: boolean;
-  classes?: ElementClasses;
+  classes?: CardClasses;
   isPrettyLoading?: boolean;
 }
 
@@ -40,6 +40,6 @@ export interface TokenGroupCardConfigProps {
 }
 
 export interface TokenGroupCardClasses {
-  container: string;
+  tokenCardsContainer: string;
   card: string;
 }

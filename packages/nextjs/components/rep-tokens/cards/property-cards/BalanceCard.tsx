@@ -1,13 +1,13 @@
-import { ElementClasses } from "../../types/Types";
-
-export interface BigIntCardPropsInternal {
-  props: BigIntCardProps;
-}
+import { CardClasses } from "../../types/Types";
 
 export interface BigIntCardProps {
   value: bigint;
-  classes?: ElementClasses;
+  classes?: CardClasses;
   isPrettyLoading?: boolean;
+}
+
+export interface BigIntCardPropsInternal {
+  props: BigIntCardProps;
 }
 
 export const BalanceCard = ({ props }: BigIntCardPropsInternal) => {
@@ -22,7 +22,7 @@ export const BalanceCard = ({ props }: BigIntCardPropsInternal) => {
     : (output = 0);
 
   return (
-    <div className={props?.classes?.container}>
+    <div className={props?.classes?.card}>
       <p className={props?.classes?.value}>{output}</p>
     </div>
   );
