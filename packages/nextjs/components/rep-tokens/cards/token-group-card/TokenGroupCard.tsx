@@ -2,19 +2,13 @@ import { CardClasses } from "../../types/Types";
 import { TokenCard } from "../token-card/TokenCard";
 import { TokenCardProps } from "../token-card/TokenCard";
 import { StringCardProps } from "../value-cards/StringCard";
-import { Address } from "~~/components/scaffold-eth";
 
 export interface TokenGroupProps {
-  address: StringCardProps;
-  tokenCardsProps: TokenCardProps[];
-  classes?: TokenGroupCardElementsClasses;
+  cardClasses?: CardClasses;
   isPrettyLoading?: boolean;
-}
-
-export interface TokenGroupCardElementsClasses {
-  card?: string;
-  tokenCardsContainer?: string;
-  address?: CardClasses;
+  addressProps?: StringCardProps;
+  tokenCardsProps: TokenCardProps[];
+  addressOutput?: JSX.Element;
 }
 
 export interface TokenGroupCardInternalProps {
@@ -27,10 +21,10 @@ export const TokenGroupCard = ({ props }: TokenGroupCardInternalProps) => {
   ));
 
   let output = (
-    <>
-      <Address props={props.address}></Address>
-      <div className={props.classes?.tokenCardsContainer}>{tokenCards}</div>
-    </>
+    <div>
+      {props.addressOutput}
+      <div className={props.cardClasses?.value}>{tokenCards}</div>
+    </div>
   );
 
   if (props.isPrettyLoading) {
@@ -58,7 +52,7 @@ export const TokenGroupCard = ({ props }: TokenGroupCardInternalProps) => {
 
   return (
     <>
-      <div className={props?.classes?.card}>{output}</div>
+      <div className={props?.cardClasses?.card}>{output}</div>
     </>
   );
 };

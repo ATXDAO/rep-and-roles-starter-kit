@@ -1,5 +1,4 @@
 import { ImageProps } from "../cards/value-cards/ImageCard";
-import { StringCardProps } from "../cards/value-cards/StringCard";
 
 export interface CardClasses {
   card?: string;
@@ -33,13 +32,8 @@ export interface TokenCardConfigProps {
 
 export interface TokenGroupCardConfigProps {
   isRendering: boolean;
-  classes: TokenGroupCardClasses;
-  address: StringCardProps;
+  cardClasses: CardClasses;
+  address?: ValueCardConfigProps;
   isPrettyLoading: boolean;
   tokenCardProps: TokenCardConfigProps;
-}
-
-export interface TokenGroupCardClasses {
-  tokenCardsContainer: string;
-  card: string;
 }

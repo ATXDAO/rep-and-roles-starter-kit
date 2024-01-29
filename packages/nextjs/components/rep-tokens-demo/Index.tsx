@@ -15,6 +15,7 @@ import { tokenGroupCardConfigProps } from "./MainTokensCardConfig";
 //   tokensCardPropertiesClasses as navBarTokenGroupCardElementsClasses,
 // } from "./NavBarCardConfig";
 import { useAccount } from "wagmi";
+import { Address } from "~~/components/scaffold-eth";
 
 export const Index = () => {
   const { address } = useAccount();
@@ -40,7 +41,11 @@ export const Index = () => {
     tokensData.address,
     tokenGroupCardConfigProps.tokenCardProps,
   );
-  const mainTokenGroupCard = buildTokenGroupCard(tokenGroupCardConfigProps, mainTokenCards, tokensData.address);
+  const mainTokenGroupCardProps = buildTokenGroupCard(tokenGroupCardConfigProps, mainTokenCards, tokensData.address);
+
+  if (tokenGroupCardConfigProps.address?.isRendering) {
+    mainTokenGroupCardProps.addressOutput = <Address props={mainTokenGroupCardProps.addressProps} />;
+  }
 
   return (
     <>
@@ -57,7 +62,7 @@ export const Index = () => {
 
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
-          <TokenGroupCard props={mainTokenGroupCard} />
+          <TokenGroupCard props={mainTokenGroupCardProps} />
         </div>
       </div>
 

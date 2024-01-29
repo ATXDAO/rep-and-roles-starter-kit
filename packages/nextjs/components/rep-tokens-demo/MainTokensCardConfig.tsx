@@ -69,18 +69,18 @@ export const tokenCardProps = {
 
 export const tokenGroupCardConfigProps = {
   isRendering: true,
-  classes: {
-    tokenCardsContainer: "flex justify-center bg bg-slate-1000 p-3",
-    card: "bg-slate-800 flex flex-col items-center",
+  cardClasses: {
+    card: "bg-slate-900 flex flex-col items-center p-5",
+    value: "bg-slate-800 flex justify-center p-5",
   },
   address: {
     isRendering: true,
     classes: {
-      card: "flex items-center justify-center bg-slate-300",
+      card: "m-5 flex items-center justify-center bg-slate-300",
       value: "rounded mx-auto",
     },
     isPrettyLoading: true,
-  },
+  } as ValueCardConfigProps,
 
   isPrettyLoading: true,
   tokenCardProps,

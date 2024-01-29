@@ -7,13 +7,15 @@ import { TokenGroupCardConfigProps } from "../types/Types";
 export function buildTokenGroupCard(config: TokenGroupCardConfigProps, tokenCards: TokenCardProps[], address?: string) {
   const tokenGroupCard: TokenGroupProps = {
     tokenCardsProps: tokenCards,
-    classes: config.classes,
-    address: {
-      value: address,
-      classes: config.address.classes,
-      isPrettyLoading: config.isPrettyLoading,
-    },
-    isPrettyLoading: config.isPrettyLoading,
+    cardClasses: config.cardClasses,
+    addressProps: config?.address?.isRendering
+      ? {
+          value: address,
+          classes: config?.address?.classes,
+          isPrettyLoading: config?.isPrettyLoading,
+        }
+      : undefined,
+    isPrettyLoading: config?.isPrettyLoading,
   };
 
   return tokenGroupCard;
@@ -69,6 +71,5 @@ export function buildTokenCards(tokens: Token[], address?: string, tokenCardProp
     arr.push(tokenCardProp);
   }
 
-  console.log(arr);
   return arr;
 }
