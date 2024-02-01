@@ -1,14 +1,21 @@
 "use client";
 
 import { tokenCardConfigProps as singleCardConfig } from "./configs/SingleCardConfig";
+import { balanceConfigProps } from "./configs/values/BalanceCardConfig";
 import { useAccount } from "wagmi";
 import { tokenGroupCardConfigProps as mainTokenGroupCardConfigProps } from "~~/app/rep-tokens-demo/_components/configs/MainTokensCardConfig";
 import { tokenGroupCardConfigProps as mainTokenGroupOverlayCardConfigProps } from "~~/app/rep-tokens-demo/_components/configs/MainTokensCardWithNumberOverlayConfig";
 import { tokenGroupCardConfigProps as navBarTokenGroupConfigProps } from "~~/app/rep-tokens-demo/_components/configs/NavBarCardConfig";
 import { TokenCard } from "~~/components/rep-tokens/cards/token-card/TokenCard";
 import { TokenGroupCard } from "~~/components/rep-tokens/cards/token-group-card/TokenGroupCard";
+import { BalanceCard } from "~~/components/rep-tokens/cards/value-cards/BalanceCard";
 import { useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
-import { buildTokenCard, buildTokenCards, buildTokenGroupCard } from "~~/components/rep-tokens/utils/buildTokensCard";
+import {
+  buildBalanceCard,
+  buildTokenCard,
+  buildTokenCards,
+  buildTokenGroupCard,
+} from "~~/components/rep-tokens/utils/buildTokensCard";
 import { Address } from "~~/components/scaffold-eth";
 
 export function RepTokensDemo() {
@@ -66,8 +73,16 @@ export function RepTokensDemo() {
 
   const singleCard0 = buildTokenCard(tokensData?.tokens[0], tokensData.address, singleCardConfig);
 
+  const balanceProps = buildBalanceCard(tokensData?.tokens[0]?.balance, balanceConfigProps);
+
   return (
     <>
+      <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
+        <div>
+          <BalanceCard props={balanceProps} />
+        </div>
+      </div>
+
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
           <TokenCard props={singleCard0} />

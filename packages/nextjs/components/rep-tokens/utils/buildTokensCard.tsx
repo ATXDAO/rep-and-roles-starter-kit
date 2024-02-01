@@ -1,7 +1,8 @@
 import { TokenCardProps } from "../cards/token-card/TokenCard";
 import { TokenGroupProps } from "../cards/token-group-card/TokenGroupCard";
+import { BigIntCardProps } from "../cards/value-cards/BalanceCard";
 import { Token } from "../hooks/Hooks";
-import { TokenCardConfigProps } from "../types/Types";
+import { TokenCardConfigProps, ValueCardConfigProps } from "../types/Types";
 import { TokenGroupCardConfigProps } from "../types/Types";
 
 export function buildTokenGroupCard(config: TokenGroupCardConfigProps, tokenCards: TokenCardProps[], address?: string) {
@@ -21,6 +22,20 @@ export function buildTokenGroupCard(config: TokenGroupCardConfigProps, tokenCard
   return tokenGroupCard;
 }
 
+export function buildBalanceCard(value: bigint, configProps?: ValueCardConfigProps) {
+  if (!value) return {} as BigIntCardProps;
+
+  return (
+    configProps?.isRendering
+      ? {
+          value,
+          classes: configProps?.classes,
+          isPrettyLoading: configProps?.isPrettyLoading,
+        }
+      : undefined
+  ) as BigIntCardProps;
+}
+
 export function buildTokenCard(token: Token, address?: string, tokenCardProps?: TokenCardConfigProps) {
   if (!token) return {} as TokenCardProps;
 
@@ -28,13 +43,7 @@ export function buildTokenCard(token: Token, address?: string, tokenCardProps?: 
     isPrettyLoading: tokenCardProps?.isPrettyLoading,
     cardClasses: tokenCardProps?.cardClasses,
     valuesProps: {
-      balanceProps: tokenCardProps?.valuesProps?.balanceConfigProps?.isRendering
-        ? {
-            value: token.balance,
-            classes: tokenCardProps?.valuesProps?.balanceConfigProps?.classes,
-            isPrettyLoading: tokenCardProps?.valuesProps?.balanceConfigProps?.isPrettyLoading,
-          }
-        : undefined,
+      balanceProps: buildBalanceCard(token.balance, tokenCardProps?.valuesProps?.balanceConfigProps),
       nameProps: tokenCardProps?.valuesProps?.nameConfigProps?.isRendering
         ? {
             value: token.name,
