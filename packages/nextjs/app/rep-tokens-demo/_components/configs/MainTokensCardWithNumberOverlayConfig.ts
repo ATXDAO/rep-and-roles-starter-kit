@@ -7,7 +7,7 @@ import {
 } from "../../../../components/rep-tokens/types/Types";
 import { TokenGroupCardConfigProps } from "../../../../components/rep-tokens/types/Types";
 
-export const balanceProps = {
+export const balanceConfigProps = {
   isRendering: true,
   classes: {
     card: "absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/3",
@@ -16,7 +16,7 @@ export const balanceProps = {
   isPrettyLoading: true,
 } as ValueCardConfigProps;
 
-export const imageProps = {
+export const imageConfigProps = {
   isRendering: true,
   classes: {
     card: "rounded-lg bg-slate-300 p-1",
@@ -26,7 +26,7 @@ export const imageProps = {
   isPrettyLoading: true,
 } as ImageValueCardConfigProp;
 
-export const nameProps = {
+export const nameConfigProps = {
   isRendering: true,
   classes: {
     card: "rounded-lg bg-slate-300",
@@ -35,7 +35,7 @@ export const nameProps = {
   isPrettyLoading: true,
 } as ValueCardConfigProps;
 
-export const descriptionProps = {
+export const descriptionConfigProps = {
   isRendering: true,
   classes: {
     card: "rounded-lg bg-slate-300",
@@ -44,7 +44,7 @@ export const descriptionProps = {
   isPrettyLoading: true,
 } as ValueCardConfigProps;
 
-export const addressProps = {
+export const addressConfigProps = {
   isRendering: true,
   classes: {
     card: "rounded-lg flex items-center justify-center bg-slate-300",
@@ -53,12 +53,32 @@ export const addressProps = {
   isPrettyLoading: true,
 } as ValueCardConfigProps;
 
+export const isTradeableConfigProps = {
+  isRendering: true,
+  classes: {
+    card: "rounded-lg bg-slate-300 ",
+    value: "text-1xl text-center object-center mx-auto font-bold break-all text-black",
+  },
+  isPrettyLoading: true,
+} as ValueCardConfigProps;
+
+export const maxMintAmountConfigProps = {
+  isRendering: true,
+  classes: {
+    card: "rounded-lg bg-slate-300",
+    value: "text-1xl text-center object-center mx-auto font-bold text-black",
+  },
+  isPrettyLoading: true,
+} as ValueCardConfigProps;
+
 export const tokenCardValuesProps = {
-  balanceProps,
-  imageProps,
-  nameProps,
-  descriptionProps,
-  addressProps,
+  balanceConfigProps,
+  imageConfigProps,
+  nameConfigProps,
+  descriptionConfigProps,
+  addressConfigProps,
+  isTradeableConfigProps,
+  maxMintAmountConfigProps,
 } as TokenCardValuesConfigProps;
 
 export const tokenCardConfigProps = {

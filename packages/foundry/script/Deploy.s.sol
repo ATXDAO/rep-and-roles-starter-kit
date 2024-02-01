@@ -113,12 +113,19 @@ contract DeployScript is ScaffoldETHDeploy {
 
         TokensPropertiesStorage.TokenProperties
             memory tokenProperties = TokensPropertiesStorage.TokenProperties(
-                true,
+                false,
                 100
             );
 
         instance.createToken(tokenProperties);
-        // instance.createToken(tokenProperties);
+
+        // TokensPropertiesStorage.TokenProperties
+        //     memory tokenProperties2 = TokensPropertiesStorage.TokenProperties(
+        //         true,
+        //         100
+        //     );
+
+        // instance.createToken(tokenProperties2);
 
         instance.setTokenURI(0, string.concat(BASE_URI, "0"));
         // instance.setTokenURI(1, string.concat(BASE_URI, "1"));
@@ -127,26 +134,26 @@ contract DeployScript is ScaffoldETHDeploy {
         mintOperations.to = 0x62286D694F89a1B12c0214bfcD567bb6c2951491;
 
         mintOperations
-            .operations = new IReputationTokensInternal.TokenOperation[](2);
+            .operations = new IReputationTokensInternal.TokenOperation[](1);
         mintOperations.operations[0] = IReputationTokensInternal.TokenOperation(
             0,
             90
         );
-        mintOperations.operations[1] = IReputationTokensInternal.TokenOperation(
-            1,
-            45
-        );
+        // mintOperations.operations[1] = IReputationTokensInternal.TokenOperation(
+        //     1,
+        //     45
+        // );
         instance.mint(mintOperations);
 
         IReputationTokensInternal.TokensOperations memory mintOperations2;
         mintOperations2.to = 0x2643658817324C6536E3A027a15Cd11576Fa5884;
 
         mintOperations2
-            .operations = new IReputationTokensInternal.TokenOperation[](2);
+            .operations = new IReputationTokensInternal.TokenOperation[](1);
         mintOperations2.operations[0] = IReputationTokensInternal
             .TokenOperation(0, 90);
-        mintOperations2.operations[1] = IReputationTokensInternal
-            .TokenOperation(1, 45);
+        // mintOperations2.operations[1] = IReputationTokensInternal
+        //     .TokenOperation(1, 45);
         instance.mint(mintOperations2);
 
         // Hats hatsInstance = new Hats("Hats", "ipfs");

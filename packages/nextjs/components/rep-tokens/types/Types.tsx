@@ -16,11 +16,13 @@ export interface ImageValueCardConfigProp extends ValueCardConfigProps {
 }
 
 export interface TokenCardValuesConfigProps {
-  balanceProps?: ValueCardConfigProps;
-  imageProps?: ImageValueCardConfigProp;
-  nameProps?: ValueCardConfigProps;
-  descriptionProps?: ValueCardConfigProps;
-  addressProps?: ValueCardConfigProps;
+  balanceConfigProps?: ValueCardConfigProps;
+  imageConfigProps?: ImageValueCardConfigProp;
+  nameConfigProps?: ValueCardConfigProps;
+  descriptionConfigProps?: ValueCardConfigProps;
+  addressConfigProps?: ValueCardConfigProps;
+  isTradeableConfigProps?: ValueCardConfigProps;
+  maxMintAmountConfigProps?: ValueCardConfigProps;
 }
 
 export interface TokenCardConfigProps {

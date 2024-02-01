@@ -28,40 +28,54 @@ export function buildTokenCard(token: Token, address?: string, tokenCardProps?: 
     isPrettyLoading: tokenCardProps?.isPrettyLoading,
     cardClasses: tokenCardProps?.cardClasses,
     valuesProps: {
-      balanceProps: tokenCardProps?.valuesProps?.balanceProps?.isRendering
+      balanceProps: tokenCardProps?.valuesProps?.balanceConfigProps?.isRendering
         ? {
             value: token.balance,
-            classes: tokenCardProps?.valuesProps?.balanceProps?.classes,
-            isPrettyLoading: tokenCardProps?.valuesProps?.balanceProps?.isPrettyLoading,
+            classes: tokenCardProps?.valuesProps?.balanceConfigProps?.classes,
+            isPrettyLoading: tokenCardProps?.valuesProps?.balanceConfigProps?.isPrettyLoading,
           }
         : undefined,
-      nameProps: tokenCardProps?.valuesProps?.nameProps?.isRendering
+      nameProps: tokenCardProps?.valuesProps?.nameConfigProps?.isRendering
         ? {
             value: token.name,
-            classes: tokenCardProps?.valuesProps?.nameProps?.classes,
-            isPrettyLoading: tokenCardProps?.valuesProps?.nameProps?.isPrettyLoading,
+            classes: tokenCardProps?.valuesProps?.nameConfigProps?.classes,
+            isPrettyLoading: tokenCardProps?.valuesProps?.nameConfigProps?.isPrettyLoading,
           }
         : undefined,
-      descriptionProps: tokenCardProps?.valuesProps?.descriptionProps?.isRendering
+      descriptionProps: tokenCardProps?.valuesProps?.descriptionConfigProps?.isRendering
         ? {
             value: token.description,
-            classes: tokenCardProps?.valuesProps?.descriptionProps?.classes,
-            isPrettyLoading: tokenCardProps?.valuesProps?.descriptionProps?.isPrettyLoading,
+            classes: tokenCardProps?.valuesProps?.descriptionConfigProps?.classes,
+            isPrettyLoading: tokenCardProps?.valuesProps?.descriptionConfigProps?.isPrettyLoading,
           }
         : undefined,
-      imageProps: tokenCardProps?.valuesProps?.imageProps?.isRendering
+      imageProps: tokenCardProps?.valuesProps?.imageConfigProps?.isRendering
         ? {
             value: token.image,
-            properties: tokenCardProps?.valuesProps?.imageProps?.imageProperties,
-            classes: tokenCardProps?.valuesProps?.imageProps?.classes,
-            isPrettyLoading: tokenCardProps?.valuesProps?.imageProps?.isPrettyLoading,
+            properties: tokenCardProps?.valuesProps?.imageConfigProps?.imageProperties,
+            classes: tokenCardProps?.valuesProps?.imageConfigProps?.classes,
+            isPrettyLoading: tokenCardProps?.valuesProps?.imageConfigProps?.isPrettyLoading,
           }
         : undefined,
-      addressProps: tokenCardProps?.valuesProps?.addressProps?.isRendering
+      addressProps: tokenCardProps?.valuesProps?.addressConfigProps?.isRendering
         ? {
             value: address,
-            classes: tokenCardProps?.valuesProps?.addressProps?.classes,
-            isPrettyLoading: tokenCardProps?.valuesProps?.addressProps?.isPrettyLoading,
+            classes: tokenCardProps?.valuesProps?.addressConfigProps?.classes,
+            isPrettyLoading: tokenCardProps?.valuesProps?.addressConfigProps?.isPrettyLoading,
+          }
+        : undefined,
+      isTradeableProps: tokenCardProps?.valuesProps?.isTradeableConfigProps?.isRendering
+        ? {
+            value: `Is Tradeable: ${token.properties.isTradeable}`,
+            classes: tokenCardProps?.valuesProps?.isTradeableConfigProps?.classes,
+            isPrettyLoading: tokenCardProps?.valuesProps?.isTradeableConfigProps?.isPrettyLoading,
+          }
+        : undefined,
+      maxMintAmountProps: tokenCardProps?.valuesProps?.maxMintAmountConfigProps?.isRendering
+        ? {
+            value: `Max Mint Amount Per Tx: ${token.properties.maxMintAmountPerTx}`,
+            classes: tokenCardProps?.valuesProps?.maxMintAmountConfigProps?.classes,
+            isPrettyLoading: tokenCardProps?.valuesProps?.maxMintAmountConfigProps?.isPrettyLoading,
           }
         : undefined,
     },
@@ -72,52 +86,7 @@ export function buildTokenCards(tokens: Token[], address?: string, tokenCardProp
   const arr = [];
 
   for (let i = 0; i < tokens.length; i++) {
-    const tokenCardProp: TokenCardProps = buildTokenCard(tokens[i], address, tokenCardProps);
-
-    // const tokenCardProp: TokenCardProps = {
-    //   isPrettyLoading: tokenCardProps?.isPrettyLoading,
-    //   cardClasses: tokenCardProps?.cardClasses,
-    //   valuesProps: {
-    //     balanceProps: tokenCardProps?.valuesProps?.balanceProps?.isRendering
-    //       ? {
-    //           value: tokens[i].balance,
-    //           classes: tokenCardProps?.valuesProps?.balanceProps?.classes,
-    //           isPrettyLoading: tokenCardProps?.valuesProps?.balanceProps?.isPrettyLoading,
-    //         }
-    //       : undefined,
-    //     nameProps: tokenCardProps?.valuesProps?.nameProps?.isRendering
-    //       ? {
-    //           value: tokens[i].name,
-    //           classes: tokenCardProps?.valuesProps?.nameProps?.classes,
-    //           isPrettyLoading: tokenCardProps?.valuesProps?.nameProps?.isPrettyLoading,
-    //         }
-    //       : undefined,
-    //     descriptionProps: tokenCardProps?.valuesProps?.descriptionProps?.isRendering
-    //       ? {
-    //           value: tokens[i].description,
-    //           classes: tokenCardProps?.valuesProps?.descriptionProps?.classes,
-    //           isPrettyLoading: tokenCardProps?.valuesProps?.descriptionProps?.isPrettyLoading,
-    //         }
-    //       : undefined,
-    //     imageProps: tokenCardProps?.valuesProps?.imageProps?.isRendering
-    //       ? {
-    //           value: tokens[i].image,
-    //           properties: tokenCardProps?.valuesProps?.imageProps?.imageProperties,
-    //           classes: tokenCardProps?.valuesProps?.imageProps?.classes,
-    //           isPrettyLoading: tokenCardProps?.valuesProps?.imageProps?.isPrettyLoading,
-    //         }
-    //       : undefined,
-    //     addressProps: tokenCardProps?.valuesProps?.addressProps?.isRendering
-    //       ? {
-    //           value: address,
-    //           classes: tokenCardProps?.valuesProps?.addressProps?.classes,
-    //           isPrettyLoading: tokenCardProps?.valuesProps?.addressProps?.isPrettyLoading,
-    //         }
-    //       : undefined,
-    //   },
-    // };
-
-    arr.push(tokenCardProp);
+    arr.push(buildTokenCard(tokens[i], address, tokenCardProps));
   }
 
   return arr;

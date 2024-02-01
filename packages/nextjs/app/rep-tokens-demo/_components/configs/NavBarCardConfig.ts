@@ -7,7 +7,7 @@ import {
 } from "../../../../components/rep-tokens/types/Types";
 import { TokenGroupCardConfigProps } from "../../../../components/rep-tokens/types/Types";
 
-export const balanceProps = {
+export const balanceConfigProps = {
   isRendering: true,
   classes: {
     card: "rounded-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
@@ -16,7 +16,7 @@ export const balanceProps = {
   isPrettyLoading: true,
 } as ValueCardConfigProps;
 
-export const imageProps = {
+export const imageConfigProps = {
   isRendering: true,
   classes: {
     card: "rounded-lg bg-slate-300 p-1",
@@ -27,8 +27,8 @@ export const imageProps = {
 } as ImageValueCardConfigProp;
 
 export const tokenCardValuesProps = {
-  balanceProps,
-  imageProps,
+  balanceConfigProps,
+  imageConfigProps,
 } as TokenCardValuesConfigProps;
 
 export const tokenCardConfigProps = {

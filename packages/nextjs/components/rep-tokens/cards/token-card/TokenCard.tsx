@@ -9,6 +9,8 @@ export interface ValuesProps {
   descriptionProps?: StringCardProps;
   imageProps?: ImageCardProps;
   addressProps?: StringCardProps;
+  isTradeableProps?: StringCardProps;
+  maxMintAmountProps?: StringCardProps;
 }
 
 export interface TokenCardProps {
@@ -29,6 +31,8 @@ export const TokenCard = ({ props }: TokenCardInternalProps) => {
       {props?.valuesProps?.nameProps ? <StringCard props={props?.valuesProps?.nameProps} /> : <></>}
       {props?.valuesProps?.descriptionProps ? <StringCard props={props?.valuesProps?.descriptionProps} /> : <></>}
       {props?.valuesProps?.addressProps ? <Address props={props?.valuesProps?.addressProps} /> : <></>}
+      {props?.valuesProps?.isTradeableProps ? <StringCard props={props?.valuesProps?.isTradeableProps} /> : <></>}
+      {props?.valuesProps?.maxMintAmountProps ? <StringCard props={props?.valuesProps?.maxMintAmountProps} /> : <></>}
     </>
   );
 

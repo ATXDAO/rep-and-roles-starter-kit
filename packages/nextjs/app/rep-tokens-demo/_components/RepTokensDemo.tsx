@@ -66,8 +66,6 @@ export function RepTokensDemo() {
 
   const singleCard0 = buildTokenCard(tokensData?.tokens[0], tokensData.address, singleCardConfig);
 
-  console.log(singleCard0);
-
   return (
     <>
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
