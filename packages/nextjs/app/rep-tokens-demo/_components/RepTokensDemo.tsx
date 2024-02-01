@@ -1,10 +1,8 @@
 "use client";
 
+import { tokenCardConfigProps as singleCardConfig } from "./SingleCardConfig";
 import { useAccount } from "wagmi";
-import {
-  tokenGroupCardConfigProps as mainTokenGroupCardConfigProps,
-  tokenCardConfigProps,
-} from "~~/app/rep-tokens-demo/_components/MainTokensCardConfig";
+import { tokenGroupCardConfigProps as mainTokenGroupCardConfigProps } from "~~/app/rep-tokens-demo/_components/MainTokensCardConfig";
 import { tokenGroupCardConfigProps as mainTokenGroupOverlayCardConfigProps } from "~~/app/rep-tokens-demo/_components/MainTokensCardWithNumberOverlayConfig";
 import { tokenGroupCardConfigProps as navBarTokenGroupConfigProps } from "~~/app/rep-tokens-demo/_components/NavBarCardConfig";
 import { TokenCard } from "~~/components/rep-tokens/cards/token-card/TokenCard";
@@ -66,7 +64,7 @@ export function RepTokensDemo() {
     navBarTokenGroupCardProps.addressOutput = <Address props={navBarTokenGroupCardProps.addressProps} />;
   }
 
-  const singleCard0 = buildTokenCard(tokensData.tokens[0], tokensData.address, tokenCardConfigProps);
+  const singleCard0 = buildTokenCard(tokensData?.tokens[0], tokensData.address, singleCardConfig);
 
   return (
     <>

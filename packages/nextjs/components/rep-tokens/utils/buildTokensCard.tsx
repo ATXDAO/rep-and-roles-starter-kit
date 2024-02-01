@@ -22,6 +22,8 @@ export function buildTokenGroupCard(config: TokenGroupCardConfigProps, tokenCard
 }
 
 export function buildTokenCard(token: Token, address?: string, tokenCardProps?: TokenCardConfigProps) {
+  if (!token) return {} as TokenCardProps;
+
   return {
     isPrettyLoading: tokenCardProps?.isPrettyLoading,
     cardClasses: tokenCardProps?.cardClasses,
