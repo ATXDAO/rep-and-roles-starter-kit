@@ -108,6 +108,7 @@ export function RepTokensDemo() {
   return (
     <>
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
+        <p className="text-center text-4xl">Individual Components</p>
         <BalanceCard props={balanceProps} />
         <ImageCard props={imageProps} />
         <StringCard props={nameProps} />
@@ -115,9 +116,17 @@ export function RepTokensDemo() {
         <Address props={addressProps} />
         <StringCard props={isTradeableProps} />
         <StringCard props={maxMintAmountProps} />
+
+        <p className="text-center text-4xl">Single Card</p>
         <TokenCard props={singleCard} />
+
+        <p className="text-center text-4xl">Multi-Card</p>
         <TokenGroupCard props={mainTokenGroupCardProps} />
+
+        <p className="text-center text-4xl">Multi-Card W/ Overlay</p>
         <TokenGroupCard props={mainTokenGroupOverlayCardProps} />
+
+        <p className="text-center text-4xl">Widget</p>
         <TokenGroupCard props={navBarTokenGroupCardProps} />
       </div>
     </>
