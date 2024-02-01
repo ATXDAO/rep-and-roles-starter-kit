@@ -12,12 +12,15 @@ import { useAccount } from "wagmi";
 import { tokenGroupCardConfigProps as mainTokenGroupCardConfigProps } from "~~/app/rep-tokens-demo/_components/configs/MainTokensCardConfig";
 import { tokenGroupCardConfigProps as mainTokenGroupOverlayCardConfigProps } from "~~/app/rep-tokens-demo/_components/configs/MainTokensCardWithNumberOverlayConfig";
 import { tokenGroupCardConfigProps as navBarTokenGroupConfigProps } from "~~/app/rep-tokens-demo/_components/configs/NavBarCardConfig";
+// Single Card
 import { TokenCard } from "~~/components/rep-tokens/cards/token-card/TokenCard";
+// Multi-Card
 import { TokenGroupCard } from "~~/components/rep-tokens/cards/token-group-card/TokenGroupCard";
 import { BalanceCard } from "~~/components/rep-tokens/cards/value-cards/BalanceCard";
 import { ImageCard } from "~~/components/rep-tokens/cards/value-cards/ImageCard";
 import { StringCard } from "~~/components/rep-tokens/cards/value-cards/StringCard";
 import { useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
+// Utils
 import {
   buildBalanceCard,
   buildImageCard,
@@ -26,10 +29,14 @@ import {
   buildTokenCards,
   buildTokenGroupCard,
 } from "~~/components/rep-tokens/utils/buildTokensCard";
+// Individual Components
 import { Address } from "~~/components/scaffold-eth";
 
 export function RepTokensDemo() {
-  //Data Gathering
+  //////
+  ////// Data Gathering
+  /////
+
   const { address } = useAccount();
   const { tokensData } = useRepTokens(address);
 
@@ -37,8 +44,11 @@ export function RepTokensDemo() {
     tokensData.tokens[i].image = tokensData.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
   }
 
-  //Card Creation
+  //////
+  ////// Card Creation
+  /////
 
+  // Individual Components
   const balanceProps = buildBalanceCard(tokensData?.tokens[0]?.balance, balanceConfigProps);
   const nameProps = buildStringCard(tokensData?.tokens[0]?.name, nameConfigProps);
   const descriptionsProps = buildStringCard(tokensData?.tokens[0]?.description, descriptionConfigProps);
@@ -58,8 +68,10 @@ export function RepTokensDemo() {
     maxMintAmountConfigProps,
   );
 
+  // Single Card
   const singleCard = buildTokenCard(tokensData?.tokens[0], tokensData.address, singleCardConfig);
 
+  // Multi-card
   const mainTokenCards = buildTokenCards(
     tokensData.tokens,
     tokensData.address,
@@ -75,6 +87,7 @@ export function RepTokensDemo() {
     mainTokenGroupCardProps.addressOutput = <Address props={mainTokenGroupCardProps.addressProps} />;
   }
 
+  // Multi-card with overlay
   const mainTokensOverlayCards = buildTokenCards(
     tokensData.tokens,
     tokensData.address,
@@ -90,6 +103,7 @@ export function RepTokensDemo() {
     mainTokenGroupOverlayCardProps.addressOutput = <Address props={mainTokenGroupOverlayCardProps.addressProps} />;
   }
 
+  // Widget
   const navBarTokenCards = buildTokenCards(
     tokensData.tokens,
     tokensData.address,
