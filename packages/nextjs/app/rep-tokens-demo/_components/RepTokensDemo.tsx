@@ -3,6 +3,7 @@
 import { useAccount } from "wagmi";
 import { tokenGroupCardConfigProps as mainTokenGroupCardConfigProps } from "~~/app/rep-tokens-demo/_components/MainTokensCardConfig";
 import { tokenGroupCardConfigProps as mainTokenGroupOverlayCardConfigProps } from "~~/app/rep-tokens-demo/_components/MainTokensCardWithNumberOverlayConfig";
+import { tokenGroupCardConfigProps as navBarTokenGroupConfigProps } from "~~/app/rep-tokens-demo/_components/NavBarCardConfig";
 import { TokenGroupCard } from "~~/components/rep-tokens/cards/token-group-card/TokenGroupCard";
 import { useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
 import { buildTokenCards, buildTokenGroupCard } from "~~/components/rep-tokens/utils/buildTokensCard";
@@ -45,6 +46,22 @@ export function RepTokensDemo() {
   if (mainTokenGroupOverlayCardConfigProps.address?.isRendering) {
     mainTokenGroupOverlayCardProps.addressOutput = <Address props={mainTokenGroupOverlayCardProps.addressProps} />;
   }
+
+  const navBarTokenCards = buildTokenCards(
+    tokensData.tokens,
+    tokensData.address,
+    navBarTokenGroupConfigProps.tokenCardProps,
+  );
+  const navBarTokenGroupCardProps = buildTokenGroupCard(
+    navBarTokenGroupConfigProps,
+    navBarTokenCards,
+    tokensData.address,
+  );
+
+  if (navBarTokenGroupConfigProps.address?.isRendering) {
+    navBarTokenGroupCardProps.addressOutput = <Address props={navBarTokenGroupCardProps.addressProps} />;
+  }
+
   return (
     <>
       {/* <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
@@ -57,6 +74,12 @@ export function RepTokensDemo() {
           />
         </div>
       </div> */}
+
+      <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
+        <div>
+          <TokenGroupCard props={navBarTokenGroupCardProps} />
+        </div>
+      </div>
 
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
