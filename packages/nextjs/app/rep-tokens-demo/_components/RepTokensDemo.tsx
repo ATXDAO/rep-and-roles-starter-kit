@@ -1,6 +1,7 @@
 "use client";
 
 import { tokenCardConfigProps as singleCardConfig } from "./configs/SingleCardConfig";
+import { addressConfigProps } from "./configs/values/AddressCardConfig";
 import { balanceConfigProps } from "./configs/values/BalanceCardConfig";
 import { descriptionConfigProps } from "./configs/values/DescriptionCardConfig";
 import { imageConfigProps } from "./configs/values/ImageCardConfig";
@@ -42,6 +43,8 @@ export function RepTokensDemo() {
   const nameProps = buildStringCard(tokensData?.tokens[0]?.name, nameConfigProps);
   const descriptionsProps = buildStringCard(tokensData?.tokens[0]?.description, descriptionConfigProps);
   const imageProps = buildImageCard(tokensData?.tokens[0]?.image, imageConfigProps);
+  const addressProps = buildStringCard(tokensData?.address, addressConfigProps);
+
   const isTradeableProps = buildStringCard(
     tokensData?.tokens[0]?.properties?.isTradeable !== undefined
       ? `Is Tradeable: ${tokensData?.tokens[0]?.properties.isTradeable}`
@@ -109,6 +112,7 @@ export function RepTokensDemo() {
         <ImageCard props={imageProps} />
         <StringCard props={nameProps} />
         <StringCard props={descriptionsProps} />
+        <Address props={addressProps} />
         <StringCard props={isTradeableProps} />
         <StringCard props={maxMintAmountProps} />
         <TokenCard props={singleCard} />
