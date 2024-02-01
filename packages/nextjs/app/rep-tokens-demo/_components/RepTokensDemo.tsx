@@ -12,15 +12,12 @@ import { useAccount } from "wagmi";
 import { tokenGroupCardConfigProps as mainTokenGroupCardConfigProps } from "~~/app/rep-tokens-demo/_components/configs/MainTokensCardConfig";
 import { tokenGroupCardConfigProps as mainTokenGroupOverlayCardConfigProps } from "~~/app/rep-tokens-demo/_components/configs/MainTokensCardWithNumberOverlayConfig";
 import { tokenGroupCardConfigProps as navBarTokenGroupConfigProps } from "~~/app/rep-tokens-demo/_components/configs/NavBarCardConfig";
-// Single Card
 import { TokenCard } from "~~/components/rep-tokens/cards/token-card/TokenCard";
-// Multi-Card
 import { TokenGroupCard } from "~~/components/rep-tokens/cards/token-group-card/TokenGroupCard";
 import { BalanceCard } from "~~/components/rep-tokens/cards/value-cards/BalanceCard";
 import { ImageCard } from "~~/components/rep-tokens/cards/value-cards/ImageCard";
 import { StringCard } from "~~/components/rep-tokens/cards/value-cards/StringCard";
 import { useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
-// Utils
 import {
   buildBalanceCard,
   buildImageCard,
@@ -29,7 +26,6 @@ import {
   buildTokenCards,
   buildTokenGroupCard,
 } from "~~/components/rep-tokens/utils/buildTokensCard";
-// Individual Components
 import { Address } from "~~/components/scaffold-eth";
 
 export function RepTokensDemo() {
