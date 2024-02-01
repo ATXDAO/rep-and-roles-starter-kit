@@ -25,8 +25,6 @@ export function buildTokenGroupCard(config: TokenGroupCardConfigProps, tokenCard
 }
 
 export function buildBalanceCard(value?: bigint, configProps?: ValueCardConfigProps) {
-  if (!value) return {} as BigIntCardProps;
-
   return (
     configProps?.isRendering
       ? {
@@ -39,8 +37,6 @@ export function buildBalanceCard(value?: bigint, configProps?: ValueCardConfigPr
 }
 
 export function buildStringCard(value?: string, configProps?: ValueCardConfigProps) {
-  if (!value) return {} as StringCardProps;
-
   return (
     configProps?.isRendering
       ? {
@@ -53,8 +49,6 @@ export function buildStringCard(value?: string, configProps?: ValueCardConfigPro
 }
 
 export function buildImageCard(value?: string, configProps?: ImageValueCardConfigProp) {
-  if (!value) return {} as ImageCardProps;
-
   return (
     configProps?.isRendering
       ? {

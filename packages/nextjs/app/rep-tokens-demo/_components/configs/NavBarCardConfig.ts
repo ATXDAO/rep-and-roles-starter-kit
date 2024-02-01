@@ -40,7 +40,7 @@ export const tokenCardConfigProps = {
 export const tokenGroupCardConfigProps = {
   isRendering: true,
   cardClasses: {
-    card: "rounded-lg bg-slate-900 flex flex-col items-center p-5",
+    card: "text-white rounded-lg bg-slate-900 flex flex-col items-center p-5",
     value: "rounded-lg bg-slate-800 flex justify-center p-5",
   },
   address: {

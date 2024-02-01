@@ -21,6 +21,8 @@ export const BalanceCard = ({ props }: BigIntCardPropsInternal) => {
     ? (output = Number(props?.value))
     : (output = 0);
 
+  console.log(output);
+
   return (
     <div className={props?.classes?.card}>
       <p className={props?.classes?.value}>{output}</p>

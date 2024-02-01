@@ -4,7 +4,7 @@ import { ImageValueCardConfigProp } from "~~/components/rep-tokens/types/Types";
 export const imageConfigProps = {
   isRendering: true,
   classes: {
-    card: "w-64 rounded-lg bg-cyan-300  p-1",
+    card: "text-black w-64 rounded-lg bg-cyan-300  p-1",
     value: "rounded-lg mx-auto",
   },
   imageProperties: new ImageProps("Token", 256, 256),

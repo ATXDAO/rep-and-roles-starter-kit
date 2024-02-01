@@ -104,10 +104,10 @@ export function RepTokensDemo() {
 
   return (
     <>
-      <div className="space-y-5 flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
+      <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <BalanceCard props={balanceProps} />
-        <StringCard props={nameProps} />
         <ImageCard props={imageProps} />
+        <StringCard props={nameProps} />
         <StringCard props={descriptionsProps} />
         <StringCard props={isTradeableProps} />
         <StringCard props={maxMintAmountProps} />
