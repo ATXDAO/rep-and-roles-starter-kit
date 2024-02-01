@@ -87,7 +87,7 @@ export const tokenCardValuesProps = {
 
 export const tokenCardProps = {
   isRendering: true,
-  cardClasses: "bg-slate-600 px-5 py-5 relative w-64",
+  cardClasses: "bg-slate-600 p-5 m-4 relative w-64",
   valuesProps: tokenCardValuesProps,
 } as TokenCardConfigProps;
 
