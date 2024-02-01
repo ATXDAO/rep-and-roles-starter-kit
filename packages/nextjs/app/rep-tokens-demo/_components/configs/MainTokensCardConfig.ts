@@ -56,7 +56,7 @@ export const addressConfigProps = {
 export const isTradeableConfigProps = {
   isRendering: true,
   classes: {
-    card: "rounded-lg bg-indigo-300 ",
+    card: "rounded-lg bg-slate-300 ",
     value: "text-1xl text-center object-center mx-auto font-bold break-all text-black",
   },
   isPrettyLoading: true,
@@ -65,7 +65,7 @@ export const isTradeableConfigProps = {
 export const maxMintAmountConfigProps = {
   isRendering: true,
   classes: {
-    card: "rounded-lg bg-teal-300",
+    card: "rounded-lg bg-slate-300",
     value: "text-1xl text-center object-center mx-auto font-bold text-black",
   },
   isPrettyLoading: true,
