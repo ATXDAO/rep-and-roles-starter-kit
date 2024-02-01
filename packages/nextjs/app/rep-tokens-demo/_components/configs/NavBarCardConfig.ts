@@ -1,11 +1,11 @@
-import { ImageProps } from "../../../components/rep-tokens/cards/value-cards/ImageCard";
+import { ImageProps } from "../../../../components/rep-tokens/cards/value-cards/ImageCard";
 import {
   ImageValueCardConfigProp,
   TokenCardConfigProps,
   TokenCardValuesConfigProps,
   ValueCardConfigProps,
-} from "../../../components/rep-tokens/types/Types";
-import { TokenGroupCardConfigProps } from "../../../components/rep-tokens/types/Types";
+} from "../../../../components/rep-tokens/types/Types";
+import { TokenGroupCardConfigProps } from "../../../../components/rep-tokens/types/Types";
 
 export const balanceProps = {
   isRendering: true,

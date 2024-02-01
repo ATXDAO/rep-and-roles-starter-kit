@@ -1,10 +1,10 @@
 "use client";
 
-import { tokenCardConfigProps as singleCardConfig } from "./SingleCardConfig";
+import { tokenCardConfigProps as singleCardConfig } from "./configs/SingleCardConfig";
 import { useAccount } from "wagmi";
-import { tokenGroupCardConfigProps as mainTokenGroupCardConfigProps } from "~~/app/rep-tokens-demo/_components/MainTokensCardConfig";
-import { tokenGroupCardConfigProps as mainTokenGroupOverlayCardConfigProps } from "~~/app/rep-tokens-demo/_components/MainTokensCardWithNumberOverlayConfig";
-import { tokenGroupCardConfigProps as navBarTokenGroupConfigProps } from "~~/app/rep-tokens-demo/_components/NavBarCardConfig";
+import { tokenGroupCardConfigProps as mainTokenGroupCardConfigProps } from "~~/app/rep-tokens-demo/_components/configs/MainTokensCardConfig";
+import { tokenGroupCardConfigProps as mainTokenGroupOverlayCardConfigProps } from "~~/app/rep-tokens-demo/_components/configs/MainTokensCardWithNumberOverlayConfig";
+import { tokenGroupCardConfigProps as navBarTokenGroupConfigProps } from "~~/app/rep-tokens-demo/_components/configs/NavBarCardConfig";
 import { TokenCard } from "~~/components/rep-tokens/cards/token-card/TokenCard";
 import { TokenGroupCard } from "~~/components/rep-tokens/cards/token-group-card/TokenGroupCard";
 import { useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
@@ -66,12 +66,10 @@ export function RepTokensDemo() {
 
   const singleCard0 = buildTokenCard(tokensData?.tokens[0], tokensData.address, singleCardConfig);
 
+  console.log(singleCard0);
+
   return (
     <>
-      <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
-        <div></div>
-      </div>
-
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
           <TokenCard props={singleCard0} />

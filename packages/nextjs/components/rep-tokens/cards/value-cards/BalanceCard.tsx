@@ -13,6 +13,8 @@ export interface BigIntCardPropsInternal {
 export const BalanceCard = ({ props }: BigIntCardPropsInternal) => {
   let output;
 
+  console.log(props);
+
   props?.isPrettyLoading
     ? props?.value !== undefined
       ? (output = Number(props?.value))
