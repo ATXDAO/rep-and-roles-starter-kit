@@ -48,7 +48,7 @@ export const addressProps = {
   isRendering: true,
   classes: {
     card: "flex items-center justify-center bg-slate-300",
-    value: "rounded mx-auto text-cyan-800",
+    value: "ml-1.5 text-base font-normal text-cyan-800",
   },
   isPrettyLoading: true,
 } as ValueCardConfigProps;
@@ -77,7 +77,7 @@ export const tokenGroupCardConfigProps = {
     isRendering: true,
     classes: {
       card: "my-5 flex items-center justify-center bg-slate-300",
-      value: "rounded mx-auto text-cyan-800",
+      value: "ml-1.5 text-base font-normal text-cyan-800",
     },
     isPrettyLoading: true,
   } as ValueCardConfigProps,

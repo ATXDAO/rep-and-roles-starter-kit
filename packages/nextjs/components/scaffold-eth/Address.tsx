@@ -33,14 +33,26 @@ const blockieSizeMap = {
 /**
  * Displays an address (or ENS) with a Blockie image and option to copy address.
  */
-export const Address = ({ address, disableAddressLink, format, size = "base", props }: AddressProps) => {
+export const Address = ({ disableAddressLink, format, size = "base", props }: AddressProps) => {
+  if (props) {
+    if (props.classes) {
+      if (!props.classes.value) {
+        props.classes.value = `ml-1.5 text-base font-normal`;
+      }
+    } else {
+      props.classes = {};
+    }
+  } else {
+    props = {};
+  }
+
   const [ens, setEns] = useState<string | null>();
   const [ensAvatar, setEnsAvatar] = useState<string | null>();
   const [addressCopied, setAddressCopied] = useState(false);
 
   const { targetNetwork } = useTargetNetwork();
 
-  const { data: fetchedEns } = useEnsName({ address, enabled: isAddress(address ?? ""), chainId: 1 });
+  const { data: fetchedEns } = useEnsName({ address: props.value, enabled: isAddress(props.value ?? ""), chainId: 1 });
   const { data: fetchedEnsAvatar } = useEnsAvatar({
     name: fetchedEns,
     enabled: Boolean(fetchedEns),
@@ -58,7 +70,7 @@ export const Address = ({ address, disableAddressLink, format, size = "base", pr
   }, [fetchedEnsAvatar]);
 
   // Skeleton UI
-  if (!props?.value) {
+  if (!props.value) {
     return (
       <div className="animate-pulse flex space-x-4">
         <div className="rounded-md bg-slate-300 h-6 w-6"></div>
@@ -69,17 +81,17 @@ export const Address = ({ address, disableAddressLink, format, size = "base", pr
     );
   }
 
-  if (!isAddress(props?.value)) {
+  if (!isAddress(props.value)) {
     return <span className="text-error">Wrong address</span>;
   }
 
-  const blockExplorerAddressLink = getBlockExplorerAddressLink(targetNetwork, props?.value);
-  let displayAddress = props?.value?.slice(0, 5) + "..." + props?.value.slice(-4);
+  const blockExplorerAddressLink = getBlockExplorerAddressLink(targetNetwork, props.value);
+  let displayAddress = props?.value?.slice(0, 5) + "..." + props.value.slice(-4);
 
   if (ens) {
     displayAddress = ens;
   } else if (format === "long") {
-    displayAddress = props?.value;
+    displayAddress = props.value;
   }
 
   return (
@@ -87,7 +99,7 @@ export const Address = ({ address, disableAddressLink, format, size = "base", pr
       <div className="flex items-center">
         <div className="flex-shrink-0">
           <BlockieAvatar
-            address={props?.value}
+            address={props.value}
             ensImage={ensAvatar}
             size={(blockieSizeMap[size] * 24) / blockieSizeMap["base"]}
           />
@@ -115,7 +127,7 @@ export const Address = ({ address, disableAddressLink, format, size = "base", pr
           />
         ) : (
           <CopyToClipboard
-            text={props?.value}
+            text={props.value}
             onCopy={() => {
               setAddressCopied(true);
               setTimeout(() => {
