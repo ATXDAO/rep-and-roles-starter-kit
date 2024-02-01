@@ -26,12 +26,13 @@ contract DeployScript is ScaffoldETHDeploy {
         }
 
         vm.startBroadcast(deployerPrivateKey);
-        address[] memory admins = new address[](2);
+        address[] memory admins = new address[](3);
         admins[0] = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
         admins[1] = 0x62286D694F89a1B12c0214bfcD567bb6c2951491;
+        admins[2] = 0x2643658817324C6536E3A027a15Cd11576Fa5884;
 
         ReputationTokensStandalone instance = new ReputationTokensStandalone(
-            0x62286D694F89a1B12c0214bfcD567bb6c2951491,
+            0x2643658817324C6536E3A027a15Cd11576Fa5884,
             admins
         );
 
@@ -85,8 +86,30 @@ contract DeployScript is ScaffoldETHDeploy {
             0x62286D694F89a1B12c0214bfcD567bb6c2951491
         );
 
-        instance.setTokenURI(0, string.concat(BASE_URI, "0"));
-        instance.setTokenURI(1, string.concat(BASE_URI, "1"));
+        instance.grantRole(
+            instance.TOKEN_CREATOR_ROLE(),
+            0x2643658817324C6536E3A027a15Cd11576Fa5884
+        );
+
+        instance.grantRole(
+            instance.TOKEN_UPDATER_ROLE(),
+            0x2643658817324C6536E3A027a15Cd11576Fa5884
+        );
+
+        instance.grantRole(
+            instance.TOKEN_URI_SETTER_ROLE(),
+            0x2643658817324C6536E3A027a15Cd11576Fa5884
+        );
+
+        instance.grantRole(
+            instance.MINTER_ROLE(),
+            0x2643658817324C6536E3A027a15Cd11576Fa5884
+        );
+
+        instance.grantRole(
+            instance.DISTRIBUTOR_ROLE(),
+            0x2643658817324C6536E3A027a15Cd11576Fa5884
+        );
 
         TokensPropertiesStorage.TokenProperties
             memory tokenProperties = TokensPropertiesStorage.TokenProperties(
@@ -95,7 +118,11 @@ contract DeployScript is ScaffoldETHDeploy {
             );
 
         instance.createToken(tokenProperties);
-        instance.createToken(tokenProperties);
+        // instance.createToken(tokenProperties);
+
+        instance.setTokenURI(0, string.concat(BASE_URI, "0"));
+        // instance.setTokenURI(1, string.concat(BASE_URI, "1"));
+
         IReputationTokensInternal.TokensOperations memory mintOperations;
         mintOperations.to = 0x62286D694F89a1B12c0214bfcD567bb6c2951491;
 
@@ -110,6 +137,17 @@ contract DeployScript is ScaffoldETHDeploy {
             45
         );
         instance.mint(mintOperations);
+
+        IReputationTokensInternal.TokensOperations memory mintOperations2;
+        mintOperations2.to = 0x2643658817324C6536E3A027a15Cd11576Fa5884;
+
+        mintOperations2
+            .operations = new IReputationTokensInternal.TokenOperation[](2);
+        mintOperations2.operations[0] = IReputationTokensInternal
+            .TokenOperation(0, 90);
+        mintOperations2.operations[1] = IReputationTokensInternal
+            .TokenOperation(1, 45);
+        instance.mint(mintOperations2);
 
         // Hats hatsInstance = new Hats("Hats", "ipfs");
 
