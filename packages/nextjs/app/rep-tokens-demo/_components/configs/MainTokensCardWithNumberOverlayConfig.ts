@@ -10,7 +10,7 @@ import { TokenGroupCardConfigProps } from "../../../../components/rep-tokens/typ
 export const balanceConfigProps = {
   isRendering: true,
   classes: {
-    card: "absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/3",
+    card: "absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
     value: "text-9xl mx-auto text-center text-black",
   },
   isPrettyLoading: true,
