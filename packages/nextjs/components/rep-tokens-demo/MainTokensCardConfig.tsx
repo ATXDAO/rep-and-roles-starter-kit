@@ -11,7 +11,7 @@ export const balanceProps = {
   isRendering: true,
   classes: {
     card: "bg-slate-300",
-    value: "text-4xl mx-auto text-center",
+    value: "text-4xl mx-auto text-center text-black",
   },
   isPrettyLoading: true,
 } as ValueCardConfigProps;
@@ -30,7 +30,7 @@ export const nameProps = {
   isRendering: true,
   classes: {
     card: "bg-slate-300",
-    value: "text-1xl text-center object-center mx-auto font-bold break-all",
+    value: "text-1xl text-center object-center mx-auto font-bold break-all text-black",
   },
   isPrettyLoading: true,
 } as ValueCardConfigProps;
@@ -39,7 +39,7 @@ export const descriptionProps = {
   isRendering: true,
   classes: {
     card: "bg-slate-300",
-    value: "text-1xl mx-auto text-center break-words",
+    value: "text-1xl mx-auto text-center break-words text-black",
   },
   isPrettyLoading: true,
 } as ValueCardConfigProps;
@@ -48,7 +48,7 @@ export const addressProps = {
   isRendering: true,
   classes: {
     card: "flex items-center justify-center bg-slate-300",
-    value: "rounded mx-auto",
+    value: "rounded mx-auto text-cyan-800",
   },
   isPrettyLoading: true,
 } as ValueCardConfigProps;
@@ -76,8 +76,8 @@ export const tokenGroupCardConfigProps = {
   address: {
     isRendering: true,
     classes: {
-      card: "m-5 flex items-center justify-center bg-slate-300",
-      value: "rounded mx-auto",
+      card: "my-5 flex items-center justify-center bg-slate-300",
+      value: "rounded mx-auto text-cyan-800",
     },
     isPrettyLoading: true,
   } as ValueCardConfigProps,

@@ -1,21 +1,22 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { StringCardProps } from "../rep-tokens/cards/value-cards/StringCard";
-// import { ElementClasses } from "../rep-tokens/types/Types";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { isAddress } from "viem";
+import { Address as AddressType, isAddress } from "viem";
 import { hardhat } from "viem/chains";
 import { useEnsAvatar, useEnsName } from "wagmi";
 import { CheckCircleIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
-import { getBlockExplorerAddressLink, getTargetNetwork } from "~~/utils/scaffold-eth";
+import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
+import { getBlockExplorerAddressLink } from "~~/utils/scaffold-eth";
 
-type TAddressProps = {
-  address?: string;
+type AddressProps = {
+  address?: AddressType;
   disableAddressLink?: boolean;
   format?: "short" | "long";
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
-  // classes?: ElementClasses;
   props?: StringCardProps;
 };
 
@@ -32,23 +33,14 @@ const blockieSizeMap = {
 /**
  * Displays an address (or ENS) with a Blockie image and option to copy address.
  */
-export const Address = ({
-  // address,
-  disableAddressLink,
-  format,
-  size = "base",
-  // classes = { container: "flex items-center", value: "ml-1.5 text-${size} font-normal" },
-  props,
-}: TAddressProps) => {
+export const Address = ({ address, disableAddressLink, format, size = "base", props }: AddressProps) => {
   const [ens, setEns] = useState<string | null>();
   const [ensAvatar, setEnsAvatar] = useState<string | null>();
   const [addressCopied, setAddressCopied] = useState(false);
 
-  const { data: fetchedEns } = useEnsName({
-    address: props?.value,
-    enabled: isAddress(props?.value ?? ""),
-    chainId: 1,
-  });
+  const { targetNetwork } = useTargetNetwork();
+
+  const { data: fetchedEns } = useEnsName({ address, enabled: isAddress(address ?? ""), chainId: 1 });
   const { data: fetchedEnsAvatar } = useEnsAvatar({
     name: fetchedEns,
     enabled: Boolean(fetchedEns),
@@ -81,8 +73,8 @@ export const Address = ({
     return <span className="text-error">Wrong address</span>;
   }
 
-  const blockExplorerAddressLink = getBlockExplorerAddressLink(getTargetNetwork(), props?.value);
-  let displayAddress = props?.value?.slice(0, 5) + "..." + props?.value?.slice(-4);
+  const blockExplorerAddressLink = getBlockExplorerAddressLink(targetNetwork, props?.value);
+  let displayAddress = props?.value?.slice(0, 5) + "..." + props?.value.slice(-4);
 
   if (ens) {
     displayAddress = ens;
@@ -90,49 +82,54 @@ export const Address = ({
     displayAddress = props?.value;
   }
 
-  // let textClass = `ml-1.5 text-${size} font-normal text-white`;
-
   return (
     <div className={props?.classes?.card}>
-      <div className="flex-shrink-0">
-        <BlockieAvatar
-          address={props?.value}
-          ensImage={ensAvatar}
-          size={(blockieSizeMap[size] * 24) / blockieSizeMap["base"]}
-        />
-      </div>
-      {disableAddressLink ? (
-        <span className={props?.classes?.value}>{displayAddress}</span>
-      ) : getTargetNetwork().id === hardhat.id ? (
-        <span className={props?.classes?.value}>
-          <Link href={blockExplorerAddressLink}>{displayAddress}</Link>
-        </span>
-      ) : (
-        <a className={props?.classes?.value} target="_blank" href={blockExplorerAddressLink} rel="noopener noreferrer">
-          {displayAddress}
-        </a>
-      )}
-      {addressCopied ? (
-        <CheckCircleIcon
-          className="ml-1.5 text-xl font-normal text-sky-600 h-5 w-5 cursor-pointer"
-          aria-hidden="true"
-        />
-      ) : (
-        <CopyToClipboard
-          text={props?.value}
-          onCopy={() => {
-            setAddressCopied(true);
-            setTimeout(() => {
-              setAddressCopied(false);
-            }, 800);
-          }}
-        >
-          <DocumentDuplicateIcon
+      <div className="flex items-center">
+        <div className="flex-shrink-0">
+          <BlockieAvatar
+            address={props?.value}
+            ensImage={ensAvatar}
+            size={(blockieSizeMap[size] * 24) / blockieSizeMap["base"]}
+          />
+        </div>
+        {disableAddressLink ? (
+          <span className={props?.classes?.value}>{displayAddress}</span>
+        ) : targetNetwork.id === hardhat.id ? (
+          <span className={props?.classes?.value}>
+            <Link href={blockExplorerAddressLink}>{displayAddress}</Link>
+          </span>
+        ) : (
+          <a
+            className={props?.classes?.value}
+            target="_blank"
+            href={blockExplorerAddressLink}
+            rel="noopener noreferrer"
+          >
+            {displayAddress}
+          </a>
+        )}
+        {addressCopied ? (
+          <CheckCircleIcon
             className="ml-1.5 text-xl font-normal text-sky-600 h-5 w-5 cursor-pointer"
             aria-hidden="true"
           />
-        </CopyToClipboard>
-      )}
+        ) : (
+          <CopyToClipboard
+            text={props?.value}
+            onCopy={() => {
+              setAddressCopied(true);
+              setTimeout(() => {
+                setAddressCopied(false);
+              }, 800);
+            }}
+          >
+            <DocumentDuplicateIcon
+              className="ml-1.5 text-xl font-normal text-sky-600 h-5 w-5 cursor-pointer"
+              aria-hidden="true"
+            />
+          </CopyToClipboard>
+        )}
+      </div>
     </div>
   );
 };
