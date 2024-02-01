@@ -1,12 +1,16 @@
 "use client";
 
 import { useAccount } from "wagmi";
-import { tokenGroupCardConfigProps as mainTokenGroupCardConfigProps } from "~~/app/rep-tokens-demo/_components/MainTokensCardConfig";
+import {
+  tokenGroupCardConfigProps as mainTokenGroupCardConfigProps,
+  tokenCardConfigProps,
+} from "~~/app/rep-tokens-demo/_components/MainTokensCardConfig";
 import { tokenGroupCardConfigProps as mainTokenGroupOverlayCardConfigProps } from "~~/app/rep-tokens-demo/_components/MainTokensCardWithNumberOverlayConfig";
 import { tokenGroupCardConfigProps as navBarTokenGroupConfigProps } from "~~/app/rep-tokens-demo/_components/NavBarCardConfig";
+import { TokenCard } from "~~/components/rep-tokens/cards/token-card/TokenCard";
 import { TokenGroupCard } from "~~/components/rep-tokens/cards/token-group-card/TokenGroupCard";
 import { useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
-import { buildTokenCards, buildTokenGroupCard } from "~~/components/rep-tokens/utils/buildTokensCard";
+import { buildTokenCard, buildTokenCards, buildTokenGroupCard } from "~~/components/rep-tokens/utils/buildTokensCard";
 import { Address } from "~~/components/scaffold-eth";
 
 export function RepTokensDemo() {
@@ -20,7 +24,7 @@ export function RepTokensDemo() {
   const mainTokenCards = buildTokenCards(
     tokensData.tokens,
     tokensData.address,
-    mainTokenGroupCardConfigProps.tokenCardProps,
+    mainTokenGroupCardConfigProps.tokenCardConfigProps,
   );
   const mainTokenGroupCardProps = buildTokenGroupCard(
     mainTokenGroupCardConfigProps,
@@ -35,7 +39,7 @@ export function RepTokensDemo() {
   const mainTokensOverlayCards = buildTokenCards(
     tokensData.tokens,
     tokensData.address,
-    mainTokenGroupOverlayCardConfigProps.tokenCardProps,
+    mainTokenGroupOverlayCardConfigProps.tokenCardConfigProps,
   );
   const mainTokenGroupOverlayCardProps = buildTokenGroupCard(
     mainTokenGroupOverlayCardConfigProps,
@@ -50,7 +54,7 @@ export function RepTokensDemo() {
   const navBarTokenCards = buildTokenCards(
     tokensData.tokens,
     tokensData.address,
-    navBarTokenGroupConfigProps.tokenCardProps,
+    navBarTokenGroupConfigProps.tokenCardConfigProps,
   );
   const navBarTokenGroupCardProps = buildTokenGroupCard(
     navBarTokenGroupConfigProps,
@@ -62,22 +66,17 @@ export function RepTokensDemo() {
     navBarTokenGroupCardProps.addressOutput = <Address props={navBarTokenGroupCardProps.addressProps} />;
   }
 
+  const singleCard0 = buildTokenCard(tokensData.tokens[0], tokensData.address, tokenCardConfigProps);
+
   return (
     <>
-      {/* <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
-        <div>
-          <TokenGroupCard
-            address={tokensData.address}
-            tokenCardsProps={navBarTokenCard}
-            elementsClasses={navBarTokenGroupCardElementsClasses}
-            isBeautifyingTokenGroupCardLoadingProps={isBeuatyingNavBarTokenGroupCardLoadingProps}
-          />
-        </div>
-      </div> */}
+      <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
+        <div></div>
+      </div>
 
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
-          <TokenGroupCard props={navBarTokenGroupCardProps} />
+          <TokenCard props={singleCard0} />
         </div>
       </div>
 
@@ -90,6 +89,12 @@ export function RepTokensDemo() {
       <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <div>
           <TokenGroupCard props={mainTokenGroupOverlayCardProps} />
+        </div>
+      </div>
+
+      <div className="flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
+        <div>
+          <TokenGroupCard props={navBarTokenGroupCardProps} />
         </div>
       </div>
     </>

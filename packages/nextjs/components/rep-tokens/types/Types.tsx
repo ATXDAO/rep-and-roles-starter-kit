@@ -35,5 +35,5 @@ export interface TokenGroupCardConfigProps {
   cardClasses: CardClasses;
   address?: ValueCardConfigProps;
   isPrettyLoading: boolean;
-  tokenCardProps: TokenCardConfigProps;
+  tokenCardConfigProps: TokenCardConfigProps;
 }

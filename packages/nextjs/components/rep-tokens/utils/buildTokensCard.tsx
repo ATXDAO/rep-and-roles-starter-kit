@@ -21,52 +21,99 @@ export function buildTokenGroupCard(config: TokenGroupCardConfigProps, tokenCard
   return tokenGroupCard;
 }
 
+export function buildTokenCard(token: Token, address?: string, tokenCardProps?: TokenCardConfigProps) {
+  return {
+    isPrettyLoading: tokenCardProps?.isPrettyLoading,
+    cardClasses: tokenCardProps?.cardClasses,
+    valuesProps: {
+      balanceProps: tokenCardProps?.valuesProps?.balanceProps?.isRendering
+        ? {
+            value: token.balance,
+            classes: tokenCardProps?.valuesProps?.balanceProps?.classes,
+            isPrettyLoading: tokenCardProps?.valuesProps?.balanceProps?.isPrettyLoading,
+          }
+        : undefined,
+      nameProps: tokenCardProps?.valuesProps?.nameProps?.isRendering
+        ? {
+            value: token.name,
+            classes: tokenCardProps?.valuesProps?.nameProps?.classes,
+            isPrettyLoading: tokenCardProps?.valuesProps?.nameProps?.isPrettyLoading,
+          }
+        : undefined,
+      descriptionProps: tokenCardProps?.valuesProps?.descriptionProps?.isRendering
+        ? {
+            value: token.description,
+            classes: tokenCardProps?.valuesProps?.descriptionProps?.classes,
+            isPrettyLoading: tokenCardProps?.valuesProps?.descriptionProps?.isPrettyLoading,
+          }
+        : undefined,
+      imageProps: tokenCardProps?.valuesProps?.imageProps?.isRendering
+        ? {
+            value: token.image,
+            properties: tokenCardProps?.valuesProps?.imageProps?.imageProperties,
+            classes: tokenCardProps?.valuesProps?.imageProps?.classes,
+            isPrettyLoading: tokenCardProps?.valuesProps?.imageProps?.isPrettyLoading,
+          }
+        : undefined,
+      addressProps: tokenCardProps?.valuesProps?.addressProps?.isRendering
+        ? {
+            value: address,
+            classes: tokenCardProps?.valuesProps?.addressProps?.classes,
+            isPrettyLoading: tokenCardProps?.valuesProps?.addressProps?.isPrettyLoading,
+          }
+        : undefined,
+    },
+  } as TokenCardProps;
+}
+
 export function buildTokenCards(tokens: Token[], address?: string, tokenCardProps?: TokenCardConfigProps) {
   const arr = [];
 
   for (let i = 0; i < tokens.length; i++) {
-    const tokenCardProp: TokenCardProps = {
-      isPrettyLoading: tokenCardProps?.isPrettyLoading,
-      cardClasses: tokenCardProps?.cardClasses,
-      valuesProps: {
-        balanceProps: tokenCardProps?.valuesProps?.balanceProps?.isRendering
-          ? {
-              value: tokens[i].balance,
-              classes: tokenCardProps?.valuesProps?.balanceProps?.classes,
-              isPrettyLoading: tokenCardProps?.valuesProps?.balanceProps?.isPrettyLoading,
-            }
-          : undefined,
-        nameProps: tokenCardProps?.valuesProps?.nameProps?.isRendering
-          ? {
-              value: tokens[i].name,
-              classes: tokenCardProps?.valuesProps?.nameProps?.classes,
-              isPrettyLoading: tokenCardProps?.valuesProps?.nameProps?.isPrettyLoading,
-            }
-          : undefined,
-        descriptionProps: tokenCardProps?.valuesProps?.descriptionProps?.isRendering
-          ? {
-              value: tokens[i].description,
-              classes: tokenCardProps?.valuesProps?.descriptionProps?.classes,
-              isPrettyLoading: tokenCardProps?.valuesProps?.descriptionProps?.isPrettyLoading,
-            }
-          : undefined,
-        imageProps: tokenCardProps?.valuesProps?.imageProps?.isRendering
-          ? {
-              value: tokens[i].image,
-              properties: tokenCardProps?.valuesProps?.imageProps?.imageProperties,
-              classes: tokenCardProps?.valuesProps?.imageProps?.classes,
-              isPrettyLoading: tokenCardProps?.valuesProps?.imageProps?.isPrettyLoading,
-            }
-          : undefined,
-        addressProps: tokenCardProps?.valuesProps?.addressProps?.isRendering
-          ? {
-              value: address,
-              classes: tokenCardProps?.valuesProps?.addressProps?.classes,
-              isPrettyLoading: tokenCardProps?.valuesProps?.addressProps?.isPrettyLoading,
-            }
-          : undefined,
-      },
-    };
+    const tokenCardProp: TokenCardProps = buildTokenCard(tokens[i], address, tokenCardProps);
+
+    // const tokenCardProp: TokenCardProps = {
+    //   isPrettyLoading: tokenCardProps?.isPrettyLoading,
+    //   cardClasses: tokenCardProps?.cardClasses,
+    //   valuesProps: {
+    //     balanceProps: tokenCardProps?.valuesProps?.balanceProps?.isRendering
+    //       ? {
+    //           value: tokens[i].balance,
+    //           classes: tokenCardProps?.valuesProps?.balanceProps?.classes,
+    //           isPrettyLoading: tokenCardProps?.valuesProps?.balanceProps?.isPrettyLoading,
+    //         }
+    //       : undefined,
+    //     nameProps: tokenCardProps?.valuesProps?.nameProps?.isRendering
+    //       ? {
+    //           value: tokens[i].name,
+    //           classes: tokenCardProps?.valuesProps?.nameProps?.classes,
+    //           isPrettyLoading: tokenCardProps?.valuesProps?.nameProps?.isPrettyLoading,
+    //         }
+    //       : undefined,
+    //     descriptionProps: tokenCardProps?.valuesProps?.descriptionProps?.isRendering
+    //       ? {
+    //           value: tokens[i].description,
+    //           classes: tokenCardProps?.valuesProps?.descriptionProps?.classes,
+    //           isPrettyLoading: tokenCardProps?.valuesProps?.descriptionProps?.isPrettyLoading,
+    //         }
+    //       : undefined,
+    //     imageProps: tokenCardProps?.valuesProps?.imageProps?.isRendering
+    //       ? {
+    //           value: tokens[i].image,
+    //           properties: tokenCardProps?.valuesProps?.imageProps?.imageProperties,
+    //           classes: tokenCardProps?.valuesProps?.imageProps?.classes,
+    //           isPrettyLoading: tokenCardProps?.valuesProps?.imageProps?.isPrettyLoading,
+    //         }
+    //       : undefined,
+    //     addressProps: tokenCardProps?.valuesProps?.addressProps?.isRendering
+    //       ? {
+    //           value: address,
+    //           classes: tokenCardProps?.valuesProps?.addressProps?.classes,
+    //           isPrettyLoading: tokenCardProps?.valuesProps?.addressProps?.isPrettyLoading,
+    //         }
+    //       : undefined,
+    //   },
+    // };
 
     arr.push(tokenCardProp);
   }
