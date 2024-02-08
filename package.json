@@ -11,7 +11,7 @@
     "account": "yarn workspace @se-2/foundry account",
     "chain": "yarn workspace @se-2/foundry chain",
     "compile": "yarn workspace @se-2/foundry compile",
-    "deploy": "yarn workspace @se-2/foundry deploy",
+    "deployDemo": "yarn workspace @se-2/foundry deployDemo",
     "deploy2": "yarn workspace @se-2/foundry deploy2",
     "deploy:verify": "yarn workspace @se-2/foundry deploy:verify",
     "fork": "yarn workspace @se-2/foundry fork",
