@@ -14,13 +14,20 @@ cd reputation-and-roles-monorepo
 yarn install
 ```
 
-2. On the first terminal, run a local network:
+2. In your terminal, clone the environemnt example
+
+```
+cd packages/foundry
+cp .env.example .env
+```
+
+3. On the first terminal, run a local network:
 
 ```
 yarn chain
 ```
 
-3. On the second terminal, start your NextJS app:
+4. On the second terminal, start your NextJS app:
 
 ```
 yarn start
@@ -39,7 +46,7 @@ Return to your code editor, navigate to `~/packages/foundry/script/DeployDemo.s.
 
 This command starts a local Ethereum network using Foundry. The network runs on your local machine and can be used for testing and development.
 
-4. On a third terminal, deploy the test contract:
+5. On a third terminal, deploy the test contract:
 
 ```
 yarn deployDemo
@@ -49,7 +56,7 @@ This command deploys a test smart contract to the local network. The contract is
 
 The `yarn deployDemo` command uses the deploy script located in `packages/foundry/script/DeployDemo.s.sol` to deploy the contract to the network. You can also customize the deploy script.
 
-5. View results on webpage
+6. View results on webpage
 
 Re-visit your app on: `http://localhost:3000`.
 
