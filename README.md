@@ -43,7 +43,7 @@ This command starts a local Ethereum network using Foundry. The network runs on 
 yarn deployDemo
 ```
 
-This command deploys a test smart contract to the local network. The contract is located in `packages/foundry/lib/reputation/src/ReputationTokensStandalone`.
+This command deploys a test smart contract to the local network. The contract is located at `packages/foundry/lib/reputation/src/ReputationTokensStandalone.sol`.
 
 The `yarn deploy` command uses the deploy script located in `packages/foundry/script/DeployDemo.s.sol` to deploy the contract to the network. You can also customize the deploy script.
 
