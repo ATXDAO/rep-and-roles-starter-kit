@@ -26,7 +26,7 @@ Connect a burner wallet.
 
 Copy the wallet address.
 
-Return to your code editor, navigate to `~/packages/foundry/script/DeployDemo.s.sol`, and replace the value of the `controller` variable with your copied wallet address.
+Return to your code editor, navigate to `~/packages/foundry/script/DeployDemo.s.sol`, and replace the value of the `controller` variable with your copied wallet address (make sure to save your file after doing so!).
 
 
 3. Run a local network on your second terminal:
