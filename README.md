@@ -14,7 +14,13 @@ cd reputation-and-roles-monorepo
 yarn install
 ```
 
-2. On the first terminal, start your NextJS app:
+2. On the first terminal, run a local network:
+
+```
+yarn chain
+```
+
+3. On the second terminal, start your NextJS app:
 
 ```
 yarn start
@@ -29,11 +35,7 @@ Copy the wallet address.
 Return to your code editor, navigate to `~/packages/foundry/script/DeployDemo.s.sol`, and replace the value of the `controller` variable with your copied wallet address (make sure to save your file after doing so!).
 
 
-3. Run a local network on your second terminal:
 
-```
-yarn chain
-```
 
 This command starts a local Ethereum network using Foundry. The network runs on your local machine and can be used for testing and development.
 

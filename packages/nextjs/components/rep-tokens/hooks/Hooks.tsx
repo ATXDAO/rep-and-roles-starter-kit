@@ -111,6 +111,7 @@ export function useFetches(uris: string[]) {
 
 export const useRepTokens = (address?: string) => {
   const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokensStandalone" });
+
   const { data: numOfTokens } = useScaffoldContractRead({
     contractName: "ReputationTokensStandalone",
     functionName: "getNumOfTokenTypes",
