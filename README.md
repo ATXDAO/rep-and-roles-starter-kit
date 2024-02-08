@@ -41,9 +41,6 @@ Copy the wallet address.
 
 Return to your code editor, navigate to `~/packages/foundry/script/DeployDemo.s.sol`, and replace the value of the `controller` variable with your copied wallet address (make sure to save your file after doing so!).
 
-
-
-
 This command starts a local Ethereum network using Foundry. The network runs on your local machine and can be used for testing and development.
 
 5. On a third terminal, deploy the test contract:
