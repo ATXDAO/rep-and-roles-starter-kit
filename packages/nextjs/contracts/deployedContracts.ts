@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokensStandalone: {
-      address: "0x6A47346e722937B60Df7a1149168c0E76DD6520f",
+      address: "0xbe18A1B61ceaF59aEB6A9bC81AB4FB87D56Ba167",
       abi: [
         {
           type: "constructor",

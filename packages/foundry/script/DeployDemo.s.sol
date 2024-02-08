@@ -42,6 +42,27 @@ contract DeployDemoScript is ScaffoldETHDeploy {
 
         batchMint(instance);
 
+        // Hats hatsInstance = new Hats("Hats", "ipfs");
+
+        // uint256 topHatId = hatsInstance.mintTopHat(
+        //     0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,
+        //     "",
+        //     ""
+        // );
+
+        // uint256 newHatId = hatsInstance.createHat(
+        //     topHatId,
+        //     "Details...",
+        //     100,
+        //     0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,
+        //     0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,
+        //     true,
+        //     ""
+        // );
+
+        // console.log(topHatId);
+        // console.log(newHatId);
+
         vm.stopBroadcast();
 
         exportDeployments();
