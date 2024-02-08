@@ -14,7 +14,7 @@ cd reputation-and-roles-monorepo
 yarn install
 ```
 
-1. On the first terminal, start your NextJS app:
+2. On the first terminal, start your NextJS app:
 
 ```
 yarn start
@@ -23,11 +23,13 @@ yarn start
 Visit your app on: `http://localhost:3000`.
 
 Connect a burner wallet.
+
 Copy the wallet address.
+
 Return to your code editor, navigate to `~/packages/foundry/script/DeployDemo.s.sol`, and replace the value of the `controller` variable with your copied wallet address.
 
 
-2. Run a local network on your second terminal:
+3. Run a local network on your second terminal:
 
 ```
 yarn chain
@@ -35,21 +37,24 @@ yarn chain
 
 This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development.
 
-3. On a third terminal, deploy the test contract:
+4. On a third terminal, deploy the test contract:
 
 ```
 yarn deployDemo
 ```
 
 This command deploys a test smart contract to the local network. The contract is located in `packages/foundry/lib/reputation/src/ReputationTokensStandalone`.
+
 The `yarn deploy` command uses the deploy script located in `packages/foundry/script/DeployDemo.s.sol` to deploy the contract to the network. You can also customize the deploy script.
 
-4. View results on webpage
+5. View results on webpage
 
 Re-visit your app on: `http://localhost:3000`.
+
 Refresh the page if you need to!
 
 On the home page, you should see many colorful and variable cards and widgets which display your Reputation Tokens in full force!
+
 By navigating to the `Debug Contracts` page, you can interact with and view the properties of your deploy Reputation system!
 
 
