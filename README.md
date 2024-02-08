@@ -35,7 +35,7 @@ Return to your code editor, navigate to `~/packages/foundry/script/DeployDemo.s.
 yarn chain
 ```
 
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development.
+This command starts a local Ethereum network using Foundry. The network runs on your local machine and can be used for testing and development.
 
 4. On a third terminal, deploy the test contract:
 
