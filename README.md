@@ -55,7 +55,7 @@ Refresh the page if you need to!
 
 On the home page, you should see many colorful and variable cards and widgets which display your Reputation Tokens in full force!
 
-By navigating to the `Debug Contracts` page, you can interact with and view the properties of your deploy Reputation system!
+By navigating to the `Debug Contracts` page, you can interact with and view the properties of your deployed Reputation System!
 
 
 <!-- # 🏗 Scaffold-ETH 2
