@@ -111,21 +111,23 @@ export function RepTokensDemo() {
     tokensData.address,
   );
 
-  if (navBarTokenGroupConfigProps.address?.isRendering) {
-    navBarTokenGroupCardProps.addressOutput = <Address props={navBarTokenGroupCardProps.addressProps} />;
-  }
+  // if (navBarTokenGroupConfigProps.address?.isRendering) {
+  //   navBarTokenGroupCardProps.addressOutput = <Address props={navBarTokenGroupCardProps.addressProps} />;
+  // }
 
   return (
     <>
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <p className="text-center text-4xl">Individual Components</p>
-        <BalanceCard props={balanceProps} />
-        <ImageCard props={imageProps} />
-        <StringCard props={nameProps} />
-        <StringCard props={descriptionsProps} />
-        <Address props={addressProps} />
-        <StringCard props={isTradeableProps} />
-        <StringCard props={maxMintAmountProps} />
+        <div className="flex flex-wrap justify-center items-center space-x-3 space-y-3">
+          <BalanceCard props={balanceProps} />
+          <ImageCard props={imageProps} />
+          <StringCard props={nameProps} />
+          <StringCard props={descriptionsProps} />
+          <Address props={addressProps} />
+          <StringCard props={isTradeableProps} />
+          <StringCard props={maxMintAmountProps} />
+        </div>
 
         <p className="text-center text-4xl">Single Card</p>
         <TokenCard props={singleCard} />

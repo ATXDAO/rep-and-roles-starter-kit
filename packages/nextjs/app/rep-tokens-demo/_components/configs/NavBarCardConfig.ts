@@ -43,15 +43,6 @@ export const tokenGroupCardConfigProps = {
     card: "text-white rounded-lg bg-slate-900 flex flex-col items-center p-5",
     value: "rounded-lg bg-slate-800 flex justify-center p-5",
   },
-  address: {
-    isRendering: true,
-    classes: {
-      card: "rounded-lg my-5 flex items-center justify-center bg-slate-300",
-      value: "ml-1.5 text-base font-normal text-cyan-800",
-    },
-    isPrettyLoading: true,
-  } as ValueCardConfigProps,
-
   isPrettyLoading: true,
   tokenCardConfigProps,
 } as TokenGroupCardConfigProps;
