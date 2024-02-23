@@ -6,5 +6,8 @@ export const maxMintAmountConfigProps = {
     card: "w-64 rounded-lg bg-teal-300",
     value: "text-1xl text-center object-center mx-auto font-bold text-black",
   },
-  isPrettyLoading: true,
+  isPrettyLoading: {
+    classes: "text-black text-center",
+    message: "Loading Max Mint Amount...",
+  },
 } as ValueCardConfigProps;

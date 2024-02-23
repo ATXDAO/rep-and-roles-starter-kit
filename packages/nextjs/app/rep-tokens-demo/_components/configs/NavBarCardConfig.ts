@@ -13,7 +13,6 @@ export const balanceConfigProps = {
     card: "rounded-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
     value: "text-4xl mx-auto text-center text-black",
   },
-  isPrettyLoading: true,
 } as ValueCardConfigProps;
 
 export const imageConfigProps = {
@@ -23,7 +22,6 @@ export const imageConfigProps = {
     value: "rounded mx-auto",
   },
   imageProperties: new ImageProps("Token", 256, 256),
-  isPrettyLoading: true,
 } as ImageValueCardConfigProp;
 
 export const tokenCardValuesProps = {
@@ -43,6 +41,10 @@ export const tokenGroupCardConfigProps = {
     card: "text-white rounded-lg bg-slate-900 flex flex-col items-center p-5",
     value: "rounded-lg bg-slate-800 flex justify-center p-5",
   },
-  isPrettyLoading: true,
+
+  isPrettyLoading: {
+    classes: "text-black text-center text-white",
+    message: "Loading Tokens...",
+  },
   tokenCardConfigProps,
 } as TokenGroupCardConfigProps;

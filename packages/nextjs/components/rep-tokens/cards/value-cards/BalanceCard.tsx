@@ -1,9 +1,10 @@
-import { CardClasses } from "../../types/Types";
+import { CardClasses, IsPrettyLoading } from "../../types/Types";
 
 export interface BigIntCardProps {
   value: bigint;
   classes?: CardClasses;
-  isPrettyLoading?: boolean;
+  isPrettyLoading?: IsPrettyLoading;
+  // isPrettyLoading?: boolean;
 }
 
 export interface BigIntCardPropsInternal {
@@ -11,19 +12,19 @@ export interface BigIntCardPropsInternal {
 }
 
 export const BalanceCard = ({ props }: BigIntCardPropsInternal) => {
-  let output;
+  let finalizedOutput;
 
-  props?.isPrettyLoading
-    ? props?.value !== undefined
-      ? (output = Number(props?.value))
-      : (output = "Loading Balance...")
-    : props?.value !== undefined
-    ? (output = Number(props?.value))
-    : (output = 0);
-
-  return (
-    <div className={props?.classes?.card}>
-      <p className={props?.classes?.value}>{output}</p>
-    </div>
+  props?.isPrettyLoading ? (
+    props?.value !== undefined ? (
+      (finalizedOutput = <p className={props?.classes?.value}>{Number(props?.value)}</p>)
+    ) : (
+      (finalizedOutput = <p className={props?.isPrettyLoading?.classes}> {props?.isPrettyLoading?.message}</p>)
+    )
+  ) : props?.value !== undefined ? (
+    (finalizedOutput = <p className={props?.classes?.value}>{Number(props?.value)}</p>)
+  ) : (
+    <p className={props?.classes?.value}>0</p>
   );
+
+  return <div className={props?.classes?.card}>{finalizedOutput}</div>;
 };

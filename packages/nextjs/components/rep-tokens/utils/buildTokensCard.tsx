@@ -62,7 +62,47 @@ export function buildImageCard(value?: string, configProps?: ImageValueCardConfi
 }
 
 export function buildTokenCard(token: Token, address?: string, tokenCardProps?: TokenCardConfigProps) {
-  if (!token) return {} as TokenCardProps;
+  const obj: any = {};
+
+  if (!token) return obj;
+
+  if (tokenCardProps?.isPrettyLoading) obj.isPrettyLoading = tokenCardProps?.isPrettyLoading;
+
+  if (tokenCardProps?.cardClasses) obj.cardClasses = tokenCardProps?.cardClasses;
+
+  if (tokenCardProps?.valuesProps) {
+    obj.valueProps = {};
+    if (tokenCardProps?.valuesProps?.balanceConfigProps)
+      obj.valueProps.balanceProps = buildBalanceCard(token.balance, tokenCardProps?.valuesProps?.balanceConfigProps);
+
+    if (tokenCardProps?.valuesProps?.nameConfigProps)
+      obj.valueProps.nameProps = buildStringCard(token.name, tokenCardProps?.valuesProps?.nameConfigProps);
+
+    if (tokenCardProps?.valuesProps?.descriptionConfigProps)
+      obj.valueProps.descriptionProps = buildStringCard(
+        token.description,
+        tokenCardProps?.valuesProps?.descriptionConfigProps,
+      );
+
+    if (tokenCardProps?.valuesProps?.imageConfigProps)
+      obj.valueProps.imageProps = buildImageCard(token.image, tokenCardProps?.valuesProps?.imageConfigProps);
+
+    if (tokenCardProps?.valuesProps?.addressConfigProps)
+      obj.valueProps.addressProps = buildStringCard(address, tokenCardProps?.valuesProps?.addressConfigProps);
+
+    if (tokenCardProps?.valuesProps?.isTradeableConfigProps)
+      obj.valueProps.isTradeableProps = buildStringCard(
+        `Is Tradeable: ${token.properties.isTradeable}`,
+        tokenCardProps?.valuesProps?.isTradeableConfigProps,
+      );
+    if (tokenCardProps?.valuesProps?.maxMintAmountConfigProps)
+      obj.valueProps.maxMintAmountProps = buildStringCard(
+        `Max Mint Amount Per Tx: ${token.properties.maxMintAmountPerTx}`,
+        tokenCardProps?.valuesProps?.maxMintAmountConfigProps,
+      );
+  }
+
+  return obj;
 
   return {
     isPrettyLoading: tokenCardProps?.isPrettyLoading,
@@ -82,7 +122,7 @@ export function buildTokenCard(token: Token, address?: string, tokenCardProps?: 
         tokenCardProps?.valuesProps?.maxMintAmountConfigProps,
       ),
     },
-  } as TokenCardProps;
+  };
 }
 
 export function buildTokenCards(tokens: Token[], address?: string, tokenCardProps?: TokenCardConfigProps) {

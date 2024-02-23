@@ -13,7 +13,6 @@ export const balanceConfigProps = {
     card: "rounded-lg bg-slate-300",
     value: "text-4xl mx-auto text-center text-black",
   },
-  isPrettyLoading: true,
 } as ValueCardConfigProps;
 
 export const imageConfigProps = {
@@ -23,7 +22,6 @@ export const imageConfigProps = {
     value: "rounded-lg mx-auto",
   },
   imageProperties: new ImageProps("Token", 256, 256),
-  isPrettyLoading: true,
 } as ImageValueCardConfigProp;
 
 export const nameConfigProps = {
@@ -32,7 +30,6 @@ export const nameConfigProps = {
     card: "rounded-lg bg-slate-300",
     value: "text-1xl text-center object-center mx-auto font-bold break-all text-black",
   },
-  isPrettyLoading: true,
 } as ValueCardConfigProps;
 
 export const descriptionConfigProps = {
@@ -41,7 +38,6 @@ export const descriptionConfigProps = {
     card: "rounded-lg bg-slate-300",
     value: "text-1xl mx-auto text-center break-words text-black",
   },
-  isPrettyLoading: true,
 } as ValueCardConfigProps;
 
 export const addressConfigProps = {
@@ -50,7 +46,6 @@ export const addressConfigProps = {
     card: "rounded-lg flex items-center justify-center bg-slate-300",
     value: " ml-1.5 text-base font-normal text-cyan-800",
   },
-  isPrettyLoading: true,
 } as ValueCardConfigProps;
 
 export const isTradeableConfigProps = {
@@ -59,7 +54,6 @@ export const isTradeableConfigProps = {
     card: "rounded-lg bg-slate-300 ",
     value: "text-1xl text-center object-center mx-auto font-bold break-all text-black",
   },
-  isPrettyLoading: true,
 } as ValueCardConfigProps;
 
 export const maxMintAmountConfigProps = {
@@ -68,7 +62,6 @@ export const maxMintAmountConfigProps = {
     card: "rounded-lg bg-slate-300",
     value: "text-1xl text-center object-center mx-auto font-bold text-black",
   },
-  isPrettyLoading: true,
 } as ValueCardConfigProps;
 
 export const tokenCardValuesProps = {
@@ -99,9 +92,10 @@ export const tokenGroupCardConfigProps = {
       card: "rounded-lg my-5 flex items-center justify-center bg-slate-300",
       value: "rounded-lg ml-1.5 text-base font-normal text-cyan-800",
     },
-    isPrettyLoading: true,
   } as ValueCardConfigProps,
-
-  isPrettyLoading: true,
+  isPrettyLoading: {
+    classes: "text-black text-center text-white",
+    message: "Loading Tokens...",
+  },
   tokenCardConfigProps,
 } as TokenGroupCardConfigProps;

@@ -1,9 +1,9 @@
-import { CardClasses } from "../../types/Types";
+import { CardClasses, IsPrettyLoading } from "../../types/Types";
 
 export interface StringCardProps {
   value?: string;
   classes?: CardClasses;
-  isPrettyLoading?: boolean;
+  isPrettyLoading?: IsPrettyLoading;
 }
 
 export interface StringCardPropsInternal {
@@ -11,11 +11,21 @@ export interface StringCardPropsInternal {
 }
 
 export const StringCard = ({ props }: StringCardPropsInternal) => {
-  const output = props?.isPrettyLoading ? (props?.value !== undefined ? props?.value : "Loading...") : props?.value;
+  // const output = props?.isPrettyLoading ? (props?.value !== undefined ? props?.value : "Loading...") : props?.value;
 
-  return (
-    <div className={props?.classes?.card}>
-      <p className={props?.classes?.value}>{output}</p>
-    </div>
+  let finalizedOutput;
+
+  props?.isPrettyLoading ? (
+    props?.value !== undefined ? (
+      (finalizedOutput = <p className={props?.classes?.value}>{props?.value}</p>)
+    ) : (
+      (finalizedOutput = <p className={props?.isPrettyLoading?.classes}> {props?.isPrettyLoading?.message}</p>)
+    )
+  ) : props?.value !== undefined ? (
+    (finalizedOutput = <p className={props?.classes?.value}>{props?.value}</p>)
+  ) : (
+    <p className={props?.classes?.value}>0</p>
   );
+
+  return <div className={props?.classes?.card}>{finalizedOutput}</div>;
 };

@@ -8,5 +8,8 @@ export const imageConfigProps = {
     value: "rounded-lg mx-auto",
   },
   imageProperties: new ImageProps("Token", 256, 256),
-  isPrettyLoading: true,
+  isPrettyLoading: {
+    classes: "text-black text-center",
+    message: "Loading Image...",
+  },
 } as ImageValueCardConfigProp;

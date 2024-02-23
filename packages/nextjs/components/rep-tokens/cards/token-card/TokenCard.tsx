@@ -1,3 +1,4 @@
+import { IsPrettyLoading } from "../../types/Types";
 import { BalanceCard, BigIntCardProps } from "../value-cards/BalanceCard";
 import { ImageCard, ImageCardProps } from "../value-cards/ImageCard";
 import { StringCard, StringCardProps } from "../value-cards/StringCard";
@@ -15,8 +16,8 @@ export interface ValuesProps {
 
 export interface TokenCardProps {
   cardClasses?: string;
-  isPrettyLoading?: boolean;
-  valuesProps: ValuesProps;
+  isPrettyLoading?: IsPrettyLoading;
+  valuesProps?: ValuesProps;
 }
 
 export interface TokenCardInternalProps {
@@ -47,7 +48,7 @@ export const TokenCard = ({ props }: TokenCardInternalProps) => {
           props?.valuesProps?.addressProps?.value !== undefined ? (
             <div>{output}</div>
           ) : (
-            <>Loading Token...</>
+            <p className={props?.isPrettyLoading?.classes}>{props?.isPrettyLoading?.message}</p>
           )
         ) : (
           <div>{output}</div>

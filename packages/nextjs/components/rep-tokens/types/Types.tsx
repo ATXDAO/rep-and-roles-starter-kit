@@ -5,14 +5,20 @@ export interface CardClasses {
   value?: string;
 }
 
+export interface IsPrettyLoading {
+  classes?: string;
+  message?: string;
+}
+
 export interface ValueCardConfigProps {
   isRendering?: boolean;
   classes?: CardClasses;
-  isPrettyLoading?: boolean;
+  isPrettyLoading?: IsPrettyLoading;
+  // isPrettyLoading?: boolean;
 }
 
 export interface ImageValueCardConfigProp extends ValueCardConfigProps {
-  imageProperties: ImageProps;
+  imageProperties?: ImageProps;
 }
 
 export interface TokenCardValuesConfigProps {
@@ -26,16 +32,16 @@ export interface TokenCardValuesConfigProps {
 }
 
 export interface TokenCardConfigProps {
-  isRendering: true;
-  cardClasses: string;
-  valuesProps: TokenCardValuesConfigProps;
-  isPrettyLoading: true;
+  isRendering?: true;
+  cardClasses?: string;
+  valuesProps?: TokenCardValuesConfigProps;
+  isPrettyLoading?: IsPrettyLoading;
 }
 
 export interface TokenGroupCardConfigProps {
   isRendering: boolean;
-  cardClasses: CardClasses;
+  cardClasses?: CardClasses;
   address?: ValueCardConfigProps;
-  isPrettyLoading: boolean;
+  isPrettyLoading?: IsPrettyLoading;
   tokenCardConfigProps: TokenCardConfigProps;
 }

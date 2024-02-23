@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CardClasses } from "../../types/Types";
+import { CardClasses, IsPrettyLoading } from "../../types/Types";
 
 export class ImageProps {
   alt: string;
@@ -16,7 +16,7 @@ export interface ImageCardProps {
   value: string;
   properties?: ImageProps;
   classes?: CardClasses;
-  isPrettyLoading?: boolean;
+  isPrettyLoading?: IsPrettyLoading;
 }
 
 export interface ImageCardPropsInternal {
@@ -41,7 +41,7 @@ export const ImageCard = ({ props }: ImageCardPropsInternal) => {
         props?.value !== undefined && props?.value !== "" ? (
           output
         ) : (
-          <p>Loading Image...</p>
+          <p className={props?.isPrettyLoading?.classes}>{props?.isPrettyLoading?.message}</p>
         )
       ) : props?.value !== undefined && props?.value !== "" ? (
         output
