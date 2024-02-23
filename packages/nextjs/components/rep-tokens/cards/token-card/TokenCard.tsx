@@ -37,21 +37,37 @@ export const TokenCard = ({ props }: TokenCardInternalProps) => {
     </>
   );
 
+  let isDoneLoading = true;
+
+  if (props) {
+    if (props.isPrettyLoading) {
+      if (props.valuesProps) {
+        if (Object.keys(props.valuesProps).length === 0) {
+          isDoneLoading &&= false;
+        }
+        let t: keyof typeof props.valuesProps;
+        for (t in props.valuesProps) {
+          if (props.valuesProps[t]) {
+            if (props.valuesProps[t]?.value === undefined) {
+              isDoneLoading &&= false;
+            }
+          } else {
+            isDoneLoading &&= false;
+          }
+        }
+      } else {
+        isDoneLoading &&= false;
+      }
+    }
+  }
+
   return (
     <>
       <div className={props?.cardClasses}>
-        {props?.isPrettyLoading ? (
-          props?.valuesProps?.imageProps?.value !== undefined &&
-          props?.valuesProps?.balanceProps?.value !== undefined &&
-          props?.valuesProps?.nameProps?.value !== undefined &&
-          props?.valuesProps?.descriptionProps?.value !== undefined &&
-          props?.valuesProps?.addressProps?.value !== undefined ? (
-            <div>{output}</div>
-          ) : (
-            <p className={props?.isPrettyLoading?.classes}>{props?.isPrettyLoading?.message}</p>
-          )
-        ) : (
+        {isDoneLoading ? (
           <div>{output}</div>
+        ) : (
+          <p className={props?.isPrettyLoading?.classes}>{props?.isPrettyLoading?.message}</p>
         )}
       </div>
     </>

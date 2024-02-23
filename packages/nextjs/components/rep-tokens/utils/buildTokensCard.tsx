@@ -71,32 +71,33 @@ export function buildTokenCard(token: Token, address?: string, tokenCardProps?: 
   if (tokenCardProps?.cardClasses) obj.cardClasses = tokenCardProps?.cardClasses;
 
   if (tokenCardProps?.valuesProps) {
-    obj.valueProps = {};
+    obj.valuesProps = {};
+
     if (tokenCardProps?.valuesProps?.balanceConfigProps)
-      obj.valueProps.balanceProps = buildBalanceCard(token.balance, tokenCardProps?.valuesProps?.balanceConfigProps);
+      obj.valuesProps.balanceProps = buildBalanceCard(token.balance, tokenCardProps?.valuesProps?.balanceConfigProps);
 
     if (tokenCardProps?.valuesProps?.nameConfigProps)
-      obj.valueProps.nameProps = buildStringCard(token.name, tokenCardProps?.valuesProps?.nameConfigProps);
+      obj.valuesProps.nameProps = buildStringCard(token.name, tokenCardProps?.valuesProps?.nameConfigProps);
 
     if (tokenCardProps?.valuesProps?.descriptionConfigProps)
-      obj.valueProps.descriptionProps = buildStringCard(
+      obj.valuesProps.descriptionProps = buildStringCard(
         token.description,
         tokenCardProps?.valuesProps?.descriptionConfigProps,
       );
 
     if (tokenCardProps?.valuesProps?.imageConfigProps)
-      obj.valueProps.imageProps = buildImageCard(token.image, tokenCardProps?.valuesProps?.imageConfigProps);
+      obj.valuesProps.imageProps = buildImageCard(token.image, tokenCardProps?.valuesProps?.imageConfigProps);
 
     if (tokenCardProps?.valuesProps?.addressConfigProps)
-      obj.valueProps.addressProps = buildStringCard(address, tokenCardProps?.valuesProps?.addressConfigProps);
+      obj.valuesProps.addressProps = buildStringCard(address, tokenCardProps?.valuesProps?.addressConfigProps);
 
     if (tokenCardProps?.valuesProps?.isTradeableConfigProps)
-      obj.valueProps.isTradeableProps = buildStringCard(
+      obj.valuesProps.isTradeableProps = buildStringCard(
         `Is Tradeable: ${token.properties.isTradeable}`,
         tokenCardProps?.valuesProps?.isTradeableConfigProps,
       );
     if (tokenCardProps?.valuesProps?.maxMintAmountConfigProps)
-      obj.valueProps.maxMintAmountProps = buildStringCard(
+      obj.valuesProps.maxMintAmountProps = buildStringCard(
         `Max Mint Amount Per Tx: ${token.properties.maxMintAmountPerTx}`,
         tokenCardProps?.valuesProps?.maxMintAmountConfigProps,
       );
