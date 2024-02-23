@@ -9,4 +9,4 @@
 	url = https://github.com/gnsps/solidity-bytes-utils
 [submodule "packages/foundry/lib/reputation"]
 	path = packages/foundry/lib/reputation
-	url = https://github.com/ATXDAO/reputation
+	url = https://github.com/atxdao/reputation
