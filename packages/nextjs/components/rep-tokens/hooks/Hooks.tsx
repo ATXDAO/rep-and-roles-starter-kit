@@ -154,7 +154,7 @@ export const useRepTokens = (address?: string) => {
   const { uris } = useUris(repTokensInstance, tokenIds);
 
   for (let i = 0; i < uris.length; i++) {
-    uris[i] = uris[i].replace("ipfs://", "https://nftstorage.link/ipfs/");
+    uris[i] = uris[i].replace("ipfs://", "https://ipfs.io/ipfs/");
   }
 
   const { responses } = useFetches(uris);

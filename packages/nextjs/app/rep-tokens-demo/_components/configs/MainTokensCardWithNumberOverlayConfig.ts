@@ -43,8 +43,8 @@ export const descriptionConfigProps = {
 export const addressConfigProps = {
   isRendering: true,
   classes: {
-    card: "flex items-center",
-    value: "ml-1.5 text-base font-normal",
+    card: "rounded-lg flex items-center justify-center bg-slate-300",
+    value: "ml-1.5 text-base font-normal text-cyan-800",
   },
 } as ValueCardConfigProps;
 
@@ -89,8 +89,8 @@ export const tokenGroupCardConfigProps = {
   address: {
     isRendering: true,
     classes: {
-      card: "flex items-center",
-      value: "ml-1.5 text-base font-normal",
+      card: "rounded-lg my-5 flex items-center justify-center bg-slate-300",
+      value: "ml-1.5 text-base font-normal text-cyan-800",
     },
   } as ValueCardConfigProps,
   tokenCardConfigProps,
