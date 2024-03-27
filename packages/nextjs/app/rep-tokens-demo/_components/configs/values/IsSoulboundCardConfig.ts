@@ -1,6 +1,6 @@
 import { ValueCardConfigProps } from "~~/components/rep-tokens/types/Types";
 
-export const isTradeableConfigProps = {
+export const isSoulboundConfigProps = {
   isRendering: true,
   classes: {
     card: "w-64 rounded-lg bg-indigo-300 ",

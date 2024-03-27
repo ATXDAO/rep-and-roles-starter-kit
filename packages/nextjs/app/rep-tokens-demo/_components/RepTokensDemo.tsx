@@ -5,7 +5,8 @@ import { addressConfigProps } from "./configs/values/AddressCardConfig";
 import { balanceConfigProps } from "./configs/values/BalanceCardConfig";
 import { descriptionConfigProps } from "./configs/values/DescriptionCardConfig";
 import { imageConfigProps } from "./configs/values/ImageCardConfig";
-import { isTradeableConfigProps } from "./configs/values/IsTradeableCardConfig";
+import { isRedeemableConfigProps } from "./configs/values/IsRedeemableCardConfig";
+import { isSoulboundConfigProps } from "./configs/values/IsSoulboundCardConfig";
 import { maxMintAmountConfigProps } from "./configs/values/MaxMintAmountCardConfig";
 import { nameConfigProps } from "./configs/values/NameCardConfig";
 import { useAccount } from "wagmi";
@@ -43,29 +44,6 @@ export function RepTokensDemo() {
   //////
   ////// Card Creation
   /////
-
-  // Individual Components
-  const balanceProps = buildBalanceCard(tokensData?.tokens[0]?.balance, balanceConfigProps);
-  const nameProps = buildStringCard(tokensData?.tokens[0]?.name, nameConfigProps);
-  const descriptionsProps = buildStringCard(tokensData?.tokens[0]?.description, descriptionConfigProps);
-  const imageProps = buildImageCard(tokensData?.tokens[0]?.image, imageConfigProps);
-  const addressProps = buildStringCard(tokensData?.address, addressConfigProps);
-
-  const isTradeableProps = buildStringCard(
-    tokensData?.tokens[0]?.properties?.isTradeable !== undefined
-      ? `Is Tradeable: ${tokensData?.tokens[0]?.properties.isTradeable}`
-      : undefined,
-    isTradeableConfigProps,
-  );
-  const maxMintAmountProps = buildStringCard(
-    tokensData?.tokens[0]?.properties?.maxMintAmountPerTx !== undefined
-      ? `Max Mint Amount Per Tx: ${tokensData?.tokens[0]?.properties.maxMintAmountPerTx}`
-      : undefined,
-    maxMintAmountConfigProps,
-  );
-
-  // Single Card
-  const singleCard = buildTokenCard(tokensData?.tokens[0], tokensData.address, singleCardConfig);
 
   // Multi-card
   const mainTokenCards = buildTokenCards(
@@ -116,22 +94,42 @@ export function RepTokensDemo() {
     navBarTokenGroupCardProps.addressOutput = <Address props={navBarTokenGroupCardProps.addressProps} />;
   }
 
+  // Single Card
+  const singleCard = buildTokenCard(tokensData?.tokens[0], tokensData.address, singleCardConfig);
+
+  // Individual Components
+  const balanceProps = buildBalanceCard(tokensData?.tokens[0]?.balance, balanceConfigProps);
+  const nameProps = buildStringCard(tokensData?.tokens[0]?.name, nameConfigProps);
+  const descriptionsProps = buildStringCard(tokensData?.tokens[0]?.description, descriptionConfigProps);
+  const imageProps = buildImageCard(tokensData?.tokens[0]?.image, imageConfigProps);
+  const addressProps = buildStringCard(tokensData?.address, addressConfigProps);
+
+  const isSoulboundProps = buildStringCard(
+    tokensData?.tokens[0]?.properties?.isSoulbound !== undefined
+      ? `Is Soulbound: ${tokensData?.tokens[0]?.properties.isSoulbound}`
+      : undefined,
+    isSoulboundConfigProps,
+  );
+
+  const isRedeemableProps = buildStringCard(
+    tokensData?.tokens[0]?.properties?.isRedeemable !== undefined
+      ? `Is Redeemable: ${tokensData?.tokens[0]?.properties.isRedeemable}`
+      : undefined,
+    isRedeemableConfigProps,
+  );
+
+  const maxMintAmountProps = buildStringCard(
+    tokensData?.tokens[0]?.properties?.maxMintAmountPerTx !== undefined
+      ? `Max Mint Amount Per Tx: ${tokensData?.tokens[0]?.properties.maxMintAmountPerTx}`
+      : undefined,
+    maxMintAmountConfigProps,
+  );
+
   return (
     <>
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
-        <p className="text-center text-4xl">Individual Components</p>
-        <div className="flex flex-wrap justify-center items-center space-x-3 space-y-3">
-          <BalanceCard props={balanceProps} />
-          <ImageCard props={imageProps} />
-          <StringCard props={nameProps} />
-          <StringCard props={descriptionsProps} />
-          <Address props={addressProps} />
-          <StringCard props={isTradeableProps} />
-          <StringCard props={maxMintAmountProps} />
-        </div>
-
-        <p className="text-center text-4xl">Single Card</p>
-        <TokenCard props={singleCard} />
+        <p className="text-center text-4xl">Widget</p>
+        <TokenGroupCard props={navBarTokenGroupCardProps} />
 
         <p className="text-center text-4xl">Multi-Card</p>
         <TokenGroupCard props={mainTokenGroupCardProps} />
@@ -139,8 +137,20 @@ export function RepTokensDemo() {
         <p className="text-center text-4xl">Multi-Card W/ Overlay</p>
         <TokenGroupCard props={mainTokenGroupOverlayCardProps} />
 
-        <p className="text-center text-4xl">Widget</p>
-        <TokenGroupCard props={navBarTokenGroupCardProps} />
+        <p className="text-center text-4xl">Single Card</p>
+        <TokenCard props={singleCard} />
+
+        <p className="text-center text-4xl">Individual Components</p>
+        <div className="flex flex-wrap justify-center items-center space-x-3 space-y-3">
+          <BalanceCard props={balanceProps} />
+          <ImageCard props={imageProps} />
+          <StringCard props={nameProps} />
+          <StringCard props={descriptionsProps} />
+          <Address props={addressProps} />
+          <StringCard props={isSoulboundProps} />
+          <StringCard props={isRedeemableProps} />
+          <StringCard props={maxMintAmountProps} />
+        </div>
       </div>
     </>
   );

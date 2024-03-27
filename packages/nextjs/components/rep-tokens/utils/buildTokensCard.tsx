@@ -91,11 +91,18 @@ export function buildTokenCard(token: Token, address?: string, tokenCardProps?: 
     if (tokenCardProps?.valuesProps?.addressConfigProps)
       obj.valuesProps.addressProps = buildStringCard(address, tokenCardProps?.valuesProps?.addressConfigProps);
 
-    if (tokenCardProps?.valuesProps?.isTradeableConfigProps)
-      obj.valuesProps.isTradeableProps = buildStringCard(
-        `Is Tradeable: ${token.properties.isTradeable}`,
-        tokenCardProps?.valuesProps?.isTradeableConfigProps,
+    if (tokenCardProps?.valuesProps?.isSoulboundConfigProps)
+      obj.valuesProps.isSoulboundProps = buildStringCard(
+        `Is Soulbound: ${token.properties.isSoulbound}`,
+        tokenCardProps?.valuesProps?.isSoulboundConfigProps,
       );
+
+    if (tokenCardProps?.valuesProps?.isRedeemableConfigProps)
+      obj.valuesProps.isRedeemableProps = buildStringCard(
+        `Is Redeemable: ${token.properties.isRedeemable}`,
+        tokenCardProps?.valuesProps?.isRedeemableConfigProps,
+      );
+
     if (tokenCardProps?.valuesProps?.maxMintAmountConfigProps)
       obj.valuesProps.maxMintAmountProps = buildStringCard(
         `Max Mint Amount Per Tx: ${token.properties.maxMintAmountPerTx}`,
@@ -104,26 +111,6 @@ export function buildTokenCard(token: Token, address?: string, tokenCardProps?: 
   }
 
   return obj;
-
-  return {
-    isPrettyLoading: tokenCardProps?.isPrettyLoading,
-    cardClasses: tokenCardProps?.cardClasses,
-    valuesProps: {
-      balanceProps: buildBalanceCard(token.balance, tokenCardProps?.valuesProps?.balanceConfigProps),
-      nameProps: buildStringCard(token.name, tokenCardProps?.valuesProps?.nameConfigProps),
-      descriptionProps: buildStringCard(token.description, tokenCardProps?.valuesProps?.descriptionConfigProps),
-      imageProps: buildImageCard(token.image, tokenCardProps?.valuesProps?.imageConfigProps),
-      addressProps: buildStringCard(address, tokenCardProps?.valuesProps?.addressConfigProps),
-      isTradeableProps: buildStringCard(
-        `Is Tradeable: ${token.properties.isTradeable}`,
-        tokenCardProps?.valuesProps?.isTradeableConfigProps,
-      ),
-      maxMintAmountProps: buildStringCard(
-        `Max Mint Amount Per Tx: ${token.properties.maxMintAmountPerTx}`,
-        tokenCardProps?.valuesProps?.maxMintAmountConfigProps,
-      ),
-    },
-  };
 }
 
 export function buildTokenCards(tokens: Token[], address?: string, tokenCardProps?: TokenCardConfigProps) {

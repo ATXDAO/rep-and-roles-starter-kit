@@ -27,7 +27,8 @@ export interface TokenCardValuesConfigProps {
   nameConfigProps?: ValueCardConfigProps;
   descriptionConfigProps?: ValueCardConfigProps;
   addressConfigProps?: ValueCardConfigProps;
-  isTradeableConfigProps?: ValueCardConfigProps;
+  isSoulboundConfigProps?: ValueCardConfigProps;
+  isRedeemableConfigProps?: ValueCardConfigProps;
   maxMintAmountConfigProps?: ValueCardConfigProps;
 }
 

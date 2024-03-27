@@ -10,7 +10,8 @@ export interface ValuesProps {
   descriptionProps?: StringCardProps;
   imageProps?: ImageCardProps;
   addressProps?: StringCardProps;
-  isTradeableProps?: StringCardProps;
+  isSoulboundProps?: StringCardProps;
+  isRedeemableProps?: StringCardProps;
   maxMintAmountProps?: StringCardProps;
 }
 
@@ -32,7 +33,8 @@ export const TokenCard = ({ props }: TokenCardInternalProps) => {
       {props?.valuesProps?.nameProps ? <StringCard props={props?.valuesProps?.nameProps} /> : <></>}
       {props?.valuesProps?.descriptionProps ? <StringCard props={props?.valuesProps?.descriptionProps} /> : <></>}
       {props?.valuesProps?.addressProps ? <Address props={props?.valuesProps?.addressProps} /> : <></>}
-      {props?.valuesProps?.isTradeableProps ? <StringCard props={props?.valuesProps?.isTradeableProps} /> : <></>}
+      {props?.valuesProps?.isRedeemableProps ? <StringCard props={props?.valuesProps?.isRedeemableProps} /> : <></>}
+      {props?.valuesProps?.isSoulboundProps ? <StringCard props={props?.valuesProps?.isSoulboundProps} /> : <></>}
       {props?.valuesProps?.maxMintAmountProps ? <StringCard props={props?.valuesProps?.maxMintAmountProps} /> : <></>}
     </>
   );

@@ -72,6 +72,7 @@ export function useGetTokensProperties(repTokensInstance: any, tokenIds: bigint[
       const arr = [];
       for (let i = 0; i < tokenIds.length; i++) {
         const result = await repTokensInstance.read.getTokenProperties([tokenIds[i]]);
+
         if (result !== undefined) arr.push(result);
       }
 
@@ -154,7 +155,8 @@ export const useRepTokens = (address?: string) => {
   const { uris } = useUris(repTokensInstance, tokenIds);
 
   for (let i = 0; i < uris.length; i++) {
-    uris[i] = uris[i].replace("ipfs://", "https://ipfs.io/ipfs/");
+    uris[i] = uris[i].replace("ipfs://", "https://nftstorage.link/ipfs/");
+    // uris[i] = uris[i].replace("ipfs://", "https://ipfs.io/ipfs/");
   }
 
   const { responses } = useFetches(uris);

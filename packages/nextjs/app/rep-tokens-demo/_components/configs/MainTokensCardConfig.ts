@@ -48,7 +48,15 @@ export const addressConfigProps = {
   },
 } as ValueCardConfigProps;
 
-export const isTradeableConfigProps = {
+export const isSoulboundConfigProps = {
+  isRendering: true,
+  classes: {
+    card: "rounded-lg bg-slate-300 ",
+    value: "text-1xl text-center object-center mx-auto font-bold break-all text-black",
+  },
+} as ValueCardConfigProps;
+
+export const isRedeemableConfigProps = {
   isRendering: true,
   classes: {
     card: "rounded-lg bg-slate-300 ",
@@ -70,7 +78,8 @@ export const tokenCardValuesProps = {
   nameConfigProps,
   descriptionConfigProps,
   addressConfigProps,
-  isTradeableConfigProps,
+  isSoulboundConfigProps,
+  isRedeemableConfigProps,
   maxMintAmountConfigProps,
 } as TokenCardValuesConfigProps;
 

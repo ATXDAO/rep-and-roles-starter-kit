@@ -12,7 +12,7 @@ import {Hats} from "../contracts/Hats/Hats.sol";
 contract DeployDemoScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
 
-    address controller = 0x62286D694F89a1B12c0214bfcD567bb6c2951491; //replace with burner or other address from wallet!
+    address controller = 0x4161f8A8DfF60aEdB63baFb7d5843b0988393eC9; //replace with burner or other address from wallet!
 
     function run() external {
         uint256 deployerPrivateKey = setupLocalhostEnv();
@@ -64,8 +64,6 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         // console.log(newHatId);
 
         vm.stopBroadcast();
-
-        exportDeployments();
     }
 
     ///////////////////////////////////
@@ -87,16 +85,24 @@ contract DeployDemoScript is ScaffoldETHDeploy {
     function batchCreateTokens(ReputationTokensStandalone instance) public {
         TokensPropertiesStorage.TokenProperties[]
             memory tokensProperties = new TokensPropertiesStorage.TokenProperties[](
-                2
+                3
             );
 
         tokensProperties[0] = TokensPropertiesStorage.TokenProperties(
+            true,
             false,
             100
         );
 
         tokensProperties[1] = TokensPropertiesStorage.TokenProperties(
             true,
+            true,
+            100
+        );
+
+        tokensProperties[2] = TokensPropertiesStorage.TokenProperties(
+            false,
+            false,
             100
         );
 
@@ -109,6 +115,10 @@ contract DeployDemoScript is ScaffoldETHDeploy {
 
         instance.setTokenURI(0, string.concat(BASE_URI, "0"));
         instance.setTokenURI(1, string.concat(BASE_URI, "1"));
+        instance.setTokenURI(
+            2,
+            "ipfs://bafkreiheocygb3ty4uo3znjw2wz2asjzavn56owlqjoz4cvxvspg64egtq"
+        );
     }
 
     function batchMint(ReputationTokensStandalone instance) public {
@@ -116,15 +126,21 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         mintOperations.to = controller;
 
         mintOperations
-            .operations = new IReputationTokensInternal.TokenOperation[](2);
+            .operations = new IReputationTokensInternal.TokenOperation[](3);
         mintOperations.operations[0] = IReputationTokensInternal.TokenOperation(
             0,
             50
         );
         mintOperations.operations[1] = IReputationTokensInternal.TokenOperation(
             1,
-            50
+            25
         );
+
+        mintOperations.operations[2] = IReputationTokensInternal.TokenOperation(
+            2,
+            75
+        );
+
         instance.mint(mintOperations);
     }
 }

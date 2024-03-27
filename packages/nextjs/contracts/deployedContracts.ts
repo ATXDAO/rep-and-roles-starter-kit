@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokensStandalone: {
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      address: "0xD8a5a9b31c3C0232E196d518E89Fd8bF83AcAd43",
       abi: [
         {
           type: "constructor",
@@ -200,7 +200,12 @@ const deployedContracts = {
               internalType: "struct TokensPropertiesStorage.TokenProperties[]",
               components: [
                 {
-                  name: "isTradeable",
+                  name: "isSoulbound",
+                  type: "bool",
+                  internalType: "bool",
+                },
+                {
+                  name: "isRedeemable",
                   type: "bool",
                   internalType: "bool",
                 },
@@ -217,7 +222,44 @@ const deployedContracts = {
         },
         {
           type: "function",
-          name: "batchUpdateTokens",
+          name: "batchMint",
+          inputs: [
+            {
+              name: "tokensOperations",
+              type: "tuple[]",
+              internalType: "struct IReputationTokensInternal.TokensOperations[]",
+              components: [
+                {
+                  name: "to",
+                  type: "address",
+                  internalType: "address",
+                },
+                {
+                  name: "operations",
+                  type: "tuple[]",
+                  internalType: "struct IReputationTokensInternal.TokenOperation[]",
+                  components: [
+                    {
+                      name: "id",
+                      type: "uint256",
+                      internalType: "uint256",
+                    },
+                    {
+                      name: "amount",
+                      type: "uint256",
+                      internalType: "uint256",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "batchUpdateTokensProperties",
           inputs: [
             {
               name: "ids",
@@ -230,7 +272,12 @@ const deployedContracts = {
               internalType: "struct TokensPropertiesStorage.TokenProperties[]",
               components: [
                 {
-                  name: "isTradeable",
+                  name: "isSoulbound",
+                  type: "bool",
+                  internalType: "bool",
+                },
+                {
+                  name: "isRedeemable",
                   type: "bool",
                   internalType: "bool",
                 },
@@ -250,12 +297,17 @@ const deployedContracts = {
           name: "createToken",
           inputs: [
             {
-              name: "tokenProperty",
+              name: "tokenProperties",
               type: "tuple",
               internalType: "struct TokensPropertiesStorage.TokenProperties",
               components: [
                 {
-                  name: "isTradeable",
+                  name: "isSoulbound",
+                  type: "bool",
+                  internalType: "bool",
+                },
+                {
+                  name: "isRedeemable",
                   type: "bool",
                   internalType: "bool",
                 },
@@ -267,7 +319,13 @@ const deployedContracts = {
               ],
             },
           ],
-          outputs: [],
+          outputs: [
+            {
+              name: "tokenId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           stateMutability: "nonpayable",
         },
         {
@@ -366,6 +424,30 @@ const deployedContracts = {
         },
         {
           type: "function",
+          name: "getBurnedBalance",
+          inputs: [
+            {
+              name: "addr",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "tokenId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "burnedBalance",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
           name: "getDestinationWallet",
           inputs: [
             {
@@ -379,6 +461,30 @@ const deployedContracts = {
               name: "",
               type: "address",
               internalType: "address",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "getDistributableBalance",
+          inputs: [
+            {
+              name: "addr",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "tokenId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "distributableBalance",
+              type: "uint256",
+              internalType: "uint256",
             },
           ],
           stateMutability: "view",
@@ -494,7 +600,12 @@ const deployedContracts = {
               internalType: "struct TokensPropertiesStorage.TokenProperties",
               components: [
                 {
-                  name: "isTradeable",
+                  name: "isSoulbound",
+                  type: "bool",
+                  internalType: "bool",
+                },
+                {
+                  name: "isRedeemable",
                   type: "bool",
                   internalType: "bool",
                 },
@@ -504,6 +615,30 @@ const deployedContracts = {
                   internalType: "uint256",
                 },
               ],
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "getTransferrableBalance",
+          inputs: [
+            {
+              name: "addr",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "tokenId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "transferrableBalance",
+              type: "uint256",
+              internalType: "uint256",
             },
           ],
           stateMutability: "view",
@@ -600,43 +735,6 @@ const deployedContracts = {
               name: "tokensOperations",
               type: "tuple",
               internalType: "struct IReputationTokensInternal.TokensOperations",
-              components: [
-                {
-                  name: "to",
-                  type: "address",
-                  internalType: "address",
-                },
-                {
-                  name: "operations",
-                  type: "tuple[]",
-                  internalType: "struct IReputationTokensInternal.TokenOperation[]",
-                  components: [
-                    {
-                      name: "id",
-                      type: "uint256",
-                      internalType: "uint256",
-                    },
-                    {
-                      name: "amount",
-                      type: "uint256",
-                      internalType: "uint256",
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "mintBatch",
-          inputs: [
-            {
-              name: "tokensOperations",
-              type: "tuple[]",
-              internalType: "struct IReputationTokensInternal.TokensOperations[]",
               components: [
                 {
                   name: "to",
@@ -929,7 +1027,7 @@ const deployedContracts = {
         },
         {
           type: "function",
-          name: "updateToken",
+          name: "updateTokenProperties",
           inputs: [
             {
               name: "id",
@@ -942,7 +1040,12 @@ const deployedContracts = {
               internalType: "struct TokensPropertiesStorage.TokenProperties",
               components: [
                 {
-                  name: "isTradeable",
+                  name: "isSoulbound",
+                  type: "bool",
+                  internalType: "bool",
+                },
+                {
+                  name: "isRedeemable",
                   type: "bool",
                   internalType: "bool",
                 },
@@ -1003,31 +1106,6 @@ const deployedContracts = {
         },
         {
           type: "event",
-          name: "BurnedRedeemable",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "amount",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
           name: "Create",
           inputs: [
             {
@@ -1037,7 +1115,12 @@ const deployedContracts = {
               internalType: "struct TokensPropertiesStorage.TokenProperties",
               components: [
                 {
-                  name: "isTradeable",
+                  name: "isSoulbound",
+                  type: "bool",
+                  internalType: "bool",
+                },
+                {
+                  name: "isRedeemable",
                   type: "bool",
                   internalType: "bool",
                 },
@@ -1161,13 +1244,7 @@ const deployedContracts = {
               internalType: "address",
             },
             {
-              name: "lifetimeBalance",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
-            },
-            {
-              name: "redeemableBalance",
+              name: "balance",
               type: "uint256",
               indexed: false,
               internalType: "uint256",
@@ -1379,7 +1456,12 @@ const deployedContracts = {
               internalType: "struct TokensPropertiesStorage.TokenProperties",
               components: [
                 {
-                  name: "isTradeable",
+                  name: "isSoulbound",
+                  type: "bool",
+                  internalType: "bool",
+                },
+                {
+                  name: "isRedeemable",
                   type: "bool",
                   internalType: "bool",
                 },
@@ -1470,37 +1552,37 @@ const deployedContracts = {
         },
         {
           type: "error",
-          name: "ReentrancyGuard__ReentrantCall",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ReputationTokens__AttemptingToMintToNonDistributor",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ReputationTokens__AttemptingToMintTooManyTokens",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ReputationTokens__AttemptingToSendIllegalyAsDistributor",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ReputationTokens__AttemptingToSendNonRedeemableTokens",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ReputationTokens__AttemptingToSendToNonBurner",
-          inputs: [],
-        },
-        {
-          type: "error",
           name: "ReputationTokens__AttemptingToUpdateNonexistentToken",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "ReputationTokens__CanOnlyMintToDistributor",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "ReputationTokens__CannotTransferRedeemableToNonBurner",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "ReputationTokens__CannotTransferSoulboundToken",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "ReputationTokens__CannotUpdateNonexistentTokenType",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "ReputationTokens__CantSendThatManyTransferrableTokens",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "ReputationTokens__MintAmountExceedsLimit",
           inputs: [],
         },
         {
@@ -1510,1606 +1592,60 @@ const deployedContracts = {
         },
         {
           type: "error",
-          name: "UintUtils__InsufficientHexLength",
+          name: "UintUtils__InsufficientPadding",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "UintUtils__InvalidBase",
           inputs: [],
         },
       ],
       inheritedFunctions: {
-        BURNER_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        DISTRIBUTOR_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        MINTER_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        TOKEN_CREATOR_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        TOKEN_MIGRATOR_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        TOKEN_UPDATER_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        TOKEN_URI_SETTER_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        acceptOwnership: "lib/reputation/src/ReputationTokensBase.sol",
-        accountsByToken: "lib/reputation/src/ReputationTokensBase.sol",
-        balanceOf: "lib/reputation/src/ReputationTokensBase.sol",
-        balanceOfBatch: "lib/reputation/src/ReputationTokensBase.sol",
-        batchCreateTokens: "lib/reputation/src/ReputationTokensBase.sol",
-        batchUpdateTokens: "lib/reputation/src/ReputationTokensBase.sol",
-        createToken: "lib/reputation/src/ReputationTokensBase.sol",
-        distribute: "lib/reputation/src/ReputationTokensBase.sol",
-        distributeBatch: "lib/reputation/src/ReputationTokensBase.sol",
-        getRoleAdmin: "lib/reputation/src/ReputationTokensBase.sol",
-        getRoleMember: "lib/reputation/src/ReputationTokensBase.sol",
-        getRoleMemberCount: "lib/reputation/src/ReputationTokensBase.sol",
-        grantRole: "lib/reputation/src/ReputationTokensBase.sol",
-        hasRole: "lib/reputation/src/ReputationTokensBase.sol",
-        isApprovedForAll: "lib/reputation/src/ReputationTokensBase.sol",
-        migrateOwnershipOfTokens: "lib/reputation/src/ReputationTokensBase.sol",
-        mint: "lib/reputation/src/ReputationTokensBase.sol",
-        mintBatch: "lib/reputation/src/ReputationTokensBase.sol",
-        nomineeOwner: "lib/reputation/src/ReputationTokensBase.sol",
-        owner: "lib/reputation/src/ReputationTokensBase.sol",
-        renounceRole: "lib/reputation/src/ReputationTokensBase.sol",
-        revokeRole: "lib/reputation/src/ReputationTokensBase.sol",
-        safeBatchTransferFrom: "lib/reputation/src/ReputationTokensBase.sol",
-        safeTransferFrom: "lib/reputation/src/ReputationTokensBase.sol",
-        setApprovalForAll: "lib/reputation/src/ReputationTokensBase.sol",
-        setDestinationWallet: "lib/reputation/src/ReputationTokensBase.sol",
-        setTokenURI: "lib/reputation/src/ReputationTokensBase.sol",
-        supportsInterface: "lib/reputation/src/ReputationTokensBase.sol",
-        tokensByAccount: "lib/reputation/src/ReputationTokensBase.sol",
-        totalHolders: "lib/reputation/src/ReputationTokensBase.sol",
-        totalSupply: "lib/reputation/src/ReputationTokensBase.sol",
-        transferOwnership: "lib/reputation/src/ReputationTokensBase.sol",
-        updateToken: "lib/reputation/src/ReputationTokensBase.sol",
-        uri: "lib/reputation/src/ReputationTokensBase.sol",
-      },
-    },
-  },
-  11155111: {
-    ReputationTokensStandalone: {
-      address: "0x820f78298373ef17675dbc225cEF122ac7867358",
-      abi: [
-        {
-          type: "constructor",
-          inputs: [
-            {
-              name: "ownerNominee",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "admins",
-              type: "address[]",
-              internalType: "address[]",
-            },
-          ],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "BURNER_ROLE",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "DISTRIBUTOR_ROLE",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "MINTER_ROLE",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "TOKEN_CREATOR_ROLE",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "TOKEN_MIGRATOR_ROLE",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "TOKEN_UPDATER_ROLE",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "TOKEN_URI_SETTER_ROLE",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "acceptOwnership",
-          inputs: [],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "accountsByToken",
-          inputs: [
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "address[]",
-              internalType: "address[]",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "balanceOf",
-          inputs: [
-            {
-              name: "account",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "balanceOfBatch",
-          inputs: [
-            {
-              name: "accounts",
-              type: "address[]",
-              internalType: "address[]",
-            },
-            {
-              name: "ids",
-              type: "uint256[]",
-              internalType: "uint256[]",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256[]",
-              internalType: "uint256[]",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "batchCreateTokens",
-          inputs: [
-            {
-              name: "tokensProperties",
-              type: "tuple[]",
-              internalType: "struct TokensPropertiesStorage.TokenProperties[]",
-              components: [
-                {
-                  name: "isTradeable",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "maxMintAmountPerTx",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-              ],
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "batchUpdateTokens",
-          inputs: [
-            {
-              name: "ids",
-              type: "uint256[]",
-              internalType: "uint256[]",
-            },
-            {
-              name: "tokensProperties",
-              type: "tuple[]",
-              internalType: "struct TokensPropertiesStorage.TokenProperties[]",
-              components: [
-                {
-                  name: "isTradeable",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "maxMintAmountPerTx",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-              ],
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "createToken",
-          inputs: [
-            {
-              name: "tokenProperty",
-              type: "tuple",
-              internalType: "struct TokensPropertiesStorage.TokenProperties",
-              components: [
-                {
-                  name: "isTradeable",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "maxMintAmountPerTx",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-              ],
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "distribute",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "tokensOperations",
-              type: "tuple",
-              internalType: "struct IReputationTokensInternal.TokensOperations",
-              components: [
-                {
-                  name: "to",
-                  type: "address",
-                  internalType: "address",
-                },
-                {
-                  name: "operations",
-                  type: "tuple[]",
-                  internalType: "struct IReputationTokensInternal.TokenOperation[]",
-                  components: [
-                    {
-                      name: "id",
-                      type: "uint256",
-                      internalType: "uint256",
-                    },
-                    {
-                      name: "amount",
-                      type: "uint256",
-                      internalType: "uint256",
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              name: "data",
-              type: "bytes",
-              internalType: "bytes",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "distributeBatch",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "tokensOperations",
-              type: "tuple[]",
-              internalType: "struct IReputationTokensInternal.TokensOperations[]",
-              components: [
-                {
-                  name: "to",
-                  type: "address",
-                  internalType: "address",
-                },
-                {
-                  name: "operations",
-                  type: "tuple[]",
-                  internalType: "struct IReputationTokensInternal.TokenOperation[]",
-                  components: [
-                    {
-                      name: "id",
-                      type: "uint256",
-                      internalType: "uint256",
-                    },
-                    {
-                      name: "amount",
-                      type: "uint256",
-                      internalType: "uint256",
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              name: "data",
-              type: "bytes",
-              internalType: "bytes",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "getDestinationWallet",
-          inputs: [
-            {
-              name: "addr",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "getMaxMintPerTx",
-          inputs: [
-            {
-              name: "index",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "getNumOfTokenTypes",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "getRoleAdmin",
-          inputs: [
-            {
-              name: "role",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "getRoleMember",
-          inputs: [
-            {
-              name: "role",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-            {
-              name: "index",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "getRoleMemberCount",
-          inputs: [
-            {
-              name: "role",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "getTokenProperties",
-          inputs: [
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "tuple",
-              internalType: "struct TokensPropertiesStorage.TokenProperties",
-              components: [
-                {
-                  name: "isTradeable",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "maxMintAmountPerTx",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-              ],
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "grantRole",
-          inputs: [
-            {
-              name: "role",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-            {
-              name: "account",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "hasRole",
-          inputs: [
-            {
-              name: "role",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-            {
-              name: "account",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "isApprovedForAll",
-          inputs: [
-            {
-              name: "account",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "operator",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "migrateOwnershipOfTokens",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "mint",
-          inputs: [
-            {
-              name: "tokensOperations",
-              type: "tuple",
-              internalType: "struct IReputationTokensInternal.TokensOperations",
-              components: [
-                {
-                  name: "to",
-                  type: "address",
-                  internalType: "address",
-                },
-                {
-                  name: "operations",
-                  type: "tuple[]",
-                  internalType: "struct IReputationTokensInternal.TokenOperation[]",
-                  components: [
-                    {
-                      name: "id",
-                      type: "uint256",
-                      internalType: "uint256",
-                    },
-                    {
-                      name: "amount",
-                      type: "uint256",
-                      internalType: "uint256",
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "mintBatch",
-          inputs: [
-            {
-              name: "tokensOperations",
-              type: "tuple[]",
-              internalType: "struct IReputationTokensInternal.TokensOperations[]",
-              components: [
-                {
-                  name: "to",
-                  type: "address",
-                  internalType: "address",
-                },
-                {
-                  name: "operations",
-                  type: "tuple[]",
-                  internalType: "struct IReputationTokensInternal.TokenOperation[]",
-                  components: [
-                    {
-                      name: "id",
-                      type: "uint256",
-                      internalType: "uint256",
-                    },
-                    {
-                      name: "amount",
-                      type: "uint256",
-                      internalType: "uint256",
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "nomineeOwner",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "owner",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "renounceRole",
-          inputs: [
-            {
-              name: "role",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "revokeRole",
-          inputs: [
-            {
-              name: "role",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-            {
-              name: "account",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "safeBatchTransferFrom",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "ids",
-              type: "uint256[]",
-              internalType: "uint256[]",
-            },
-            {
-              name: "amounts",
-              type: "uint256[]",
-              internalType: "uint256[]",
-            },
-            {
-              name: "data",
-              type: "bytes",
-              internalType: "bytes",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "safeTransferFrom",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-            {
-              name: "amount",
-              type: "uint256",
-              internalType: "uint256",
-            },
-            {
-              name: "data",
-              type: "bytes",
-              internalType: "bytes",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "setApprovalForAll",
-          inputs: [
-            {
-              name: "operator",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "status",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "setDestinationWallet",
-          inputs: [
-            {
-              name: "destination",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "setTokenURI",
-          inputs: [
-            {
-              name: "tokenId",
-              type: "uint256",
-              internalType: "uint256",
-            },
-            {
-              name: "tokenURI",
-              type: "string",
-              internalType: "string",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "supportsInterface",
-          inputs: [
-            {
-              name: "interfaceId",
-              type: "bytes4",
-              internalType: "bytes4",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "tokensByAccount",
-          inputs: [
-            {
-              name: "account",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256[]",
-              internalType: "uint256[]",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "totalHolders",
-          inputs: [
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "totalSupply",
-          inputs: [
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "transferOwnership",
-          inputs: [
-            {
-              name: "account",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "updateToken",
-          inputs: [
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-            {
-              name: "tokenProperties",
-              type: "tuple",
-              internalType: "struct TokensPropertiesStorage.TokenProperties",
-              components: [
-                {
-                  name: "isTradeable",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "maxMintAmountPerTx",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-              ],
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "uri",
-          inputs: [
-            {
-              name: "tokenId",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "string",
-              internalType: "string",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "event",
-          name: "ApprovalForAll",
-          inputs: [
-            {
-              name: "account",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "operator",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "approved",
-              type: "bool",
-              indexed: false,
-              internalType: "bool",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "BurnedRedeemable",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "amount",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "Create",
-          inputs: [
-            {
-              name: "",
-              type: "tuple",
-              indexed: false,
-              internalType: "struct TokensPropertiesStorage.TokenProperties",
-              components: [
-                {
-                  name: "isTradeable",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "maxMintAmountPerTx",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-              ],
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "DestinationWalletSet",
-          inputs: [
-            {
-              name: "coreAddress",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "destination",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "Distributed",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "tokens",
-              type: "tuple[]",
-              indexed: true,
-              internalType: "struct IReputationTokensInternal.TokenOperation[]",
-              components: [
-                {
-                  name: "id",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-                {
-                  name: "amount",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-              ],
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "Mint",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "tokens",
-              type: "tuple[]",
-              indexed: true,
-              internalType: "struct IReputationTokensInternal.TokenOperation[]",
-              components: [
-                {
-                  name: "id",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-                {
-                  name: "amount",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-              ],
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "OwnershipOfTokensMigrated",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "lifetimeBalance",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
-            },
-            {
-              name: "redeemableBalance",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "OwnershipTransferred",
-          inputs: [
-            {
-              name: "previousOwner",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "newOwner",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "RoleAdminChanged",
-          inputs: [
-            {
-              name: "role",
-              type: "bytes32",
-              indexed: true,
-              internalType: "bytes32",
-            },
-            {
-              name: "previousAdminRole",
-              type: "bytes32",
-              indexed: true,
-              internalType: "bytes32",
-            },
-            {
-              name: "newAdminRole",
-              type: "bytes32",
-              indexed: true,
-              internalType: "bytes32",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "RoleGranted",
-          inputs: [
-            {
-              name: "role",
-              type: "bytes32",
-              indexed: true,
-              internalType: "bytes32",
-            },
-            {
-              name: "account",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "sender",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "RoleRevoked",
-          inputs: [
-            {
-              name: "role",
-              type: "bytes32",
-              indexed: true,
-              internalType: "bytes32",
-            },
-            {
-              name: "account",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "sender",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "TransferBatch",
-          inputs: [
-            {
-              name: "operator",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "from",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "ids",
-              type: "uint256[]",
-              indexed: false,
-              internalType: "uint256[]",
-            },
-            {
-              name: "values",
-              type: "uint256[]",
-              indexed: false,
-              internalType: "uint256[]",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "TransferSingle",
-          inputs: [
-            {
-              name: "operator",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "from",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "id",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
-            },
-            {
-              name: "value",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "URI",
-          inputs: [
-            {
-              name: "value",
-              type: "string",
-              indexed: false,
-              internalType: "string",
-            },
-            {
-              name: "tokenId",
-              type: "uint256",
-              indexed: true,
-              internalType: "uint256",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "Update",
-          inputs: [
-            {
-              name: "id",
-              type: "uint256",
-              indexed: true,
-              internalType: "uint256",
-            },
-            {
-              name: "properties",
-              type: "tuple",
-              indexed: true,
-              internalType: "struct TokensPropertiesStorage.TokenProperties",
-              components: [
-                {
-                  name: "isTradeable",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "maxMintAmountPerTx",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-              ],
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "error",
-          name: "ERC1155Base__ArrayLengthMismatch",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ERC1155Base__BalanceQueryZeroAddress",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ERC1155Base__BurnExceedsBalance",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ERC1155Base__BurnFromZeroAddress",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ERC1155Base__ERC1155ReceiverNotImplemented",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ERC1155Base__ERC1155ReceiverRejected",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ERC1155Base__MintToZeroAddress",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ERC1155Base__NotOwnerOrApproved",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ERC1155Base__SelfApproval",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ERC1155Base__TransferExceedsBalance",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ERC1155Base__TransferToZeroAddress",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ERC165Base__InvalidInterfaceId",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "EnumerableSet__IndexOutOfBounds",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "Ownable__NotOwner",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "Ownable__NotTransitiveOwner",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ReentrancyGuard__ReentrantCall",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ReputationTokens__AttemptingToMintToNonDistributor",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ReputationTokens__AttemptingToMintTooManyTokens",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ReputationTokens__AttemptingToSendIllegalyAsDistributor",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ReputationTokens__AttemptingToSendNonRedeemableTokens",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ReputationTokens__AttemptingToSendToNonBurner",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ReputationTokens__AttemptingToUpdateNonexistentToken",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "SafeOwnable__NotNomineeOwner",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "UintUtils__InsufficientHexLength",
-          inputs: [],
-        },
-      ],
-      inheritedFunctions: {
-        BURNER_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        DISTRIBUTOR_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        MINTER_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        TOKEN_CREATOR_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        TOKEN_MIGRATOR_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        TOKEN_UPDATER_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        TOKEN_URI_SETTER_ROLE: "lib/reputation/src/ReputationTokensBase.sol",
-        acceptOwnership: "lib/reputation/src/ReputationTokensBase.sol",
-        accountsByToken: "lib/reputation/src/ReputationTokensBase.sol",
-        balanceOf: "lib/reputation/src/ReputationTokensBase.sol",
-        balanceOfBatch: "lib/reputation/src/ReputationTokensBase.sol",
-        batchCreateTokens: "lib/reputation/src/ReputationTokensBase.sol",
-        batchUpdateTokens: "lib/reputation/src/ReputationTokensBase.sol",
-        createToken: "lib/reputation/src/ReputationTokensBase.sol",
-        distribute: "lib/reputation/src/ReputationTokensBase.sol",
-        distributeBatch: "lib/reputation/src/ReputationTokensBase.sol",
-        getRoleAdmin: "lib/reputation/src/ReputationTokensBase.sol",
-        getRoleMember: "lib/reputation/src/ReputationTokensBase.sol",
-        getRoleMemberCount: "lib/reputation/src/ReputationTokensBase.sol",
-        grantRole: "lib/reputation/src/ReputationTokensBase.sol",
-        hasRole: "lib/reputation/src/ReputationTokensBase.sol",
-        isApprovedForAll: "lib/reputation/src/ReputationTokensBase.sol",
-        migrateOwnershipOfTokens: "lib/reputation/src/ReputationTokensBase.sol",
-        mint: "lib/reputation/src/ReputationTokensBase.sol",
-        mintBatch: "lib/reputation/src/ReputationTokensBase.sol",
-        nomineeOwner: "lib/reputation/src/ReputationTokensBase.sol",
-        owner: "lib/reputation/src/ReputationTokensBase.sol",
-        renounceRole: "lib/reputation/src/ReputationTokensBase.sol",
-        revokeRole: "lib/reputation/src/ReputationTokensBase.sol",
-        safeBatchTransferFrom: "lib/reputation/src/ReputationTokensBase.sol",
-        safeTransferFrom: "lib/reputation/src/ReputationTokensBase.sol",
-        setApprovalForAll: "lib/reputation/src/ReputationTokensBase.sol",
-        setDestinationWallet: "lib/reputation/src/ReputationTokensBase.sol",
-        setTokenURI: "lib/reputation/src/ReputationTokensBase.sol",
-        supportsInterface: "lib/reputation/src/ReputationTokensBase.sol",
-        tokensByAccount: "lib/reputation/src/ReputationTokensBase.sol",
-        totalHolders: "lib/reputation/src/ReputationTokensBase.sol",
-        totalSupply: "lib/reputation/src/ReputationTokensBase.sol",
-        transferOwnership: "lib/reputation/src/ReputationTokensBase.sol",
-        updateToken: "lib/reputation/src/ReputationTokensBase.sol",
-        uri: "lib/reputation/src/ReputationTokensBase.sol",
+        BURNER_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
+        DISTRIBUTOR_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
+        MINTER_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
+        TOKEN_CREATOR_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
+        TOKEN_MIGRATOR_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
+        TOKEN_UPDATER_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
+        TOKEN_URI_SETTER_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
+        acceptOwnership: "lib/reputation/contracts/ReputationTokensBase.sol",
+        accountsByToken: "lib/reputation/contracts/ReputationTokensBase.sol",
+        balanceOf: "lib/reputation/contracts/ReputationTokensBase.sol",
+        balanceOfBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
+        batchCreateTokens: "lib/reputation/contracts/ReputationTokensBase.sol",
+        batchMint: "lib/reputation/contracts/ReputationTokensBase.sol",
+        batchUpdateTokensProperties: "lib/reputation/contracts/ReputationTokensBase.sol",
+        createToken: "lib/reputation/contracts/ReputationTokensBase.sol",
+        distribute: "lib/reputation/contracts/ReputationTokensBase.sol",
+        distributeBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getBurnedBalance: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getDistributableBalance: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getRoleAdmin: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getRoleMember: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getRoleMemberCount: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getTransferrableBalance: "lib/reputation/contracts/ReputationTokensBase.sol",
+        grantRole: "lib/reputation/contracts/ReputationTokensBase.sol",
+        hasRole: "lib/reputation/contracts/ReputationTokensBase.sol",
+        isApprovedForAll: "lib/reputation/contracts/ReputationTokensBase.sol",
+        migrateOwnershipOfTokens: "lib/reputation/contracts/ReputationTokensBase.sol",
+        mint: "lib/reputation/contracts/ReputationTokensBase.sol",
+        nomineeOwner: "lib/reputation/contracts/ReputationTokensBase.sol",
+        owner: "lib/reputation/contracts/ReputationTokensBase.sol",
+        renounceRole: "lib/reputation/contracts/ReputationTokensBase.sol",
+        revokeRole: "lib/reputation/contracts/ReputationTokensBase.sol",
+        safeBatchTransferFrom: "lib/reputation/contracts/ReputationTokensBase.sol",
+        safeTransferFrom: "lib/reputation/contracts/ReputationTokensBase.sol",
+        setApprovalForAll: "lib/reputation/contracts/ReputationTokensBase.sol",
+        setDestinationWallet: "lib/reputation/contracts/ReputationTokensBase.sol",
+        setTokenURI: "lib/reputation/contracts/ReputationTokensBase.sol",
+        supportsInterface: "lib/reputation/contracts/ReputationTokensBase.sol",
+        tokensByAccount: "lib/reputation/contracts/ReputationTokensBase.sol",
+        totalHolders: "lib/reputation/contracts/ReputationTokensBase.sol",
+        totalSupply: "lib/reputation/contracts/ReputationTokensBase.sol",
+        transferOwnership: "lib/reputation/contracts/ReputationTokensBase.sol",
+        updateTokenProperties: "lib/reputation/contracts/ReputationTokensBase.sol",
+        uri: "lib/reputation/contracts/ReputationTokensBase.sol",
       },
     },
   },

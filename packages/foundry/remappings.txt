@@ -1,2 +1,2 @@
 @openzeppelin/contracts/=lib/openzeppelin-contracts/contracts
-@atxdao/contracts/reputation=lib/reputation/src
+@atxdao/contracts/reputation=lib/reputation/contracts
