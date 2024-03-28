@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokensStandalone: {
-      address: "0x9C85258d9A00C01d00ded98065ea3840dF06f09c",
+      address: "0xcB0f2a13098f8e841e6Adfa5B17Ec00508b27665",
       abi: [
         {
           type: "constructor",
@@ -1649,7 +1649,7 @@ const deployedContracts = {
       },
     },
     ReputationFaucet: {
-      address: "0x15Ff10fCc8A1a50bFbE07847A22664801eA79E0f",
+      address: "0x38c76A767d45Fc390160449948aF80569E2C4217",
       abi: [
         {
           type: "constructor",
@@ -1673,7 +1673,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     Hats: {
-      address: "0x6533158b042775e2FdFeF3cA1a782EFDbB8EB9b1",
+      address: "0x89ec9355b1Bcc964e576211c8B011BD709083f8d",
       abi: [
         {
           type: "constructor",
@@ -3634,7 +3634,7 @@ const deployedContracts = {
       },
     },
     SimpleClaimHatter: {
-      address: "0x2b639Cc84e1Ad3aA92D4Ee7d2755A6ABEf300D72",
+      address: "0xed12bE400A07910E4d4E743E4ceE26ab1FC9a961",
       abi: [
         {
           type: "constructor",
@@ -3960,7 +3960,7 @@ const deployedContracts = {
       },
     },
     ActiveModule: {
-      address: "0x0b27a79cb9C0B38eE06Ca3d94DAA68e0Ed17F953",
+      address: "0xc775bF567D67018dfFac4E89a7Cf10f0EDd0Be93",
       abi: [
         {
           type: "function",
@@ -3990,14 +3990,25 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ERC1155EligibiltiyModule: {
-      address: "0x7bdd3b028C4796eF0EAf07d11394d0d9d8c24139",
+      address: "0x3489745eff9525CCC3d8c648102FE2cf3485e228",
       abi: [
+        {
+          type: "constructor",
+          inputs: [
+            {
+              name: "erc1155Address",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+          stateMutability: "nonpayable",
+        },
         {
           type: "function",
           name: "getWearerStatus",
           inputs: [
             {
-              name: "",
+              name: "_wearer",
               type: "address",
               internalType: "address",
             },
@@ -4019,7 +4030,7 @@ const deployedContracts = {
               internalType: "bool",
             },
           ],
-          stateMutability: "pure",
+          stateMutability: "view",
         },
       ],
       inheritedFunctions: {},

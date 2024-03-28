@@ -84,11 +84,13 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         console.log(address(hatter));
 
         ActiveModule activeModule = new ActiveModule();
-        ERC1155EligibiltiyModule eligibilityModule = new ERC1155EligibiltiyModule();
+        ERC1155EligibiltiyModule eligibilityModule = new ERC1155EligibiltiyModule(
+                address(instance)
+            );
 
         uint256 claimableHatId = hatsInstance.createHat(
             hatterHatId,
-            "Claimable Hat",
+            "Hat of Engineering",
             100,
             address(eligibilityModule),
             address(activeModule),

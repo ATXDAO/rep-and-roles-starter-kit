@@ -3,6 +3,8 @@
 import { useAccount } from "wagmi";
 import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
+const claimableHatId = "26960358049567071831564234593151059434471056522609336320533481914368";
+
 export function Hats() {
   const { address } = useAccount();
 
@@ -23,11 +25,11 @@ export function Hats() {
   //   args: [address, BigInt("26959946667150639794667015087019630673637144422540572481103610249216")],
   // });
 
-  // const { data: viewHat } = useScaffoldContractRead({
-  //   contractName: "Hats",
-  //   functionName: "viewHat",
-  //   args: [BigInt("26959946667150639794667015087019630673637144422540572481103610249216")],
-  // });
+  const { data: viewHat } = useScaffoldContractRead({
+    contractName: "Hats",
+    functionName: "viewHat",
+    args: [BigInt(claimableHatId)],
+  });
 
   const { data: isEligible } = useScaffoldContractRead({
     contractName: "Hats",
@@ -57,7 +59,7 @@ export function Hats() {
   const { data: balanceOfClaimableHat, refetch } = useScaffoldContractRead({
     contractName: "Hats",
     functionName: "balanceOf",
-    args: [address, BigInt("26960358049567071831564234593151059434471056522609336320533481914368")],
+    args: [address, BigInt(claimableHatId)],
   });
 
   console.log(balanceOfClaimableHat);
@@ -65,21 +67,27 @@ export function Hats() {
   const { writeAsync: claimHat } = useScaffoldContractWrite({
     contractName: "SimpleClaimHatter",
     functionName: "claimHat",
-    args: [BigInt("26960358049567071831564234593151059434471056522609336320533481914368")],
+    args: [BigInt(claimableHatId)],
   });
+
+  console.log(viewHat);
 
   return (
     <>
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
+        <p>{viewHat ? viewHat[0] : ""}</p>
         <button
+          disabled={(balanceOfClaimableHat || 0) > 0}
           className="btn btn-secondary btn-sm font-normal gap-1"
           onClick={async () => {
             await claimHat();
             await refetch();
           }}
         >
-          Claim Hat
+          {"Claim (100 Lifetime Tokens)"}
         </button>
+
+        {balanceOfClaimableHat || 0 > 0 ? <p>Hat Claimed!</p> : <></>}
       </div>
     </>
   );

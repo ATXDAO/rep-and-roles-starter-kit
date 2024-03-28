@@ -11,9 +11,15 @@ contract ERC1155EligibiltiyModule {
     }
 
     function getWearerStatus(
-        address,
+        address _wearer,
         uint256
-    ) external pure returns (bool eligible, bool standing) {
-        return (true, true);
+    ) external view returns (bool eligible, bool standing) {
+        if (s_erc1155.balanceOf(_wearer, 0) > 100) {
+            eligible = true;
+        } else {
+            eligible = false;
+        }
+
+        return (eligible, true);
     }
 }
