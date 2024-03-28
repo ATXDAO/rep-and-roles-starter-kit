@@ -1,5 +1,6 @@
 "use client";
 
+import { useFetch } from "usehooks-ts";
 import { useAccount } from "wagmi";
 import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
@@ -70,12 +71,20 @@ export function Hats() {
     args: [BigInt(claimableHatId)],
   });
 
-  console.log(viewHat);
+  const result: any = useFetch(viewHat ? viewHat[5].replace("ipfs://", "https://nftstorage.link/ipfs/") : "");
+  console.log(result.data);
 
+  console.log(result?.data?.json?.image.replace("ipfs://", "https://nftstorage.link/ipfs/"));
   return (
     <>
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
-        <p>{viewHat ? viewHat[0] : ""}</p>
+        <p>{result?.data?.name}</p>
+        <img
+          src={result?.data?.image.replace("ipfs://", "https://nftstorage.link/ipfs/")}
+          width={156}
+          height={156}
+        ></img>
+        <p>{result?.data?.description}</p>
         <button
           disabled={(balanceOfClaimableHat || 0) > 0}
           className="btn btn-secondary btn-sm font-normal gap-1"
@@ -87,7 +96,7 @@ export function Hats() {
           {"Claim (100 Lifetime Tokens)"}
         </button>
 
-        {balanceOfClaimableHat || 0 > 0 ? <p>Hat Claimed!</p> : <></>}
+        {balanceOfClaimableHat || 0 > 0 ? <p>You are currently wearing this hat!</p> : <></>}
       </div>
     </>
   );
