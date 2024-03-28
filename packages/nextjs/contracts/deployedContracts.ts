@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokensStandalone: {
-      address: "0x9Fcca440F19c62CDF7f973eB6DDF218B15d4C71D",
+      address: "0x9C85258d9A00C01d00ded98065ea3840dF06f09c",
       abi: [
         {
           type: "constructor",
@@ -1648,8 +1648,32 @@ const deployedContracts = {
         uri: "lib/reputation/contracts/ReputationTokensBase.sol",
       },
     },
+    ReputationFaucet: {
+      address: "0x15Ff10fCc8A1a50bFbE07847A22664801eA79E0f",
+      abi: [
+        {
+          type: "constructor",
+          inputs: [
+            {
+              name: "addr",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "claim",
+          inputs: [],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
+      ],
+      inheritedFunctions: {},
+    },
     Hats: {
-      address: "0x987e855776C03A4682639eEb14e65b3089EE6310",
+      address: "0x6533158b042775e2FdFeF3cA1a782EFDbB8EB9b1",
       abi: [
         {
           type: "constructor",
@@ -3610,7 +3634,7 @@ const deployedContracts = {
       },
     },
     SimpleClaimHatter: {
-      address: "0xe38b6847E611e942E6c80eD89aE867F522402e80",
+      address: "0x2b639Cc84e1Ad3aA92D4Ee7d2755A6ABEf300D72",
       abi: [
         {
           type: "constructor",
@@ -3936,7 +3960,7 @@ const deployedContracts = {
       },
     },
     ActiveModule: {
-      address: "0x7580708993de7CA120E957A62f26A5dDD4b3D8aC",
+      address: "0x0b27a79cb9C0B38eE06Ca3d94DAA68e0Ed17F953",
       abi: [
         {
           type: "function",
@@ -3966,7 +3990,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ERC1155EligibiltiyModule: {
-      address: "0x75c68e69775fA3E9DD38eA32E554f6BF259C1135",
+      address: "0x7bdd3b028C4796eF0EAf07d11394d0d9d8c24139",
       abi: [
         {
           type: "function",

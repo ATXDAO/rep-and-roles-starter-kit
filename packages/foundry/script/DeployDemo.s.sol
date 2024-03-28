@@ -12,6 +12,7 @@ import {Hats} from "../contracts/Hats/Hats.sol";
 import {SimpleClaimHatter} from "../contracts/SimpleClaimHatter.sol";
 import {ERC1155EligibiltiyModule} from "../contracts/ERC1155EligibiltiyModule.sol";
 import {ActiveModule} from "../contracts/ActiveModule.sol";
+import {ReputationFaucet} from "../contracts/Reputation/ReputationFaucet.sol";
 
 contract DeployDemoScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
@@ -40,11 +41,15 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         setupAccountWithAllRoles(instance, deployerPubKey);
         setupAccountWithAllRoles(instance, controller);
 
+        ReputationFaucet faucet = new ReputationFaucet(address(instance));
+        setupAccountWithAllRoles(instance, address(faucet));
+
         batchCreateTokens(instance);
 
         batchSetTokenURIs(instance);
 
-        batchMint(instance);
+        batchMint(instance, controller, 50, 25, 75);
+        batchMint(instance, address(faucet), 500, 500, 500);
 
         Hats hatsInstance = new Hats("v0.1", "Default IFPS");
 
@@ -121,19 +126,19 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         tokensProperties[0] = TokensPropertiesStorage.TokenProperties(
             true,
             false,
-            100
+            1000
         );
 
         tokensProperties[1] = TokensPropertiesStorage.TokenProperties(
             true,
             true,
-            100
+            1000
         );
 
         tokensProperties[2] = TokensPropertiesStorage.TokenProperties(
             false,
             false,
-            100
+            1000
         );
 
         instance.batchCreateTokens(tokensProperties);
@@ -151,24 +156,30 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         );
     }
 
-    function batchMint(ReputationTokensStandalone instance) public {
+    function batchMint(
+        ReputationTokensStandalone instance,
+        address recipient,
+        uint256 token0Amount,
+        uint256 token1Amount,
+        uint256 token2Amount
+    ) public {
         IReputationTokensInternal.TokensOperations memory mintOperations;
-        mintOperations.to = controller;
+        mintOperations.to = recipient;
 
         mintOperations
             .operations = new IReputationTokensInternal.TokenOperation[](3);
         mintOperations.operations[0] = IReputationTokensInternal.TokenOperation(
             0,
-            50
+            token0Amount
         );
         mintOperations.operations[1] = IReputationTokensInternal.TokenOperation(
             1,
-            25
+            token1Amount
         );
 
         mintOperations.operations[2] = IReputationTokensInternal.TokenOperation(
             2,
-            75
+            token2Amount
         );
 
         instance.mint(mintOperations);

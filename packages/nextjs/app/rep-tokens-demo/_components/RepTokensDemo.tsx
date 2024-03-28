@@ -28,7 +28,7 @@ import {
   buildTokenGroupCard,
 } from "~~/components/rep-tokens/utils/buildTokensCard";
 import { Address } from "~~/components/scaffold-eth";
-import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useScaffoldContract, useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 // import { loadBurnerSK } from "~~/hooks/scaffold-eth";
 
@@ -128,78 +128,45 @@ export function RepTokensDemo() {
     maxMintAmountConfigProps,
   );
 
-  //  26959946667150639794667015087019630673637144422540572481103610249216
-  // 26960358043289970096177553829315270011263390106506980876069447401472
-
-  // console.log(loadBurnerSK());
-
-  // const { data: isAdminOfHat } = useScaffoldContractRead({
-  //   contractName: "Hats",
-  //   functionName: "isAdminOfHat",
-  //   args: [address, BigInt("26959946667150639794667015087019630673637144422540572481103610249216")],
-  // });
-
-  // const { data: balanceOfHat } = useScaffoldContractRead({
-  //   contractName: "Hats",
-  //   functionName: "balanceOf",
-  //   args: [address, BigInt("26959946667150639794667015087019630673637144422540572481103610249216")],
-  // });
-
-  // const { data: viewHat } = useScaffoldContractRead({
-  //   contractName: "Hats",
-  //   functionName: "viewHat",
-  //   args: [BigInt("26959946667150639794667015087019630673637144422540572481103610249216")],
-  // });
-
-  const { data: isEligible } = useScaffoldContractRead({
-    contractName: "Hats",
-    functionName: "isEligible",
-    args: [address, BigInt("26959946667150639794667015087019630673637144422540572481103610249216")],
+  const { writeAsync: claim } = useScaffoldContractWrite({
+    contractName: "ReputationFaucet",
+    functionName: "claim",
   });
 
-  const { data: isActive } = useScaffoldContractRead({
-    contractName: "Hats",
-    functionName: "isActive",
-    args: [BigInt("26959946667150639794667015087019630673637144422540572481103610249216")],
-  });
+  const { data: faucet } = useScaffoldContract({ contractName: "ReputationFaucet" });
 
-  console.log(isEligible);
-  console.log(isActive);
-
-  // const { writeAsync: mintHat } = useScaffoldContractWrite({
-  //   contractName: "Hats",
-  //   functionName: "mintHat",
-  //   args: [BigInt("26959946667150639794667015087019630673637144422540572481103610249216"), address],
-  // });
-
-  // console.log(isEligible);
-
-  // console.log(viewHat);
-
-  const { data: balanceOfClaimableHat, refetch } = useScaffoldContractRead({
-    contractName: "Hats",
+  const { data: balanceOf0 } = useScaffoldContractRead({
+    contractName: "ReputationTokensStandalone",
     functionName: "balanceOf",
-    args: [address, BigInt("26960358049567071831564234593151059434471056522609336320533481914368")],
+    args: [faucet?.address, BigInt(0)],
   });
 
-  console.log(balanceOfClaimableHat);
+  const { data: balanceOf1 } = useScaffoldContractRead({
+    contractName: "ReputationTokensStandalone",
+    functionName: "balanceOf",
+    args: [faucet?.address, BigInt(1)],
+  });
 
-  const { writeAsync: claimHat } = useScaffoldContractWrite({
-    contractName: "SimpleClaimHatter",
-    functionName: "claimHat",
-    args: [BigInt("26960358049567071831564234593151059434471056522609336320533481914368")],
+  const { data: balanceOf2 } = useScaffoldContractRead({
+    contractName: "ReputationTokensStandalone",
+    functionName: "balanceOf",
+    args: [faucet?.address, BigInt(2)],
   });
 
   return (
     <>
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
+        <p>Faucet Balance:</p>
+        <p>
+          0: {balanceOf0?.toString()}, 1: {balanceOf1?.toString()}, 2: {balanceOf2?.toString()}
+        </p>
         <button
+          className="btn btn-secondary btn-sm font-normal gap-1"
           onClick={async () => {
-            await claimHat();
-            await refetch();
+            await claim();
           }}
         >
-          Claim Hat
+          Claim Tokens
         </button>
 
         <p className="text-center text-4xl">Widget</p>
