@@ -29,7 +29,8 @@ import {
 } from "~~/components/rep-tokens/utils/buildTokensCard";
 import { Address } from "~~/components/scaffold-eth";
 import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
-import { loadBurnerSK } from "~~/hooks/scaffold-eth";
+
+// import { loadBurnerSK } from "~~/hooks/scaffold-eth";
 
 export function RepTokensDemo() {
   //////
@@ -130,7 +131,7 @@ export function RepTokensDemo() {
   //  26959946667150639794667015087019630673637144422540572481103610249216
   // 26960358043289970096177553829315270011263390106506980876069447401472
 
-  console.log(loadBurnerSK());
+  // console.log(loadBurnerSK());
 
   // const { data: isAdminOfHat } = useScaffoldContractRead({
   //   contractName: "Hats",
@@ -144,11 +145,11 @@ export function RepTokensDemo() {
   //   args: [address, BigInt("26959946667150639794667015087019630673637144422540572481103610249216")],
   // });
 
-  const { data: viewHat } = useScaffoldContractRead({
-    contractName: "Hats",
-    functionName: "viewHat",
-    args: [BigInt("26959946667150639794667015087019630673637144422540572481103610249216")],
-  });
+  // const { data: viewHat } = useScaffoldContractRead({
+  //   contractName: "Hats",
+  //   functionName: "viewHat",
+  //   args: [BigInt("26959946667150639794667015087019630673637144422540572481103610249216")],
+  // });
 
   const { data: isEligible } = useScaffoldContractRead({
     contractName: "Hats",
@@ -156,15 +157,38 @@ export function RepTokensDemo() {
     args: [address, BigInt("26959946667150639794667015087019630673637144422540572481103610249216")],
   });
 
-  const { writeAsync: claimHat } = useScaffoldContractWrite({
+  const { data: isActive } = useScaffoldContractRead({
     contractName: "Hats",
-    functionName: "mintHat",
-    args: [BigInt("26959946667150639794667015087019630673637144422540572481103610249216"), address],
+    functionName: "isActive",
+    args: [BigInt("26959946667150639794667015087019630673637144422540572481103610249216")],
   });
 
   console.log(isEligible);
+  console.log(isActive);
 
-  console.log(viewHat);
+  // const { writeAsync: mintHat } = useScaffoldContractWrite({
+  //   contractName: "Hats",
+  //   functionName: "mintHat",
+  //   args: [BigInt("26959946667150639794667015087019630673637144422540572481103610249216"), address],
+  // });
+
+  // console.log(isEligible);
+
+  // console.log(viewHat);
+
+  const { data: balanceOfClaimableHat, refetch } = useScaffoldContractRead({
+    contractName: "Hats",
+    functionName: "balanceOf",
+    args: [address, BigInt("26960358049567071831564234593151059434471056522609336320533481914368")],
+  });
+
+  console.log(balanceOfClaimableHat);
+
+  const { writeAsync: claimHat } = useScaffoldContractWrite({
+    contractName: "SimpleClaimHatter",
+    functionName: "claimHat",
+    args: [BigInt("26960358049567071831564234593151059434471056522609336320533481914368")],
+  });
 
   return (
     <>
@@ -172,6 +196,7 @@ export function RepTokensDemo() {
         <button
           onClick={async () => {
             await claimHat();
+            await refetch();
           }}
         >
           Claim Hat

@@ -12,14 +12,13 @@ contract HatsModuleFactory {
   //////////////////////////////////////////////////////////////*/
 
     /**
-     * @notice Emitted if attempting to deploy a clone of `implementation` for a given `hatId`, `otherImmutableArgs`, and
-     * `saltNonce` that already has a HatsModule deployment
+     * @notice Emitted if attempting to deploy a clone of `implementation` for a given `hatId` and `otherImmutableArgs`
+     * that already has a HatsModule deployment
      */
     error HatsModuleFactory_ModuleAlreadyDeployed(
         address implementation,
         uint256 hatId,
-        bytes otherImmutableArgs,
-        uint256 saltNonce
+        bytes otherImmutableArgs
     );
 
     /// @notice Emitted when array arguments to a batch function have mismatching lengths
@@ -29,15 +28,13 @@ contract HatsModuleFactory {
                               EVENTS
   //////////////////////////////////////////////////////////////*/
 
-    /// @notice Emitted when a HatsModule for `hatId`, `otherImmutableArgs`, and `saltNonce` is deployed to address
-    /// `instance`
+    /// @notice Emitted when a HatsModule for `hatId` and `otherImmutableArgs` is deployed to address `instance`
     event HatsModuleFactory_ModuleDeployed(
         address implementation,
         address instance,
         uint256 hatId,
         bytes otherImmutableArgs,
-        bytes initData,
-        uint256 saltNonce
+        bytes initData
     );
 
     /*//////////////////////////////////////////////////////////////
@@ -75,15 +72,13 @@ contract HatsModuleFactory {
      * @param _otherImmutableArgs Other immutable args to pass to the clone as immutable storage.
      * @param _initData The encoded data to pass to the `setUp` function of the new HatsModule instance. Leave empty if no
      * {setUp} is required.
-     * @param _saltNonce The nonce to use when calculating the salt
      * @return _instance The address of the deployed HatsModule instance
      */
     function createHatsModule(
         address _implementation,
         uint256 _hatId,
         bytes calldata _otherImmutableArgs,
-        bytes calldata _initData,
-        uint256 _saltNonce
+        bytes calldata _initData
     ) public returns (address _instance) {
         // calculate unique params that will be used to check for existing deployments and deploy the clone if none exists
         bytes memory args = _encodeArgs(
@@ -91,7 +86,7 @@ contract HatsModuleFactory {
             _hatId,
             _otherImmutableArgs
         );
-        bytes32 _salt = _calculateSalt(args, _saltNonce);
+        bytes32 _salt = _calculateSalt(args);
 
         // check if a HatsModule has already been deployed for these parameters
         if (
@@ -100,8 +95,7 @@ contract HatsModuleFactory {
             revert HatsModuleFactory_ModuleAlreadyDeployed(
                 _implementation,
                 _hatId,
-                _otherImmutableArgs,
-                _saltNonce
+                _otherImmutableArgs
             );
         }
 
@@ -117,8 +111,7 @@ contract HatsModuleFactory {
             address(_instance),
             _hatId,
             _otherImmutableArgs,
-            _initData,
-            _saltNonce
+            _initData
         );
     }
 
@@ -132,15 +125,13 @@ contract HatsModuleFactory {
      * @param _otherImmutableArgsArray Other immutable args to pass to the clones as immutable storage.
      * @param _initDataArray The encoded data to pass to the `setUp` functions of the new HatsModule instances. Leave
      * empty if no {setUp} is required.
-     * @param _saltNonces The nonces to use when calculating the salts
      * @return success True if all modules were successfully created
      */
     function batchCreateHatsModule(
         address[] calldata _implementations,
         uint256[] calldata _hatIds,
         bytes[] calldata _otherImmutableArgsArray,
-        bytes[] calldata _initDataArray,
-        uint256[] calldata _saltNonces
+        bytes[] calldata _initDataArray
     ) public returns (bool success) {
         uint256 length = _implementations.length;
 
@@ -156,8 +147,7 @@ contract HatsModuleFactory {
                 _implementations[i],
                 _hatIds[i],
                 _otherImmutableArgsArray[i],
-                _initDataArray[i],
-                _saltNonces[i]
+                _initDataArray[i]
             );
 
             unchecked {
@@ -171,15 +161,12 @@ contract HatsModuleFactory {
     /**
      * @notice Predicts the address of a HatsModule instance for a given hat
      * @param _hatId The hat for which to predict the HatsModule instance address
-     * @param _otherImmutableArgs Other immutable args to pass to the clone as immutable storage.
-     * @param _saltNonce The nonce to use when calculating the salt
      * @return The predicted address of the deployed instance
      */
     function getHatsModuleAddress(
         address _implementation,
         uint256 _hatId,
-        bytes calldata _otherImmutableArgs,
-        uint256 _saltNonce
+        bytes calldata _otherImmutableArgs
     ) public view returns (address) {
         // prepare the unique inputs
         bytes memory args = _encodeArgs(
@@ -187,7 +174,7 @@ contract HatsModuleFactory {
             _hatId,
             _otherImmutableArgs
         );
-        bytes32 _salt = _calculateSalt(args, _saltNonce);
+        bytes32 _salt = _calculateSalt(args);
         // predict the address
         return _getHatsModuleAddress(_implementation, args, _salt);
     }
@@ -196,23 +183,18 @@ contract HatsModuleFactory {
      * @notice Checks if a HatsModule instance has already been deployed for a given hat
      * @param _hatId The hat for which to check for an existing instance
      * @param _otherImmutableArgs Other immutable args to pass to the clone as immutable storage.
-     * @param _saltNonce The nonce to use when calculating the salt
      * @return True if an instance has already been deployed for the given hat
      */
     function deployed(
         address _implementation,
         uint256 _hatId,
-        bytes calldata _otherImmutableArgs,
-        uint256 _saltNonce
+        bytes calldata _otherImmutableArgs
     ) public view returns (bool) {
         // check for contract code at the predicted address
         return
-            getHatsModuleAddress(
-                _implementation,
-                _hatId,
-                _otherImmutableArgs,
-                _saltNonce
-            ).code.length > 0;
+            getHatsModuleAddress(_implementation, _hatId, _otherImmutableArgs)
+                .code
+                .length > 0;
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -270,13 +252,11 @@ contract HatsModuleFactory {
      *  - The chain ID of the current network, to avoid confusion across networks since the same hat trees
      *    on different networks may have different wearers/admins
      * @param _args The encoded arguments to pass to the clone as immutable storage
-     * @param _saltNonce The nonce to use when calculating the salt
      * @return The salt to use when deploying the clone
      */
     function _calculateSalt(
-        bytes memory _args,
-        uint256 _saltNonce
+        bytes memory _args
     ) internal view returns (bytes32) {
-        return keccak256(abi.encodePacked(_args, block.chainid, _saltNonce));
+        return keccak256(abi.encodePacked(_args, block.chainid));
     }
 }

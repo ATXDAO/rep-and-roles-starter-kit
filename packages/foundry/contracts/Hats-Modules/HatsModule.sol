@@ -39,10 +39,11 @@ contract HatsModule is IHatsModule, Clone, Initializable {
         return _getArgAddress(0);
     }
 
-    /// @inheritdoc IHatsModule
-    function HATS() public pure returns (IHats) {
-        return IHats(_getArgAddress(20));
-    }
+    // function HATS() public pure returns (IHats) {
+    //     return IHats(_getArgAddress(20));
+    // }
+
+    IHats s_hats;
 
     /// @inheritdoc IHatsModule
     function hatId() public pure returns (uint256) {
@@ -75,8 +76,9 @@ contract HatsModule is IHatsModule, Clone, Initializable {
 
     /// @notice Deploy the implementation contract and set its version
     /// @dev This is only used to deploy the implementation contract, and should not be used to deploy clones
-    constructor(string memory _version) {
+    constructor(string memory _version, address hats) {
         version_ = _version;
+        s_hats = IHats(hats);
         // prevent the implementation contract from being initialized
         _disableInitializers();
     }

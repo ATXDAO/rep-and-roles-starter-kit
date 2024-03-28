@@ -5,7 +5,7 @@ import {IHats} from "../../Hats/Interfaces/IHats.sol";
 
 interface IHatsModule {
     /// @notice Hats Protocol address
-    function HATS() external pure returns (IHats);
+    // function HATS() external pure returns (IHats);
 
     /// @notice The address of the implementation contract of which this instance is a clone
     function IMPLEMENTATION() external pure returns (address);

@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokensStandalone: {
-      address: "0x70e0bA845a1A0F2DA3359C97E0285013525FFC49",
+      address: "0x9Fcca440F19c62CDF7f973eB6DDF218B15d4C71D",
       abi: [
         {
           type: "constructor",
@@ -1649,7 +1649,7 @@ const deployedContracts = {
       },
     },
     Hats: {
-      address: "0xc351628EB244ec633d5f21fBD6621e1a683B1181",
+      address: "0x987e855776C03A4682639eEb14e65b3089EE6310",
       abi: [
         {
           type: "constructor",
@@ -3608,6 +3608,397 @@ const deployedContracts = {
         linkedTreeAdmins: "contracts/Hats/HatsIdUtilities.sol",
         linkedTreeRequests: "contracts/Hats/HatsIdUtilities.sol",
       },
+    },
+    SimpleClaimHatter: {
+      address: "0xe38b6847E611e942E6c80eD89aE867F522402e80",
+      abi: [
+        {
+          type: "constructor",
+          inputs: [
+            {
+              name: "_version",
+              type: "string",
+              internalType: "string",
+            },
+            {
+              name: "hats",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "IMPLEMENTATION",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+          stateMutability: "pure",
+        },
+        {
+          type: "function",
+          name: "accountCanClaim",
+          inputs: [
+            {
+              name: "_account",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "_hatId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "bool",
+              internalType: "bool",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "canClaimForAccount",
+          inputs: [
+            {
+              name: "_account",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "_hatId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "bool",
+              internalType: "bool",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "claimHat",
+          inputs: [
+            {
+              name: "_hatId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "hatExists",
+          inputs: [
+            {
+              name: "_hatId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "bool",
+              internalType: "bool",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "hatId",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          stateMutability: "pure",
+        },
+        {
+          type: "function",
+          name: "hatToClaimType",
+          inputs: [
+            {
+              name: "hatId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "claimType",
+              type: "uint8",
+              internalType: "enum SimpleClaimHatter.ClaimType",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "isClaimableBy",
+          inputs: [
+            {
+              name: "_hatId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "bool",
+              internalType: "bool",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "isClaimableFor",
+          inputs: [
+            {
+              name: "_hatId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "bool",
+              internalType: "bool",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "setUp",
+          inputs: [
+            {
+              name: "_initData",
+              type: "bytes",
+              internalType: "bytes",
+            },
+          ],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "version",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "string",
+              internalType: "string",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "version_",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "string",
+              internalType: "string",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "wearsAdmin",
+          inputs: [
+            {
+              name: "_hatId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "bool",
+              internalType: "bool",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "event",
+          name: "HatClaimabilitySet",
+          inputs: [
+            {
+              name: "hatId",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "claimType",
+              type: "uint8",
+              indexed: false,
+              internalType: "enum SimpleClaimHatter.ClaimType",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "HatsClaimabilitySet",
+          inputs: [
+            {
+              name: "hatIds",
+              type: "uint256[]",
+              indexed: false,
+              internalType: "uint256[]",
+            },
+            {
+              name: "claimTypes",
+              type: "uint8[]",
+              indexed: false,
+              internalType: "enum SimpleClaimHatter.ClaimType[]",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "Initialized",
+          inputs: [
+            {
+              name: "version",
+              type: "uint64",
+              indexed: false,
+              internalType: "uint64",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "error",
+          name: "InvalidInitialization",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "MultiClaimsHatter_NotExplicitlyEligible",
+          inputs: [
+            {
+              name: "account",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "hatId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+        },
+        {
+          type: "error",
+          name: "NotInitializing",
+          inputs: [],
+        },
+      ],
+      inheritedFunctions: {
+        IMPLEMENTATION: "contracts/Hats-Modules/HatsModule.sol",
+        hatId: "contracts/Hats-Modules/HatsModule.sol",
+        setUp: "contracts/Hats-Modules/HatsModule.sol",
+        version: "contracts/Hats-Modules/HatsModule.sol",
+        version_: "contracts/Hats-Modules/HatsModule.sol",
+      },
+    },
+    ActiveModule: {
+      address: "0x7580708993de7CA120E957A62f26A5dDD4b3D8aC",
+      abi: [
+        {
+          type: "function",
+          name: "getWearerStatus",
+          inputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "eligible",
+              type: "bool",
+              internalType: "bool",
+            },
+            {
+              name: "standing",
+              type: "bool",
+              internalType: "bool",
+            },
+          ],
+          stateMutability: "pure",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+    ERC1155EligibiltiyModule: {
+      address: "0x75c68e69775fA3E9DD38eA32E554f6BF259C1135",
+      abi: [
+        {
+          type: "function",
+          name: "getWearerStatus",
+          inputs: [
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "eligible",
+              type: "bool",
+              internalType: "bool",
+            },
+            {
+              name: "standing",
+              type: "bool",
+              internalType: "bool",
+            },
+          ],
+          stateMutability: "pure",
+        },
+      ],
+      inheritedFunctions: {},
     },
   },
 } as const;

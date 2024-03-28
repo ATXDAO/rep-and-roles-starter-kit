@@ -8,6 +8,10 @@ import {ReputationTokensStandalone} from "@atxdao/contracts/reputation/Reputatio
 import {TokensPropertiesStorage} from "@atxdao/contracts/reputation/storage/TokensPropertiesStorage.sol";
 import {IReputationTokensInternal} from "@atxdao/contracts/reputation/interfaces/IReputationTokensInternal.sol";
 import {Hats} from "../contracts/Hats/Hats.sol";
+// import {MultiClaimsHatter} from "../contracts/MultiClaimsHatter.sol";
+import {SimpleClaimHatter} from "../contracts/SimpleClaimHatter.sol";
+import {ERC1155EligibiltiyModule} from "../contracts/ERC1155EligibiltiyModule.sol";
+import {ActiveModule} from "../contracts/ActiveModule.sol";
 
 contract DeployDemoScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
@@ -42,28 +46,52 @@ contract DeployDemoScript is ScaffoldETHDeploy {
 
         batchMint(instance);
 
-        Hats hatsInstance = new Hats("Hats", "ipfs");
+        Hats hatsInstance = new Hats("v0.1", "Default IFPS");
 
         console.log(deployerPubKey);
 
         uint256 topHatId = hatsInstance.mintTopHat(
             deployerPubKey,
-            "The details",
-            "ipfs://"
+            "Top Hat",
+            "TopHat IPFS"
         );
         console.log(topHatId);
 
-        uint256 newHatId = hatsInstance.createHat(
+        uint256 hatterHatId = hatsInstance.createHat(
             topHatId,
-            "Details...",
-            100,
+            "Hatter",
+            5,
             deployerPubKey,
             deployerPubKey,
             true,
-            "ipfs..."
+            "Hatter IPFS"
         );
 
-        console.log(newHatId);
+        console.log(hatterHatId);
+
+        SimpleClaimHatter hatter = new SimpleClaimHatter(
+            "v0.1",
+            address(hatsInstance)
+        );
+
+        hatsInstance.mintHat(hatterHatId, address(hatter));
+
+        console.log(address(hatter));
+
+        ActiveModule activeModule = new ActiveModule();
+        ERC1155EligibiltiyModule eligibilityModule = new ERC1155EligibiltiyModule();
+
+        uint256 claimableHatId = hatsInstance.createHat(
+            hatterHatId,
+            "Claimable Hat",
+            100,
+            address(eligibilityModule),
+            address(activeModule),
+            true,
+            "Claimable IPFS"
+        );
+
+        console.log(claimableHatId);
 
         vm.stopBroadcast();
     }
