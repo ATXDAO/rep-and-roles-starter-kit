@@ -10,9 +10,3 @@
 [submodule "packages/foundry/lib/reputation"]
 	path = packages/foundry/lib/reputation
 	url = https://github.com/atxdao/reputation
-[submodule "packages/foundry/lib/hats-module"]
-	path = packages/foundry/lib/hats-module
-	url = https://github.com/Hats-Protocol/hats-module
-[submodule "packages/foundry/lib/hats-protocol"]
-	path = packages/foundry/lib/hats-protocol
-	url = https://github.com/Hats-Protocol/hats-protocol
