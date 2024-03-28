@@ -9,7 +9,7 @@ import {TokensPropertiesStorage} from "@atxdao/contracts/reputation/storage/Toke
 import {IReputationTokensInternal} from "@atxdao/contracts/reputation/interfaces/IReputationTokensInternal.sol";
 import {Hats} from "../contracts/Hats/Hats.sol";
 // import {MultiClaimsHatter} from "../contracts/MultiClaimsHatter.sol";
-import {SimpleClaimHatter} from "../contracts/SimpleClaimHatter.sol";
+import {MultiClaimsHatter} from "../contracts/MultiClaimsHatter.sol";
 import {ERC1155EligibiltiyModule} from "../contracts/ERC1155EligibiltiyModule.sol";
 import {ActiveModule} from "../contracts/ActiveModule.sol";
 import {ReputationFaucet} from "../contracts/Reputation/ReputationFaucet.sol";
@@ -51,54 +51,57 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         batchMint(instance, controller, 50, 25, 75);
         batchMint(instance, address(faucet), 500, 500, 500);
 
-        Hats hatsInstance = new Hats("v0.1", "Default IFPS");
+        uint256 id;
+        assembly {
+            id := chainid()
+        }
 
-        console.log(deployerPubKey);
+        if (id == 31337) {
+            Hats hatsInstance = new Hats("v0.1", "Default IFPS");
 
-        uint256 topHatId = hatsInstance.mintTopHat(
-            deployerPubKey,
-            "Top Hat",
-            "TopHat IPFS"
-        );
-        console.log(topHatId);
+            console.log(deployerPubKey);
 
-        uint256 hatterHatId = hatsInstance.createHat(
-            topHatId,
-            "Hatter",
-            5,
-            deployerPubKey,
-            deployerPubKey,
-            true,
-            "Hatter IPFS"
-        );
+            uint256 topHatId = hatsInstance.mintTopHat(
+                deployerPubKey,
+                "Top Hat",
+                "TopHat IPFS"
+            );
+            console.log(topHatId);
 
-        console.log(hatterHatId);
-
-        SimpleClaimHatter hatter = new SimpleClaimHatter(
-            "v0.1",
-            address(hatsInstance)
-        );
-
-        hatsInstance.mintHat(hatterHatId, address(hatter));
-
-        console.log(address(hatter));
-
-        ActiveModule activeModule = new ActiveModule();
-        ERC1155EligibiltiyModule eligibilityModule = new ERC1155EligibiltiyModule(
-                address(instance)
+            uint256 hatterHatId = hatsInstance.createHat(
+                topHatId,
+                "Hatter",
+                5,
+                deployerPubKey,
+                deployerPubKey,
+                true,
+                "Hatter IPFS"
             );
 
-        uint256 claimableHatId = hatsInstance.createHat(
-            hatterHatId,
-            "Hat of Engineering",
-            100,
-            address(eligibilityModule),
-            address(activeModule),
-            true,
-            "ipfs://bafkreicff2j67tg5g3klktkk4wavcctorj65y5upkolznwgbhmrakv4dba"
-        );
+            MultiClaimsHatter hatter = new MultiClaimsHatter(
+                "v0.1",
+                address(hatsInstance)
+            );
 
-        console.log(claimableHatId);
+            hatsInstance.mintHat(hatterHatId, address(hatter));
+
+            ActiveModule activeModule = new ActiveModule();
+            ERC1155EligibiltiyModule eligibilityModule = new ERC1155EligibiltiyModule(
+                    address(instance)
+                );
+
+            uint256 claimableHatId = hatsInstance.createHat(
+                hatterHatId,
+                "Hat of Engineering",
+                100,
+                address(eligibilityModule),
+                address(activeModule),
+                true,
+                "ipfs://bafkreicff2j67tg5g3klktkk4wavcctorj65y5upkolznwgbhmrakv4dba"
+            );
+
+            console.log(claimableHatId);
+        }
 
         vm.stopBroadcast();
     }

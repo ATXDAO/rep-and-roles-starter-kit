@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokensStandalone: {
-      address: "0x575D3d18666B28680255a202fB5d482D1949bB32",
+      address: "0xa82fF9aFd8f496c3d6ac40E2a0F282E47488CFc9",
       abi: [
         {
           type: "constructor",
@@ -1649,7 +1649,7 @@ const deployedContracts = {
       },
     },
     ReputationFaucet: {
-      address: "0x15BB2cc3Ea43ab2658F7AaecEb78A9d3769BE3cb",
+      address: "0x36C02dA8a0983159322a80FFE9F24b1acfF8B570",
       abi: [
         {
           type: "constructor",
@@ -1673,7 +1673,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     Hats: {
-      address: "0xaE2abbDE6c9829141675fA0A629a675badbb0d9F",
+      address: "0xcbEAF3BDe82155F56486Fb5a1072cb8baAf547cc",
       abi: [
         {
           type: "constructor",
@@ -3633,8 +3633,8 @@ const deployedContracts = {
         linkedTreeRequests: "contracts/Hats/HatsIdUtilities.sol",
       },
     },
-    SimpleClaimHatter: {
-      address: "0xD28F3246f047Efd4059B24FA1fa587eD9fa3e77F",
+    MultiClaimsHatter: {
+      address: "0x162A433068F51e18b7d13932F27e66a3f99E6890",
       abi: [
         {
           type: "constructor",
@@ -3772,7 +3772,7 @@ const deployedContracts = {
             {
               name: "claimType",
               type: "uint8",
-              internalType: "enum SimpleClaimHatter.ClaimType",
+              internalType: "enum MultiClaimsHatter.ClaimType",
             },
           ],
           stateMutability: "view",
@@ -3887,7 +3887,7 @@ const deployedContracts = {
               name: "claimType",
               type: "uint8",
               indexed: false,
-              internalType: "enum SimpleClaimHatter.ClaimType",
+              internalType: "enum MultiClaimsHatter.ClaimType",
             },
           ],
           anonymous: false,
@@ -3906,7 +3906,7 @@ const deployedContracts = {
               name: "claimTypes",
               type: "uint8[]",
               indexed: false,
-              internalType: "enum SimpleClaimHatter.ClaimType[]",
+              internalType: "enum MultiClaimsHatter.ClaimType[]",
             },
           ],
           anonymous: false,
@@ -3960,7 +3960,7 @@ const deployedContracts = {
       },
     },
     ActiveModule: {
-      address: "0x0B32a3F8f5b7E5d315b9E52E640a49A89d89c820",
+      address: "0x5081a39b8A5f0E35a8D959395a630b68B74Dd30f",
       abi: [
         {
           type: "function",
@@ -3990,7 +3990,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ERC1155EligibiltiyModule: {
-      address: "0xF357118EBd576f3C812c7875B1A1651a7f140E9C",
+      address: "0x1fA02b2d6A771842690194Cf62D91bdd92BfE28d",
       abi: [
         {
           type: "constructor",
