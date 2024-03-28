@@ -95,7 +95,7 @@ contract DeployDemoScript is ScaffoldETHDeploy {
             address(eligibilityModule),
             address(activeModule),
             true,
-            "ipfs://bafkreidsaw3skbqux3oiutd6j3vqh6dpjimy3msgizm54fq7e5yikdcje4"
+            "ipfs://bafkreicff2j67tg5g3klktkk4wavcctorj65y5upkolznwgbhmrakv4dba"
         );
 
         console.log(claimableHatId);
