@@ -5,5 +5,5 @@ export interface TokenCardInternalProps {
 }
 
 export const StylizedTokenCard = ({ color = "slate", children }: any) => {
-  return <div className={`bg-${color}-600 rounded-lg p-5 m-4 w-64`}>{children}</div>;
+  return <div className={`bg-${color}-600 rounded-lg relative p-5 m-4 w-64`}>{children}</div>;
 };

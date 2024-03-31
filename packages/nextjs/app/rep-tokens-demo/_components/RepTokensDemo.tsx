@@ -12,6 +12,7 @@ import { useAccount } from "wagmi";
 import { tokenGroupCardConfigProps as mainTokenGroupCardConfigProps } from "~~/app/rep-tokens-demo/_components/configs/MainTokensCardConfig";
 import { tokenGroupCardConfigProps as mainTokenGroupOverlayCardConfigProps } from "~~/app/rep-tokens-demo/_components/configs/MainTokensCardWithNumberOverlayConfig";
 import { tokenGroupCardConfigProps as navBarTokenGroupConfigProps } from "~~/app/rep-tokens-demo/_components/configs/NavBarCardConfig";
+import { BalanceImageOverlay } from "~~/components/rep-tokens/cards/stylized-cards/BalanceImageOverlay";
 import { StylizedAddressCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedAddressCard";
 import { StylizedBalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedBalanceCard";
 import { StylizedImageCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedImageCard";
@@ -182,12 +183,16 @@ export function RepTokensDemo() {
     "MaxMintAmountPerTx",
   ];
 
+  const widgetComponents = ["Balance", "Image"];
+
   return (
     <>
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <StylizedTokenCard>
           <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
           <StylizedImageCard src={tokensData.tokens[0]?.image} />
+          <BalanceImageOverlay balance={Number(tokensData.tokens[0]?.balance)} image={tokensData.tokens[0]?.image} />
+
           <StylizedStringCard value={tokensData.tokens[0]?.name} color="violet" type="bold" />
           <StylizedStringCard value={tokensData.tokens[0]?.description} color="lime" />
           <StylizedAddressCard address={tokensData.tokens[0]?.address} color="pink" />
@@ -208,6 +213,12 @@ export function RepTokensDemo() {
         <StylizedTokenGroupCard tokens={tokensData.tokens} components={mainComponents}>
           <StylizedAddressCard address={tokensData.address} isGroup={true} />
         </StylizedTokenGroupCard>
+
+        <StylizedTokenGroupCard tokens={tokensData.tokens} components={mainComponents} isBalanceOverlayed={true}>
+          <StylizedAddressCard address={tokensData.address} isGroup={true} />
+        </StylizedTokenGroupCard>
+
+        <StylizedTokenGroupCard tokens={tokensData.tokens} components={widgetComponents} isBalanceOverlayed={true} />
 
         <p>Faucet Balance:</p>
         <p>

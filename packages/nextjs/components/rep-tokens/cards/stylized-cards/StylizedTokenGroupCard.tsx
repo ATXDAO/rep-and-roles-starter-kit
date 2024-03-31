@@ -1,3 +1,4 @@
+import { BalanceImageOverlay } from "./BalanceImageOverlay";
 import { Color } from "./Stylized";
 import { StylizedAddressCard } from "./StylizedAddressCard";
 import { StylizedBalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedBalanceCard";
@@ -9,6 +10,7 @@ export interface TokenCardInternalProps {
   tokens: any[];
   components?: ReputationComponent[];
   color?: Color;
+  isBalanceOverlayed?: boolean;
 }
 
 export type ReputationComponent =
@@ -34,7 +36,7 @@ export const StylizedTokenGroupCard = ({
     "MaxMintAmountPerTx",
   ],
   color = "slate",
-
+  isBalanceOverlayed,
   children,
 }: any) => {
   const output: any[] = [];
@@ -44,11 +46,40 @@ export const StylizedTokenGroupCard = ({
 
     for (let j = 0; j < components?.length; j++) {
       if (components[j] === "Balance") {
-        cardContent.push(<StylizedBalanceCard key={j} value={Number(tokens[i]?.balance)} />);
+        if (isBalanceOverlayed) {
+          let doesImageComponentExist;
+          for (let k = 0; k < components?.length; k++) {
+            if (k === j) continue;
+
+            if (components[k] === "Image") {
+              doesImageComponentExist = true;
+              break;
+            }
+          }
+
+          if (doesImageComponentExist) {
+            cardContent.push(
+              <BalanceImageOverlay key={j} balance={Number(tokens[i]?.balance)} image={tokens[i]?.image} />,
+            );
+          } else {
+            cardContent.push(<StylizedBalanceCard key={j} value={Number(tokens[i]?.balance)} isOverlay={false} />);
+          }
+        } else {
+          cardContent.push(<StylizedBalanceCard key={j} value={Number(tokens[i]?.balance)} isOverlay={false} />);
+        }
       }
 
-      if (components[j] === "Image") {
-        cardContent.push(<StylizedImageCard key={j} src={tokens[i]?.image} />);
+      // if (components[j] == "Balance")
+      //   if (components[j] === "Balance") {
+      //     cardContent.push(
+      //       <StylizedBalanceCard key={j} value={Number(tokens[i]?.balance)} isOverlay={isBalanceOverlayed} />,
+      //     );
+      //   }
+
+      if (!isBalanceOverlayed) {
+        if (components[j] === "Image") {
+          cardContent.push(<StylizedImageCard key={j} src={tokens[i]?.image} />);
+        }
       }
 
       if (components[j] === "Name") {
