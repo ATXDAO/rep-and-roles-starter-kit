@@ -2,7 +2,8 @@ import { IsPrettyLoading } from "../../types/Types";
 import { BalanceCard, BigIntCardProps } from "../value-cards/BalanceCard";
 import { ImageCard, ImageCardProps } from "../value-cards/ImageCard";
 import { StringCard, StringCardProps } from "../value-cards/StringCard";
-import { Address } from "~~/components/scaffold-eth";
+
+// import { Address } from "~~/components/scaffold-eth";
 
 export interface ValuesProps {
   balanceProps?: BigIntCardProps;
@@ -32,7 +33,7 @@ export const TokenCard = ({ props }: TokenCardInternalProps) => {
       {props?.valuesProps?.imageProps ? <ImageCard props={props?.valuesProps?.imageProps} /> : <></>}
       {props?.valuesProps?.nameProps ? <StringCard props={props?.valuesProps?.nameProps} /> : <></>}
       {props?.valuesProps?.descriptionProps ? <StringCard props={props?.valuesProps?.descriptionProps} /> : <></>}
-      {props?.valuesProps?.addressProps ? <Address props={props?.valuesProps?.addressProps} /> : <></>}
+      {/* {props?.valuesProps?.addressProps ? <Address address={} /> : <></>} */}
       {props?.valuesProps?.isRedeemableProps ? <StringCard props={props?.valuesProps?.isRedeemableProps} /> : <></>}
       {props?.valuesProps?.isSoulboundProps ? <StringCard props={props?.valuesProps?.isSoulboundProps} /> : <></>}
       {props?.valuesProps?.maxMintAmountProps ? <StringCard props={props?.valuesProps?.maxMintAmountProps} /> : <></>}
