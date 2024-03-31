@@ -21,7 +21,7 @@ export const imageConfigProps = {
     card: "rounded-lg bg-slate-300 p-1",
     value: "rounded mx-auto",
   },
-  imageProperties: new ImageProps("Token", 256, 256),
+  imageProperties: new ImageProps("Token", 120, 120),
 } as ImageValueCardConfigProp;
 
 export const tokenCardValuesProps = {

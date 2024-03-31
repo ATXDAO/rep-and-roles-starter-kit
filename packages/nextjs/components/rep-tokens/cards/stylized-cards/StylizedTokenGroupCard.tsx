@@ -11,7 +11,19 @@ export interface TokenCardInternalProps {
   components?: ReputationComponent[];
   color?: Color;
   isBalanceOverlayed?: boolean;
+  size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
+  children?: React.ReactNode;
 }
+
+const sizeMap = {
+  xs: "p-1",
+  sm: "p-5",
+  base: "p-5",
+  lg: "",
+  xl: "",
+  "2xl": "",
+  "3xl": "",
+};
 
 export type ReputationComponent =
   | "Balance"
@@ -38,7 +50,8 @@ export const StylizedTokenGroupCard = ({
   color = "slate",
   isBalanceOverlayed,
   children,
-}: any) => {
+  size = "base",
+}: TokenCardInternalProps) => {
   const output: any[] = [];
 
   for (let i = 0; i < tokens?.length; i++) {
@@ -59,13 +72,17 @@ export const StylizedTokenGroupCard = ({
 
           if (doesImageComponentExist) {
             cardContent.push(
-              <BalanceImageOverlay key={j} balance={Number(tokens[i]?.balance)} image={tokens[i]?.image} />,
+              <BalanceImageOverlay key={j} balance={Number(tokens[i]?.balance)} image={tokens[i]?.image} size={size} />,
             );
           } else {
-            cardContent.push(<StylizedBalanceCard key={j} value={Number(tokens[i]?.balance)} isOverlay={false} />);
+            cardContent.push(
+              <StylizedBalanceCard key={j} value={Number(tokens[i]?.balance)} isOverlay={false} size={size} />,
+            );
           }
         } else {
-          cardContent.push(<StylizedBalanceCard key={j} value={Number(tokens[i]?.balance)} isOverlay={false} />);
+          cardContent.push(
+            <StylizedBalanceCard key={j} value={Number(tokens[i]?.balance)} isOverlay={false} size={size} />,
+          );
         }
       }
 
@@ -78,7 +95,7 @@ export const StylizedTokenGroupCard = ({
 
       if (!isBalanceOverlayed) {
         if (components[j] === "Image") {
-          cardContent.push(<StylizedImageCard key={j} src={tokens[i]?.image} />);
+          cardContent.push(<StylizedImageCard key={j} src={tokens[i]?.image} size={size} />);
         }
       }
 
@@ -116,14 +133,18 @@ export const StylizedTokenGroupCard = ({
       }
     }
 
-    const card = <StylizedTokenCard key={i}>{cardContent}</StylizedTokenCard>;
+    const card = (
+      <StylizedTokenCard key={i} size={size}>
+        {cardContent}
+      </StylizedTokenCard>
+    );
     output.push(card);
   }
 
   return (
-    <div className={`bg-${color}-800 flex flex-col rounded-lg`}>
+    <div className={`bg-${color}-900 flex flex-col rounded-lg ${sizeMap[size]}`}>
       {children}
-      <div className={`flex justify-center`}>{output}</div>
+      <div className={`flex justify-center ${sizeMap[size]} bg-${color}-800 `}>{output}</div>
     </div>
   );
 };

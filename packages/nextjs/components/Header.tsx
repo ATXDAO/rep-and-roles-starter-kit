@@ -4,6 +4,10 @@ import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { StylizedTokenGroupCard } from "./rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
+import { ReputationComponent } from "./rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
+import { useRepTokens } from "./rep-tokens/hooks/Hooks";
+import { useAccount } from "wagmi";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
@@ -67,6 +71,16 @@ export const Header = () => {
     useCallback(() => setIsDrawerOpen(false), []),
   );
 
+  const { address } = useAccount();
+
+  const { tokensData } = useRepTokens(address);
+
+  for (let i = 0; i < tokensData.tokens.length; i++) {
+    tokensData.tokens[i].image = tokensData.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
+  }
+
+  const widgetComponents: ReputationComponent[] = ["Balance", "Image"];
+
   return (
     <div className="sticky lg:static top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2">
       <div className="navbar-start w-auto lg:w-1/2">
@@ -106,6 +120,12 @@ export const Header = () => {
         </ul>
       </div>
       <div className="navbar-end flex-grow mr-4">
+        <StylizedTokenGroupCard
+          tokens={tokensData.tokens}
+          components={widgetComponents}
+          isBalanceOverlayed={true}
+          size="xs"
+        />
         <RainbowKitCustomConnectButton />
         <FaucetButton />
       </div>

@@ -97,9 +97,11 @@ export function useFetches(uris: string[]) {
 
       const arr = [];
       for (let i = 0; i < uris.length; i++) {
-        const response = await fetch(uris[i]);
-        const responseJson = await response.json();
-        arr.push(responseJson);
+        try {
+          const response = await fetch(uris[i]);
+          const responseJson = await response.json();
+          arr.push(responseJson);
+        } catch (e) {}
       }
 
       setResponses([...arr]);
