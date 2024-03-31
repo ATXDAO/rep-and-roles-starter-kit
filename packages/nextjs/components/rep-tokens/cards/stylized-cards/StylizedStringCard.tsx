@@ -3,15 +3,16 @@ import { Color } from "./Stylized";
 type StringProps = {
   value: string;
   color?: Color;
-  type?: "description" | "title";
+
+  type?: "default" | "bold";
 };
 
-export const StylizedStringCard = ({ type = "description", color = "slate", value }: StringProps) => {
+export const StylizedStringCard = ({ value, color = "slate", type = "default" }: StringProps) => {
   let textClassName;
-  if (type === "description") {
-    textClassName = "text-1xl mx-auto text-center break-words text-black";
-  } else {
-    textClassName = "text-1xl text-center object-center mx-auto font-bold break-all text-black";
+  if (type === "default") {
+    textClassName = "text-black text-1xl mx-auto text-center break-words";
+  } else if (type === "bold") {
+    textClassName = "text-black text-1xl mx-auto text-center break-all object-center font-bold";
   }
 
   return (

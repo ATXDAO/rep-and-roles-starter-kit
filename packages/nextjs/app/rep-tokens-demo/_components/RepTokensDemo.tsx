@@ -12,6 +12,7 @@ import { useAccount } from "wagmi";
 import { tokenGroupCardConfigProps as mainTokenGroupCardConfigProps } from "~~/app/rep-tokens-demo/_components/configs/MainTokensCardConfig";
 import { tokenGroupCardConfigProps as mainTokenGroupOverlayCardConfigProps } from "~~/app/rep-tokens-demo/_components/configs/MainTokensCardWithNumberOverlayConfig";
 import { tokenGroupCardConfigProps as navBarTokenGroupConfigProps } from "~~/app/rep-tokens-demo/_components/configs/NavBarCardConfig";
+import { StylizedAddressCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedAddressCard";
 import { StylizedBalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedBalanceCard";
 import { StylizedImageCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedImageCard";
 import { StylizedStringCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedStringCard";
@@ -170,85 +171,42 @@ export function RepTokensDemo() {
   //   </>
   // );
 
-  console.log(tokensData.tokens[0]?.image);
+  const mainComponents = [
+    "Balance",
+    "Image",
+    "Name",
+    "Description",
+    "Address",
+    "IsSoulbound",
+    "IsRedeemable",
+    "MaxMintAmountPerTx",
+  ];
 
   return (
     <>
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <StylizedTokenCard>
           <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
-          <StylizedImageCard src={tokensData.tokens[0]?.image}></StylizedImageCard>
-          <StylizedStringCard value={tokensData.tokens[0]?.name} color={"violet"} />
-          <StylizedStringCard value={tokensData.tokens[0]?.description} color={"lime"} />
-          <div className="rounded-lg flex items-center justify-center bg-pink-300">
-            <Address address={tokensData.address} textColor="black" />
-          </div>{" "}
-          <StylizedStringCard value={`Is Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
-          <StylizedStringCard value={`Is Redeemable: ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`} />
+          <StylizedImageCard src={tokensData.tokens[0]?.image} />
+          <StylizedStringCard value={tokensData.tokens[0]?.name} color="violet" type="bold" />
+          <StylizedStringCard value={tokensData.tokens[0]?.description} color="lime" />
+          <StylizedAddressCard address={tokensData.tokens[0]?.address} color="pink" />
           <StylizedStringCard
-            value={`Max Mint Amount Per Tx: ${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
-            color={"teal"}
+            value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`}
+            color="blue"
+          />
+          <StylizedStringCard
+            value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`}
+            color="yellow"
+          />
+          <StylizedStringCard
+            value={`Max Mint Amount Per Tx \n${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
+            color="teal"
           />
         </StylizedTokenCard>
 
-        <StylizedTokenGroupCard>
-          <div className="rounded-lg my-5 flex items-center justify-center bg-slate-300">
-            <Address address={tokensData.address} textColor="black" />
-          </div>
-          <div className={`rounded-lg bg-slate-800 flex justify-center p-5`}>
-            <StylizedTokenCard>
-              <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
-              <StylizedImageCard src={tokensData.tokens[0]?.image}></StylizedImageCard>
-              <StylizedStringCard value={tokensData.tokens[0]?.name} color={"violet"} />
-              <StylizedStringCard value={tokensData.tokens[0]?.description} color={"lime"} />
-              <div className="rounded-lg flex items-center justify-center bg-pink-300">
-                <Address address={tokensData.address} textColor="black" />
-              </div>{" "}
-              <StylizedStringCard value={`Is Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
-              <StylizedStringCard
-                value={`Is Redeemable: ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`}
-              />
-              <StylizedStringCard
-                value={`Max Mint Amount Per Tx: ${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
-                color={"teal"}
-              />
-            </StylizedTokenCard>
-            <StylizedTokenCard>
-              <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
-              <StylizedImageCard src={tokensData.tokens[0]?.image}></StylizedImageCard>
-              <StylizedStringCard value={tokensData.tokens[0]?.name} color={"violet"} />
-              <StylizedStringCard value={tokensData.tokens[0]?.description} color={"lime"} />
-              <div className="rounded-lg flex items-center justify-center bg-pink-300">
-                <Address address={tokensData.address} textColor="black" />
-              </div>{" "}
-              <StylizedStringCard value={`Is Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
-              <StylizedStringCard
-                value={`Is Redeemable: ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`}
-              />
-              <StylizedStringCard
-                value={`Max Mint Amount Per Tx: ${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
-                color={"teal"}
-              />
-            </StylizedTokenCard>
-
-            <StylizedTokenCard>
-              <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
-              <StylizedImageCard src={tokensData.tokens[0]?.image}></StylizedImageCard>
-              <StylizedStringCard value={tokensData.tokens[0]?.name} color={"violet"} />
-              <StylizedStringCard value={tokensData.tokens[0]?.description} color={"lime"} />
-              <div className="rounded-lg flex items-center justify-center bg-pink-300">
-                <Address address={tokensData.address} textColor="black" />
-              </div>{" "}
-              <StylizedStringCard value={`Is Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
-              <StylizedStringCard
-                value={`Is Redeemable: ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`}
-              />
-              <StylizedStringCard
-                value={`Max Mint Amount Per Tx: ${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
-                color={"teal"}
-              />
-            </StylizedTokenCard>
-          </div>
+        <StylizedTokenGroupCard tokens={tokensData.tokens} components={mainComponents}>
+          <StylizedAddressCard address={tokensData.address} isGroup={true} />
         </StylizedTokenGroupCard>
 
         <p>Faucet Balance:</p>

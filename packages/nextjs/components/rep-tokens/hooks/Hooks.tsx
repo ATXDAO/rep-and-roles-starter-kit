@@ -14,6 +14,7 @@ export type Token = {
   description: string;
   id: number;
   properties: any;
+  address: string;
 };
 
 export interface Nft {
@@ -174,6 +175,7 @@ export const useRepTokens = (address?: string) => {
       description: responses[i]?.description,
       image: responses[i]?.image,
       properties: tokensProperties[i],
+      address: repTokensInstance?.address,
     } as Token;
     tokens.push(token);
   }
