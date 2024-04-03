@@ -49,7 +49,7 @@ export function RepTokensDemo() {
 
   return (
     <>
-      <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
+      <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <p>Faucet</p>
         <StylizedTokenGroupCard
           tokens={faucetTokensData.tokens}
@@ -70,17 +70,13 @@ export function RepTokensDemo() {
         <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
         <StylizedImageCard src={tokensData.tokens[0]?.image} />
 
-        <StylizedStringCard value={tokensData.tokens[0]?.name} color="violet" type="bold" />
-        <StylizedStringCard value={tokensData.tokens[0]?.description} color="lime" />
-        <StylizedAddressCard address={tokensData.tokens[0]?.address} color="pink" />
+        <StylizedStringCard value={tokensData.tokens[0]?.name} type="bold" />
+        <StylizedStringCard value={tokensData.tokens[0]?.description} />
+        <StylizedAddressCard address={tokensData.tokens[0]?.address} />
         <StylizedStringCard value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
-        <StylizedStringCard
-          value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`}
-          color="yellow"
-        />
+        <StylizedStringCard value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`} />
         <StylizedStringCard
           value={`Max Mint Amount Per Tx \n${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
-          color="teal"
         />
         <p className="text-center text-4xl">Single Card</p>
 
@@ -88,20 +84,13 @@ export function RepTokensDemo() {
           <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
           <StylizedImageCard src={tokensData.tokens[0]?.image} />
 
-          <StylizedStringCard value={tokensData.tokens[0]?.name} color="violet" type="bold" />
-          <StylizedStringCard value={tokensData.tokens[0]?.description} color="lime" />
-          <StylizedAddressCard address={tokensData.tokens[0]?.address} color="pink" />
-          <StylizedStringCard
-            value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`}
-            color="blue"
-          />
-          <StylizedStringCard
-            value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`}
-            color="yellow"
-          />
+          <StylizedStringCard value={tokensData.tokens[0]?.name} type="bold" />
+          <StylizedStringCard value={tokensData.tokens[0]?.description} />
+          <StylizedAddressCard address={tokensData.tokens[0]?.address} />
+          <StylizedStringCard value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
+          <StylizedStringCard value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`} />
           <StylizedStringCard
             value={`Max Mint Amount Per Tx \n${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
-            color="teal"
           />
         </StylizedTokenCard>
 

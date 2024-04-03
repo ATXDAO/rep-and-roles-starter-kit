@@ -29,15 +29,14 @@ const cardSizeMap = {
   "3xl": 15,
 };
 
-export const StylizedImageCard = ({
-  src,
-  alt = "Token Image",
-  size = "base",
-  color = "slate",
-}: ImageCardPropsInternal) => {
+export const StylizedImageCard = ({ src, alt = "Token Image", size = "base" }: ImageCardPropsInternal) => {
   return (
-    <div className={`rounded-lg bg-${color}-300 ${cardSizeMap[size]}`}>
-      <Image className="rounded-lg mx-auto" src={src} alt={alt} width={sizeMap[size]} height={sizeMap[size]} />
+    <div className={`rounded-lg bg-base-300 ${cardSizeMap[size]}`}>
+      {src ? (
+        <Image className="rounded-lg mx-auto" src={src} alt={alt} width={sizeMap[size]} height={sizeMap[size]} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

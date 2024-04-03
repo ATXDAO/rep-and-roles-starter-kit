@@ -1,5 +1,4 @@
 import { BalanceImageOverlay } from "./BalanceImageOverlay";
-import { Color } from "./Stylized";
 import { StylizedAddressCard } from "./StylizedAddressCard";
 import { StylizedBalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedBalanceCard";
 import { StylizedImageCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedImageCard";
@@ -9,7 +8,6 @@ import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards
 export interface TokenCardInternalProps {
   tokens: any[];
   components?: ReputationComponent[];
-  color?: Color;
   isBalanceOverlayed?: boolean;
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
   children?: React.ReactNode;
@@ -47,7 +45,6 @@ export const StylizedTokenGroupCard = ({
     "IsRedeemable",
     "MaxMintAmountPerTx",
   ],
-  color = "slate",
   isBalanceOverlayed,
   children,
   size = "base",
@@ -142,9 +139,9 @@ export const StylizedTokenGroupCard = ({
   }
 
   return (
-    <div className={`bg-${color}-900 flex flex-col rounded-lg ${sizeMap[size]}`}>
+    <div className={`bg-base-100 flex flex-col rounded-lg ${sizeMap[size]}`}>
       {children}
-      <div className={`flex justify-center ${sizeMap[size]} bg-${color}-800 `}>{output}</div>
+      <div className={`flex justify-center ${sizeMap[size]} rounded-lg bg-base-200`}>{output}</div>
     </div>
   );
 };

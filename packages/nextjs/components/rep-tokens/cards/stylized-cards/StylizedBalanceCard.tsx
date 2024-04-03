@@ -1,16 +1,13 @@
-import { Color } from "./Stylized";
-
 type BalanceProps = {
   value: number;
-  color?: Color;
   isOverlay?: boolean;
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
 };
 
 const normalSizeMap = {
-  xs: "2xl",
-  sm: "4xl",
-  base: "4xl",
+  xs: "text-2xl",
+  sm: "text-4xl",
+  base: "text-4xl",
   lg: 9,
   xl: 10,
   "2xl": 12,
@@ -18,9 +15,9 @@ const normalSizeMap = {
 };
 
 const overlaidSizeMap = {
-  xs: "2xl",
-  sm: "4xl",
-  base: "9xl",
+  xs: "text-2xl",
+  sm: "text-4xl",
+  base: "text-9xl",
   lg: 9,
   xl: 10,
   "2xl": 12,
@@ -37,16 +34,16 @@ const overlaidCardSizeMap = {
   "3xl": "",
 };
 
-export const StylizedBalanceCard = ({ value, color = "slate", isOverlay, size = "base" }: BalanceProps) => {
+export const StylizedBalanceCard = ({ value, isOverlay, size = "base" }: BalanceProps) => {
   let cardClasses;
   let textClasses;
 
   if (isOverlay) {
-    cardClasses = `absolute ${overlaidCardSizeMap[size]} items-center justify-center`;
-    textClasses = `text-${overlaidSizeMap[size]} mx-auto text-center text-black`;
+    cardClasses = `absolute ${overlaidCardSizeMap[size]} items-center justify-center bg-base-300 bg-opacity-75`;
+    textClasses = `${overlaidSizeMap[size]} mx-auto text-center`;
   } else {
-    cardClasses = `rounded-lg bg-${color}-300`;
-    textClasses = `text-${normalSizeMap[size]} mx-auto text-center text-black`;
+    cardClasses = `rounded-lg bg-base-300`;
+    textClasses = `${normalSizeMap[size]} mx-auto text-center`;
   }
 
   return (

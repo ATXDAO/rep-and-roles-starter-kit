@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Color } from "../rep-tokens/cards/stylized-cards/Stylized";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Address as AddressType, getAddress, isAddress } from "viem";
 import { hardhat } from "viem/chains";
@@ -17,7 +16,6 @@ type AddressProps = {
   disableAddressLink?: boolean;
   format?: "short" | "long";
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
-  textColor?: Color;
 };
 
 const blockieSizeMap = {
@@ -33,7 +31,7 @@ const blockieSizeMap = {
 /**
  * Displays an address (or ENS) with a Blockie image and option to copy address.
  */
-export const Address = ({ address, disableAddressLink, format, size = "base", textColor = "white" }: AddressProps) => {
+export const Address = ({ address, disableAddressLink, format, size = "base" }: AddressProps) => {
   const [ens, setEns] = useState<string | null>();
   const [ensAvatar, setEnsAvatar] = useState<string | null>();
   const [addressCopied, setAddressCopied] = useState(false);
@@ -97,14 +95,14 @@ export const Address = ({ address, disableAddressLink, format, size = "base", te
         />
       </div>
       {disableAddressLink ? (
-        <span className={`ml-1.5 text-${size} text-${textColor} font-normal`}>{displayAddress}</span>
+        <span className={`ml-1.5 text-${size} font-normal`}>{displayAddress}</span>
       ) : targetNetwork.id === hardhat.id ? (
-        <span className={`ml-1.5 text-${size} text-${textColor} font-normal`}>
+        <span className={`ml-1.5 text-${size} font-normal`}>
           <Link href={blockExplorerAddressLink}>{displayAddress}</Link>
         </span>
       ) : (
         <a
-          className={`ml-1.5 text-${size} text-${textColor} font-normal`}
+          className={`ml-1.5 text-${size} font-normal`}
           target="_blank"
           href={blockExplorerAddressLink}
           rel="noopener noreferrer"
