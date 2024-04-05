@@ -2,9 +2,10 @@ import { StylizedAddressCard } from "../StylizedAddressCard";
 import { Token } from "~~/components/rep-tokens/hooks/Hooks";
 
 type Props = {
-  token: Token;
+  token?: Token;
+  address?: string;
 };
 
-export const AddressCard = ({ token }: Props) => {
-  return <StylizedAddressCard address={token?.address} />;
+export const AddressCard = ({ token, address = "" }: Props) => {
+  return <StylizedAddressCard address={token ? token?.address : address} />;
 };

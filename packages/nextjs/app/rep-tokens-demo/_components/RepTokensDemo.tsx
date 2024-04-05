@@ -114,6 +114,18 @@ export function RepTokensDemo() {
             <RedeemableCard token={token} />
             <MaxMintAmountPerTxCard token={token} />
           </div>
+
+          <div>
+            <p className="text-center text-4xl">Individual Components 3</p>
+            <BalanceCard balance={token?.balance} />
+            <ImageCard src={token?.image} />
+            <NameCard name={token?.name} />
+            <DescriptionCard description={token?.description} />
+            <AddressCard address={token?.address} />
+            <SoulboundCard isSoulbound={token?.properties?.isSoulbound} />
+            <RedeemableCard isRedeemable={token?.properties?.isRedeemable} />
+            <MaxMintAmountPerTxCard maxMintAmountPerTx={token?.properties?.maxMintAmountPerTx} />
+          </div>
         </div>
 
         <div className="flex">

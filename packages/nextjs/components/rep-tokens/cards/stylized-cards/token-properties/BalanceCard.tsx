@@ -2,9 +2,10 @@ import { StylizedBalanceCard } from "../StylizedBalanceCard";
 import { Token } from "~~/components/rep-tokens/hooks/Hooks";
 
 type Props = {
-  token: Token;
+  token?: Token;
+  balance?: bigint;
 };
 
-export const BalanceCard = ({ token }: Props) => {
-  return <StylizedBalanceCard value={Number(token?.balance)} />;
+export const BalanceCard = ({ token, balance }: Props) => {
+  return <StylizedBalanceCard value={token ? Number(token?.balance) : Number(balance)} />;
 };

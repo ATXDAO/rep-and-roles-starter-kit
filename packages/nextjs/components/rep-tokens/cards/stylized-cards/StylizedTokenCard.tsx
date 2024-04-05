@@ -86,12 +86,14 @@ export const StylizedTokenCard = ({
     }
 
     if (components[j] === "IsSoulbound") {
-      cardContent.push(<StylizedStringCard key={j} value={`Soulbound: ${token?.properties.isSoulbound.toString()}`} />);
+      cardContent.push(
+        <StylizedStringCard key={j} value={`Soulbound: ${token?.properties?.isSoulbound?.toString()}`} />,
+      );
     }
 
     if (components[j] === "IsRedeemable") {
       cardContent.push(
-        <StylizedStringCard key={j} value={`Redeemable: ${token?.properties.isRedeemable.toString()}`} />,
+        <StylizedStringCard key={j} value={`Redeemable: ${token?.properties?.isRedeemable?.toString()}`} />,
       );
     }
 
@@ -99,7 +101,7 @@ export const StylizedTokenCard = ({
       cardContent.push(
         <StylizedStringCard
           key={j}
-          value={`Max Mint Amount Per Tx: ${token?.properties.maxMintAmountPerTx.toString()}`}
+          value={`Max Mint Amount Per Tx: ${token?.properties?.maxMintAmountPerTx?.toString()}`}
         />,
       );
     }

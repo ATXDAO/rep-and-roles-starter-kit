@@ -2,14 +2,17 @@ import { StylizedStringCard } from "../StylizedStringCard";
 import { Token } from "~~/components/rep-tokens/hooks/Hooks";
 
 type Props = {
-  token: Token;
+  token?: Token;
+  maxMintAmountPerTx?: number;
   type?: "default" | "bold";
 };
 
-export const MaxMintAmountPerTxCard = ({ token, type = "default" }: Props) => {
+export const MaxMintAmountPerTxCard = ({ token, maxMintAmountPerTx, type = "default" }: Props) => {
   return (
     <StylizedStringCard
-      value={`Max Mint Amount Per Tx: ` + token?.properties?.maxMintAmountPerTx?.toString()}
+      value={
+        `Max Mint Amount Per Tx: ` + (token ? token?.properties?.maxMintAmountPerTx?.toString() : maxMintAmountPerTx)
+      }
       type={type}
     />
   );
