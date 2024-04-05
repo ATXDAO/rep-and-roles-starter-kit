@@ -59,7 +59,7 @@ export function RepTokensDemo() {
           <StylizedStringCard value={"Faucet"} />
         </StylizedTokenGroupCard>
         <button
-          className="btn btn-secondary btn-sm font-normal gap-1"
+          className="btn btn-primary btn-sm font-normal gap-1"
           onClick={async () => {
             await claim();
             await refetchUserBalances();
