@@ -1,9 +1,9 @@
 import { Token } from "../../hooks/Hooks";
-// import { BalanceImageOverlay } from "./BalanceImageOverlay";
-// import { StylizedAddressCard } from "./StylizedAddressCard";
-// import { StylizedBalanceCard } from "./StylizedBalanceCard";
-// import { StylizedImageCard } from "./StylizedImageCard";
-// import { StylizedStringCard } from "./StylizedStringCard";
+import { BalanceImageOverlay } from "./BalanceImageOverlay";
+import { StylizedAddressCard } from "./StylizedAddressCard";
+import { StylizedBalanceCard } from "./StylizedBalanceCard";
+import { StylizedImageCard } from "./StylizedImageCard";
+import { StylizedStringCard } from "./StylizedStringCard";
 import { ReputationComponent } from "./StylizedTokenGroupCard";
 
 export type Size = "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
@@ -28,91 +28,91 @@ const sizeMap = {
 
 export const StylizedTokenCard = ({
   size = "base",
-  children,
-}: // token,
-// components = [
-//   "Balance",
-//   "Image",
-//   "Name",
-//   "Description",
-//   "Address",
-//   "IsSoulbound",
-//   "IsRedeemable",
-//   "MaxMintAmountPerTx",
-// ],
-// isBalanceOverlayed = false,
-TokenCardInternalProps) => {
-  // const cardContent: JSX.Element[] = [];
+  // children,
+  token,
+  components = [
+    "Balance",
+    "Image",
+    "Name",
+    "Description",
+    "Address",
+    "IsSoulbound",
+    "IsRedeemable",
+    "MaxMintAmountPerTx",
+  ],
+  isBalanceOverlayed = false,
+}: TokenCardInternalProps) => {
+  const cardContent: JSX.Element[] = [];
 
-  // for (let j = 0; j < components?.length; j++) {
-  //   if (components[j] === "Balance") {
-  //     if (isBalanceOverlayed) {
-  //       let doesImageComponentExist;
-  //       for (let k = 0; k < components?.length; k++) {
-  //         if (k === j) continue;
+  for (let j = 0; j < components?.length; j++) {
+    if (components[j] === "Balance") {
+      if (isBalanceOverlayed) {
+        let doesImageComponentExist;
+        for (let k = 0; k < components?.length; k++) {
+          if (k === j) continue;
 
-  //         if (components[k] === "Image") {
-  //           doesImageComponentExist = true;
-  //           break;
-  //         }
-  //       }
+          if (components[k] === "Image") {
+            doesImageComponentExist = true;
+            break;
+          }
+        }
 
-  //       if (doesImageComponentExist) {
-  //         cardContent.push(
-  //           <BalanceImageOverlay key={j} balance={Number(token?.balance)} image={token?.image} size={size} />,
-  //         );
-  //       } else {
-  //         cardContent.push(
-  //           <StylizedBalanceCard key={j} value={Number(token?.balance)} isOverlay={false} size={size} />,
-  //         );
-  //       }
-  //     } else {
-  //       cardContent.push(<StylizedBalanceCard key={j} value={Number(token?.balance)} isOverlay={false} size={size} />);
-  //     }
-  //   }
+        if (doesImageComponentExist) {
+          cardContent.push(
+            <BalanceImageOverlay key={j} balance={Number(token?.balance)} image={token?.image} size={size} />,
+          );
+        } else {
+          cardContent.push(
+            <StylizedBalanceCard key={j} value={Number(token?.balance)} isOverlay={false} size={size} />,
+          );
+        }
+      } else {
+        cardContent.push(<StylizedBalanceCard key={j} value={Number(token?.balance)} isOverlay={false} size={size} />);
+      }
+    }
 
-  //   if (!isBalanceOverlayed) {
-  //     if (components[j] === "Image") {
-  //       cardContent.push(<StylizedImageCard key={j} src={token?.image} size={size} />);
-  //     }
-  //   }
+    if (!isBalanceOverlayed) {
+      if (components[j] === "Image") {
+        cardContent.push(<StylizedImageCard key={j} src={token?.image} size={size} />);
+      }
+    }
 
-  //   if (components[j] === "Name") {
-  //     cardContent.push(<StylizedStringCard key={j} value={token?.name} type="bold" />);
-  //   }
+    if (components[j] === "Name") {
+      cardContent.push(<StylizedStringCard key={j} value={token?.name} type="bold" />);
+    }
 
-  //   if (components[j] === "Description") {
-  //     cardContent.push(<StylizedStringCard key={j} value={token?.description} />);
-  //   }
+    if (components[j] === "Description") {
+      cardContent.push(<StylizedStringCard key={j} value={token?.description} />);
+    }
 
-  //   if (components[j] === "IsSoulbound") {
-  //     cardContent.push(<StylizedStringCard key={j} value={`Soulbound: ${token?.properties.isSoulbound.toString()}`} />);
-  //   }
+    if (components[j] === "IsSoulbound") {
+      cardContent.push(<StylizedStringCard key={j} value={`Soulbound: ${token?.properties.isSoulbound.toString()}`} />);
+    }
 
-  //   if (components[j] === "IsRedeemable") {
-  //     cardContent.push(
-  //       <StylizedStringCard key={j} value={`Redeemable: ${token?.properties.isRedeemable.toString()}`} />,
-  //     );
-  //   }
+    if (components[j] === "IsRedeemable") {
+      cardContent.push(
+        <StylizedStringCard key={j} value={`Redeemable: ${token?.properties.isRedeemable.toString()}`} />,
+      );
+    }
 
-  //   if (components[j] === "MaxMintAmountPerTx") {
-  //     cardContent.push(
-  //       <StylizedStringCard
-  //         key={j}
-  //         value={`Max Mint Amount Per Tx: ${token?.properties.maxMintAmountPerTx.toString()}`}
-  //       />,
-  //     );
-  //   }
+    if (components[j] === "MaxMintAmountPerTx") {
+      cardContent.push(
+        <StylizedStringCard
+          key={j}
+          value={`Max Mint Amount Per Tx: ${token?.properties.maxMintAmountPerTx.toString()}`}
+        />,
+      );
+    }
 
-  //   if (components[j] === "Address") {
-  //     cardContent.push(<StylizedAddressCard key={j} address={token?.address} />);
-  //   }
-  // }
+    if (components[j] === "Address") {
+      cardContent.push(<StylizedAddressCard key={j} address={token?.address} />);
+    }
+  }
 
   return (
     <div className={`bg-base-100 rounded-lg ${sizeMap[size]} relative p-1`}>
-      {children}
-      {/* {cardContent} */}
+      {/* {children} */}
+      {cardContent}
     </div>
   );
 };
