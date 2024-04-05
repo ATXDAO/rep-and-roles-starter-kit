@@ -6,6 +6,7 @@ import { StylizedBalanceCard } from "~~/components/rep-tokens/cards/stylized-car
 import { StylizedImageCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedImageCard";
 import { StylizedStringCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedStringCard";
 import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard";
+import { StylizedTokenCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard2";
 import {
   ReputationComponent,
   StylizedTokenGroupCard,
@@ -82,42 +83,71 @@ export function RepTokensDemo() {
           <StylizedAddressCard address={tokensData.address} isGroup={true} />
         </StylizedTokenGroupCard2> */}
 
-        <p className="text-center text-4xl">Individual Components 1</p>
-        <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
-        <StylizedImageCard src={tokensData.tokens[0]?.image} />
-        <StylizedStringCard value={tokensData.tokens[0]?.name} type="bold" />
-        <StylizedStringCard value={tokensData.tokens[0]?.description} />
-        <StylizedAddressCard address={tokensData.tokens[0]?.address} />
-        <StylizedStringCard value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
-        <StylizedStringCard value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`} />
-        <StylizedStringCard
-          value={`Max Mint Amount Per Tx: \n${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
-        />
+        <div className="flex">
+          <div>
+            <p className="text-center text-4xl">Individual Components 1</p>
+            <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
+            <StylizedImageCard src={tokensData.tokens[0]?.image} />
+            <StylizedStringCard value={tokensData.tokens[0]?.name} type="bold" />
+            <StylizedStringCard value={tokensData.tokens[0]?.description} />
+            <StylizedAddressCard address={tokensData.tokens[0]?.address} />
+            <StylizedStringCard value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
+            <StylizedStringCard value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`} />
+            <StylizedStringCard
+              value={`Max Mint Amount Per Tx: \n${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
+            />
+          </div>
+          <div>
+            <p className="text-center text-4xl">Individual Components 2</p>
+            <BalanceCard token={tokensData.tokens[0]} />
+            <ImageCard token={tokensData.tokens[0]} />
+            <NameCard token={tokensData.tokens[0]} />
+            <DescriptionCard token={tokensData.tokens[0]} />
+            <AddressCard token={tokensData.tokens[0]} />
+            <SoulboundCard token={tokensData.tokens[0]} />
+            <RedeemableCard token={tokensData.tokens[0]} />
+            <MaxMintAmountPerTxCard token={tokensData.tokens[0]} />
+          </div>
+        </div>
 
-        <p className="text-center text-4xl">Individual Components 2</p>
-        <BalanceCard token={tokensData.tokens[0]} />
-        <ImageCard token={tokensData.tokens[0]} />
-        <NameCard token={tokensData.tokens[0]} />
-        <DescriptionCard token={tokensData.tokens[0]} />
-        <AddressCard token={tokensData.tokens[0]} />
-        <SoulboundCard token={tokensData.tokens[0]} />
-        <RedeemableCard token={tokensData.tokens[0]} />
-        <MaxMintAmountPerTxCard token={tokensData.tokens[0]} />
+        <div className="flex">
+          <div>
+            <p className="text-center text-4xl">Single Card 1</p>
+            <StylizedTokenCard token={tokensData.tokens[0]} components={["Balance", "Image", "Name", "Description"]} />
+          </div>
+          <div>
+            <p className="text-center text-4xl">Single Card 2</p>
+            <StylizedTokenCard2>
+              <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
+              <StylizedImageCard src={tokensData.tokens[0]?.image} />
 
-        <p className="text-center text-4xl">Single Card</p>
-        <StylizedTokenCard token={tokensData.tokens[0]}>
-          {/* <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
-          <StylizedImageCard src={tokensData.tokens[0]?.image} />
+              <StylizedStringCard value={tokensData.tokens[0]?.name} type="bold" />
+              <StylizedStringCard value={tokensData.tokens[0]?.description} />
+              <StylizedAddressCard address={tokensData.tokens[0]?.address} />
+              <StylizedStringCard value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
+              <StylizedStringCard
+                value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`}
+              />
+              <StylizedStringCard
+                value={`Max Mint Amount Per Tx \n${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
+              />
+            </StylizedTokenCard2>
+          </div>
 
-          <StylizedStringCard value={tokensData.tokens[0]?.name} type="bold" />
-          <StylizedStringCard value={tokensData.tokens[0]?.description} />
-          <StylizedAddressCard address={tokensData.tokens[0]?.address} />
-          <StylizedStringCard value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
-          <StylizedStringCard value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`} />
-          <StylizedStringCard
-            value={`Max Mint Amount Per Tx \n${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
-          /> */}
-        </StylizedTokenCard>
+          <div>
+            <p className="text-center text-4xl">Single Card 3</p>
+            <StylizedTokenCard2>
+              <BalanceCard token={tokensData.tokens[0]} />
+              <ImageCard token={tokensData.tokens[0]} />
+              <NameCard token={tokensData.tokens[0]} />
+              <DescriptionCard token={tokensData.tokens[0]} />
+              <AddressCard token={tokensData.tokens[0]} />
+              <SoulboundCard token={tokensData.tokens[0]} />
+              <RedeemableCard token={tokensData.tokens[0]} />
+              <MaxMintAmountPerTxCard token={tokensData.tokens[0]} />
+            </StylizedTokenCard2>
+          </div>
+        </div>
 
         <p className="text-center text-4xl">Multi-Card</p>
 
