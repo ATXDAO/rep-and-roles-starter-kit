@@ -1,5 +1,3 @@
-import { ImageProps } from "../cards/value-cards/ImageCard";
-
 export interface CardClasses {
   card?: string;
   value?: string;
@@ -17,13 +15,8 @@ export interface ValueCardConfigProps {
   // isPrettyLoading?: boolean;
 }
 
-export interface ImageValueCardConfigProp extends ValueCardConfigProps {
-  imageProperties?: ImageProps;
-}
-
 export interface TokenCardValuesConfigProps {
   balanceConfigProps?: ValueCardConfigProps;
-  imageConfigProps?: ImageValueCardConfigProp;
   nameConfigProps?: ValueCardConfigProps;
   descriptionConfigProps?: ValueCardConfigProps;
   addressConfigProps?: ValueCardConfigProps;

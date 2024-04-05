@@ -10,8 +10,10 @@ import {
   ReputationComponent,
   StylizedTokenGroupCard,
 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
+import { BalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/BalanceCard";
 // import { StylizedTokenGroupCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard2";
 import { DescriptionCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/DescriptionCard";
+import { ImageCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/ImageCard";
 import { MaxMintAmountPerTxCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/MaxMintAmountPerTxCard";
 import { NameCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/NameCard";
 import { RedeemableCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/RedeemableCard";
@@ -86,14 +88,13 @@ export function RepTokensDemo() {
         <StylizedStringCard value={tokensData.tokens[0]?.description} />
         <StylizedStringCard value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
         <StylizedStringCard value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`} />
-
         <StylizedStringCard
           value={`Max Mint Amount Per Tx: \n${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
         />
-        <p className="text-center text-4xl">Individual Components 2</p>
-        <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
-        <StylizedImageCard src={tokensData.tokens[0]?.image} />
 
+        <p className="text-center text-4xl">Individual Components 2</p>
+        <BalanceCard token={tokensData.tokens[0]} />
+        <ImageCard token={tokensData.tokens[0]} />
         <NameCard token={tokensData.tokens[0]} />
         <DescriptionCard token={tokensData.tokens[0]} />
         <StylizedAddressCard address={tokensData.tokens[0]?.address} />
@@ -101,16 +102,7 @@ export function RepTokensDemo() {
         <RedeemableCard token={tokensData.tokens[0]} />
         <MaxMintAmountPerTxCard token={tokensData.tokens[0]} />
 
-        {/* <StylizedStringCard value={tokensData.tokens[0]?.name} type="bold" />
-        <StylizedStringCard value={tokensData.tokens[0]?.description} /> */}
-        {/* <StylizedStringCard value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
-        <StylizedStringCard value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`} /> */}
-
-        {/* <StylizedStringCard
-          value={`Max Mint Amount Per Tx: \n${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
-        />*/}
         <p className="text-center text-4xl">Single Card</p>
-
         <StylizedTokenCard token={tokensData.tokens[0]}>
           {/* <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
           <StylizedImageCard src={tokensData.tokens[0]?.image} />
