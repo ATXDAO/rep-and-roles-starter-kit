@@ -83,13 +83,6 @@ export const StylizedTokenGroupCard = ({
         }
       }
 
-      // if (components[j] == "Balance")
-      //   if (components[j] === "Balance") {
-      //     cardContent.push(
-      //       <StylizedBalanceCard key={j} value={Number(tokens[i]?.balance)} isOverlay={isBalanceOverlayed} />,
-      //     );
-      //   }
-
       if (!isBalanceOverlayed) {
         if (components[j] === "Image") {
           cardContent.push(<StylizedImageCard key={j} src={tokens[i]?.image} size={size} />);
@@ -131,7 +124,13 @@ export const StylizedTokenGroupCard = ({
     }
 
     const card = (
-      <StylizedTokenCard key={i} size={size}>
+      <StylizedTokenCard
+        key={i}
+        size={size}
+        token={tokens[i]}
+        components={components}
+        isBalanceOverlayed={isBalanceOverlayed}
+      >
         {cardContent}
       </StylizedTokenCard>
     );

@@ -10,6 +10,7 @@ import {
   ReputationComponent,
   StylizedTokenGroupCard,
 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
+// import { StylizedTokenGroupCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard2";
 import { DescriptionCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/DescriptionCard";
 import { MaxMintAmountPerTxCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/MaxMintAmountPerTxCard";
 import { NameCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/NameCard";
@@ -74,6 +75,10 @@ export function RepTokensDemo() {
           Claim Tokens
         </button>
 
+        {/* <StylizedTokenGroupCard2 tokens={tokensData.tokens} components={mainComponents}>
+          <StylizedAddressCard address={tokensData.address} isGroup={true} />
+        </StylizedTokenGroupCard2> */}
+
         <p className="text-center text-4xl">Individual Components</p>
         <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
         <StylizedImageCard src={tokensData.tokens[0]?.image} />
@@ -95,7 +100,7 @@ export function RepTokensDemo() {
         />*/}
         <p className="text-center text-4xl">Single Card</p>
 
-        <StylizedTokenCard>
+        <StylizedTokenCard token={tokensData.tokens[0]}>
           <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
           <StylizedImageCard src={tokensData.tokens[0]?.image} />
 
