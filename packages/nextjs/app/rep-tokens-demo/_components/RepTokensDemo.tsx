@@ -10,6 +10,7 @@ import {
   ReputationComponent,
   StylizedTokenGroupCard,
 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
+import { AddressCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/AddressCard";
 import { BalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/BalanceCard";
 // import { StylizedTokenGroupCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard2";
 import { DescriptionCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/DescriptionCard";
@@ -86,6 +87,7 @@ export function RepTokensDemo() {
         <StylizedImageCard src={tokensData.tokens[0]?.image} />
         <StylizedStringCard value={tokensData.tokens[0]?.name} type="bold" />
         <StylizedStringCard value={tokensData.tokens[0]?.description} />
+        <StylizedAddressCard address={tokensData.tokens[0]?.address} />
         <StylizedStringCard value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
         <StylizedStringCard value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`} />
         <StylizedStringCard
@@ -97,7 +99,7 @@ export function RepTokensDemo() {
         <ImageCard token={tokensData.tokens[0]} />
         <NameCard token={tokensData.tokens[0]} />
         <DescriptionCard token={tokensData.tokens[0]} />
-        <StylizedAddressCard address={tokensData.tokens[0]?.address} />
+        <AddressCard token={tokensData.tokens[0]} />
         <SoulboundCard token={tokensData.tokens[0]} />
         <RedeemableCard token={tokensData.tokens[0]} />
         <MaxMintAmountPerTxCard token={tokensData.tokens[0]} />
