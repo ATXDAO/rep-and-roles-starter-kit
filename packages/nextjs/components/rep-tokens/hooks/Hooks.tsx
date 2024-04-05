@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useFetch } from "usehooks-ts";
 // import { useFetch } from "usehooks-ts";
 import { useScaffoldContract, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
@@ -39,28 +40,48 @@ export const useBalanceOf = (address?: string, tokenId?: number) => {
   });
 };
 
-export function useUris(repTokensInstance: any, tokenIds: bigint[]) {
+export function useUris(contract: any, tokenIds: bigint[]) {
   const [uris, setUris] = useState<string[]>([]);
+
+  const refetch = useCallback(async () => {
+    if (!contract) return;
+
+    const arr = [];
+    for (let i = 0; i < tokenIds.length; i++) {
+      const result = await contract.read.uri([tokenIds[i]]);
+      arr.push(result);
+    }
+
+    setUris([...arr]);
+  }, [contract?.address, tokenIds, uris.length]);
 
   useEffect(() => {
     async function get() {
-      if (!repTokensInstance || tokenIds.length === 0) return;
-
-      const arr = [];
-      for (let i = 0; i < tokenIds.length; i++) {
-        const result = await repTokensInstance.read.uri([tokenIds[i]]);
-        if (result !== undefined) arr.push(result);
-      }
-
-      setUris([...arr]);
+      await refetch();
     }
 
-    if (uris.length === 0) {
-      get();
-    }
-  }, [repTokensInstance, tokenIds, uris.length]);
+    get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [contract?.address, tokenIds, uris.length, refetch]);
 
-  return { uris, setUris };
+  return { uris, setUris, refetch };
+}
+
+export function useGetTokenProperties(repTokensInstance: any, tokenId: bigint) {
+  const [tokenProperties, setTokenProperties] = useState<string[]>([]);
+
+  useEffect(() => {
+    async function get() {
+      if (!repTokensInstance) return;
+
+      const result = await repTokensInstance.read.getTokenProperties([tokenId]);
+      setTokenProperties(result);
+    }
+
+    get();
+  }, [repTokensInstance?.address, tokenId]);
+
+  return { tokenProperties, setTokenProperties };
 }
 
 export function useGetTokensProperties(repTokensInstance: any, tokenIds: bigint[]) {
@@ -88,101 +109,140 @@ export function useGetTokensProperties(repTokensInstance: any, tokenIds: bigint[
   return { tokensProperties, setTokensProperties };
 }
 
-export function useFetches(uris: string[]) {
-  const [responses, setResponses] = useState<Nft[]>([]);
+// function useFetches(uris: string[]) {
+//   const [responses, setResponses] = useState<any[]>([]);
 
-  useEffect(() => {
-    async function getJson() {
-      if (uris.length === 0) return;
+//   const refetch = useCallback(async () => {
+//     const arr = [];
+//     for (let i = 0; i < uris.length; i++) {
+//       const response = await fetch(uris[i]);
+//       const responseJson = await response.json();
+//       arr.push(responseJson);
+//     }
 
-      const arr = [];
-      for (let i = 0; i < uris.length; i++) {
-        try {
-          const response = await fetch(uris[i]);
-          const responseJson = await response.json();
-          arr.push(responseJson);
-        } catch (e) {}
-      }
+//     setResponses([...arr]);
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, [uris.length]);
 
-      setResponses([...arr]);
-    }
+//   useEffect(() => {
+//     async function get() {
+//       await refetch();
+//     }
 
-    if (responses.length === 0) getJson();
-  }, [uris, uris.length, responses.length]);
+//     get();
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, [uris.length, refetch]);
 
-  return { responses };
-}
+//   return { responses, refetch };
+// }
 
-export const useRepTokens = (address?: string) => {
+export const useGetRepToken = (address?: string, tokenId?: bigint) => {
   const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokensStandalone" });
 
-  const { data: numOfTokens } = useScaffoldContractRead({
+  const { data: balanceOf, refetch: refetchBalance } = useScaffoldContractRead({
     contractName: "ReputationTokensStandalone",
-    functionName: "getNumOfTokenTypes",
+    functionName: "balanceOf",
+    args: [address, tokenId],
   });
 
-  const { addresses } = useMemo(() => {
-    const addresses: string[] = [];
+  const { tokenProperties } = useGetTokenProperties(repTokensInstance, tokenId || BigInt(0));
 
-    if (numOfTokens) {
-      for (let i = 0; i < numOfTokens; i++) {
-        if (address) {
-          addresses.push(address);
-        }
-      }
-    }
-
-    return { addresses };
-  }, [numOfTokens, address]);
-
-  const { tokenIds } = useMemo(() => {
-    const tokenIds: bigint[] = [];
-
-    if (numOfTokens) {
-      for (let i = 0; i < numOfTokens; i++) {
-        tokenIds.push(BigInt(i));
-      }
-    }
-
-    return { tokenIds };
-  }, [numOfTokens]);
-
-  const { data: balanceOfBatch, refetch: refetchBalances } = useScaffoldContractRead({
+  const { data: uri } = useScaffoldContractRead({
     contractName: "ReputationTokensStandalone",
-    functionName: "balanceOfBatch",
-    args: [addresses, tokenIds],
+    functionName: "uri",
+    args: [tokenId],
   });
 
-  const { tokensProperties } = useGetTokensProperties(repTokensInstance, tokenIds);
+  const formattedURI = uri?.replace("ipfs://", "https://nftstorage.link/ipfs/");
 
-  const { uris } = useUris(repTokensInstance, tokenIds);
+  const { data: result } = useFetch<any>(formattedURI);
+  console.log(result);
+  console.log("Re-rendered");
 
-  for (let i = 0; i < uris.length; i++) {
-    uris[i] = uris[i].replace("ipfs://", "https://nftstorage.link/ipfs/");
-    // uris[i] = uris[i].replace("ipfs://", "https://ipfs.io/ipfs/");
-  }
+  const token = {
+    id: Number(tokenId),
+    balance: balanceOf,
+    name: result?.name,
+    description: result?.description,
+    image: result?.image,
+    properties: tokenProperties,
+    address: repTokensInstance?.address,
+  } as Token;
 
-  const { responses } = useFetches(uris);
-
-  const tokens: Token[] = [];
-  for (let i = 0; i < responses.length; i++) {
-    let balance = BigInt(0);
-    if (balanceOfBatch) {
-      balance = balanceOfBatch[i];
-    }
-    const token = {
-      id: i,
-      balance: balance,
-      name: responses[i]?.name,
-      description: responses[i]?.description,
-      image: responses[i]?.image,
-      properties: tokensProperties[i],
-      address: repTokensInstance?.address,
-    } as Token;
-    tokens.push(token);
-  }
-
-  const addr = repTokensInstance?.address ?? "";
-
-  return { tokensData: { address: addr, tokens: tokens }, refetchBalances };
+  console.log(token);
+  return { token, refetchBalance };
 };
+
+// export const useRepTokens = (address?: string) => {
+//   const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokensStandalone" });
+
+//   const { data: numOfTokens } = useScaffoldContractRead({
+//     contractName: "ReputationTokensStandalone",
+//     functionName: "getNumOfTokenTypes",
+//   });
+
+//   const { addresses } = useMemo(() => {
+//     const addresses: string[] = [];
+
+//     if (numOfTokens) {
+//       for (let i = 0; i < numOfTokens; i++) {
+//         if (address) {
+//           addresses.push(address);
+//         }
+//       }
+//     }
+
+//     return { addresses };
+//   }, [numOfTokens, address]);
+
+//   const { tokenIds } = useMemo(() => {
+//     const tokenIds: bigint[] = [];
+
+//     if (numOfTokens) {
+//       for (let i = 0; i < numOfTokens; i++) {
+//         tokenIds.push(BigInt(i));
+//       }
+//     }
+
+//     return { tokenIds };
+//   }, [numOfTokens]);
+
+//   const { data: balanceOfBatch, refetch: refetchBalances } = useScaffoldContractRead({
+//     contractName: "ReputationTokensStandalone",
+//     functionName: "balanceOfBatch",
+//     args: [addresses, tokenIds],
+//   });
+
+//   const { tokensProperties } = useGetTokensProperties(repTokensInstance, tokenIds);
+
+//   const { uris } = useUris(repTokensInstance, tokenIds);
+
+//   for (let i = 0; i < uris.length; i++) {
+//     uris[i] = uris[i].replace("ipfs://", "https://nftstorage.link/ipfs/");
+//     // uris[i] = uris[i].replace("ipfs://", "https://ipfs.io/ipfs/");
+//   }
+
+//   const { responses } = useFetches(uris);
+
+//   const tokens: Token[] = [];
+//   for (let i = 0; i < responses.length; i++) {
+//     let balance = BigInt(0);
+//     if (balanceOfBatch) {
+//       balance = balanceOfBatch[i];
+//     }
+//     const token = {
+//       id: i,
+//       balance: balance,
+//       name: responses[i]?.name,
+//       description: responses[i]?.description,
+//       image: responses[i]?.image,
+//       properties: tokensProperties[i],
+//       address: repTokensInstance?.address,
+//     } as Token;
+//     tokens.push(token);
+//   }
+
+//   const addr = repTokensInstance?.address ?? "";
+
+//   return { tokensData: { address: addr, tokens: tokens }, refetchBalances };
+// };

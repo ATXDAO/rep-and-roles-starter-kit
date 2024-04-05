@@ -7,10 +7,10 @@ import { StylizedImageCard } from "~~/components/rep-tokens/cards/stylized-cards
 import { StylizedStringCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedStringCard";
 import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard";
 import { StylizedTokenCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard2";
-import {
-  ReputationComponent,
-  StylizedTokenGroupCard,
-} from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
+// import {
+//   ReputationComponent,
+//   StylizedTokenGroupCard,
+// } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
 import { AddressCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/AddressCard";
 import { BalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/BalanceCard";
 // import { StylizedTokenGroupCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard2";
@@ -20,47 +20,53 @@ import { MaxMintAmountPerTxCard } from "~~/components/rep-tokens/cards/stylized-
 import { NameCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/NameCard";
 import { RedeemableCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/RedeemableCard";
 import { SoulboundCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/SoulboundCard";
-import { useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
-import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useGetRepToken } from "~~/components/rep-tokens/hooks/Hooks";
+
+// import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 export function RepTokensDemo() {
   const { address } = useAccount();
-  const { tokensData, refetchBalances: refetchUserBalances } = useRepTokens(address);
 
-  for (let i = 0; i < tokensData.tokens.length; i++) {
-    tokensData.tokens[i].image = tokensData.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
-  }
+  const { token } = useGetRepToken(address, BigInt(0));
 
-  const { writeAsync: claim } = useScaffoldContractWrite({
-    contractName: "ReputationFaucet",
-    functionName: "claim",
-  });
+  token.image = token?.image?.replace("ipfs://", "https://ipfs.io/ipfs/");
 
-  const { data: faucet } = useScaffoldContract({ contractName: "ReputationFaucet" });
+  // const { tokensData, refetchBalances: refetchUserBalances } = useRepTokens(address);
 
-  const { tokensData: faucetTokensData, refetchBalances: refetchFaucetBalances } = useRepTokens(faucet?.address);
+  // for (let i = 0; i < tokensData.tokens.length; i++) {
+  //   tokensData.tokens[i].image = tokensData.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
+  // }
 
-  for (let i = 0; i < faucetTokensData.tokens.length; i++) {
-    faucetTokensData.tokens[i].image = faucetTokensData.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
-  }
+  // const { writeAsync: claim } = useScaffoldContractWrite({
+  //   contractName: "ReputationFaucet",
+  //   functionName: "claim",
+  // });
 
-  const mainComponents: ReputationComponent[] = [
-    "Balance",
-    "Image",
-    "Name",
-    "Description",
-    "Address",
-    "IsSoulbound",
-    "IsRedeemable",
-    "MaxMintAmountPerTx",
-  ];
+  // const { data: faucet } = useScaffoldContract({ contractName: "ReputationFaucet" });
 
-  const widgetComponents: ReputationComponent[] = ["Balance", "Image"];
+  // const { tokensData: faucetTokensData, refetchBalances: refetchFaucetBalances } = useRepTokens(faucet?.address);
+
+  // for (let i = 0; i < faucetTokensData.tokens.length; i++) {
+  //   faucetTokensData.tokens[i].image = faucetTokensData.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
+  // }
+
+  // const mainComponents: ReputationComponent[] = [
+  //   "Balance",
+  //   "Image",
+  //   "Name",
+  //   "Description",
+  //   "Address",
+  //   "IsSoulbound",
+  //   "IsRedeemable",
+  //   "MaxMintAmountPerTx",
+  // ];
+
+  // const widgetComponents: ReputationComponent[] = ["Balance", "Image"];
 
   return (
     <>
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
-        <StylizedTokenGroupCard
+        {/* <StylizedTokenGroupCard
           tokens={faucetTokensData.tokens}
           components={widgetComponents}
           isBalanceOverlayed={true}
@@ -77,7 +83,7 @@ export function RepTokensDemo() {
           }}
         >
           Claim Tokens
-        </button>
+        </button> */}
 
         {/* <StylizedTokenGroupCard2 tokens={tokensData.tokens} components={mainComponents}>
           <StylizedAddressCard address={tokensData.address} isGroup={true} />
@@ -86,50 +92,48 @@ export function RepTokensDemo() {
         <div className="flex">
           <div>
             <p className="text-center text-4xl">Individual Components 1</p>
-            <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
-            <StylizedImageCard src={tokensData.tokens[0]?.image} />
-            <StylizedStringCard value={tokensData.tokens[0]?.name} type="bold" />
-            <StylizedStringCard value={tokensData.tokens[0]?.description} />
-            <StylizedAddressCard address={tokensData.tokens[0]?.address} />
-            <StylizedStringCard value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
-            <StylizedStringCard value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`} />
+            <StylizedBalanceCard value={Number(token?.balance)} />
+            <StylizedImageCard src={token?.image} />
+            <StylizedStringCard value={token?.name} type="bold" />
+            <StylizedStringCard value={token?.description} />
+            <StylizedAddressCard address={token?.address} />
+            <StylizedStringCard value={`Soulbound: ${token?.properties?.isSoulbound?.toString()}`} />
+            <StylizedStringCard value={`Redeemable: \n ${token?.properties?.isRedeemable?.toString()}`} />
             <StylizedStringCard
-              value={`Max Mint Amount Per Tx: \n${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
+              value={`Max Mint Amount Per Tx: \n${token?.properties?.maxMintAmountPerTx?.toString()}`}
             />
           </div>
           <div>
             <p className="text-center text-4xl">Individual Components 2</p>
-            <BalanceCard token={tokensData.tokens[0]} />
-            <ImageCard token={tokensData.tokens[0]} />
-            <NameCard token={tokensData.tokens[0]} />
-            <DescriptionCard token={tokensData.tokens[0]} />
-            <AddressCard token={tokensData.tokens[0]} />
-            <SoulboundCard token={tokensData.tokens[0]} />
-            <RedeemableCard token={tokensData.tokens[0]} />
-            <MaxMintAmountPerTxCard token={tokensData.tokens[0]} />
+            <BalanceCard token={token} />
+            <ImageCard token={token} />
+            <NameCard token={token} />
+            <DescriptionCard token={token} />
+            <AddressCard token={token} />
+            <SoulboundCard token={token} />
+            <RedeemableCard token={token} />
+            <MaxMintAmountPerTxCard token={token} />
           </div>
         </div>
 
         <div className="flex">
           <div>
             <p className="text-center text-4xl">Single Card 1</p>
-            <StylizedTokenCard token={tokensData.tokens[0]} components={["Balance", "Image", "Name", "Description"]} />
+            <StylizedTokenCard token={token} />
           </div>
           <div>
             <p className="text-center text-4xl">Single Card 2</p>
             <StylizedTokenCard2>
-              <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
-              <StylizedImageCard src={tokensData.tokens[0]?.image} />
+              <StylizedBalanceCard value={Number(token?.balance)} />
+              <StylizedImageCard src={token?.image} />
 
-              <StylizedStringCard value={tokensData.tokens[0]?.name} type="bold" />
-              <StylizedStringCard value={tokensData.tokens[0]?.description} />
-              <StylizedAddressCard address={tokensData.tokens[0]?.address} />
-              <StylizedStringCard value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
+              <StylizedStringCard value={token?.name} type="bold" />
+              <StylizedStringCard value={token?.description} />
+              <StylizedAddressCard address={token?.address} />
+              <StylizedStringCard value={`Soulbound: ${token?.properties?.isSoulbound?.toString()}`} />
+              <StylizedStringCard value={`Redeemable: \n ${token?.properties?.isRedeemable?.toString()}`} />
               <StylizedStringCard
-                value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`}
-              />
-              <StylizedStringCard
-                value={`Max Mint Amount Per Tx \n${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
+                value={`Max Mint Amount Per Tx \n${token?.properties?.maxMintAmountPerTx?.toString()}`}
               />
             </StylizedTokenCard2>
           </div>
@@ -137,19 +141,19 @@ export function RepTokensDemo() {
           <div>
             <p className="text-center text-4xl">Single Card 3</p>
             <StylizedTokenCard2>
-              <BalanceCard token={tokensData.tokens[0]} />
-              <ImageCard token={tokensData.tokens[0]} />
-              <NameCard token={tokensData.tokens[0]} />
-              <DescriptionCard token={tokensData.tokens[0]} />
-              <AddressCard token={tokensData.tokens[0]} />
-              <SoulboundCard token={tokensData.tokens[0]} />
-              <RedeemableCard token={tokensData.tokens[0]} />
-              <MaxMintAmountPerTxCard token={tokensData.tokens[0]} />
+              <BalanceCard token={token} />
+              <ImageCard token={token} />
+              <NameCard token={token} />
+              <DescriptionCard token={token} />
+              <AddressCard token={token} />
+              <SoulboundCard token={token} />
+              <RedeemableCard token={token} />
+              <MaxMintAmountPerTxCard token={token} />
             </StylizedTokenCard2>
           </div>
         </div>
 
-        <p className="text-center text-4xl">Multi-Card</p>
+        {/* <p className="text-center text-4xl">Multi-Card</p>
 
         <StylizedTokenGroupCard tokens={tokensData.tokens} components={mainComponents}>
           <StylizedAddressCard address={tokensData.address} isGroup={true} />
@@ -177,7 +181,7 @@ export function RepTokensDemo() {
           components={widgetComponents}
           isBalanceOverlayed={true}
           size="xs"
-        />
+        /> */}
       </div>
     </>
   );
