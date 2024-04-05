@@ -141,7 +141,7 @@ export const StylizedTokenGroupCard = ({
   return (
     <div className={`bg-base-100 flex flex-col rounded-lg ${sizeMap[size]}`}>
       {children}
-      <div className={`flex justify-center ${sizeMap[size]} rounded-lg bg-base-200`}>{output}</div>
+      <div className={`flex flex-wrap justify-center ${sizeMap[size]} rounded-lg bg-base-200`}>{output}</div>
     </div>
   );
 };

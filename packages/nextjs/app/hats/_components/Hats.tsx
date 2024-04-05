@@ -76,6 +76,7 @@ export function Hats() {
           src={result?.data?.image.replace("ipfs://", "https://nftstorage.link/ipfs/")}
           width={156}
           height={156}
+          alt={"Hat 1"}
         ></img>
         <p className="w-96 text-center">{result?.data?.description}</p>
         <button

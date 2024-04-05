@@ -7,21 +7,21 @@ import "~~/styles/globals.css";
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
   : `http://localhost:${process.env.PORT}`;
-const imageUrl = `${baseUrl}/thumbnail.jpg`;
+const imageUrl = `${baseUrl}/logo-transparent.png`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Scaffold-ETH 2 App",
-    template: "%s | Scaffold-ETH 2",
+    default: "Reputation & Roles",
+    template: "%s | Reputation & Roles",
   },
-  description: "Built with 🏗 Scaffold-ETH 2",
+  description: "Built with Reputation & Roles",
   openGraph: {
     title: {
-      default: "Scaffold-ETH 2 App",
-      template: "%s | Scaffold-ETH 2",
+      default: "Reputation & Roles",
+      template: "%s | Reputation & Roles",
     },
-    description: "Built with 🏗 Scaffold-ETH 2",
+    description: "Built with Reputation & Roles",
     images: [
       {
         url: imageUrl,
@@ -32,13 +32,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: [imageUrl],
     title: {
-      default: "Scaffold-ETH 2",
-      template: "%s | Scaffold-ETH 2",
+      default: "Reputation & Roles",
+      template: "%s | Reputation & Roles",
     },
-    description: "Built with 🏗 Scaffold-ETH 2",
+    description: "Built with Reputation & Roles",
   },
   icons: {
-    icon: [{ url: "/favicon.png", sizes: "32x32", type: "image/png" }],
+    icon: [{ url: "/logo-transparent.png", sizes: "32x32", type: "image/png" }],
   },
 };
 
