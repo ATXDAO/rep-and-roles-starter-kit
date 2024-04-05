@@ -14,8 +14,6 @@ import {DeployDemoScript} from "./DeployDemo.s.sol";
 contract DeployScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
 
-    address controller = 0x62286D694F89a1B12c0214bfcD567bb6c2951491; //replace with burner or other address from wallet!
-
     function run() external {
         DeployDemoScript deployer = new DeployDemoScript();
         deployer.run();

@@ -25,9 +25,9 @@ const overlaidSizeMap = {
 };
 
 const overlaidCardSizeMap = {
-  xs: "inset-x-0 -inset-y-3",
+  xs: "inset-0",
   sm: "inset-0",
-  base: "inset-5",
+  base: "inset-0",
   lg: "",
   xl: "",
   "2xl": "",
@@ -39,7 +39,7 @@ export const StylizedBalanceCard = ({ value, isOverlay, size = "base" }: Balance
   let textClasses;
 
   if (isOverlay) {
-    cardClasses = `absolute ${overlaidCardSizeMap[size]} items-center justify-center bg-base-300 bg-opacity-75`;
+    cardClasses = `absolute ${overlaidCardSizeMap[size]} flex items-center justify-center bg-base-300 bg-opacity-40`;
     textClasses = `${overlaidSizeMap[size]} mx-auto text-center`;
   } else {
     cardClasses = `rounded-lg bg-base-300`;

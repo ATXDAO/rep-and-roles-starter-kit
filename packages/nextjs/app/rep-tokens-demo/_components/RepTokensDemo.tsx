@@ -15,7 +15,7 @@ import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold
 
 export function RepTokensDemo() {
   const { address } = useAccount();
-  const { tokensData } = useRepTokens(address);
+  const { tokensData, refetchBalances: refetchUserBalances } = useRepTokens(address);
 
   for (let i = 0; i < tokensData.tokens.length; i++) {
     tokensData.tokens[i].image = tokensData.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
@@ -28,7 +28,7 @@ export function RepTokensDemo() {
 
   const { data: faucet } = useScaffoldContract({ contractName: "ReputationFaucet" });
 
-  const { tokensData: faucetTokensData } = useRepTokens(faucet?.address);
+  const { tokensData: faucetTokensData, refetchBalances: refetchFaucetBalances } = useRepTokens(faucet?.address);
 
   for (let i = 0; i < faucetTokensData.tokens.length; i++) {
     faucetTokensData.tokens[i].image = faucetTokensData.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
@@ -50,17 +50,20 @@ export function RepTokensDemo() {
   return (
     <>
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
-        <p>Faucet</p>
         <StylizedTokenGroupCard
           tokens={faucetTokensData.tokens}
           components={widgetComponents}
           isBalanceOverlayed={true}
           size="xs"
-        />
+        >
+          <StylizedStringCard value={"Faucet"} />
+        </StylizedTokenGroupCard>
         <button
           className="btn btn-secondary btn-sm font-normal gap-1"
           onClick={async () => {
             await claim();
+            await refetchUserBalances();
+            await refetchFaucetBalances();
           }}
         >
           Claim Tokens

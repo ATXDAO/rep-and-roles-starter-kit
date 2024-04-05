@@ -147,7 +147,7 @@ export const useRepTokens = (address?: string) => {
     return { tokenIds };
   }, [numOfTokens]);
 
-  const { data: balanceOfBatch } = useScaffoldContractRead({
+  const { data: balanceOfBatch, refetch: refetchBalances } = useScaffoldContractRead({
     contractName: "ReputationTokensStandalone",
     functionName: "balanceOfBatch",
     args: [addresses, tokenIds],
@@ -184,5 +184,5 @@ export const useRepTokens = (address?: string) => {
 
   const addr = repTokensInstance?.address ?? "";
 
-  return { tokensData: { address: addr, tokens: tokens } };
+  return { tokensData: { address: addr, tokens: tokens }, refetchBalances };
 };
