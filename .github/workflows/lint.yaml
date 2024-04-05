@@ -43,8 +43,8 @@ jobs:
       - name: Run tests
         run: yarn test -vvv
 
-      # - name: Run snapshot
-      #   run: forge snapshot
+      - name: Run snapshot
+        run: yarn snapshot
 
       - name: Run nextjs lint
         run: yarn next:lint --max-warnings=0

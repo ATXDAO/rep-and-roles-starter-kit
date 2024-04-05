@@ -10,6 +10,11 @@ import {
   ReputationComponent,
   StylizedTokenGroupCard,
 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
+import { DescriptionCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/DescriptionCard";
+import { MaxMintAmountPerTxCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/MaxMintAmountPerTxCard";
+import { NameCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/NameCard";
+import { RedeemableCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/RedeemableCard";
+import { SoulboundCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/SoulboundCard";
 import { useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
 import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
@@ -73,14 +78,21 @@ export function RepTokensDemo() {
         <StylizedBalanceCard value={Number(tokensData.tokens[0]?.balance)} />
         <StylizedImageCard src={tokensData.tokens[0]?.image} />
 
-        <StylizedStringCard value={tokensData.tokens[0]?.name} type="bold" />
-        <StylizedStringCard value={tokensData.tokens[0]?.description} />
+        <NameCard token={tokensData.tokens[0]} />
+        <DescriptionCard token={tokensData.tokens[0]} />
         <StylizedAddressCard address={tokensData.tokens[0]?.address} />
-        <StylizedStringCard value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
-        <StylizedStringCard value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`} />
-        <StylizedStringCard
-          value={`Max Mint Amount Per Tx \n${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
-        />
+        <MaxMintAmountPerTxCard token={tokensData.tokens[0]} />
+        <SoulboundCard token={tokensData.tokens[0]} />
+        <RedeemableCard token={tokensData.tokens[0]} />
+
+        {/* <StylizedStringCard value={tokensData.tokens[0]?.name} type="bold" />
+        <StylizedStringCard value={tokensData.tokens[0]?.description} /> */}
+        {/* <StylizedStringCard value={`Soulbound: ${tokensData.tokens[0]?.properties.isSoulbound.toString()}`} />
+        <StylizedStringCard value={`Redeemable: \n ${tokensData.tokens[0]?.properties.isRedeemable.toString()}`} /> */}
+
+        {/* <StylizedStringCard
+          value={`Max Mint Amount Per Tx: \n${tokensData.tokens[0]?.properties.maxMintAmountPerTx.toString()}`}
+        />*/}
         <p className="text-center text-4xl">Single Card</p>
 
         <StylizedTokenCard>
