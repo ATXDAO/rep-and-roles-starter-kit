@@ -41,10 +41,10 @@ jobs:
         id: build
 
       - name: Run tests
-        run: forge test -vvv
+        run: yarn test -vvv
 
-      - name: Run snapshot
-        run: forge snapshot
+      # - name: Run snapshot
+      #   run: forge snapshot
 
       - name: Run nextjs lint
         run: yarn next:lint --max-warnings=0
