@@ -53,6 +53,7 @@ export function useUris(contract: any, tokenIds: bigint[]) {
     }
 
     setUris([...arr]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contract?.address, tokenIds, uris.length]);
 
   useEffect(() => {
@@ -79,6 +80,7 @@ export function useGetTokenProperties(repTokensInstance: any, tokenId: bigint) {
     }
 
     get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [repTokensInstance?.address, tokenId]);
 
   return { tokenProperties, setTokenProperties };
