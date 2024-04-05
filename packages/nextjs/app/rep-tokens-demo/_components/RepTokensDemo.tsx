@@ -103,20 +103,9 @@ export function RepTokensDemo() {
               value={`Max Mint Amount Per Tx: \n${token?.properties?.maxMintAmountPerTx?.toString()}`}
             />
           </div>
-          <div>
-            <p className="text-center text-4xl">Individual Components 2</p>
-            <BalanceCard token={token} />
-            <ImageCard token={token} />
-            <NameCard token={token} />
-            <DescriptionCard token={token} />
-            <AddressCard token={token} />
-            <SoulboundCard token={token} />
-            <RedeemableCard token={token} />
-            <MaxMintAmountPerTxCard token={token} />
-          </div>
 
           <div>
-            <p className="text-center text-4xl">Individual Components 3</p>
+            <p className="text-center text-4xl">Individual Components 2</p>
             <BalanceCard balance={token?.balance} />
             <ImageCard src={token?.image} />
             <NameCard name={token?.name} />
@@ -125,6 +114,18 @@ export function RepTokensDemo() {
             <SoulboundCard isSoulbound={token?.properties?.isSoulbound} />
             <RedeemableCard isRedeemable={token?.properties?.isRedeemable} />
             <MaxMintAmountPerTxCard maxMintAmountPerTx={token?.properties?.maxMintAmountPerTx} />
+          </div>
+
+          <div>
+            <p className="text-center text-4xl">Individual Components 3</p>
+            <BalanceCard token={token} />
+            <ImageCard token={token} />
+            <NameCard token={token} />
+            <DescriptionCard token={token} />
+            <AddressCard token={token} />
+            <SoulboundCard token={token} />
+            <RedeemableCard token={token} />
+            <MaxMintAmountPerTxCard token={token} />
           </div>
         </div>
 
