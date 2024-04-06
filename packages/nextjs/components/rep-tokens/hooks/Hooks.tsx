@@ -3,10 +3,10 @@ import { useFetch } from "usehooks-ts";
 // import { useFetch } from "usehooks-ts";
 import { useScaffoldContract, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
-// export type TokenGroup = {
-//   token0: Token;
-//   token1: Token;
-// };
+const replacement = {
+  ipfs: "https://ipfs.io/ipfs/",
+  nftstorage: "https://nftstorage.link/ipfs/",
+};
 
 export type Token = {
   balance: bigint;
@@ -18,11 +18,11 @@ export type Token = {
   address: string;
 };
 
-export interface Nft {
-  name: string;
-  description: string;
-  image: string;
-}
+// export interface Nft {
+//   name: string;
+//   description: string;
+//   image: string;
+// }
 
 export const useUri = (tokenId?: number) => {
   return useScaffoldContractRead({
@@ -138,7 +138,7 @@ function useFetches(uris: string[]) {
   return { responses, refetch };
 }
 
-export const useGetRepToken = (address?: string, tokenId?: bigint) => {
+export const useGetRepToken = (address?: string, tokenId?: bigint, replacementType: ReplacementType = "ipfs") => {
   const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokens" });
 
   const { data: balanceOf, refetch: refetchBalance } = useScaffoldContractRead({
@@ -155,7 +155,7 @@ export const useGetRepToken = (address?: string, tokenId?: bigint) => {
     args: [tokenId],
   });
 
-  const formattedURI = uri?.replace("ipfs://", "https://nftstorage.link/ipfs/");
+  const formattedURI = uri?.replace("ipfs://", replacement[replacementType]);
 
   const { data: result } = useFetch<any>(formattedURI);
 
@@ -172,7 +172,9 @@ export const useGetRepToken = (address?: string, tokenId?: bigint) => {
   return { token, refetchBalance };
 };
 
-export const useRepTokens = (address?: string) => {
+type ReplacementType = "ipfs" | "nftstorage";
+
+export const useRepTokens = (address?: string, replacementType: ReplacementType = "ipfs") => {
   const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokens" });
 
   const { data: numOfTokens } = useScaffoldContractRead({
@@ -217,8 +219,7 @@ export const useRepTokens = (address?: string) => {
   const { uris } = useUris(repTokensInstance, tokenIds);
 
   for (let i = 0; i < uris.length; i++) {
-    uris[i] = uris[i].replace("ipfs://", "https://nftstorage.link/ipfs/");
-    // uris[i] = uris[i].replace("ipfs://", "https://ipfs.io/ipfs/");
+    uris[i] = uris[i].replace("ipfs://", replacement[replacementType]);
   }
 
   const { responses } = useFetches(uris);
@@ -234,7 +235,7 @@ export const useRepTokens = (address?: string) => {
       balance: balance,
       name: responses[i]?.name,
       description: responses[i]?.description,
-      image: responses[i]?.image,
+      image: responses[i]?.image?.replace("ipfs://", replacement[replacementType]),
       properties: tokensProperties[i],
       address: repTokensInstance?.address,
     } as Token;

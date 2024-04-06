@@ -19,15 +19,11 @@ import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold
 export function RepTokensDemo() {
   const { address } = useAccount();
 
-  const { token, refetchBalance } = useGetRepToken(address, BigInt(0));
+  const { token, refetchBalance } = useGetRepToken(address, BigInt(0), "nftstorage");
 
-  token.image = token?.image?.replace("ipfs://", "https://ipfs.io/ipfs/");
+  const { tokensData: tokens, refetchBalances: refetchUserBalances } = useRepTokens(address, "nftstorage");
 
-  const { tokensData: tokens, refetchBalances: refetchUserBalances } = useRepTokens(address);
-
-  for (let i = 0; i < tokens.tokens.length; i++) {
-    tokens.tokens[i].image = tokens.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
-  }
+  console.log(tokens);
 
   const { writeAsync: claim } = useScaffoldContractWrite({
     contractName: "ReputationFaucet",
@@ -36,11 +32,10 @@ export function RepTokensDemo() {
 
   const { data: faucet } = useScaffoldContract({ contractName: "ReputationFaucet" });
 
-  const { tokensData: faucetTokens, refetchBalances: refetchFaucetBalances } = useRepTokens(faucet?.address);
-
-  for (let i = 0; i < faucetTokens.tokens.length; i++) {
-    faucetTokens.tokens[i].image = faucetTokens.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
-  }
+  const { tokensData: faucetTokens, refetchBalances: refetchFaucetBalances } = useRepTokens(
+    faucet?.address,
+    "nftstorage",
+  );
 
   return (
     <>
