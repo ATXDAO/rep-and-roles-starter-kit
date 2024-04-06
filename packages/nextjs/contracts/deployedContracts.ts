@@ -6,14 +6,14 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
   31337: {
-    ReputationTokensStandalone: {
-      address: "0xa82fF9aFd8f496c3d6ac40E2a0F282E47488CFc9",
+    ReputationTokens: {
+      address: "0x04C89607413713Ec9775E14b954286519d836FEf",
       abi: [
         {
           type: "constructor",
           inputs: [
             {
-              name: "ownerNominee",
+              name: "owner",
               type: "address",
               internalType: "address",
             },
@@ -28,6 +28,19 @@ const deployedContracts = {
         {
           type: "function",
           name: "BURNER_ROLE",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "bytes32",
+              internalType: "bytes32",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "DEFAULT_ADMIN_ROLE",
           inputs: [],
           outputs: [
             {
@@ -118,32 +131,6 @@ const deployedContracts = {
         },
         {
           type: "function",
-          name: "acceptOwnership",
-          inputs: [],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "accountsByToken",
-          inputs: [
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "address[]",
-              internalType: "address[]",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
           name: "balanceOf",
           inputs: [
             {
@@ -197,17 +184,12 @@ const deployedContracts = {
             {
               name: "tokensProperties",
               type: "tuple[]",
-              internalType: "struct TokensPropertiesStorage.TokenProperties[]",
+              internalType: "struct ReputationTokens.TokenProperties[]",
               components: [
                 {
-                  name: "isSoulbound",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "isRedeemable",
-                  type: "bool",
-                  internalType: "bool",
+                  name: "tokenType",
+                  type: "uint8",
+                  internalType: "enum ReputationTokens.TokenType",
                 },
                 {
                   name: "maxMintAmountPerTx",
@@ -222,22 +204,64 @@ const deployedContracts = {
         },
         {
           type: "function",
-          name: "batchMint",
+          name: "batchDistribute",
           inputs: [
             {
-              name: "tokensOperations",
+              name: "from",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "sequences",
               type: "tuple[]",
-              internalType: "struct IReputationTokensInternal.TokensOperations[]",
+              internalType: "struct ReputationTokens.Sequence[]",
               components: [
                 {
-                  name: "to",
+                  name: "recipient",
                   type: "address",
                   internalType: "address",
                 },
                 {
                   name: "operations",
                   type: "tuple[]",
-                  internalType: "struct IReputationTokensInternal.TokenOperation[]",
+                  internalType: "struct ReputationTokens.Operation[]",
+                  components: [
+                    {
+                      name: "id",
+                      type: "uint256",
+                      internalType: "uint256",
+                    },
+                    {
+                      name: "amount",
+                      type: "uint256",
+                      internalType: "uint256",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "batchMint",
+          inputs: [
+            {
+              name: "sequences",
+              type: "tuple[]",
+              internalType: "struct ReputationTokens.Sequence[]",
+              components: [
+                {
+                  name: "recipient",
+                  type: "address",
+                  internalType: "address",
+                },
+                {
+                  name: "operations",
+                  type: "tuple[]",
+                  internalType: "struct ReputationTokens.Operation[]",
                   components: [
                     {
                       name: "id",
@@ -269,17 +293,12 @@ const deployedContracts = {
             {
               name: "tokensProperties",
               type: "tuple[]",
-              internalType: "struct TokensPropertiesStorage.TokenProperties[]",
+              internalType: "struct ReputationTokens.TokenProperties[]",
               components: [
                 {
-                  name: "isSoulbound",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "isRedeemable",
-                  type: "bool",
-                  internalType: "bool",
+                  name: "tokenType",
+                  type: "uint8",
+                  internalType: "enum ReputationTokens.TokenType",
                 },
                 {
                   name: "maxMintAmountPerTx",
@@ -299,17 +318,12 @@ const deployedContracts = {
             {
               name: "tokenProperties",
               type: "tuple",
-              internalType: "struct TokensPropertiesStorage.TokenProperties",
+              internalType: "struct ReputationTokens.TokenProperties",
               components: [
                 {
-                  name: "isSoulbound",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "isRedeemable",
-                  type: "bool",
-                  internalType: "bool",
+                  name: "tokenType",
+                  type: "uint8",
+                  internalType: "enum ReputationTokens.TokenType",
                 },
                 {
                   name: "maxMintAmountPerTx",
@@ -338,19 +352,19 @@ const deployedContracts = {
               internalType: "address",
             },
             {
-              name: "tokensOperations",
+              name: "sequence",
               type: "tuple",
-              internalType: "struct IReputationTokensInternal.TokensOperations",
+              internalType: "struct ReputationTokens.Sequence",
               components: [
                 {
-                  name: "to",
+                  name: "recipient",
                   type: "address",
                   internalType: "address",
                 },
                 {
                   name: "operations",
                   type: "tuple[]",
-                  internalType: "struct IReputationTokensInternal.TokenOperation[]",
+                  internalType: "struct ReputationTokens.Operation[]",
                   components: [
                     {
                       name: "id",
@@ -365,58 +379,6 @@ const deployedContracts = {
                   ],
                 },
               ],
-            },
-            {
-              name: "data",
-              type: "bytes",
-              internalType: "bytes",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "distributeBatch",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "tokensOperations",
-              type: "tuple[]",
-              internalType: "struct IReputationTokensInternal.TokensOperations[]",
-              components: [
-                {
-                  name: "to",
-                  type: "address",
-                  internalType: "address",
-                },
-                {
-                  name: "operations",
-                  type: "tuple[]",
-                  internalType: "struct IReputationTokensInternal.TokenOperation[]",
-                  components: [
-                    {
-                      name: "id",
-                      type: "uint256",
-                      internalType: "uint256",
-                    },
-                    {
-                      name: "amount",
-                      type: "uint256",
-                      internalType: "uint256",
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              name: "data",
-              type: "bytes",
-              internalType: "bytes",
             },
           ],
           outputs: [],
@@ -542,49 +504,6 @@ const deployedContracts = {
         },
         {
           type: "function",
-          name: "getRoleMember",
-          inputs: [
-            {
-              name: "role",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-            {
-              name: "index",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "getRoleMemberCount",
-          inputs: [
-            {
-              name: "role",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
           name: "getTokenProperties",
           inputs: [
             {
@@ -597,17 +516,12 @@ const deployedContracts = {
             {
               name: "",
               type: "tuple",
-              internalType: "struct TokensPropertiesStorage.TokenProperties",
+              internalType: "struct ReputationTokens.TokenProperties",
               components: [
                 {
-                  name: "isSoulbound",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "isRedeemable",
-                  type: "bool",
-                  internalType: "bool",
+                  name: "tokenType",
+                  type: "uint8",
+                  internalType: "enum ReputationTokens.TokenType",
                 },
                 {
                   name: "maxMintAmountPerTx",
@@ -732,19 +646,19 @@ const deployedContracts = {
           name: "mint",
           inputs: [
             {
-              name: "tokensOperations",
+              name: "sequence",
               type: "tuple",
-              internalType: "struct IReputationTokensInternal.TokensOperations",
+              internalType: "struct ReputationTokens.Sequence",
               components: [
                 {
-                  name: "to",
+                  name: "recipient",
                   type: "address",
                   internalType: "address",
                 },
                 {
                   name: "operations",
                   type: "tuple[]",
-                  internalType: "struct IReputationTokensInternal.TokenOperation[]",
+                  internalType: "struct ReputationTokens.Operation[]",
                   components: [
                     {
                       name: "id",
@@ -766,19 +680,6 @@ const deployedContracts = {
         },
         {
           type: "function",
-          name: "nomineeOwner",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
           name: "owner",
           inputs: [],
           outputs: [
@@ -792,12 +693,24 @@ const deployedContracts = {
         },
         {
           type: "function",
+          name: "renounceOwnership",
+          inputs: [],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
           name: "renounceRole",
           inputs: [
             {
               name: "role",
               type: "bytes32",
               internalType: "bytes32",
+            },
+            {
+              name: "callerConfirmation",
+              type: "address",
+              internalType: "address",
             },
           ],
           outputs: [],
@@ -841,7 +754,7 @@ const deployedContracts = {
               internalType: "uint256[]",
             },
             {
-              name: "amounts",
+              name: "values",
               type: "uint256[]",
               internalType: "uint256[]",
             },
@@ -897,7 +810,7 @@ const deployedContracts = {
               internalType: "address",
             },
             {
-              name: "status",
+              name: "approved",
               type: "bool",
               internalType: "bool",
             },
@@ -957,67 +870,10 @@ const deployedContracts = {
         },
         {
           type: "function",
-          name: "tokensByAccount",
-          inputs: [
-            {
-              name: "account",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256[]",
-              internalType: "uint256[]",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "totalHolders",
-          inputs: [
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "totalSupply",
-          inputs: [
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
           name: "transferOwnership",
           inputs: [
             {
-              name: "account",
+              name: "newOwner",
               type: "address",
               internalType: "address",
             },
@@ -1037,17 +893,12 @@ const deployedContracts = {
             {
               name: "tokenProperties",
               type: "tuple",
-              internalType: "struct TokensPropertiesStorage.TokenProperties",
+              internalType: "struct ReputationTokens.TokenProperties",
               components: [
                 {
-                  name: "isSoulbound",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "isRedeemable",
-                  type: "bool",
-                  internalType: "bool",
+                  name: "tokenType",
+                  type: "uint8",
+                  internalType: "enum ReputationTokens.TokenType",
                 },
                 {
                   name: "maxMintAmountPerTx",
@@ -1109,27 +960,10 @@ const deployedContracts = {
           name: "Create",
           inputs: [
             {
-              name: "",
-              type: "tuple",
-              indexed: false,
-              internalType: "struct TokensPropertiesStorage.TokenProperties",
-              components: [
-                {
-                  name: "isSoulbound",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "isRedeemable",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "maxMintAmountPerTx",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-              ],
+              name: "tokenId",
+              type: "uint256",
+              indexed: true,
+              internalType: "uint256",
             },
           ],
           anonymous: false,
@@ -1170,22 +1004,16 @@ const deployedContracts = {
               internalType: "address",
             },
             {
-              name: "tokens",
-              type: "tuple[]",
-              indexed: true,
-              internalType: "struct IReputationTokensInternal.TokenOperation[]",
-              components: [
-                {
-                  name: "id",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-                {
-                  name: "amount",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-              ],
+              name: "tokenId",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
             },
           ],
           anonymous: false,
@@ -1207,22 +1035,16 @@ const deployedContracts = {
               internalType: "address",
             },
             {
-              name: "tokens",
-              type: "tuple[]",
-              indexed: true,
-              internalType: "struct IReputationTokensInternal.TokenOperation[]",
-              components: [
-                {
-                  name: "id",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-                {
-                  name: "amount",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-              ],
+              name: "tokenId",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
             },
           ],
           anonymous: false,
@@ -1431,7 +1253,7 @@ const deployedContracts = {
               internalType: "string",
             },
             {
-              name: "tokenId",
+              name: "id",
               type: "uint256",
               indexed: true,
               internalType: "uint256",
@@ -1444,111 +1266,158 @@ const deployedContracts = {
           name: "Update",
           inputs: [
             {
-              name: "id",
+              name: "tokenId",
               type: "uint256",
               indexed: true,
               internalType: "uint256",
-            },
-            {
-              name: "properties",
-              type: "tuple",
-              indexed: true,
-              internalType: "struct TokensPropertiesStorage.TokenProperties",
-              components: [
-                {
-                  name: "isSoulbound",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "isRedeemable",
-                  type: "bool",
-                  internalType: "bool",
-                },
-                {
-                  name: "maxMintAmountPerTx",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-              ],
             },
           ],
           anonymous: false,
         },
         {
           type: "error",
-          name: "ERC1155Base__ArrayLengthMismatch",
+          name: "AccessControlBadConfirmation",
           inputs: [],
         },
         {
           type: "error",
-          name: "ERC1155Base__BalanceQueryZeroAddress",
-          inputs: [],
+          name: "AccessControlUnauthorizedAccount",
+          inputs: [
+            {
+              name: "account",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "neededRole",
+              type: "bytes32",
+              internalType: "bytes32",
+            },
+          ],
         },
         {
           type: "error",
-          name: "ERC1155Base__BurnExceedsBalance",
-          inputs: [],
+          name: "ERC1155InsufficientBalance",
+          inputs: [
+            {
+              name: "sender",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "balance",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "needed",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "tokenId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
         },
         {
           type: "error",
-          name: "ERC1155Base__BurnFromZeroAddress",
-          inputs: [],
+          name: "ERC1155InvalidApprover",
+          inputs: [
+            {
+              name: "approver",
+              type: "address",
+              internalType: "address",
+            },
+          ],
         },
         {
           type: "error",
-          name: "ERC1155Base__ERC1155ReceiverNotImplemented",
-          inputs: [],
+          name: "ERC1155InvalidArrayLength",
+          inputs: [
+            {
+              name: "idsLength",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "valuesLength",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
         },
         {
           type: "error",
-          name: "ERC1155Base__ERC1155ReceiverRejected",
-          inputs: [],
+          name: "ERC1155InvalidOperator",
+          inputs: [
+            {
+              name: "operator",
+              type: "address",
+              internalType: "address",
+            },
+          ],
         },
         {
           type: "error",
-          name: "ERC1155Base__MintToZeroAddress",
-          inputs: [],
+          name: "ERC1155InvalidReceiver",
+          inputs: [
+            {
+              name: "receiver",
+              type: "address",
+              internalType: "address",
+            },
+          ],
         },
         {
           type: "error",
-          name: "ERC1155Base__NotOwnerOrApproved",
-          inputs: [],
+          name: "ERC1155InvalidSender",
+          inputs: [
+            {
+              name: "sender",
+              type: "address",
+              internalType: "address",
+            },
+          ],
         },
         {
           type: "error",
-          name: "ERC1155Base__SelfApproval",
-          inputs: [],
+          name: "ERC1155MissingApprovalForAll",
+          inputs: [
+            {
+              name: "operator",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "owner",
+              type: "address",
+              internalType: "address",
+            },
+          ],
         },
         {
           type: "error",
-          name: "ERC1155Base__TransferExceedsBalance",
-          inputs: [],
+          name: "OwnableInvalidOwner",
+          inputs: [
+            {
+              name: "owner",
+              type: "address",
+              internalType: "address",
+            },
+          ],
         },
         {
           type: "error",
-          name: "ERC1155Base__TransferToZeroAddress",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "ERC165Base__InvalidInterfaceId",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "EnumerableSet__IndexOutOfBounds",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "Ownable__NotOwner",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "Ownable__NotTransitiveOwner",
-          inputs: [],
+          name: "OwnableUnauthorizedAccount",
+          inputs: [
+            {
+              name: "account",
+              type: "address",
+              internalType: "address",
+            },
+          ],
         },
         {
           type: "error",
@@ -1585,71 +1454,29 @@ const deployedContracts = {
           name: "ReputationTokens__MintAmountExceedsLimit",
           inputs: [],
         },
-        {
-          type: "error",
-          name: "SafeOwnable__NotNomineeOwner",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "UintUtils__InsufficientPadding",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "UintUtils__InvalidBase",
-          inputs: [],
-        },
       ],
       inheritedFunctions: {
-        BURNER_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
-        DISTRIBUTOR_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
-        MINTER_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
-        TOKEN_CREATOR_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
-        TOKEN_MIGRATOR_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
-        TOKEN_UPDATER_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
-        TOKEN_URI_SETTER_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
-        acceptOwnership: "lib/reputation/contracts/ReputationTokensBase.sol",
-        accountsByToken: "lib/reputation/contracts/ReputationTokensBase.sol",
-        balanceOf: "lib/reputation/contracts/ReputationTokensBase.sol",
-        balanceOfBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
-        batchCreateTokens: "lib/reputation/contracts/ReputationTokensBase.sol",
-        batchMint: "lib/reputation/contracts/ReputationTokensBase.sol",
-        batchUpdateTokensProperties: "lib/reputation/contracts/ReputationTokensBase.sol",
-        createToken: "lib/reputation/contracts/ReputationTokensBase.sol",
-        distribute: "lib/reputation/contracts/ReputationTokensBase.sol",
-        distributeBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
-        getBurnedBalance: "lib/reputation/contracts/ReputationTokensBase.sol",
-        getDistributableBalance: "lib/reputation/contracts/ReputationTokensBase.sol",
-        getRoleAdmin: "lib/reputation/contracts/ReputationTokensBase.sol",
-        getRoleMember: "lib/reputation/contracts/ReputationTokensBase.sol",
-        getRoleMemberCount: "lib/reputation/contracts/ReputationTokensBase.sol",
-        getTransferrableBalance: "lib/reputation/contracts/ReputationTokensBase.sol",
-        grantRole: "lib/reputation/contracts/ReputationTokensBase.sol",
-        hasRole: "lib/reputation/contracts/ReputationTokensBase.sol",
-        isApprovedForAll: "lib/reputation/contracts/ReputationTokensBase.sol",
-        migrateOwnershipOfTokens: "lib/reputation/contracts/ReputationTokensBase.sol",
-        mint: "lib/reputation/contracts/ReputationTokensBase.sol",
-        nomineeOwner: "lib/reputation/contracts/ReputationTokensBase.sol",
-        owner: "lib/reputation/contracts/ReputationTokensBase.sol",
-        renounceRole: "lib/reputation/contracts/ReputationTokensBase.sol",
-        revokeRole: "lib/reputation/contracts/ReputationTokensBase.sol",
-        safeBatchTransferFrom: "lib/reputation/contracts/ReputationTokensBase.sol",
-        safeTransferFrom: "lib/reputation/contracts/ReputationTokensBase.sol",
-        setApprovalForAll: "lib/reputation/contracts/ReputationTokensBase.sol",
-        setDestinationWallet: "lib/reputation/contracts/ReputationTokensBase.sol",
-        setTokenURI: "lib/reputation/contracts/ReputationTokensBase.sol",
-        supportsInterface: "lib/reputation/contracts/ReputationTokensBase.sol",
-        tokensByAccount: "lib/reputation/contracts/ReputationTokensBase.sol",
-        totalHolders: "lib/reputation/contracts/ReputationTokensBase.sol",
-        totalSupply: "lib/reputation/contracts/ReputationTokensBase.sol",
-        transferOwnership: "lib/reputation/contracts/ReputationTokensBase.sol",
-        updateTokenProperties: "lib/reputation/contracts/ReputationTokensBase.sol",
-        uri: "lib/reputation/contracts/ReputationTokensBase.sol",
+        balanceOf: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
+        balanceOfBatch: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
+        isApprovedForAll: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
+        safeBatchTransferFrom: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
+        safeTransferFrom: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
+        setApprovalForAll: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
+        supportsInterface: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+        uri: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
+        DEFAULT_ADMIN_ROLE: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+        getRoleAdmin: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+        grantRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+        hasRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+        renounceRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+        revokeRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+        owner: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
+        renounceOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
+        transferOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
       },
     },
     ReputationFaucet: {
-      address: "0x36C02dA8a0983159322a80FFE9F24b1acfF8B570",
+      address: "0x4EE6eCAD1c2Dae9f525404De8555724e3c35d07B",
       abi: [
         {
           type: "constructor",
@@ -1669,11 +1496,112 @@ const deployedContracts = {
           outputs: [],
           stateMutability: "nonpayable",
         },
+        {
+          type: "function",
+          name: "onERC1155BatchReceived",
+          inputs: [
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "",
+              type: "uint256[]",
+              internalType: "uint256[]",
+            },
+            {
+              name: "",
+              type: "uint256[]",
+              internalType: "uint256[]",
+            },
+            {
+              name: "",
+              type: "bytes",
+              internalType: "bytes",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "bytes4",
+              internalType: "bytes4",
+            },
+          ],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "onERC1155Received",
+          inputs: [
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "",
+              type: "bytes",
+              internalType: "bytes",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "bytes4",
+              internalType: "bytes4",
+            },
+          ],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "supportsInterface",
+          inputs: [
+            {
+              name: "interfaceId",
+              type: "bytes4",
+              internalType: "bytes4",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "bool",
+              internalType: "bool",
+            },
+          ],
+          stateMutability: "view",
+        },
       ],
-      inheritedFunctions: {},
+      inheritedFunctions: {
+        onERC1155BatchReceived: "lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol",
+        onERC1155Received: "lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol",
+        supportsInterface: "lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol",
+      },
     },
     Hats: {
-      address: "0xcbEAF3BDe82155F56486Fb5a1072cb8baAf547cc",
+      address: "0x86A2EE8FAf9A840F7a2c64CA3d51209F9A02081D",
       abi: [
         {
           type: "constructor",
@@ -3634,7 +3562,7 @@ const deployedContracts = {
       },
     },
     MultiClaimsHatter: {
-      address: "0x162A433068F51e18b7d13932F27e66a3f99E6890",
+      address: "0xAA292E8611aDF267e563f334Ee42320aC96D0463",
       abi: [
         {
           type: "constructor",
@@ -3960,7 +3888,7 @@ const deployedContracts = {
       },
     },
     ActiveModule: {
-      address: "0x5081a39b8A5f0E35a8D959395a630b68B74Dd30f",
+      address: "0x720472c8ce72c2A2D711333e064ABD3E6BbEAdd3",
       abi: [
         {
           type: "function",
@@ -3990,7 +3918,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ERC1155EligibiltiyModule: {
-      address: "0x1fA02b2d6A771842690194Cf62D91bdd92BfE28d",
+      address: "0xe8D2A1E88c91DCd5433208d4152Cc4F399a7e91d",
       abi: [
         {
           type: "constructor",

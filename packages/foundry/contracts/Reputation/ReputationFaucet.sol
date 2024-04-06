@@ -2,8 +2,9 @@
 pragma solidity ^0.8.19;
 
 import {ReputationTokens} from "@atxdao/contracts/reputation/ReputationTokens.sol";
+import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 
-contract ReputationFaucet {
+contract ReputationFaucet is ERC1155Holder {
     ReputationTokens reputationTokens;
 
     constructor(address addr) {

@@ -5,7 +5,7 @@ import type { NextPage } from "next";
 import { useScaffoldContract } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
-  const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokensStandalone" });
+  const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokens" });
 
   return (
     <>

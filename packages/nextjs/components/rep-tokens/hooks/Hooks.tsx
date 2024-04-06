@@ -26,7 +26,7 @@ export interface Nft {
 
 export const useUri = (tokenId?: number) => {
   return useScaffoldContractRead({
-    contractName: "ReputationTokensStandalone",
+    contractName: "ReputationTokens",
     functionName: "uri",
     args: [BigInt(Number(tokenId))],
   });
@@ -34,7 +34,7 @@ export const useUri = (tokenId?: number) => {
 
 export const useBalanceOf = (address?: string, tokenId?: number) => {
   return useScaffoldContractRead({
-    contractName: "ReputationTokensStandalone",
+    contractName: "ReputationTokens",
     functionName: "balanceOf",
     args: [address, BigInt(Number(tokenId))],
   });
@@ -139,10 +139,10 @@ export function useGetTokensProperties(repTokensInstance: any, tokenIds: bigint[
 // }
 
 export const useGetRepToken = (address?: string, tokenId?: bigint) => {
-  const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokensStandalone" });
+  const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokens" });
 
   const { data: balanceOf, refetch: refetchBalance } = useScaffoldContractRead({
-    contractName: "ReputationTokensStandalone",
+    contractName: "ReputationTokens",
     functionName: "balanceOf",
     args: [address, tokenId],
   });
@@ -150,7 +150,7 @@ export const useGetRepToken = (address?: string, tokenId?: bigint) => {
   const { tokenProperties } = useGetTokenProperties(repTokensInstance, tokenId || BigInt(0));
 
   const { data: uri } = useScaffoldContractRead({
-    contractName: "ReputationTokensStandalone",
+    contractName: "ReputationTokens",
     functionName: "uri",
     args: [tokenId],
   });

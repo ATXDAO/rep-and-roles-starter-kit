@@ -30,16 +30,7 @@ export const StylizedTokenCard = ({
   size = "base",
   // children,
   token,
-  components = [
-    "Balance",
-    "Image",
-    "Name",
-    "Description",
-    "Address",
-    "IsSoulbound",
-    "IsRedeemable",
-    "MaxMintAmountPerTx",
-  ],
+  components = ["Balance", "Image", "Name", "Description", "Address", "TokenType", "MaxMintAmountPerTx"],
   isBalanceOverlayed = false,
 }: TokenCardInternalProps) => {
   const cardContent: JSX.Element[] = [];
@@ -85,16 +76,8 @@ export const StylizedTokenCard = ({
       cardContent.push(<StylizedStringCard key={j} value={token?.description} />);
     }
 
-    if (components[j] === "IsSoulbound") {
-      cardContent.push(
-        <StylizedStringCard key={j} value={`Soulbound: ${token?.properties?.isSoulbound?.toString()}`} />,
-      );
-    }
-
-    if (components[j] === "IsRedeemable") {
-      cardContent.push(
-        <StylizedStringCard key={j} value={`Redeemable: ${token?.properties?.isRedeemable?.toString()}`} />,
-      );
+    if (components[j] === "TokenType") {
+      cardContent.push(<StylizedStringCard value={`Token Type: ${token?.properties?.tokenType?.toString()}`} />);
     }
 
     if (components[j] === "MaxMintAmountPerTx") {

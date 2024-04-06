@@ -29,22 +29,12 @@ export type ReputationComponent =
   | "Name"
   | "Description"
   | "Address"
-  | "IsSoulbound"
-  | "IsRedeemable"
+  | "TokenType"
   | "MaxMintAmountPerTx";
 
 export const StylizedTokenGroupCard = ({
   tokens,
-  components = [
-    "Balance",
-    "Image",
-    "Name",
-    "Description",
-    "Address",
-    "IsSoulbound",
-    "IsRedeemable",
-    "MaxMintAmountPerTx",
-  ],
+  components = ["Balance", "Image", "Name", "Description", "Address", "TokenType", "MaxMintAmountPerTx"],
   isBalanceOverlayed,
   children,
   size = "base",
