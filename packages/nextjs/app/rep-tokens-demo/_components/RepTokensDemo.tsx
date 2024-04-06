@@ -5,7 +5,7 @@ import "react-tabs/style/react-tabs.css";
 import { useAccount } from "wagmi";
 import { ReputationTokenCard } from "~~/components/rep-tokens/cards/ReputationTokenCard";
 import { ReputationTokenGroupCard } from "~~/components/rep-tokens/cards/ReputationTokenGroupCard";
-import { StylizedAddressCard } from "~~/components/rep-tokens/cards/internal/StylizedAddressCard";
+// import { StylizedAddressCard } from "~~/components/rep-tokens/cards/internal/StylizedAddressCard";
 import { AddressCard } from "~~/components/rep-tokens/cards/token-properties/AddressCard";
 import { BalanceCard } from "~~/components/rep-tokens/cards/token-properties/BalanceCard";
 import { DescriptionCard } from "~~/components/rep-tokens/cards/token-properties/DescriptionCard";
@@ -53,7 +53,7 @@ export function RepTokensDemo() {
             <p className="text-center text-4xl">Multi-Card</p>
             <ReputationTokenGroupCard
               tokens={tokens}
-              preChildren={<StylizedAddressCard address={tokens.address} isGroup={true} />}
+              preChildren={<AddressCard address={tokens.address} isGroup={true} />}
             />
           </TabPanel>
 
@@ -62,7 +62,7 @@ export function RepTokensDemo() {
             <ReputationTokenGroupCard
               tokens={tokens}
               isBalanceOverlayed={true}
-              preChildren={<StylizedAddressCard address={tokens.address} isGroup={true} />}
+              preChildren={<AddressCard address={tokens.address} isGroup={true} />}
             />
           </TabPanel>
 
