@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Color } from "./Stylized";
+import { Color } from "./deprecated/Stylized";
 
 export interface ImageCardPropsInternal {
   src: string;

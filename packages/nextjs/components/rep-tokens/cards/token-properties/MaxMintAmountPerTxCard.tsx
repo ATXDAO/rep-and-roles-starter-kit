@@ -1,4 +1,4 @@
-import { StylizedStringCard } from "../StylizedStringCard";
+import { StylizedStringCard } from "../internal/StylizedStringCard";
 import { Token } from "~~/components/rep-tokens/hooks/Hooks";
 
 type Props = {

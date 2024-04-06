@@ -1,6 +1,6 @@
-import { Color } from "./Stylized";
 import { StylizedBalanceCard } from "./StylizedBalanceCard";
 import { StylizedImageCard } from "./StylizedImageCard";
+import { Color } from "./deprecated/Stylized";
 
 type BalanceProps = {
   balance: number;

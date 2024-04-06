@@ -1,4 +1,4 @@
-import { TokenGroup } from "../../hooks/Hooks";
+import { TokenGroup } from "../hooks/Hooks";
 import { ReputationTokenCard } from "./ReputationTokenCard";
 
 export interface TokenCardInternalProps {

@@ -3,16 +3,16 @@
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useAccount } from "wagmi";
-import { ReputationTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/ReputationTokenCard";
-import { ReputationTokenGroupCard } from "~~/components/rep-tokens/cards/stylized-cards/ReputationTokenGroupCard";
-import { StylizedAddressCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedAddressCard";
-import { AddressCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/AddressCard";
-import { BalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/BalanceCard";
-import { DescriptionCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/DescriptionCard";
-import { ImageCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/ImageCard";
-import { MaxMintAmountPerTxCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/MaxMintAmountPerTxCard";
-import { NameCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/NameCard";
-import { TokenTypeCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/TokenTypeCard";
+import { ReputationTokenCard } from "~~/components/rep-tokens/cards/ReputationTokenCard";
+import { ReputationTokenGroupCard } from "~~/components/rep-tokens/cards/ReputationTokenGroupCard";
+import { StylizedAddressCard } from "~~/components/rep-tokens/cards/internal/StylizedAddressCard";
+import { AddressCard } from "~~/components/rep-tokens/cards/token-properties/AddressCard";
+import { BalanceCard } from "~~/components/rep-tokens/cards/token-properties/BalanceCard";
+import { DescriptionCard } from "~~/components/rep-tokens/cards/token-properties/DescriptionCard";
+import { ImageCard } from "~~/components/rep-tokens/cards/token-properties/ImageCard";
+import { MaxMintAmountPerTxCard } from "~~/components/rep-tokens/cards/token-properties/MaxMintAmountPerTxCard";
+import { NameCard } from "~~/components/rep-tokens/cards/token-properties/NameCard";
+import { TokenTypeCard } from "~~/components/rep-tokens/cards/token-properties/TokenTypeCard";
 import { useGetRepToken, useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
 import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 

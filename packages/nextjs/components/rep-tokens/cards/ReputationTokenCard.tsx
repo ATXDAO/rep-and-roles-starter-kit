@@ -1,6 +1,6 @@
-import { Token } from "../../hooks/Hooks";
-import { BalanceImageOverlay } from "./BalanceImageOverlay";
+import { Token } from "../hooks/Hooks";
 import { ReputationComponent } from "./ReputationTokenGroupCard";
+import { BalanceImageOverlay } from "./internal/BalanceImageOverlay";
 import { AddressCard } from "./token-properties/AddressCard";
 import { BalanceCard } from "./token-properties/BalanceCard";
 import { DescriptionCard } from "./token-properties/DescriptionCard";

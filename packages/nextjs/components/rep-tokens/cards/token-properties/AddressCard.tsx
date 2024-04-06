@@ -1,4 +1,4 @@
-import { StylizedAddressCard } from "../StylizedAddressCard";
+import { StylizedAddressCard } from "../internal/StylizedAddressCard";
 import { Token } from "~~/components/rep-tokens/hooks/Hooks";
 
 type Props = {
