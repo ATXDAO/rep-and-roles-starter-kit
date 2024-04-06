@@ -242,12 +242,12 @@ export const useRepTokens = (address?: string, replacementType: ReplacementType 
     tokens.push(token);
   }
 
-  const addr = repTokensInstance?.address ?? "";
+  // const addr = repTokensInstance?.address ?? "";
 
-  return { tokensData: { address: addr, tokens: tokens } as TokenGroup, refetchBalances };
+  return { tokens: tokens, refetchBalances };
 };
 
-export type TokenGroup = {
-  address: string;
-  tokens: Token[];
-};
+// export type TokenGroup = {
+//   address: string;
+//   tokens: Token[];
+// };

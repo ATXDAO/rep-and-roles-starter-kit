@@ -73,10 +73,10 @@ export const Header = () => {
 
   const { address } = useAccount();
 
-  const { tokensData } = useRepTokens(address);
+  const { tokens } = useRepTokens(address);
 
-  for (let i = 0; i < tokensData.tokens.length; i++) {
-    tokensData.tokens[i].image = tokensData.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
+  for (let i = 0; i < tokens.length; i++) {
+    tokens[i].image = tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
   }
 
   const widgetComponents: ReputationComponent[] = ["Balance", "Image"];
@@ -120,12 +120,7 @@ export const Header = () => {
         </ul>
       </div>
       <div className="navbar-end flex-grow mr-4">
-        <ReputationTokenGroupCard
-          tokens={tokensData}
-          components={widgetComponents}
-          isBalanceOverlayed={true}
-          size="xs"
-        />
+        <ReputationTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" />
         <RainbowKitCustomConnectButton />
         <FaucetButton />
       </div>

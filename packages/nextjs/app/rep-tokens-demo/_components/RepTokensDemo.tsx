@@ -18,18 +18,16 @@ import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold
 export function RepTokensDemo() {
   const { address } = useAccount();
 
-  const { data: faucet } = useScaffoldContract({ contractName: "ReputationFaucet" });
-
+  const { data: reputationTokens } = useScaffoldContract({ contractName: "ReputationTokens" });
   const { token, refetchBalance } = useGetRepToken(address, BigInt(0), "nftstorage");
-  const { tokensData: tokens, refetchBalances: refetchUserBalances } = useRepTokens(address, "nftstorage");
+  const { tokens: userTokens, refetchBalances: refetchUserBalances } = useRepTokens(address, "nftstorage");
   const { writeAsync: claim } = useScaffoldContractWrite({
     contractName: "ReputationFaucet",
     functionName: "claim",
   });
-  const { tokensData: faucetTokens, refetchBalances: refetchFaucetBalances } = useRepTokens(
-    faucet?.address,
-    "nftstorage",
-  );
+
+  const { data: faucet } = useScaffoldContract({ contractName: "ReputationFaucet" });
+  const { tokens: faucetTokens, refetchBalances: refetchFaucetBalances } = useRepTokens(faucet?.address, "nftstorage");
 
   return (
     <>
@@ -48,24 +46,24 @@ export function RepTokensDemo() {
           <TabPanel>
             <p className="text-center text-4xl">Multi-Card</p>
             <ReputationTokenGroupCard
-              tokens={tokens}
-              preChildren={<AddressCard address={tokens.address} isGroup={true} />}
+              tokens={userTokens}
+              preChildren={<AddressCard address={reputationTokens?.address} isGroup={true} />}
             />
           </TabPanel>
 
           <TabPanel>
             <p className="text-center text-4xl">Multi-Card w/ Overlay</p>
             <ReputationTokenGroupCard
-              tokens={tokens}
+              tokens={userTokens}
               isBalanceOverlayed={true}
-              preChildren={<AddressCard address={tokens.address} isGroup={true} />}
+              preChildren={<AddressCard address={reputationTokens?.address} isGroup={true} />}
             />
           </TabPanel>
 
           <TabPanel>
             <p className="text-center text-4xl">Small</p>
             <ReputationTokenGroupCard
-              tokens={tokens}
+              tokens={userTokens}
               components={["Balance", "Image"]}
               isBalanceOverlayed={true}
               size="sm"
@@ -75,7 +73,7 @@ export function RepTokensDemo() {
           <TabPanel>
             <p className="text-center text-4xl">Widget</p>
             <ReputationTokenGroupCard
-              tokens={tokens}
+              tokens={userTokens}
               components={["Balance", "Image"]}
               isBalanceOverlayed={true}
               size="xs"

@@ -1,8 +1,9 @@
-import { TokenGroup } from "../hooks/Hooks";
+// import { TokenGroup } from "../hooks/Hooks";
+import { Token } from "../hooks/Hooks";
 import { ReputationTokenCard } from "./ReputationTokenCard";
 
 export interface TokenCardInternalProps {
-  tokens: TokenGroup;
+  tokens: Token[];
   components?: ReputationComponent[];
   isBalanceOverlayed?: boolean;
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
@@ -39,12 +40,12 @@ export const ReputationTokenGroupCard = ({
 }: TokenCardInternalProps) => {
   const output: any[] = [];
 
-  for (let i = 0; i < tokens?.tokens?.length; i++) {
+  for (let i = 0; i < tokens?.length; i++) {
     const card = (
       <ReputationTokenCard
         key={i}
         size={size}
-        token={tokens.tokens[i]}
+        token={tokens[i]}
         components={components}
         isBalanceOverlayed={isBalanceOverlayed}
       />
