@@ -1,5 +1,5 @@
 import { TokenGroup } from "../../hooks/Hooks";
-import { StylizedTokenCard } from "./StylizedTokenCard";
+import { ReputationTokenCard } from "./ReputationTokenCard";
 
 export interface TokenCardInternalProps {
   tokens: TokenGroup;
@@ -29,7 +29,7 @@ export type ReputationComponent =
   | "TokenType"
   | "MaxMintAmountPerTx";
 
-export const StylizedTokenGroupCard = ({
+export const ReputationTokenGroupCard = ({
   tokens,
   components = ["Balance", "Image", "Name", "Description", "Address", "TokenType", "MaxMintAmountPerTx"],
   isBalanceOverlayed,
@@ -41,7 +41,7 @@ export const StylizedTokenGroupCard = ({
 
   for (let i = 0; i < tokens?.tokens?.length; i++) {
     const card = (
-      <StylizedTokenCard
+      <ReputationTokenCard
         key={i}
         size={size}
         token={tokens.tokens[i]}

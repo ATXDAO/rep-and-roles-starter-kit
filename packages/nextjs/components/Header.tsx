@@ -4,8 +4,8 @@ import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { StylizedTokenGroupCard } from "./rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
-import { ReputationComponent } from "./rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
+import { ReputationTokenGroupCard } from "./rep-tokens/cards/stylized-cards/ReputationTokenGroupCard";
+import { ReputationComponent } from "./rep-tokens/cards/stylized-cards/ReputationTokenGroupCard";
 import { useRepTokens } from "./rep-tokens/hooks/Hooks";
 import { useAccount } from "wagmi";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
@@ -120,7 +120,12 @@ export const Header = () => {
         </ul>
       </div>
       <div className="navbar-end flex-grow mr-4">
-        <StylizedTokenGroupCard tokens={tokensData} components={widgetComponents} isBalanceOverlayed={true} size="xs" />
+        <ReputationTokenGroupCard
+          tokens={tokensData}
+          components={widgetComponents}
+          isBalanceOverlayed={true}
+          size="xs"
+        />
         <RainbowKitCustomConnectButton />
         <FaucetButton />
       </div>

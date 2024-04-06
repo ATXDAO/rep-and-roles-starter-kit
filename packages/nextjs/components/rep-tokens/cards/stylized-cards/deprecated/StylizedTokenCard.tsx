@@ -1,10 +1,10 @@
 import { Token } from "../../../hooks/Hooks";
 import { BalanceImageOverlay } from "../BalanceImageOverlay";
+import { ReputationComponent } from "../ReputationTokenGroupCard";
 import { StylizedAddressCard } from "../StylizedAddressCard";
 import { StylizedBalanceCard } from "../StylizedBalanceCard";
 import { StylizedImageCard } from "../StylizedImageCard";
 import { StylizedStringCard } from "../StylizedStringCard";
-import { ReputationComponent } from "../StylizedTokenGroupCard";
 
 export type Size = "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
 

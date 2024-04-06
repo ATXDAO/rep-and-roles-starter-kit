@@ -3,9 +3,9 @@
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useAccount } from "wagmi";
+import { ReputationTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/ReputationTokenCard";
+import { ReputationTokenGroupCard } from "~~/components/rep-tokens/cards/stylized-cards/ReputationTokenGroupCard";
 import { StylizedAddressCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedAddressCard";
-import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard";
-import { StylizedTokenGroupCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
 import { AddressCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/AddressCard";
 import { BalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/BalanceCard";
 import { DescriptionCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/DescriptionCard";
@@ -22,8 +22,6 @@ export function RepTokensDemo() {
   const { token, refetchBalance } = useGetRepToken(address, BigInt(0), "nftstorage");
 
   const { tokensData: tokens, refetchBalances: refetchUserBalances } = useRepTokens(address, "nftstorage");
-
-  console.log(tokens);
 
   const { writeAsync: claim } = useScaffoldContractWrite({
     contractName: "ReputationFaucet",
@@ -53,7 +51,7 @@ export function RepTokensDemo() {
         <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
           <TabPanel>
             <p className="text-center text-4xl">Multi-Card</p>
-            <StylizedTokenGroupCard
+            <ReputationTokenGroupCard
               tokens={tokens}
               preChildren={<StylizedAddressCard address={tokens.address} isGroup={true} />}
             />
@@ -61,7 +59,7 @@ export function RepTokensDemo() {
 
           <TabPanel>
             <p className="text-center text-4xl">Multi-Card w/ Overlay</p>
-            <StylizedTokenGroupCard
+            <ReputationTokenGroupCard
               tokens={tokens}
               isBalanceOverlayed={true}
               preChildren={<StylizedAddressCard address={tokens.address} isGroup={true} />}
@@ -70,7 +68,7 @@ export function RepTokensDemo() {
 
           <TabPanel>
             <p className="text-center text-4xl">Small</p>
-            <StylizedTokenGroupCard
+            <ReputationTokenGroupCard
               tokens={tokens}
               components={["Balance", "Image"]}
               isBalanceOverlayed={true}
@@ -80,7 +78,7 @@ export function RepTokensDemo() {
 
           <TabPanel>
             <p className="text-center text-4xl">Widget</p>
-            <StylizedTokenGroupCard
+            <ReputationTokenGroupCard
               tokens={tokens}
               components={["Balance", "Image"]}
               isBalanceOverlayed={true}
@@ -90,7 +88,7 @@ export function RepTokensDemo() {
 
           <TabPanel>
             <p className="text-center text-4xl">Single Card</p>
-            <StylizedTokenCard token={token} />
+            <ReputationTokenCard token={token} />
           </TabPanel>
 
           <TabPanel>
@@ -105,7 +103,7 @@ export function RepTokensDemo() {
           </TabPanel>
 
           <TabPanel>
-            <StylizedTokenGroupCard
+            <ReputationTokenGroupCard
               tokens={faucetTokens}
               components={["Balance", "Image"]}
               isBalanceOverlayed={true}

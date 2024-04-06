@@ -1,6 +1,6 @@
 import { Token } from "../../hooks/Hooks";
 import { BalanceImageOverlay } from "./BalanceImageOverlay";
-import { ReputationComponent } from "./StylizedTokenGroupCard";
+import { ReputationComponent } from "./ReputationTokenGroupCard";
 import { AddressCard } from "./token-properties/AddressCard";
 import { BalanceCard } from "./token-properties/BalanceCard";
 import { DescriptionCard } from "./token-properties/DescriptionCard";
@@ -29,7 +29,7 @@ const sizeMap = {
   "3xl": "",
 };
 
-export const StylizedTokenCard = ({
+export const ReputationTokenCard = ({
   size = "base",
   token,
   components = ["Balance", "Image", "Name", "Description", "Address", "TokenType", "MaxMintAmountPerTx"],
