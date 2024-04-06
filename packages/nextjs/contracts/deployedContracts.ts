@@ -7,13 +7,13 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokens: {
-      address: "0xaB7B4c595d3cE8C85e16DA86630f2fc223B05057",
+      address: "0x1fA02b2d6A771842690194Cf62D91bdd92BfE28d",
       abi: [
         {
           type: "constructor",
           inputs: [
             {
-              name: "owner",
+              name: "newOwner",
               type: "address",
               internalType: "address",
             },
@@ -128,6 +128,42 @@ const deployedContracts = {
             },
           ],
           stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "_createToken",
+          inputs: [
+            {
+              name: "tokenProperties",
+              type: "tuple",
+              internalType: "struct ReputationTokens.TokenProperties",
+              components: [
+                {
+                  name: "tokenType",
+                  type: "uint8",
+                  internalType: "enum ReputationTokens.TokenType",
+                },
+                {
+                  name: "maxMintAmountPerTx",
+                  type: "uint256",
+                  internalType: "uint256",
+                },
+              ],
+            },
+            {
+              name: "id",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "tokenId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          stateMutability: "nonpayable",
         },
         {
           type: "function",
@@ -1476,7 +1512,7 @@ const deployedContracts = {
       },
     },
     ReputationFaucet: {
-      address: "0x12Bcb546bC60fF39F1Adfc7cE4605d5Bd6a6A876",
+      address: "0xf4B146FbA71F41E0592668ffbF264F1D186b2Ca8",
       abi: [
         {
           type: "constructor",
@@ -1601,7 +1637,7 @@ const deployedContracts = {
       },
     },
     Hats: {
-      address: "0x071586BA1b380B00B793Cc336fe01106B0BFbE6D",
+      address: "0x49fd2BE640DB2910c2fAb69bB8531Ab6E76127ff",
       abi: [
         {
           type: "constructor",
@@ -3562,7 +3598,7 @@ const deployedContracts = {
       },
     },
     MultiClaimsHatter: {
-      address: "0xccf1769D8713099172642EB55DDFFC0c5A444FE9",
+      address: "0xA4899D35897033b927acFCf422bc745916139776",
       abi: [
         {
           type: "constructor",
@@ -3888,7 +3924,7 @@ const deployedContracts = {
       },
     },
     ActiveModule: {
-      address: "0x2Dd78Fd9B8F40659Af32eF98555B8b31bC97A351",
+      address: "0xAA292E8611aDF267e563f334Ee42320aC96D0463",
       abi: [
         {
           type: "function",
@@ -3918,7 +3954,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ERC1155EligibiltiyModule: {
-      address: "0x56fC17a65ccFEC6B7ad0aDe9BD9416CB365B9BE8",
+      address: "0x5c74c94173F05dA1720953407cbb920F3DF9f887",
       abi: [
         {
           type: "constructor",
