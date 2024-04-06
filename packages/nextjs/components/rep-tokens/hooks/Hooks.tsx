@@ -158,8 +158,6 @@ export const useGetRepToken = (address?: string, tokenId?: bigint) => {
   const formattedURI = uri?.replace("ipfs://", "https://nftstorage.link/ipfs/");
 
   const { data: result } = useFetch<any>(formattedURI);
-  console.log(result);
-  console.log("Re-rendered");
 
   const token = {
     id: Number(tokenId),
@@ -171,7 +169,6 @@ export const useGetRepToken = (address?: string, tokenId?: bigint) => {
     address: repTokensInstance?.address,
   } as Token;
 
-  console.log(token);
   return { token, refetchBalance };
 };
 

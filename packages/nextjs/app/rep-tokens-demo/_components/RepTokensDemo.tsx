@@ -2,31 +2,19 @@
 
 import { useAccount } from "wagmi";
 import { StylizedAddressCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedAddressCard";
-// import { StylizedBalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedBalanceCard";
-// import { StylizedImageCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedImageCard";
-// import { StylizedStringCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedStringCard";
-// import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard";
-// import { StylizedTokenCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard2";
 import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard";
-import {
-  // ReputationComponent,
-  StylizedTokenGroupCard,
-} from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
+import { StylizedTokenGroupCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
 import { AddressCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/AddressCard";
 import { BalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/BalanceCard";
-// import { StylizedTokenGroupCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard2";
 import { DescriptionCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/DescriptionCard";
 import { ImageCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/ImageCard";
 import { MaxMintAmountPerTxCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/MaxMintAmountPerTxCard";
 import { NameCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/NameCard";
-// import { RedeemableCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/RedeemableCard";
-// import { SoulboundCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/SoulboundCard";
 import { TokenTypeCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/TokenTypeCard";
 import { useGetRepToken, useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
 import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 export function RepTokensDemo() {
-  console.log("Hello");
   const { address } = useAccount();
 
   const { token, refetchBalance } = useGetRepToken(address, BigInt(0));
@@ -51,21 +39,6 @@ export function RepTokensDemo() {
   for (let i = 0; i < faucetTokens.tokens.length; i++) {
     faucetTokens.tokens[i].image = faucetTokens.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
   }
-
-  // const mainComponents: ReputationComponent[] = [
-  //   "Balance",
-  //   "Image",
-  //   "Name",
-  //   "Description",
-  //   "Address",
-  //   "IsSoulbound",
-  //   "IsRedeemable",
-  //   "MaxMintAmountPerTx",
-  // ];
-
-  // const widgetComponents: ReputationComponent[] = ["Balance", "Image"];
-
-  console.log(token);
 
   return (
     <>
@@ -119,102 +92,8 @@ export function RepTokensDemo() {
         <p className="text-center text-4xl">Small</p>
         <StylizedTokenGroupCard tokens={tokens} components={["Balance", "Image"]} isBalanceOverlayed={true} size="sm" />
 
-        <p className="text-center text-4xl">Faucet</p>
+        <p className="text-center text-4xl">Widget</p>
         <StylizedTokenGroupCard tokens={tokens} components={["Balance", "Image"]} isBalanceOverlayed={true} size="xs" />
-
-        {/* <div className="flex">
-          <div>
-            <p className="text-center text-4xl">Individual Components 1</p>
-            <StylizedBalanceCard value={Number(token?.balance)} />
-            <StylizedImageCard src={token?.image} />
-            <StylizedStringCard value={token?.name} type="bold" />
-            <StylizedStringCard value={token?.description} />
-            <StylizedAddressCard address={token?.address} />
-            <StylizedStringCard value={`Token Type: ${token?.properties?.tokenType?.toString()}`} />
-            <StylizedStringCard
-              value={`Max Mint Amount Per Tx: \n${token?.properties?.maxMintAmountPerTx?.toString()}`}
-            />
-          </div>
-
-          <div>
-            <p className="text-center text-4xl">Individual Components 2</p>
-            <BalanceCard balance={token?.balance} />
-            <ImageCard src={token?.image} />
-            <NameCard name={token?.name} />
-            <DescriptionCard description={token?.description} />
-            <AddressCard address={token?.address} />
-            <TokenTypeCard tokenType={token?.properties?.tokenType} />
-            <MaxMintAmountPerTxCard maxMintAmountPerTx={token?.properties?.maxMintAmountPerTx} />
-          </div>
-
-          <div>
-            <p className="text-center text-4xl">Individual Components 3</p>
-            <BalanceCard token={token} />
-            <ImageCard token={token} />
-            <NameCard token={token} />
-            <DescriptionCard token={token} />
-            <AddressCard token={token} />
-            <TokenTypeCard token={token} />
-            <MaxMintAmountPerTxCard token={token} />
-          </div>
-        </div> */}
-        {/* <div className="flex">
-          <div>
-            <p className="text-center text-4xl">Single Card 1</p>
-            <StylizedTokenCard2>
-              <StylizedBalanceCard value={Number(token?.balance)} />
-              <StylizedImageCard src={token?.image} />
-              <StylizedStringCard value={token?.name} type="bold" />
-              <StylizedStringCard value={token?.description} />
-              <StylizedAddressCard address={token?.address} />
-              <StylizedStringCard value={`Token Type: ${token?.properties?.tokenType?.toString()}`} />
-              <StylizedStringCard
-                value={`Max Mint Amount Per Tx \n${token?.properties?.maxMintAmountPerTx?.toString()}`}
-              />
-            </StylizedTokenCard2>
-          </div>
-
-          <div>
-            <p className="text-center text-4xl">Single Card 2</p>
-            <StylizedTokenCard2>
-              <BalanceCard token={token} />
-              <ImageCard token={token} />
-              <NameCard token={token} />
-              <DescriptionCard token={token} />
-              <AddressCard token={token} />
-              <TokenTypeCard token={token} />
-
-              <MaxMintAmountPerTxCard token={token} />
-            </StylizedTokenCard2>
-          </div>
-
-          <div>
-            <p className="text-center text-4xl">Single Card 3</p>
-            <StylizedTokenCard token={token} />
-          </div>
-          <div>
-            <p className="text-center text-4xl">Single Card 4</p>
-            <StylizedTokenCard3 token={token} />
-          </div>
-        </div> */}
-        {/* <p className="text-center text-4xl">Multi-Card</p>
-        <StylizedTokenGroupCard
-          tokens={tokens}
-          preChildren={<StylizedAddressCard address={tokens.address} isGroup={true} />}
-        />
-
-        <p className="text-center text-4xl">Multi-Card w/ Overlay</p>
-        <StylizedTokenGroupCard
-          tokens={tokens}
-          isBalanceOverlayed={true}
-          preChildren={<StylizedAddressCard address={tokens.address} isGroup={true} />}
-        />
-
-        <p className="text-center text-4xl">Small</p>
-        <StylizedTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="sm" />
-
-        <p className="text-center text-4xl">Faucet</p>
-        <StylizedTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" /> */}
       </div>
     </>
   );
