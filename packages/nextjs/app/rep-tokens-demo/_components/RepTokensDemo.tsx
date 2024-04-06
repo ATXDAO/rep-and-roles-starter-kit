@@ -184,31 +184,6 @@ export function RepTokensDemo() {
 
         <p className="text-center text-4xl">Faucet</p>
         <StylizedTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" />
-
-        {/* 
-        <p className="text-center text-4xl">Multi-Card W/ Overlay</p>
-
-        <StylizedTokenGroupCard tokens={tokensData.tokens} components={mainComponents} isBalanceOverlayed={true}>
-          <StylizedAddressCard address={tokensData.address} isGroup={true} />
-        </StylizedTokenGroupCard>
-
-        <p className="text-center text-4xl">Small</p>
-
-        <StylizedTokenGroupCard
-          tokens={tokensData.tokens}
-          components={widgetComponents}
-          isBalanceOverlayed={true}
-          size="sm"
-        />
-
-        <p className="text-center text-4xl">Widget</p>
-
-        <StylizedTokenGroupCard
-          tokens={tokensData.tokens}
-          components={widgetComponents}
-          isBalanceOverlayed={true}
-          size="xs"
-        /> */}
       </div>
     </>
   );

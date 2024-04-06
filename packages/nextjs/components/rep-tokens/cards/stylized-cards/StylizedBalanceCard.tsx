@@ -24,7 +24,7 @@ const overlaidCardSizeMap = {
   "3xl": "",
 };
 
-const formatCash = (n: number) => {
+const formatNumber = (n: number) => {
   if (n < 1e3) return n;
   if (n >= 1e3 && n < 1e6) return +(n / 1e3).toFixed(1) + "K";
   if (n >= 1e6 && n < 1e9) return +(n / 1e6).toFixed(1) + "M";
@@ -42,7 +42,7 @@ export const StylizedBalanceCard = ({ value, isOverlay, size = "base" }: Balance
   if (isOverlay) {
     cardClasses = `absolute ${overlaidCardSizeMap[size]} flex items-center justify-center bg-base-300 bg-opacity-60`;
 
-    output = formatCash(123411).toString();
+    output = formatNumber(123411).toString();
     let result = "";
 
     if (size === "xs") {
@@ -96,15 +96,11 @@ export const StylizedBalanceCard = ({ value, isOverlay, size = "base" }: Balance
     }
 
     textClasses = `${result} mx-auto text-center`;
-
-    // textClasses = `${overlaidSizeMap[size]} mx-auto text-center`;
   } else {
     cardClasses = `rounded-lg bg-base-300`;
     textClasses = `${normalSizeMap[size]} mx-auto text-center`;
     output = value.toString();
   }
-
-  console.log(formatCash(value));
 
   return (
     <div className={cardClasses}>
