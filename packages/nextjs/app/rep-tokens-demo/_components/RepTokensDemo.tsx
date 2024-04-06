@@ -8,10 +8,10 @@ import { StylizedStringCard } from "~~/components/rep-tokens/cards/stylized-card
 import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard";
 import { StylizedTokenCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard2";
 import { StylizedTokenCard3 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard3";
-// import {
-//   ReputationComponent,
-//   StylizedTokenGroupCard,
-// } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
+import {
+  // ReputationComponent,
+  StylizedTokenGroupCard,
+} from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
 import { AddressCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/AddressCard";
 import { BalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/BalanceCard";
 // import { StylizedTokenGroupCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard2";
@@ -22,7 +22,7 @@ import { NameCard } from "~~/components/rep-tokens/cards/stylized-cards/token-pr
 // import { RedeemableCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/RedeemableCard";
 // import { SoulboundCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/SoulboundCard";
 import { TokenTypeCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/TokenTypeCard";
-import { useGetRepToken } from "~~/components/rep-tokens/hooks/Hooks";
+import { useGetRepToken, useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
 
 // import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
@@ -34,11 +34,11 @@ export function RepTokensDemo() {
 
   token.image = token?.image?.replace("ipfs://", "https://ipfs.io/ipfs/");
 
-  // const { tokensData, refetchBalances: refetchUserBalances } = useRepTokens(address);
+  const { tokensData: tokens /*refetchBalances: refetchUserBalances*/ } = useRepTokens(address);
 
-  // for (let i = 0; i < tokensData.tokens.length; i++) {
-  //   tokensData.tokens[i].image = tokensData.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
-  // }
+  for (let i = 0; i < tokens.tokens.length; i++) {
+    tokens.tokens[i].image = tokens.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
+  }
 
   // const { writeAsync: claim } = useScaffoldContractWrite({
   //   contractName: "ReputationFaucet",
@@ -167,12 +167,13 @@ export function RepTokensDemo() {
             <StylizedTokenCard3 token={token} />
           </div>
         </div>
-        {/* <p className="text-center text-4xl">Multi-Card</p>
+        <p className="text-center text-4xl">Multi-Card</p>
 
-        <StylizedTokenGroupCard tokens={tokensData.tokens} components={mainComponents}>
-          <StylizedAddressCard address={tokensData.address} isGroup={true} />
+        <StylizedTokenGroupCard tokens={tokens}>
+          <StylizedAddressCard address={tokens.address} isGroup={true} />
         </StylizedTokenGroupCard>
 
+        {/* 
         <p className="text-center text-4xl">Multi-Card W/ Overlay</p>
 
         <StylizedTokenGroupCard tokens={tokensData.tokens} components={mainComponents} isBalanceOverlayed={true}>

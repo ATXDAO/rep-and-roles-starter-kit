@@ -3,10 +3,16 @@
 // import { StylizedBalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedBalanceCard";
 // import { StylizedImageCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedImageCard";
 // import { StylizedStringCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedStringCard";
-import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard";
+import {
+  /*Token,*/
+  TokenGroup,
+} from "../../hooks/Hooks";
+import { StylizedTokenCard3 } from "./StylizedTokenCard3";
+
+// import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard";
 
 export interface TokenCardInternalProps {
-  tokens: any[];
+  tokens: TokenGroup;
   components?: ReputationComponent[];
   isBalanceOverlayed?: boolean;
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
@@ -41,7 +47,7 @@ export const StylizedTokenGroupCard = ({
 }: TokenCardInternalProps) => {
   const output: any[] = [];
 
-  for (let i = 0; i < tokens?.length; i++) {
+  for (let i = 0; i < tokens?.tokens?.length; i++) {
     // const cardContent: any[] = [];
 
     // for (let j = 0; j < components?.length; j++) {
@@ -114,15 +120,15 @@ export const StylizedTokenGroupCard = ({
     // }
 
     const card = (
-      <StylizedTokenCard
+      <StylizedTokenCard3
         key={i}
         size={size}
-        token={tokens[i]}
+        token={tokens.tokens[i]}
         components={components}
         isBalanceOverlayed={isBalanceOverlayed}
       >
         {/* {cardContent} */}
-      </StylizedTokenCard>
+      </StylizedTokenCard3>
     );
     output.push(card);
   }
