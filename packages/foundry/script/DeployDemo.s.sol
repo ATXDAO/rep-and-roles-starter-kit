@@ -4,9 +4,7 @@ pragma solidity ^0.8.19;
 import {console} from "forge-std/console.sol";
 
 import {ScaffoldETHDeploy} from "./DeployHelpers.s.sol";
-import {ReputationTokensStandalone} from "@atxdao/contracts/reputation/ReputationTokensStandalone.sol";
-import {TokensPropertiesStorage} from "@atxdao/contracts/reputation/storage/TokensPropertiesStorage.sol";
-import {IReputationTokensInternal} from "@atxdao/contracts/reputation/interfaces/IReputationTokensInternal.sol";
+import {ReputationTokens} from "@atxdao/contracts/reputation/ReputationTokens.sol";
 import {Hats} from "../contracts/Hats/Hats.sol";
 // import {MultiClaimsHatter} from "../contracts/MultiClaimsHatter.sol";
 import {MultiClaimsHatter} from "../contracts/MultiClaimsHatter.sol";
@@ -33,10 +31,7 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         admins[0] = deployerPubKey;
         admins[1] = controller;
 
-        ReputationTokensStandalone instance = new ReputationTokensStandalone(
-            controller,
-            admins
-        );
+        ReputationTokens instance = new ReputationTokens(controller, admins);
 
         setupAccountWithAllRoles(instance, deployerPubKey);
         setupAccountWithAllRoles(instance, controller);
@@ -61,34 +56,18 @@ contract DeployDemoScript is ScaffoldETHDeploy {
 
             console.log(deployerPubKey);
 
-            uint256 topHatId = hatsInstance.mintTopHat(
-                deployerPubKey,
-                "Top Hat",
-                "TopHat IPFS"
-            );
+            uint256 topHatId = hatsInstance.mintTopHat(deployerPubKey, "Top Hat", "TopHat IPFS");
             console.log(topHatId);
 
-            uint256 hatterHatId = hatsInstance.createHat(
-                topHatId,
-                "Hatter",
-                5,
-                deployerPubKey,
-                deployerPubKey,
-                true,
-                "Hatter IPFS"
-            );
+            uint256 hatterHatId =
+                hatsInstance.createHat(topHatId, "Hatter", 5, deployerPubKey, deployerPubKey, true, "Hatter IPFS");
 
-            MultiClaimsHatter hatter = new MultiClaimsHatter(
-                "v0.1",
-                address(hatsInstance)
-            );
+            MultiClaimsHatter hatter = new MultiClaimsHatter("v0.1", address(hatsInstance));
 
             hatsInstance.mintHat(hatterHatId, address(hatter));
 
             ActiveModule activeModule = new ActiveModule();
-            ERC1155EligibiltiyModule eligibilityModule = new ERC1155EligibiltiyModule(
-                    address(instance)
-                );
+            ERC1155EligibiltiyModule eligibilityModule = new ERC1155EligibiltiyModule(address(instance));
 
             uint256 claimableHatId = hatsInstance.createHat(
                 hatterHatId,
@@ -110,10 +89,7 @@ contract DeployDemoScript is ScaffoldETHDeploy {
     // HELPER FUNCTIONS
     ///////////////////////////////////
 
-    function setupAccountWithAllRoles(
-        ReputationTokensStandalone instance,
-        address addr
-    ) public {
+    function setupAccountWithAllRoles(ReputationTokens instance, address addr) public {
         instance.grantRole(instance.TOKEN_CREATOR_ROLE(), addr);
         instance.grantRole(instance.TOKEN_UPDATER_ROLE(), addr);
         instance.grantRole(instance.TOKEN_URI_SETTER_ROLE(), addr);
@@ -122,70 +98,40 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         instance.grantRole(instance.TOKEN_MIGRATOR_ROLE(), addr);
     }
 
-    function batchCreateTokens(ReputationTokensStandalone instance) public {
-        TokensPropertiesStorage.TokenProperties[]
-            memory tokensProperties = new TokensPropertiesStorage.TokenProperties[](
-                3
-            );
+    function batchCreateTokens(ReputationTokens instance) public {
+        ReputationTokens.TokenProperties[] memory tokensProperties = new ReputationTokens.TokenProperties[](3);
 
-        tokensProperties[0] = TokensPropertiesStorage.TokenProperties(
-            true,
-            false,
-            1000
-        );
+        tokensProperties[0] = ReputationTokens.TokenProperties(ReputationTokens.TokenType.Soulbound, 1000);
 
-        tokensProperties[1] = TokensPropertiesStorage.TokenProperties(
-            true,
-            true,
-            1000
-        );
+        tokensProperties[1] = ReputationTokens.TokenProperties(ReputationTokens.TokenType.Redeemable, 1000);
 
-        tokensProperties[2] = TokensPropertiesStorage.TokenProperties(
-            false,
-            false,
-            1000
-        );
+        tokensProperties[2] = ReputationTokens.TokenProperties(ReputationTokens.TokenType.Transferable, 1000);
 
         instance.batchCreateTokens(tokensProperties);
     }
 
-    function batchSetTokenURIs(ReputationTokensStandalone instance) public {
-        string
-            memory BASE_URI = "ipfs://bafybeiaz55w6kf7ar2g5vzikfbft2qoexknstfouu524l7q3mliutns2u4/";
+    function batchSetTokenURIs(ReputationTokens instance) public {
+        string memory BASE_URI = "ipfs://bafybeiaz55w6kf7ar2g5vzikfbft2qoexknstfouu524l7q3mliutns2u4/";
 
         instance.setTokenURI(0, string.concat(BASE_URI, "0"));
         instance.setTokenURI(1, string.concat(BASE_URI, "1"));
-        instance.setTokenURI(
-            2,
-            "ipfs://bafkreiheocygb3ty4uo3znjw2wz2asjzavn56owlqjoz4cvxvspg64egtq"
-        );
+        instance.setTokenURI(2, "ipfs://bafkreiheocygb3ty4uo3znjw2wz2asjzavn56owlqjoz4cvxvspg64egtq");
     }
 
     function batchMint(
-        ReputationTokensStandalone instance,
+        ReputationTokens instance,
         address recipient,
         uint256 token0Amount,
         uint256 token1Amount,
         uint256 token2Amount
     ) public {
-        IReputationTokensInternal.TokensOperations memory mintOperations;
-        mintOperations.to = recipient;
+        ReputationTokens.Sequence memory mintOperations;
+        mintOperations.recipient = recipient;
 
-        mintOperations
-            .operations = new IReputationTokensInternal.TokenOperation[](3);
-        mintOperations.operations[0] = IReputationTokensInternal.TokenOperation(
-            0,
-            token0Amount
-        );
-        mintOperations.operations[1] = IReputationTokensInternal.TokenOperation(
-            1,
-            token1Amount
-        );
-
-        mintOperations.operations[2] = IReputationTokensInternal.TokenOperation(
-            2,
-            token2Amount
-        );
+        mintOperations.operations = new ReputationTokens.Operation[](3);
+        mintOperations.operations[0] = ReputationTokens.Operation(0, token0Amount);
+        mintOperations.operations[1] = ReputationTokens.Operation(1, token1Amount);
+        mintOperations.operations[2] = ReputationTokens.Operation(2, token2Amount);
 
         instance.mint(mintOperations);
     }
