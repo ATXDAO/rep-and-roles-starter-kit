@@ -77,7 +77,9 @@ export const StylizedTokenCard = ({
     }
 
     if (components[j] === "TokenType") {
-      cardContent.push(<StylizedStringCard value={`Token Type: ${token?.properties?.tokenType?.toString()}`} />);
+      cardContent.push(
+        <StylizedStringCard key={j} value={`Token Type: ${token?.properties?.tokenType?.toString()}`} />,
+      );
     }
 
     if (components[j] === "MaxMintAmountPerTx") {

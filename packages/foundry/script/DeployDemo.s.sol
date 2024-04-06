@@ -44,7 +44,7 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         batchSetTokenURIs(instance);
 
         batchMint(instance, controller, 50, 25, 75);
-        batchMint(instance, address(faucet), 500, 500, 500);
+        batchMint(instance, address(faucet), 10000, 10000, 10000);
 
         uint256 id;
         assembly {
@@ -101,11 +101,11 @@ contract DeployDemoScript is ScaffoldETHDeploy {
     function batchCreateTokens(ReputationTokens instance) public {
         ReputationTokens.TokenProperties[] memory tokensProperties = new ReputationTokens.TokenProperties[](3);
 
-        tokensProperties[0] = ReputationTokens.TokenProperties(ReputationTokens.TokenType.Soulbound, 1000);
+        tokensProperties[0] = ReputationTokens.TokenProperties(ReputationTokens.TokenType.Soulbound, 10000);
 
-        tokensProperties[1] = ReputationTokens.TokenProperties(ReputationTokens.TokenType.Redeemable, 1000);
+        tokensProperties[1] = ReputationTokens.TokenProperties(ReputationTokens.TokenType.Redeemable, 10000);
 
-        tokensProperties[2] = ReputationTokens.TokenProperties(ReputationTokens.TokenType.Transferable, 1000);
+        tokensProperties[2] = ReputationTokens.TokenProperties(ReputationTokens.TokenType.Transferable, 10000);
 
         instance.batchCreateTokens(tokensProperties);
     }

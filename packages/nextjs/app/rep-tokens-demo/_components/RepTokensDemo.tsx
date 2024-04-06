@@ -91,28 +91,6 @@ export function RepTokensDemo() {
           }
         />
 
-        {/* <StylizedTokenGroupCard
-          tokens={faucetTokensData.tokens}
-          components={widgetComponents}
-          isBalanceOverlayed={true}
-          size="xs"
-        >
-        
-          <StylizedStringCard value={"Faucet"} />
-        </StylizedTokenGroupCard>
-        <button
-          className="btn btn-primary btn-sm font-normal gap-1"
-          onClick={async () => {
-            await claim();
-            await refetchUserBalances();
-            await refetchFaucetBalances();
-          }}
-        >
-          Claim Tokens
-        </button> */}
-        {/* <StylizedTokenGroupCard2 tokens={tokensData.tokens} components={mainComponents}>
-          <StylizedAddressCard address={tokensData.address} isGroup={true} />
-        </StylizedTokenGroupCard2> */}
         <div className="flex">
           <div>
             <p className="text-center text-4xl">Individual Components 1</p>
