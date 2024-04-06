@@ -1,13 +1,10 @@
-import { Token } from "../../hooks/Hooks";
-import { BalanceImageOverlay } from "./BalanceImageOverlay";
-import { ReputationComponent } from "./StylizedTokenGroupCard";
-import { AddressCard } from "./token-properties/AddressCard";
-import { BalanceCard } from "./token-properties/BalanceCard";
-import { DescriptionCard } from "./token-properties/DescriptionCard";
-import { ImageCard } from "./token-properties/ImageCard";
-import { MaxMintAmountPerTxCard } from "./token-properties/MaxMintAmountPerTxCard";
-import { NameCard } from "./token-properties/NameCard";
-import { TokenTypeCard } from "./token-properties/TokenTypeCard";
+import { Token } from "../../../hooks/Hooks";
+import { BalanceImageOverlay } from "../BalanceImageOverlay";
+import { StylizedAddressCard } from "../StylizedAddressCard";
+import { StylizedBalanceCard } from "../StylizedBalanceCard";
+import { StylizedImageCard } from "../StylizedImageCard";
+import { StylizedStringCard } from "../StylizedStringCard";
+import { ReputationComponent } from "../StylizedTokenGroupCard";
 
 export type Size = "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
 
@@ -29,7 +26,7 @@ const sizeMap = {
   "3xl": "",
 };
 
-export const StylizedTokenCard3 = ({
+export const StylizedTokenCard = ({
   size = "base",
   // children,
   token,
@@ -56,37 +53,46 @@ export const StylizedTokenCard3 = ({
             <BalanceImageOverlay key={j} balance={Number(token?.balance)} image={token?.image} size={size} />,
           );
         } else {
-          cardContent.push(<BalanceCard key={j} token={token} isOverlay={false} size={size} />);
+          cardContent.push(
+            <StylizedBalanceCard key={j} value={Number(token?.balance)} isOverlay={false} size={size} />,
+          );
         }
       } else {
-        cardContent.push(<BalanceCard key={j} token={token} isOverlay={false} size={size} />);
+        cardContent.push(<StylizedBalanceCard key={j} value={Number(token?.balance)} isOverlay={false} size={size} />);
       }
     }
 
     if (!isBalanceOverlayed) {
       if (components[j] === "Image") {
-        cardContent.push(<ImageCard key={j} token={token} />);
+        cardContent.push(<StylizedImageCard key={j} src={token?.image} size={size} />);
       }
     }
 
     if (components[j] === "Name") {
-      cardContent.push(<NameCard key={j} token={token} />);
+      cardContent.push(<StylizedStringCard key={j} value={token?.name} type="bold" />);
     }
 
     if (components[j] === "Description") {
-      cardContent.push(<DescriptionCard key={j} token={token} />);
+      cardContent.push(<StylizedStringCard key={j} value={token?.description} />);
     }
 
     if (components[j] === "TokenType") {
-      cardContent.push(<TokenTypeCard key={j} token={token} />);
+      cardContent.push(
+        <StylizedStringCard key={j} value={`Token Type: ${token?.properties?.tokenType?.toString()}`} />,
+      );
     }
 
     if (components[j] === "MaxMintAmountPerTx") {
-      cardContent.push(<MaxMintAmountPerTxCard key={j} token={token} />);
+      cardContent.push(
+        <StylizedStringCard
+          key={j}
+          value={`Max Mint Amount Per Tx: ${token?.properties?.maxMintAmountPerTx?.toString()}`}
+        />,
+      );
     }
 
     if (components[j] === "Address") {
-      cardContent.push(<AddressCard key={j} token={token} />);
+      cardContent.push(<StylizedAddressCard key={j} address={token?.address} />);
     }
   }
 

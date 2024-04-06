@@ -1,5 +1,5 @@
 import { TokenGroup } from "../../hooks/Hooks";
-import { StylizedTokenCard3 } from "./StylizedTokenCard3";
+import { StylizedTokenCard } from "./StylizedTokenCard";
 
 export interface TokenCardInternalProps {
   tokens: TokenGroup;
@@ -41,7 +41,7 @@ export const StylizedTokenGroupCard = ({
 
   for (let i = 0; i < tokens?.tokens?.length; i++) {
     const card = (
-      <StylizedTokenCard3
+      <StylizedTokenCard
         key={i}
         size={size}
         token={tokens.tokens[i]}

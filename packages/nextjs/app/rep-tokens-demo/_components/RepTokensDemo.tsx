@@ -7,7 +7,7 @@ import { StylizedAddressCard } from "~~/components/rep-tokens/cards/stylized-car
 // import { StylizedStringCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedStringCard";
 // import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard";
 // import { StylizedTokenCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard2";
-import { StylizedTokenCard3 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard3";
+import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard";
 import {
   // ReputationComponent,
   StylizedTokenGroupCard,
@@ -101,7 +101,7 @@ export function RepTokensDemo() {
         <MaxMintAmountPerTxCard token={token} />
 
         <p className="text-center text-4xl">Single Card</p>
-        <StylizedTokenCard3 token={token} />
+        <StylizedTokenCard token={token} />
 
         <p className="text-center text-4xl">Multi-Card</p>
         <StylizedTokenGroupCard
