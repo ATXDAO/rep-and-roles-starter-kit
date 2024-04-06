@@ -7,6 +7,7 @@ import { StylizedImageCard } from "~~/components/rep-tokens/cards/stylized-cards
 import { StylizedStringCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedStringCard";
 import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard";
 import { StylizedTokenCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard2";
+import { StylizedTokenCard3 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard3";
 // import {
 //   ReputationComponent,
 //   StylizedTokenGroupCard,
@@ -130,19 +131,13 @@ export function RepTokensDemo() {
         <div className="flex">
           <div>
             <p className="text-center text-4xl">Single Card 1</p>
-            <StylizedTokenCard token={token} />
-          </div>
-          <div>
-            <p className="text-center text-4xl">Single Card 2</p>
             <StylizedTokenCard2>
               <StylizedBalanceCard value={Number(token?.balance)} />
               <StylizedImageCard src={token?.image} />
-
               <StylizedStringCard value={token?.name} type="bold" />
               <StylizedStringCard value={token?.description} />
               <StylizedAddressCard address={token?.address} />
               <StylizedStringCard value={`Token Type: ${token?.properties?.tokenType?.toString()}`} />
-
               <StylizedStringCard
                 value={`Max Mint Amount Per Tx \n${token?.properties?.maxMintAmountPerTx?.toString()}`}
               />
@@ -150,7 +145,7 @@ export function RepTokensDemo() {
           </div>
 
           <div>
-            <p className="text-center text-4xl">Single Card 3</p>
+            <p className="text-center text-4xl">Single Card 2</p>
             <StylizedTokenCard2>
               <BalanceCard token={token} />
               <ImageCard token={token} />
@@ -161,6 +156,15 @@ export function RepTokensDemo() {
 
               <MaxMintAmountPerTxCard token={token} />
             </StylizedTokenCard2>
+          </div>
+
+          <div>
+            <p className="text-center text-4xl">Single Card 3</p>
+            <StylizedTokenCard token={token} />
+          </div>
+          <div>
+            <p className="text-center text-4xl">Single Card 4</p>
+            <StylizedTokenCard3 token={token} />
           </div>
         </div>
         {/* <p className="text-center text-4xl">Multi-Card</p>
