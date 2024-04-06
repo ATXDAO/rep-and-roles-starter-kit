@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokens: {
-      address: "0x04C89607413713Ec9775E14b954286519d836FEf",
+      address: "0x18E317A7D70d8fBf8e6E893616b52390EbBdb629",
       abi: [
         {
           type: "constructor",
@@ -1455,28 +1455,10 @@ const deployedContracts = {
           inputs: [],
         },
       ],
-      inheritedFunctions: {
-        balanceOf: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
-        balanceOfBatch: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
-        isApprovedForAll: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
-        safeBatchTransferFrom: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
-        safeTransferFrom: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
-        setApprovalForAll: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
-        supportsInterface: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-        uri: "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol",
-        DEFAULT_ADMIN_ROLE: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-        getRoleAdmin: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-        grantRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-        hasRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-        renounceRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-        revokeRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-        owner: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-        renounceOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-        transferOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-      },
+      inheritedFunctions: {},
     },
     ReputationFaucet: {
-      address: "0x4EE6eCAD1c2Dae9f525404De8555724e3c35d07B",
+      address: "0x276C216D241856199A83bf27b2286659e5b877D3",
       abi: [
         {
           type: "constructor",
@@ -1594,14 +1576,10 @@ const deployedContracts = {
           stateMutability: "view",
         },
       ],
-      inheritedFunctions: {
-        onERC1155BatchReceived: "lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol",
-        onERC1155Received: "lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol",
-        supportsInterface: "lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol",
-      },
+      inheritedFunctions: {},
     },
     Hats: {
-      address: "0x86A2EE8FAf9A840F7a2c64CA3d51209F9A02081D",
+      address: "0xB82008565FdC7e44609fA118A4a681E92581e680",
       abi: [
         {
           type: "constructor",
@@ -3562,7 +3540,7 @@ const deployedContracts = {
       },
     },
     MultiClaimsHatter: {
-      address: "0xAA292E8611aDF267e563f334Ee42320aC96D0463",
+      address: "0x8A93d247134d91e0de6f96547cB0204e5BE8e5D8",
       abi: [
         {
           type: "constructor",
@@ -3888,7 +3866,7 @@ const deployedContracts = {
       },
     },
     ActiveModule: {
-      address: "0x720472c8ce72c2A2D711333e064ABD3E6BbEAdd3",
+      address: "0xF32D39ff9f6Aa7a7A64d7a4F00a54826Ef791a55",
       abi: [
         {
           type: "function",
@@ -3918,7 +3896,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ERC1155EligibiltiyModule: {
-      address: "0xe8D2A1E88c91DCd5433208d4152Cc4F399a7e91d",
+      address: "0xd6e1afe5cA8D00A2EFC01B89997abE2De47fdfAf",
       abi: [
         {
           type: "constructor",

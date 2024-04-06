@@ -9,7 +9,7 @@ import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards
 import { StylizedTokenCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard2";
 import { StylizedTokenCard3 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard3";
 import {
-  // ReputationComponent,
+  ReputationComponent,
   StylizedTokenGroupCard,
 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
 import { AddressCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/AddressCard";
@@ -23,35 +23,34 @@ import { NameCard } from "~~/components/rep-tokens/cards/stylized-cards/token-pr
 // import { SoulboundCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/SoulboundCard";
 import { TokenTypeCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/TokenTypeCard";
 import { useGetRepToken, useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
-
-// import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 export function RepTokensDemo() {
   console.log("Hello");
   const { address } = useAccount();
 
-  const { token } = useGetRepToken(address, BigInt(0));
+  const { token, refetchBalance } = useGetRepToken(address, BigInt(0));
 
   token.image = token?.image?.replace("ipfs://", "https://ipfs.io/ipfs/");
 
-  const { tokensData: tokens /*refetchBalances: refetchUserBalances*/ } = useRepTokens(address);
+  const { tokensData: tokens, refetchBalances: refetchUserBalances } = useRepTokens(address);
 
   for (let i = 0; i < tokens.tokens.length; i++) {
     tokens.tokens[i].image = tokens.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
   }
 
-  // const { writeAsync: claim } = useScaffoldContractWrite({
-  //   contractName: "ReputationFaucet",
-  //   functionName: "claim",
-  // });
+  const { writeAsync: claim } = useScaffoldContractWrite({
+    contractName: "ReputationFaucet",
+    functionName: "claim",
+  });
 
-  // const { data: faucet } = useScaffoldContract({ contractName: "ReputationFaucet" });
+  const { data: faucet } = useScaffoldContract({ contractName: "ReputationFaucet" });
 
-  // const { tokensData: faucetTokensData, refetchBalances: refetchFaucetBalances } = useRepTokens(faucet?.address);
+  const { tokensData: faucetTokens, refetchBalances: refetchFaucetBalances } = useRepTokens(faucet?.address);
 
-  // for (let i = 0; i < faucetTokensData.tokens.length; i++) {
-  //   faucetTokensData.tokens[i].image = faucetTokensData.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
-  // }
+  for (let i = 0; i < faucetTokens.tokens.length; i++) {
+    faucetTokens.tokens[i].image = faucetTokens.tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
+  }
 
   // const mainComponents: ReputationComponent[] = [
   //   "Balance",
@@ -64,19 +63,38 @@ export function RepTokensDemo() {
   //   "MaxMintAmountPerTx",
   // ];
 
-  // const widgetComponents: ReputationComponent[] = ["Balance", "Image"];
+  const widgetComponents: ReputationComponent[] = ["Balance", "Image"];
 
   console.log(token);
 
   return (
     <>
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
+        <p className="text-center text-4xl">Faucet</p>
+        <StylizedTokenGroupCard
+          tokens={faucetTokens}
+          components={widgetComponents}
+          isBalanceOverlayed={true}
+          size="xs"
+        />
+        <button
+          className="btn btn-primary btn-sm font-normal gap-1"
+          onClick={async () => {
+            await claim();
+            await refetchUserBalances();
+            await refetchFaucetBalances();
+            await refetchBalance();
+          }}
+        >
+          Claim Tokens
+        </button>
         {/* <StylizedTokenGroupCard
           tokens={faucetTokensData.tokens}
           components={widgetComponents}
           isBalanceOverlayed={true}
           size="xs"
         >
+        
           <StylizedStringCard value={"Faucet"} />
         </StylizedTokenGroupCard>
         <button
@@ -168,10 +186,16 @@ export function RepTokensDemo() {
           </div>
         </div>
         <p className="text-center text-4xl">Multi-Card</p>
+        <StylizedTokenGroupCard tokens={tokens} showTopLevelAddress={true} />
 
-        <StylizedTokenGroupCard tokens={tokens}>
-          <StylizedAddressCard address={tokens.address} isGroup={true} />
-        </StylizedTokenGroupCard>
+        <p className="text-center text-4xl">Multi-Card w/ Overlay</p>
+        <StylizedTokenGroupCard tokens={tokens} showTopLevelAddress={true} isBalanceOverlayed={true} />
+
+        <p className="text-center text-4xl">Small</p>
+        <StylizedTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="sm" />
+
+        <p className="text-center text-4xl">Faucet</p>
+        <StylizedTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" />
 
         {/* 
         <p className="text-center text-4xl">Multi-Card W/ Overlay</p>
