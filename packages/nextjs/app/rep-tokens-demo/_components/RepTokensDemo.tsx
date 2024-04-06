@@ -9,7 +9,7 @@ import { StylizedAddressCard } from "~~/components/rep-tokens/cards/stylized-car
 // import { StylizedTokenCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard2";
 import { StylizedTokenCard3 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard3";
 import {
-  ReputationComponent,
+  // ReputationComponent,
   StylizedTokenGroupCard,
 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenGroupCard";
 import { AddressCard } from "~~/components/rep-tokens/cards/stylized-cards/token-properties/AddressCard";
@@ -63,7 +63,7 @@ export function RepTokensDemo() {
   //   "MaxMintAmountPerTx",
   // ];
 
-  const widgetComponents: ReputationComponent[] = ["Balance", "Image"];
+  // const widgetComponents: ReputationComponent[] = ["Balance", "Image"];
 
   console.log(token);
 
@@ -72,7 +72,7 @@ export function RepTokensDemo() {
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
         <StylizedTokenGroupCard
           tokens={faucetTokens}
-          components={widgetComponents}
+          components={["Balance", "Image"]}
           isBalanceOverlayed={true}
           size="xs"
           preChildren={<p className="text-center text-4xl bg-base-200 rounded-lg">Faucet</p>}
@@ -117,10 +117,10 @@ export function RepTokensDemo() {
         />
 
         <p className="text-center text-4xl">Small</p>
-        <StylizedTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="sm" />
+        <StylizedTokenGroupCard tokens={tokens} components={["Balance", "Image"]} isBalanceOverlayed={true} size="sm" />
 
         <p className="text-center text-4xl">Faucet</p>
-        <StylizedTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" />
+        <StylizedTokenGroupCard tokens={tokens} components={["Balance", "Image"]} isBalanceOverlayed={true} size="xs" />
 
         {/* <div className="flex">
           <div>
