@@ -1,5 +1,4 @@
 import { TokenGroup } from "../../hooks/Hooks";
-import { StylizedAddressCard } from "./StylizedAddressCard";
 import { StylizedTokenCard3 } from "./StylizedTokenCard3";
 
 export interface TokenCardInternalProps {
@@ -7,8 +6,8 @@ export interface TokenCardInternalProps {
   components?: ReputationComponent[];
   isBalanceOverlayed?: boolean;
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
-  children?: React.ReactNode;
-  showTopLevelAddress?: boolean;
+  preChildren?: React.ReactNode;
+  postChildren?: React.ReactNode;
 }
 
 const sizeMap = {
@@ -34,9 +33,9 @@ export const StylizedTokenGroupCard = ({
   tokens,
   components = ["Balance", "Image", "Name", "Description", "Address", "TokenType", "MaxMintAmountPerTx"],
   isBalanceOverlayed,
-  children,
+  preChildren,
+  postChildren,
   size = "base",
-  showTopLevelAddress,
 }: TokenCardInternalProps) => {
   const output: any[] = [];
 
@@ -54,10 +53,10 @@ export const StylizedTokenGroupCard = ({
   }
 
   return (
-    <div className={`bg-base-100 flex flex-col rounded-lg ${sizeMap[size]}`}>
-      {showTopLevelAddress ? <StylizedAddressCard address={tokens.address} isGroup={true} /> : <></>}
-      {children}
+    <div className={`bg-base-100 flex flex-col rounded-lg ${sizeMap[size]} space-y-4`}>
+      {preChildren}
       <div className={`flex flex-wrap justify-center ${sizeMap[size]} rounded-lg bg-base-200`}>{output}</div>
+      {postChildren}
     </div>
   );
 };

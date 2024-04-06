@@ -70,24 +70,27 @@ export function RepTokensDemo() {
   return (
     <>
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
-        <p className="text-center text-4xl">Faucet</p>
         <StylizedTokenGroupCard
           tokens={faucetTokens}
           components={widgetComponents}
           isBalanceOverlayed={true}
           size="xs"
+          preChildren={<p className="text-center text-4xl bg-base-200 rounded-lg">Faucet</p>}
+          postChildren={
+            <button
+              className="btn btn-primary btn-sm font-normal gap-1"
+              onClick={async () => {
+                await claim();
+                await refetchUserBalances();
+                await refetchFaucetBalances();
+                await refetchBalance();
+              }}
+            >
+              Claim Tokens
+            </button>
+          }
         />
-        <button
-          className="btn btn-primary btn-sm font-normal gap-1"
-          onClick={async () => {
-            await claim();
-            await refetchUserBalances();
-            await refetchFaucetBalances();
-            await refetchBalance();
-          }}
-        >
-          Claim Tokens
-        </button>
+
         {/* <StylizedTokenGroupCard
           tokens={faucetTokensData.tokens}
           components={widgetComponents}
@@ -186,10 +189,17 @@ export function RepTokensDemo() {
           </div>
         </div>
         <p className="text-center text-4xl">Multi-Card</p>
-        <StylizedTokenGroupCard tokens={tokens} showTopLevelAddress={true} />
+        <StylizedTokenGroupCard
+          tokens={tokens}
+          preChildren={<StylizedAddressCard address={tokens.address} isGroup={true} />}
+        />
 
         <p className="text-center text-4xl">Multi-Card w/ Overlay</p>
-        <StylizedTokenGroupCard tokens={tokens} showTopLevelAddress={true} isBalanceOverlayed={true} />
+        <StylizedTokenGroupCard
+          tokens={tokens}
+          isBalanceOverlayed={true}
+          preChildren={<StylizedAddressCard address={tokens.address} isGroup={true} />}
+        />
 
         <p className="text-center text-4xl">Small</p>
         <StylizedTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="sm" />
