@@ -5,7 +5,6 @@ import "react-tabs/style/react-tabs.css";
 import { useAccount } from "wagmi";
 import { ReputationTokenCard } from "~~/components/rep-tokens/cards/ReputationTokenCard";
 import { ReputationTokenGroupCard } from "~~/components/rep-tokens/cards/ReputationTokenGroupCard";
-// import { StylizedAddressCard } from "~~/components/rep-tokens/cards/internal/StylizedAddressCard";
 import { AddressCard } from "~~/components/rep-tokens/cards/token-properties/AddressCard";
 import { BalanceCard } from "~~/components/rep-tokens/cards/token-properties/BalanceCard";
 import { DescriptionCard } from "~~/components/rep-tokens/cards/token-properties/DescriptionCard";
@@ -19,17 +18,14 @@ import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold
 export function RepTokensDemo() {
   const { address } = useAccount();
 
+  const { data: faucet } = useScaffoldContract({ contractName: "ReputationFaucet" });
+
   const { token, refetchBalance } = useGetRepToken(address, BigInt(0), "nftstorage");
-
   const { tokensData: tokens, refetchBalances: refetchUserBalances } = useRepTokens(address, "nftstorage");
-
   const { writeAsync: claim } = useScaffoldContractWrite({
     contractName: "ReputationFaucet",
     functionName: "claim",
   });
-
-  const { data: faucet } = useScaffoldContract({ contractName: "ReputationFaucet" });
-
   const { tokensData: faucetTokens, refetchBalances: refetchFaucetBalances } = useRepTokens(
     faucet?.address,
     "nftstorage",
