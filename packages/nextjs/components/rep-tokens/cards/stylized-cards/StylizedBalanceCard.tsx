@@ -42,7 +42,7 @@ export const StylizedBalanceCard = ({ value, isOverlay, size = "base" }: Balance
   if (isOverlay) {
     cardClasses = `absolute ${overlaidCardSizeMap[size]} flex items-center justify-center bg-base-300 bg-opacity-60`;
 
-    output = formatNumber(123411).toString();
+    output = formatNumber(value).toString();
     let result = "";
 
     if (size === "xs") {
@@ -51,7 +51,7 @@ export const StylizedBalanceCard = ({ value, isOverlay, size = "base" }: Balance
       } else if (output.length === 1) {
         result = "text-4xl";
       } else if (output.length === 2) {
-        result = "text-4xl";
+        result = "text-3xl";
       } else if (output.length === 3) {
         result = "text-2xl";
       } else if (output.length === 4) {
