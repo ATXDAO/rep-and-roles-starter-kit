@@ -164,7 +164,7 @@ export const useGetRepToken = (address?: string, tokenId?: bigint, replacementTy
     balance: balanceOf,
     name: result?.name,
     description: result?.description,
-    image: result?.image,
+    image: result?.image?.replace("ipfs://", replacement[replacementType]),
     properties: tokenProperties,
     address: repTokensInstance?.address,
   } as Token;
