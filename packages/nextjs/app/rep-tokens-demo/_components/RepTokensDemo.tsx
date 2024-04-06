@@ -2,11 +2,11 @@
 
 import { useAccount } from "wagmi";
 import { StylizedAddressCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedAddressCard";
-import { StylizedBalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedBalanceCard";
-import { StylizedImageCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedImageCard";
-import { StylizedStringCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedStringCard";
-import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard";
-import { StylizedTokenCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard2";
+// import { StylizedBalanceCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedBalanceCard";
+// import { StylizedImageCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedImageCard";
+// import { StylizedStringCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedStringCard";
+// import { StylizedTokenCard } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard";
+// import { StylizedTokenCard2 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard2";
 import { StylizedTokenCard3 } from "~~/components/rep-tokens/cards/stylized-cards/StylizedTokenCard3";
 import {
   ReputationComponent,
@@ -91,7 +91,38 @@ export function RepTokensDemo() {
           }
         />
 
-        <div className="flex">
+        <p className="text-center text-4xl">Individual Components</p>
+        <BalanceCard token={token} />
+        <ImageCard token={token} />
+        <NameCard token={token} />
+        <DescriptionCard token={token} />
+        <AddressCard token={token} />
+        <TokenTypeCard token={token} />
+        <MaxMintAmountPerTxCard token={token} />
+
+        <p className="text-center text-4xl">Single Card</p>
+        <StylizedTokenCard3 token={token} />
+
+        <p className="text-center text-4xl">Multi-Card</p>
+        <StylizedTokenGroupCard
+          tokens={tokens}
+          preChildren={<StylizedAddressCard address={tokens.address} isGroup={true} />}
+        />
+
+        <p className="text-center text-4xl">Multi-Card w/ Overlay</p>
+        <StylizedTokenGroupCard
+          tokens={tokens}
+          isBalanceOverlayed={true}
+          preChildren={<StylizedAddressCard address={tokens.address} isGroup={true} />}
+        />
+
+        <p className="text-center text-4xl">Small</p>
+        <StylizedTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="sm" />
+
+        <p className="text-center text-4xl">Faucet</p>
+        <StylizedTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" />
+
+        {/* <div className="flex">
           <div>
             <p className="text-center text-4xl">Individual Components 1</p>
             <StylizedBalanceCard value={Number(token?.balance)} />
@@ -126,8 +157,8 @@ export function RepTokensDemo() {
             <TokenTypeCard token={token} />
             <MaxMintAmountPerTxCard token={token} />
           </div>
-        </div>
-        <div className="flex">
+        </div> */}
+        {/* <div className="flex">
           <div>
             <p className="text-center text-4xl">Single Card 1</p>
             <StylizedTokenCard2>
@@ -165,8 +196,8 @@ export function RepTokensDemo() {
             <p className="text-center text-4xl">Single Card 4</p>
             <StylizedTokenCard3 token={token} />
           </div>
-        </div>
-        <p className="text-center text-4xl">Multi-Card</p>
+        </div> */}
+        {/* <p className="text-center text-4xl">Multi-Card</p>
         <StylizedTokenGroupCard
           tokens={tokens}
           preChildren={<StylizedAddressCard address={tokens.address} isGroup={true} />}
@@ -183,7 +214,7 @@ export function RepTokensDemo() {
         <StylizedTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="sm" />
 
         <p className="text-center text-4xl">Faucet</p>
-        <StylizedTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" />
+        <StylizedTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" /> */}
       </div>
     </>
   );
