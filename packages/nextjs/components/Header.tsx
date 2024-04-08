@@ -73,11 +73,7 @@ export const Header = () => {
 
   const { address } = useAccount();
 
-  const { tokens } = useRepTokens(address);
-
-  for (let i = 0; i < tokens.length; i++) {
-    tokens[i].image = tokens[i].image?.replace("ipfs://", "https://ipfs.io/ipfs/");
-  }
+  const { tokens } = useRepTokens(address, "nftstorage");
 
   const widgetComponents: ReputationComponent[] = ["Balance", "Image"];
 
