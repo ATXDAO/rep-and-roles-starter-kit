@@ -22,7 +22,7 @@ export interface TokenCardInternalProps {
 const sizeMap = {
   xs: "",
   sm: "px-1 py-1 w-20",
-  base: "p-5 m-4 w-64",
+  base: "py-2 px-5 mx-4 w-64",
   lg: "",
   xl: "",
   "2xl": "",
@@ -89,5 +89,5 @@ export const ReputationTokenCard = ({
     }
   }
 
-  return <div className={`bg-base-100 rounded-lg ${sizeMap[size]} relative p-1`}>{cardContent}</div>;
+  return <div className={`bg-base-100 rounded-lg ${sizeMap[size]} relative`}>{cardContent}</div>;
 };

@@ -42,26 +42,26 @@ export function RepTokensDemo() {
           <Tab>Faucet</Tab>
         </TabList>
 
-        <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
+        <div className="py-1 space-y-5 flex flex-col justify-center items-center bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
           <TabPanel>
-            <p className="text-center text-4xl">Multi-Card</p>
+            <p className="text-center text-4xl my-1">Multi-Card</p>
             <ReputationTokenGroupCard
               tokens={userTokens}
-              preChildren={<AddressCard address={reputationTokens?.address} isGroup={true} />}
+              preChildren={<AddressCard address={reputationTokens?.address} />}
             />
           </TabPanel>
 
           <TabPanel>
-            <p className="text-center text-4xl">Multi-Card w/ Overlay</p>
+            <p className="text-center text-4xl my-1">Multi-Card w/ Overlay</p>
             <ReputationTokenGroupCard
               tokens={userTokens}
               isBalanceOverlayed={true}
-              preChildren={<AddressCard address={reputationTokens?.address} isGroup={true} />}
+              preChildren={<AddressCard address={reputationTokens?.address} />}
             />
           </TabPanel>
 
           <TabPanel>
-            <p className="text-center text-4xl">Small</p>
+            <p className="text-center text-4xl  my-1">Small</p>
             <ReputationTokenGroupCard
               tokens={userTokens}
               components={["Balance", "Image"]}
@@ -71,7 +71,7 @@ export function RepTokensDemo() {
           </TabPanel>
 
           <TabPanel>
-            <p className="text-center text-4xl">Widget</p>
+            <p className="text-center text-4xl my-1">Widget</p>
             <ReputationTokenGroupCard
               tokens={userTokens}
               components={["Balance", "Image"]}
@@ -81,12 +81,15 @@ export function RepTokensDemo() {
           </TabPanel>
 
           <TabPanel>
-            <p className="text-center text-4xl">Single Card</p>
-            <ReputationTokenCard token={token} />
+            <p className="text-center text-4xl my-1">Single Card</p>
+            <ReputationTokenCard
+              token={token}
+              components={["Balance", "Image", "Name", "Description", "Address", "TokenType", "MaxMintAmountPerTx"]}
+            />
           </TabPanel>
 
           <TabPanel>
-            <p className="text-center text-4xl">Individual Components</p>
+            <p className="text-center text-2xl my-1">Individual Components</p>
             <BalanceCard token={token} />
             <ImageCard token={token} />
             <NameCard token={token} />
@@ -102,7 +105,7 @@ export function RepTokensDemo() {
               components={["Balance", "Image"]}
               isBalanceOverlayed={true}
               size="xs"
-              preChildren={<p className="text-center text-4xl bg-base-200 rounded-lg">Faucet</p>}
+              preChildren={<p className="text-center text-4xl bg-base-200 rounded-lg my-1">Faucet</p>}
               postChildren={
                 <button
                   className="btn btn-primary btn-sm font-normal gap-1"

@@ -14,7 +14,7 @@ export interface TokenCardInternalProps {
 const sizeMap = {
   xs: "p-1",
   sm: "p-5",
-  base: "p-5",
+  base: "py-2 px-5",
   lg: "",
   xl: "",
   "2xl": "",
@@ -54,7 +54,7 @@ export const ReputationTokenGroupCard = ({
   }
 
   return (
-    <div className={`bg-base-100 flex flex-col rounded-lg ${sizeMap[size]} space-y-4`}>
+    <div className={`bg-base-100 flex flex-col rounded-lg ${sizeMap[size]} space-y-2`}>
       {preChildren}
       <div className={`flex flex-wrap justify-center ${sizeMap[size]} rounded-lg bg-base-200`}>{output}</div>
       {postChildren}

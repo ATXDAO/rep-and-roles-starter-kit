@@ -95,10 +95,10 @@ export const StylizedBalanceCard = ({ value, isOverlay, size = "base" }: Balance
       }
     }
 
-    textClasses = `${result} mx-auto text-center`;
+    textClasses = `${result} text-center`;
   } else {
     cardClasses = `rounded-lg bg-base-300`;
-    textClasses = `${normalSizeMap[size]} mx-auto text-center`;
+    textClasses = `${normalSizeMap[size]} text-center`;
     output = value.toString();
   }
 

@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokens: {
-      address: "0x1fA02b2d6A771842690194Cf62D91bdd92BfE28d",
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       abi: [
         {
           type: "constructor",
@@ -1512,7 +1512,7 @@ const deployedContracts = {
       },
     },
     ReputationFaucet: {
-      address: "0xf4B146FbA71F41E0592668ffbF264F1D186b2Ca8",
+      address: "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82",
       abi: [
         {
           type: "constructor",
@@ -1637,7 +1637,7 @@ const deployedContracts = {
       },
     },
     Hats: {
-      address: "0x49fd2BE640DB2910c2fAb69bB8531Ab6E76127ff",
+      address: "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
       abi: [
         {
           type: "constructor",
@@ -3598,7 +3598,7 @@ const deployedContracts = {
       },
     },
     MultiClaimsHatter: {
-      address: "0xA4899D35897033b927acFCf422bc745916139776",
+      address: "0x67d269191c92Caf3cD7723F116c85e6E9bf55933",
       abi: [
         {
           type: "constructor",
@@ -3924,7 +3924,7 @@ const deployedContracts = {
       },
     },
     ActiveModule: {
-      address: "0xAA292E8611aDF267e563f334Ee42320aC96D0463",
+      address: "0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690",
       abi: [
         {
           type: "function",
@@ -3954,7 +3954,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ERC1155EligibiltiyModule: {
-      address: "0x5c74c94173F05dA1720953407cbb920F3DF9f887",
+      address: "0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB",
       abi: [
         {
           type: "constructor",

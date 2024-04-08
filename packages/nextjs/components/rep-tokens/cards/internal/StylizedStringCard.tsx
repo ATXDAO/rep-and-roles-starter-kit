@@ -7,9 +7,9 @@ type StringProps = {
 export const StylizedStringCard = ({ value, type = "default" }: StringProps) => {
   let textClassName;
   if (type === "default") {
-    textClassName = "text-base-content text-1xl mx-auto text-center break-words";
+    textClassName = "text-base-content text-sm text-center break-words";
   } else if (type === "bold") {
-    textClassName = "text-base-content text-1xl mx-auto text-center break-all object-center font-bold";
+    textClassName = "text-base-content text-md text-center break-all object-center font-bold";
   }
 
   return (
