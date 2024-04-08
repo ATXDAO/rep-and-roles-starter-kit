@@ -43,7 +43,7 @@ contract DeployDemoScript is ScaffoldETHDeploy {
 
         batchSetTokenURIs(instance);
 
-        batchMint(instance, controller, 50, 25, 75);
+        // batchMint(instance, controller, 50, 25, 75);
         batchMint(instance, address(faucet), 10000, 10000, 10000);
 
         uint256 id;
