@@ -104,7 +104,6 @@ export function RepTokensDemo() {
               tokens={faucetTokens}
               components={["Balance", "Image"]}
               isBalanceOverlayed={true}
-              size="xs"
               preChildren={<p className="text-center text-4xl bg-base-200 rounded-lg my-1">Faucet</p>}
               postChildren={
                 <button
