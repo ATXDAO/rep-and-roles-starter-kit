@@ -4,6 +4,8 @@ An open-source toolkit used to quickly and easily deploy your own Reputation & R
 
 ## Quickstart
 
+[Quickstart Tutorial Video](https://www.youtube.com/watch?v=-XbTq4sp37Q&t=3s)
+
 To get started with Reputation & Roles, follow the steps below:
 
 1. Clone this repo & install dependencies
