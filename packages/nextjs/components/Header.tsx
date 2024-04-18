@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,7 +10,7 @@ import { useRepTokens } from "./rep-tokens/hooks/Hooks";
 import { useAccount } from "wagmi";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
-import { useOutsideClick } from "~~/hooks/scaffold-eth";
+import { useOutsideClick, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
 type HeaderMenuLink = {
   label: string;
@@ -34,7 +34,11 @@ export const menuLinks: HeaderMenuLink[] = [
   },
 ];
 
-export const HeaderMenuLinks = () => {
+type Props = {
+  menuLinks: HeaderMenuLink[];
+};
+
+export const HeaderMenuLinks = ({ menuLinks }: Props) => {
   const pathname = usePathname();
 
   return (
@@ -64,6 +68,8 @@ export const HeaderMenuLinks = () => {
  * Site header
  */
 export const Header = () => {
+  const [instancedHeaderLinks, setInstancedHeaderLinks] = useState(menuLinks);
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const burgerMenuRef = useRef<HTMLDivElement>(null);
   useOutsideClick(
@@ -76,6 +82,27 @@ export const Header = () => {
   const { tokens } = useRepTokens(address, "nftstorage");
 
   const widgetComponents: ReputationComponent[] = ["Balance", "Image"];
+
+  const claimableHatId2 = "26960358055844173566950915356986848857678722938711691764997516427264";
+
+  const { data: balanceOfClaimableHat2 } = useScaffoldContractRead({
+    contractName: "Hats",
+    functionName: "balanceOf",
+    args: [address, BigInt(claimableHatId2)],
+  });
+
+  useEffect(() => {
+    if (Number(balanceOfClaimableHat2) > 0) {
+      console.log("im set");
+      setInstancedHeaderLinks([
+        ...instancedHeaderLinks,
+        {
+          label: "Steward's Hideout",
+          href: "/stewards-hideout",
+        },
+      ]);
+    }
+  }, [balanceOfClaimableHat2]);
 
   return (
     <div className="sticky lg:static top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2">
@@ -98,7 +125,7 @@ export const Header = () => {
                 setIsDrawerOpen(false);
               }}
             >
-              <HeaderMenuLinks />
+              <HeaderMenuLinks menuLinks={instancedHeaderLinks} />
             </ul>
           )}
         </div>
@@ -112,7 +139,7 @@ export const Header = () => {
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
-          <HeaderMenuLinks />
+          <HeaderMenuLinks menuLinks={instancedHeaderLinks} />
         </ul>
       </div>
       <div className="navbar-end flex-grow mr-4">

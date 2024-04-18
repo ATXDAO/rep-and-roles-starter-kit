@@ -18,7 +18,7 @@ contract ReputationFaucet is ERC1155Holder {
 
         for (uint256 i = 0; i < sequence.operations.length; i++) {
             sequence.operations[i].id = i;
-            sequence.operations[i].amount = 40;
+            sequence.operations[i].amount = 120;
         }
 
         reputationTokens.distribute(address(this), sequence);

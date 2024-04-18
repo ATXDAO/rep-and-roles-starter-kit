@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokens: {
-      address: "0x1613beB3B2C4f22Ee086B2b38C1476A3cE7f78E8",
+      address: "0x821f3361D454cc98b7555221A06Be563a7E2E0A6",
       abi: [
         {
           type: "constructor",
@@ -1512,7 +1512,7 @@ const deployedContracts = {
       },
     },
     ReputationFaucet: {
-      address: "0x809d550fca64d94Bd9F66E60752A544199cfAC3D",
+      address: "0x38A70c040CA5F5439ad52d0e821063b0EC0B52b6",
       abi: [
         {
           type: "constructor",
@@ -1637,7 +1637,7 @@ const deployedContracts = {
       },
     },
     Hats: {
-      address: "0xcbEAF3BDe82155F56486Fb5a1072cb8baAf547cc",
+      address: "0x2Dd78Fd9B8F40659Af32eF98555B8b31bC97A351",
       abi: [
         {
           type: "constructor",
@@ -3598,7 +3598,7 @@ const deployedContracts = {
       },
     },
     MultiClaimsHatter: {
-      address: "0x162A433068F51e18b7d13932F27e66a3f99E6890",
+      address: "0xFE5f411481565fbF70D8D33D992C78196E014b90",
       abi: [
         {
           type: "constructor",
@@ -3924,7 +3924,7 @@ const deployedContracts = {
       },
     },
     ActiveModule: {
-      address: "0x5081a39b8A5f0E35a8D959395a630b68B74Dd30f",
+      address: "0x139e1D41943ee15dDe4DF876f9d0E7F85e26660A",
       abi: [
         {
           type: "function",
@@ -3954,7 +3954,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ERC1155EligibiltiyModule: {
-      address: "0x1fA02b2d6A771842690194Cf62D91bdd92BfE28d",
+      address: "0xcE0066b1008237625dDDBE4a751827de037E53D2",
       abi: [
         {
           type: "constructor",
@@ -3963,6 +3963,11 @@ const deployedContracts = {
               name: "erc1155Address",
               type: "address",
               internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              internalType: "uint256",
             },
           ],
           stateMutability: "nonpayable",
