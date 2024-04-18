@@ -67,19 +67,43 @@ contract DeployDemoScript is ScaffoldETHDeploy {
             hatsInstance.mintHat(hatterHatId, address(hatter));
 
             ActiveModule activeModule = new ActiveModule();
-            ERC1155EligibiltiyModule eligibilityModule = new ERC1155EligibiltiyModule(address(instance));
+            ERC1155EligibiltiyModule eligibilityModule = new ERC1155EligibiltiyModule(address(instance), 100);
+            ERC1155EligibiltiyModule eligibilityModule2 = new ERC1155EligibiltiyModule(address(instance), 500);
+            ERC1155EligibiltiyModule eligibilityModule3 = new ERC1155EligibiltiyModule(address(instance), 1500);
 
-            uint256 claimableHatId = hatsInstance.createHat(
+            uint256 claimableHatId1 = hatsInstance.createHat(
                 hatterHatId,
                 "Hat of Engineering",
-                100,
+                30,
                 address(eligibilityModule),
                 address(activeModule),
                 true,
                 "ipfs://bafkreicff2j67tg5g3klktkk4wavcctorj65y5upkolznwgbhmrakv4dba"
             );
 
-            console.log(claimableHatId);
+            uint256 claimableHatId2 = hatsInstance.createHat(
+                hatterHatId,
+                "Hat of Steardship",
+                30,
+                address(eligibilityModule2),
+                address(activeModule),
+                true,
+                "ipfs://bafkreibfian6fybuifdvchrjspqpedvrkakhwdnyhpwrroustpa7mjtto4"
+            );
+
+            uint256 claimableHatId3 = hatsInstance.createHat(
+                hatterHatId,
+                "Hat of Warden",
+                30,
+                address(eligibilityModule3),
+                address(activeModule),
+                true,
+                "ipfs://bafkreigvzey77niarqslm6wjd3e77ihwc5rcdrrahp3o6og2dszzzw2fpi"
+            );
+
+            console.log(claimableHatId1);
+            console.log(claimableHatId2);
+            console.log(claimableHatId3);
         }
 
         vm.stopBroadcast();
