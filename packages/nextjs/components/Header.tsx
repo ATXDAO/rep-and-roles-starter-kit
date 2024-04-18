@@ -102,6 +102,7 @@ export const Header = () => {
         },
       ]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [balanceOfClaimableHat2]);
 
   return (
