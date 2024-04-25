@@ -185,8 +185,6 @@ export const useRepTokens = (tokenIds: bigint[], address?: string, replacementTy
   const { addresses } = useMemo(() => {
     const addresses: string[] = [];
 
-    if (tokenIds === undefined) return { addresses };
-
     for (let i = 0; i < tokenIds.length; i++) {
       if (address) {
         addresses.push(address);

@@ -12,6 +12,18 @@ contract ReputationFaucet is ERC1155Holder {
     }
 
     function claim() external {
+        uint256[] memory tokenIds = new uint256[](3);
+        tokenIds[0] = 0;
+        tokenIds[1] = 1;
+        tokenIds[2] = 2;
+
+        uint256[] memory mintAmounts = new uint256[](3);
+        mintAmounts[0] = 120;
+        mintAmounts[1] = 120;
+        mintAmounts[2] = 120;
+
+        reputationTokens.distributeBatch(address(this), msg.sender, tokenIds, mintAmounts, "");
+
         // ReputationTokens.Sequence memory sequence;
         // sequence.operations = new ReputationTokens.Operation[](3);
 
