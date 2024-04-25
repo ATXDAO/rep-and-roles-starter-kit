@@ -12,15 +12,17 @@ contract ReputationFaucet is ERC1155Holder {
     }
 
     function claim() external {
-        ReputationTokens.Sequence memory sequence;
-        sequence.operations = new ReputationTokens.Operation[](3);
-        sequence.recipient = msg.sender;
+        // ReputationTokens.Sequence memory sequence;
+        // sequence.operations = new ReputationTokens.Operation[](3);
 
-        for (uint256 i = 0; i < sequence.operations.length; i++) {
-            sequence.operations[i].id = i;
-            sequence.operations[i].amount = 120;
-        }
+        // uint256[] memory tokenIds[]
+        // sequence.recipient = msg.sender;
 
-        reputationTokens.distribute(address(this), sequence);
+        // for (uint256 i = 0; i < sequence.operations.length; i++) {
+        //     sequence.operations[i].id = i;
+        //     sequence.operations[i].amount = 120;
+        // }
+
+        // reputationTokens.distribute(address(this), sequence);
     }
 }

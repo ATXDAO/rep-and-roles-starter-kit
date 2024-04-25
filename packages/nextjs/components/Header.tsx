@@ -79,7 +79,7 @@ export const Header = () => {
 
   const { address } = useAccount();
 
-  const { tokens } = useRepTokens(address, "nftstorage");
+  const { tokens } = useRepTokens([BigInt(0), BigInt(1), BigInt(2)], address, "nftstorage");
 
   const widgetComponents: ReputationComponent[] = ["Balance", "Image"];
 

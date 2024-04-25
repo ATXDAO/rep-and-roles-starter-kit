@@ -75,7 +75,7 @@ export function useGetTokenProperties(repTokensInstance: any, tokenId: bigint) {
     async function get() {
       if (!repTokensInstance) return;
 
-      const result = await repTokensInstance.read.getTokenProperties([tokenId]);
+      const result = await repTokensInstance.read.getTokenType([tokenId]);
       setTokenProperties(result);
     }
 
@@ -95,7 +95,7 @@ export function useGetTokensProperties(repTokensInstance: any, tokenIds: bigint[
 
       const arr = [];
       for (let i = 0; i < tokenIds.length; i++) {
-        const result = await repTokensInstance.read.getTokenProperties([tokenIds[i]]);
+        const result = await repTokensInstance.read.getTokenType([tokenIds[i]]);
 
         if (result !== undefined) arr.push(result);
       }
@@ -174,39 +174,42 @@ export const useGetRepToken = (address?: string, tokenId?: bigint, replacementTy
 
 type ReplacementType = "ipfs" | "nftstorage";
 
-export const useRepTokens = (address?: string, replacementType: ReplacementType = "ipfs") => {
+export const useRepTokens = (tokenIds: bigint[], address?: string, replacementType: ReplacementType = "ipfs") => {
   const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokens" });
 
-  const { data: numOfTokens } = useScaffoldContractRead({
-    contractName: "ReputationTokens",
-    functionName: "getNumOfTokenTypes",
-  });
+  // const { data: numOfTokens } = useScaffoldContractRead({
+  //   contractName: "ReputationTokens",
+  //   functionName: "getNumOfTokenTypes",
+  // });
 
   const { addresses } = useMemo(() => {
     const addresses: string[] = [];
 
-    if (numOfTokens) {
-      for (let i = 0; i < numOfTokens; i++) {
-        if (address) {
-          addresses.push(address);
-        }
+    if (tokenIds === undefined) return { addresses };
+
+    for (let i = 0; i < tokenIds.length; i++) {
+      if (address) {
+        addresses.push(address);
       }
     }
 
     return { addresses };
-  }, [numOfTokens, address]);
+  }, [address, tokenIds]);
 
-  const { tokenIds } = useMemo(() => {
-    const tokenIds: bigint[] = [];
+  // const { tokenIds } = useMemo(() => {
+  //   const tokenIds: bigint[] = [];
 
-    if (numOfTokens) {
-      for (let i = 0; i < numOfTokens; i++) {
-        tokenIds.push(BigInt(i));
-      }
-    }
+  //   if (numOfTokens) {
+  //     for (let i = 0; i < numOfTokens; i++) {
+  //       tokenIds.push(BigInt(i));
+  //     }
+  //   }
 
-    return { tokenIds };
-  }, [numOfTokens]);
+  //   return { tokenIds };
+  // }, [numOfTokens]);
+
+  console.log(addresses);
+  console.log(tokenIds);
 
   const { data: balanceOfBatch, refetch: refetchBalances } = useScaffoldContractRead({
     contractName: "ReputationTokens",

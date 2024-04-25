@@ -18,7 +18,11 @@ import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold
 export function RepTokensDemo() {
   const { address } = useAccount();
 
-  const { tokens: userTokens, refetchBalances: refetchUserBalances } = useRepTokens(address, "nftstorage");
+  const { tokens: userTokens, refetchBalances: refetchUserBalances } = useRepTokens(
+    [BigInt(0), BigInt(1), BigInt(2)],
+    address,
+    "nftstorage",
+  );
 
   const { data: reputationTokens } = useScaffoldContract({ contractName: "ReputationTokens" });
   const { token, refetchBalance } = useGetRepToken(address, BigInt(0), "nftstorage");
@@ -28,7 +32,11 @@ export function RepTokensDemo() {
   });
 
   const { data: faucet } = useScaffoldContract({ contractName: "ReputationFaucet" });
-  const { tokens: faucetTokens, refetchBalances: refetchFaucetBalances } = useRepTokens(faucet?.address, "nftstorage");
+  const { tokens: faucetTokens, refetchBalances: refetchFaucetBalances } = useRepTokens(
+    [BigInt(0), BigInt(1), BigInt(2)],
+    faucet?.address,
+    "nftstorage",
+  );
 
   return (
     <>

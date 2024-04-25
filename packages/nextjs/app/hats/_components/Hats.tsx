@@ -84,7 +84,7 @@ export function Hats() {
     args: [address, BigInt(claimableHatId3)],
   });
 
-  const { tokens: userTokens } = useRepTokens(address, "nftstorage");
+  const { tokens: userTokens } = useRepTokens([BigInt(0), BigInt(1), BigInt(2)], address, "nftstorage");
 
   const { writeAsync: claimHat1 } = useScaffoldContractWrite({
     contractName: "MultiClaimsHatter",
