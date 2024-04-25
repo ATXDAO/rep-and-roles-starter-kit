@@ -23,18 +23,5 @@ contract ReputationFaucet is ERC1155Holder {
         mintAmounts[2] = 120;
 
         reputationTokens.distributeBatch(address(this), msg.sender, tokenIds, mintAmounts, "");
-
-        // ReputationTokens.Sequence memory sequence;
-        // sequence.operations = new ReputationTokens.Operation[](3);
-
-        // uint256[] memory tokenIds[]
-        // sequence.recipient = msg.sender;
-
-        // for (uint256 i = 0; i < sequence.operations.length; i++) {
-        //     sequence.operations[i].id = i;
-        //     sequence.operations[i].amount = 120;
-        // }
-
-        // reputationTokens.distribute(address(this), sequence);
     }
 }

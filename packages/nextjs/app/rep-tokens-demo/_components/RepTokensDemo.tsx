@@ -9,7 +9,6 @@ import { AddressCard } from "~~/components/rep-tokens/cards/token-properties/Add
 import { BalanceCard } from "~~/components/rep-tokens/cards/token-properties/BalanceCard";
 import { DescriptionCard } from "~~/components/rep-tokens/cards/token-properties/DescriptionCard";
 import { ImageCard } from "~~/components/rep-tokens/cards/token-properties/ImageCard";
-import { MaxMintAmountPerTxCard } from "~~/components/rep-tokens/cards/token-properties/MaxMintAmountPerTxCard";
 import { NameCard } from "~~/components/rep-tokens/cards/token-properties/NameCard";
 import { TokenTypeCard } from "~~/components/rep-tokens/cards/token-properties/TokenTypeCard";
 import { useGetRepToken, useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
@@ -105,7 +104,6 @@ export function RepTokensDemo() {
             <DescriptionCard token={token} />
             <AddressCard token={token} />
             <TokenTypeCard token={token} />
-            <MaxMintAmountPerTxCard token={token} />
           </TabPanel>
 
           <TabPanel>

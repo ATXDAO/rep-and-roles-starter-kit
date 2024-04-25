@@ -5,7 +5,7 @@ import { AddressCard } from "./token-properties/AddressCard";
 import { BalanceCard } from "./token-properties/BalanceCard";
 import { DescriptionCard } from "./token-properties/DescriptionCard";
 import { ImageCard } from "./token-properties/ImageCard";
-import { MaxMintAmountPerTxCard } from "./token-properties/MaxMintAmountPerTxCard";
+// import { MaxMintAmountPerTxCard } from "./token-properties/MaxMintAmountPerTxCard";
 import { NameCard } from "./token-properties/NameCard";
 import { TokenTypeCard } from "./token-properties/TokenTypeCard";
 
@@ -80,9 +80,9 @@ export const ReputationTokenCard = ({
       cardContent.push(<TokenTypeCard key={j} token={token} />);
     }
 
-    if (components[j] === "MaxMintAmountPerTx") {
-      cardContent.push(<MaxMintAmountPerTxCard key={j} token={token} />);
-    }
+    // if (components[j] === "MaxMintAmountPerTx") {
+    //   cardContent.push(<MaxMintAmountPerTxCard key={j} token={token} />);
+    // }
 
     if (components[j] === "Address") {
       cardContent.push(<AddressCard key={j} token={token} />);

@@ -77,19 +77,17 @@ export const StylizedTokenCard = ({
     }
 
     if (components[j] === "TokenType") {
-      cardContent.push(
-        <StylizedStringCard key={j} value={`Token Type: ${token?.properties?.tokenType?.toString()}`} />,
-      );
+      cardContent.push(<StylizedStringCard key={j} value={`Token Type: ${token?.tokenType?.toString()}`} />);
     }
 
-    if (components[j] === "MaxMintAmountPerTx") {
-      cardContent.push(
-        <StylizedStringCard
-          key={j}
-          value={`Max Mint Amount Per Tx: ${token?.properties?.maxMintAmountPerTx?.toString()}`}
-        />,
-      );
-    }
+    // if (components[j] === "MaxMintAmountPerTx") {
+    //   cardContent.push(
+    //     <StylizedStringCard
+    //       key={j}
+    //       value={`Max Mint Amount Per Tx: ${token?.maxMintAmountPerTx?.toString()}`}
+    //     />,
+    //   );
+    // }
 
     if (components[j] === "Address") {
       cardContent.push(<StylizedAddressCard key={j} address={token?.address} />);

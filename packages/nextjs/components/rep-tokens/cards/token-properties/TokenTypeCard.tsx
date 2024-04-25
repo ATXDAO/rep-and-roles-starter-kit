@@ -10,12 +10,14 @@ type Props = {
 export const TokenTypeCard = ({ token, tokenType, type = "default" }: Props) => {
   let i = "Token Type: ";
 
+  console.log(token);
+
   if (token) {
-    if (token?.properties?.tokenType === 0) {
+    if (token?.tokenType === 0) {
       i += "Transferable";
-    } else if (token?.properties?.tokenType === 1) {
+    } else if (token?.tokenType === 1) {
       i += "Soulbound";
-    } else if (token?.properties?.tokenType === 2) {
+    } else if (token?.tokenType === 2) {
       i += "Redeemable";
     }
   } else if (tokenType) {

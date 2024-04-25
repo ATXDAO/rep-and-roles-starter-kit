@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useFetch } from "usehooks-ts";
 // import { useFetch } from "usehooks-ts";
 import { useScaffoldContract, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
@@ -14,7 +14,7 @@ export type Token = {
   name: string;
   description: string;
   id: number;
-  properties: any;
+  tokenType: any;
   address: string;
 };
 
@@ -54,7 +54,7 @@ export function useUris(contract: any, tokenIds: bigint[]) {
 
     setUris([...arr]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [contract?.address, tokenIds, uris.length]);
+  }, [contract?.address, tokenIds.length, uris.length]);
 
   useEffect(() => {
     async function get() {
@@ -63,7 +63,7 @@ export function useUris(contract: any, tokenIds: bigint[]) {
 
     get();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [contract?.address, tokenIds, uris.length, refetch]);
+  }, [contract?.address, tokenIds.length, uris.length, refetch]);
 
   return { uris, setUris, refetch };
 }
@@ -165,7 +165,7 @@ export const useGetRepToken = (address?: string, tokenId?: bigint, replacementTy
     name: result?.name,
     description: result?.description,
     image: result?.image?.replace("ipfs://", replacement[replacementType]),
-    properties: tokenProperties,
+    tokenType: tokenProperties,
     address: repTokensInstance?.address,
   } as Token;
 
@@ -182,17 +182,29 @@ export const useRepTokens = (tokenIds: bigint[], address?: string, replacementTy
   //   functionName: "getNumOfTokenTypes",
   // });
 
-  const { addresses } = useMemo(() => {
-    const addresses: string[] = [];
+  const addresses: string[] = [];
 
-    for (let i = 0; i < tokenIds.length; i++) {
-      if (address) {
-        addresses.push(address);
-      }
+  for (let i = 0; i < tokenIds.length; i++) {
+    if (address) {
+      addresses.push(address);
     }
+  }
 
-    return { addresses };
-  }, [address, tokenIds]);
+  console.log(addresses);
+
+  // const { addresses } = useMemo(() => {
+  //   const addresses: string[] = [];
+
+  //   if (tokenIds.length > 0) {
+  //     for (let i = 0; i < tokenIds.length; i++) {
+  //       if (address) {
+  //         addresses.push(address);
+  //       }
+  //     }
+  //   }
+
+  //   return { addresses };
+  // }, [address, tokenIds.length]);
 
   // const { tokenIds } = useMemo(() => {
   //   const tokenIds: bigint[] = [];
@@ -206,8 +218,8 @@ export const useRepTokens = (tokenIds: bigint[], address?: string, replacementTy
   //   return { tokenIds };
   // }, [numOfTokens]);
 
-  console.log(addresses);
-  console.log(tokenIds);
+  // console.log(addresses);
+  // console.log(tokenIds);
 
   const { data: balanceOfBatch, refetch: refetchBalances } = useScaffoldContractRead({
     contractName: "ReputationTokens",
@@ -237,13 +249,11 @@ export const useRepTokens = (tokenIds: bigint[], address?: string, replacementTy
       name: responses[i]?.name,
       description: responses[i]?.description,
       image: responses[i]?.image?.replace("ipfs://", replacement[replacementType]),
-      properties: tokensProperties[i],
+      tokenType: tokensProperties[i],
       address: repTokensInstance?.address,
     } as Token;
     tokens.push(token);
   }
-
-  // const addr = repTokensInstance?.address ?? "";
 
   return { tokens: tokens, refetchBalances };
 };

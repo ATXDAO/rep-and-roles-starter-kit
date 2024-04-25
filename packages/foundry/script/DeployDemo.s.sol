@@ -7,7 +7,6 @@ import {ScaffoldETHDeploy} from "./DeployHelpers.s.sol";
 import {ReputationTokens} from "@atxdao/contracts/reputation/ReputationTokens.sol";
 import {IReputationTokensTypes} from "@atxdao/contracts/reputation/IReputationTokensTypes.sol";
 import {Hats} from "../contracts/Hats/Hats.sol";
-// import {MultiClaimsHatter} from "../contracts/MultiClaimsHatter.sol";
 import {MultiClaimsHatter} from "../contracts/MultiClaimsHatter.sol";
 import {ERC1155EligibiltiyModule} from "../contracts/ERC1155EligibiltiyModule.sol";
 import {ActiveModule} from "../contracts/ActiveModule.sol";
@@ -55,8 +54,6 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         mintAmounts[2] = 10000;
 
         instance.mintBatch(address(faucet), tokenIds, mintAmounts, "");
-        // batchMint(instance, controller, 50, 25, 75);
-        // batchMint(instance, address(faucet), 10000, 10000, 10000);
 
         uint256 id;
         assembly {
@@ -133,14 +130,6 @@ contract DeployDemoScript is ScaffoldETHDeploy {
     }
 
     function batchCreateTokens(ReputationTokens instance) public {
-        // ReputationTokens.TokenProperties[] memory tokensProperties = new ReputationTokens.TokenProperties[](3);
-
-        // tokensProperties[0] = ReputationTokens.TokenProperties(ReputationTokens.TokenType.Soulbound, 10000);
-
-        // tokensProperties[1] = ReputationTokens.TokenProperties(ReputationTokens.TokenType.Redeemable, 10000);
-
-        // tokensProperties[2] = ReputationTokens.TokenProperties(ReputationTokens.TokenType.Transferable, 10000);
-
         uint256[] memory tokenIds = new uint256[](3);
         tokenIds[0] = 0;
         tokenIds[1] = 1;
@@ -152,7 +141,6 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         tokenTypes[2] = IReputationTokensTypes.TokenType.Transferable;
 
         instance.updateTokenBatch(tokenIds, tokenTypes);
-        // instance.batchCreateTokens(tokensProperties);
     }
 
     function batchSetTokenURIs(ReputationTokens instance) public {
@@ -162,23 +150,4 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         instance.setTokenURI(1, string.concat(BASE_URI, "1"));
         instance.setTokenURI(2, "ipfs://bafkreiheocygb3ty4uo3znjw2wz2asjzavn56owlqjoz4cvxvspg64egtq");
     }
-
-    // function batchMint(
-    //     ReputationTokens instance,
-    //     address recipient,
-    //     uint256[]
-    //     uint256 token0Amount,
-    //     uint256 token1Amount,
-    //     uint256 token2Amount
-    // ) public {
-    //     ReputationTokens.Sequence memory mintOperations;
-    //     mintOperations.recipient = recipient;
-
-    //     mintOperations.operations = new ReputationTokens.Operation[](3);
-    //     mintOperations.operations[0] = ReputationTokens.Operation(0, token0Amount);
-    //     mintOperations.operations[1] = ReputationTokens.Operation(1, token1Amount);
-    //     mintOperations.operations[2] = ReputationTokens.Operation(2, token2Amount);
-
-    //     instance.mint(mintOperations);
-    // }
 }
