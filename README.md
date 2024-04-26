@@ -1,4 +1,9 @@
-# Reputation & Roles
+# Reputation & Roles Starter Kit
+
+<h4 align="center">
+  <a href="https://hotmanics.github.io/rep-and-roles-docs/">Documentation</a> |
+  <a href="https://github.com/atxdao/rep-and-roles-starter-kit/">Core Smart Contract Repo</a>
+</h4>
 
 An open-source toolkit used to quickly and easily deploy your own Reputation & Roles smart contracts along with a decentralized application to interact with them.
 
