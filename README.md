@@ -1,7 +1,7 @@
 # Reputation & Roles Starter Kit
 
 <h4 align="center">
-  <a href="https://hotmanics.github.io/rep-and-roles-docs/">Documentation</a> |
+  <a href="https://hotmanics.github.io/rep-and-roles-docs/starter-kit/overview.html">Documentation</a> |
   <a href="https://github.com/atxdao/rep-and-roles-starter-kit/">Core Smart Contract Repo</a>
 </h4>
 
