@@ -84,6 +84,7 @@ export const Header = () => {
         <ReputationTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" />,
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tokens.length]);
 
   useEffect(() => {
