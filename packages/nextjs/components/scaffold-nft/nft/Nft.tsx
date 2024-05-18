@@ -61,6 +61,14 @@ export const Nft = ({
       );
     }
 
+    console.log(token);
+
+    if (renderOrder[i] === "balanceOf") {
+      selectedElement = (
+        <Text value={token?.balanceOf?.toString()} size={size} valueClassName={bigAndBoldTextStyleMap[size]} />
+      );
+    }
+
     if (renderOrder[i] === "Name") {
       selectedElement = (
         <Text value={token?.metadata?.name} size={size} valueClassName={bigAndBoldTextStyleMap[size]} />

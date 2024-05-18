@@ -4,6 +4,7 @@ export type ScaffoldToken = {
   collectionSymbol?: string;
   id?: bigint;
   uri?: string;
+  balanceOf?: bigint;
   metadata?: {
     name?: string;
     description?: string;

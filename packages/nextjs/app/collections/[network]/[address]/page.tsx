@@ -36,7 +36,7 @@ export default function CollectionPage({ params }: { params: { network: string; 
   const { collection, isLoading, isError } = useTokens(
     params["network"],
     params["address"],
-    userAccount.address!,
+    userAccount.address,
     tokenIds,
     "nftstorage",
     //chosenOption2,
@@ -49,7 +49,7 @@ export default function CollectionPage({ params }: { params: { network: string; 
         collection={collection}
         isLoading={isLoading}
         isError={isError}
-        renderOrder={["Image", "Token Id", "Name", "Description", "Attributes"]}
+        renderOrder={["balanceOf", "Image", "Token Id", "Name", "Description", "Attributes"]}
       />
     </div>
   );

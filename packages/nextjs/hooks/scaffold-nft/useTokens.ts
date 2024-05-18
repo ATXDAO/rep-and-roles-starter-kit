@@ -18,7 +18,7 @@ const replacement = {
 export const useTokens = (
   chainName: string,
   address: string,
-  userAddress: string,
+  userAddress: string | undefined,
   tokenIds: bigint[],
   replacementType: string,
   // loadType = "url",
@@ -44,27 +44,27 @@ export const useTokens = (
       setIsLoading(true);
       setIsError(false);
 
-      let collectionName;
-      try {
-        collectionName = await publicClient?.readContract({
-          address,
-          abi: erc1155Abi,
-          functionName: "name",
-        });
-      } catch (e) {
-        console.log(e);
-      }
+      // let collectionName;
+      // try {
+      //   collectionName = await publicClient?.readContract({
+      //     address,
+      //     abi: erc1155Abi,
+      //     functionName: "name",
+      //   });
+      // } catch (e) {
+      //   console.log(e);
+      // }
 
-      let collectionSymbol;
-      try {
-        collectionSymbol = await publicClient?.readContract({
-          address,
-          abi: erc1155Abi,
-          functionName: "symbol",
-        });
-      } catch (e) {
-        console.log(e);
-      }
+      // let collectionSymbol;
+      // try {
+      //   collectionSymbol = await publicClient?.readContract({
+      //     address,
+      //     abi: erc1155Abi,
+      //     functionName: "symbol",
+      //   });
+      // } catch (e) {
+      //   console.log(e);
+      // }
       try {
         // const collectionName = await publicClient?.readContract({
         //   address,
@@ -79,17 +79,6 @@ export const useTokens = (
         // });
 
         //const balanceOf =
-
-        try {
-          await publicClient?.readContract({
-            address,
-            abi: erc1155Abi,
-            functionName: "balanceOf",
-            args: [userAddress],
-          });
-        } catch (e) {
-          console.log(e);
-        }
 
         const arr = [];
 
@@ -133,21 +122,38 @@ export const useTokens = (
             alt: metadataJson.name + " Image",
           };
 
+          let balanceOf;
+          try {
+            balanceOf = await publicClient?.readContract({
+              address,
+              abi: erc1155Abi,
+              functionName: "balanceOf",
+              args: [userAddress, tokenIds[i]],
+            });
+          } catch (e) {
+            console.log("NYEUH22222");
+            console.log(userAddress);
+
+            console.log(e);
+            console.log("NYEUH");
+          }
+
           const token = {} as any;
           token.address = address;
           token.metadata = metadataJson;
           token.id = tokenIds[i];
+          token.balanceOf = balanceOf;
           token.uri = tokenURIFormatted;
-          token.collectionName = collectionName;
-          token.collectionSymbol = collectionSymbol;
+          // token.collectionName = collectionName;
+          // token.collectionSymbol = collectionSymbol;
           arr.push(token);
         }
 
         const collection = {} as ScaffoldCollection;
         collection.tokens = arr;
         collection.address = address;
-        collection.symbol = collectionSymbol as string | undefined;
-        collection.name = collectionName as string | undefined;
+        // collection.symbol = collectionSymbol as string | undefined;
+        // collection.name = collectionName as string | undefined;
 
         setCollection(collection);
       } catch (e) {
@@ -158,7 +164,7 @@ export const useTokens = (
       setIsLoading(false);
     }
     get();
-  }, [publicClient?.account, tokenIds]);
+  }, [publicClient?.account, tokenIds, userAddress]);
 
   return { collection, isLoading, isError };
 };
