@@ -33,6 +33,7 @@
     "react-tabs": "^6.0.2",
     "use-debounce": "~8.0.4",
     "usehooks-ts": "2.13.0",
+    "uuid": "^9.0.1",
     "viem": "2.8.16",
     "wagmi": "2.5.12",
     "zustand": "~4.1.2"
@@ -43,6 +44,7 @@
     "@types/nprogress": "^0",
     "@types/react": "^18.0.21",
     "@types/react-copy-to-clipboard": "^5.0.4",
+    "@types/uuid": "^9",
     "@typescript-eslint/eslint-plugin": "~5.40.0",
     "abitype": "1.0.2",
     "autoprefixer": "~10.4.12",
