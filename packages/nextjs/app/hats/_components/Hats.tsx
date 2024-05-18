@@ -3,7 +3,7 @@
 import { useFetch } from "usehooks-ts";
 import { useAccount, useChainId } from "wagmi";
 import { useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
-import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
 // const claimableHatId = "26960358049567071831564234593151059434471056522609336320533481914368";
 
@@ -36,19 +36,19 @@ export function Hats() {
   //   args: [address, BigInt(claimableHatId)],
   // });
 
-  const { data: viewHat1 } = useScaffoldContractRead({
+  const { data: viewHat1 } = useScaffoldReadContract({
     contractName: "Hats",
     functionName: "viewHat",
     args: [BigInt(claimableHatId1)],
   });
 
-  const { data: viewHat2 } = useScaffoldContractRead({
+  const { data: viewHat2 } = useScaffoldReadContract({
     contractName: "Hats",
     functionName: "viewHat",
     args: [BigInt(claimableHatId2)],
   });
 
-  const { data: viewHat3 } = useScaffoldContractRead({
+  const { data: viewHat3 } = useScaffoldReadContract({
     contractName: "Hats",
     functionName: "viewHat",
     args: [BigInt(claimableHatId3)],
@@ -66,19 +66,19 @@ export function Hats() {
   //     args: [BigInt(claimableHatId)],
   //   });
 
-  const { data: balanceOfClaimableHat1, refetch: refetchBalance1 } = useScaffoldContractRead({
+  const { data: balanceOfClaimableHat1, refetch: refetchBalance1 } = useScaffoldReadContract({
     contractName: "Hats",
     functionName: "balanceOf",
     args: [address, BigInt(claimableHatId1)],
   });
 
-  const { data: balanceOfClaimableHat2, refetch: refetchBalance2 } = useScaffoldContractRead({
+  const { data: balanceOfClaimableHat2, refetch: refetchBalance2 } = useScaffoldReadContract({
     contractName: "Hats",
     functionName: "balanceOf",
     args: [address, BigInt(claimableHatId2)],
   });
 
-  const { data: balanceOfClaimableHat3, refetch: refetchBalance3 } = useScaffoldContractRead({
+  const { data: balanceOfClaimableHat3, refetch: refetchBalance3 } = useScaffoldReadContract({
     contractName: "Hats",
     functionName: "balanceOf",
     args: [address, BigInt(claimableHatId3)],
@@ -86,23 +86,23 @@ export function Hats() {
 
   const { tokens: userTokens } = useRepTokens([BigInt(0), BigInt(1), BigInt(2)], address, "nftstorage");
 
-  const { writeAsync: claimHat1 } = useScaffoldContractWrite({
-    contractName: "MultiClaimsHatter",
-    functionName: "claimHat",
-    args: [BigInt(claimableHatId1)],
-  });
+  const { writeContractAsync: writeMultiClaimsHatterAsync } = useScaffoldWriteContract("MultiClaimsHatter");
+  // {
+  //   functionName: "claimHat",
+  //   args: [BigInt(claimableHatId1)],
+  // });
 
-  const { writeAsync: claimHat2 } = useScaffoldContractWrite({
-    contractName: "MultiClaimsHatter",
-    functionName: "claimHat",
-    args: [BigInt(claimableHatId2)],
-  });
+  // const { writeAsync: claimHat2 } = useScaffoldContractWrite({
+  //   contractName: "MultiClaimsHatter",
+  //   functionName: "claimHat",
+  //   args: [BigInt(claimableHatId2)],
+  // });
 
-  const { writeAsync: claimHat3 } = useScaffoldContractWrite({
-    contractName: "MultiClaimsHatter",
-    functionName: "claimHat",
-    args: [BigInt(claimableHatId3)],
-  });
+  // const { writeAsync: claimHat3 } = useScaffoldContractWrite({
+  //   contractName: "MultiClaimsHatter",
+  //   functionName: "claimHat",
+  //   args: [BigInt(claimableHatId3)],
+  // });
 
   const result1: any = useFetch(viewHat1 ? viewHat1[5].replace("ipfs://", "https://nftstorage.link/ipfs/") : "");
   const result2: any = useFetch(viewHat2 ? viewHat2[5].replace("ipfs://", "https://nftstorage.link/ipfs/") : "");
@@ -140,7 +140,7 @@ export function Hats() {
               disabled={!canClaimHat1}
               className="btn btn-secondary btn-sm font-normal gap-1"
               onClick={async () => {
-                await claimHat1();
+                await writeMultiClaimsHatterAsync({ functionName: "claimHat", args: [BigInt(claimableHatId1)] });
                 await refetchBalance1();
               }}
             >
@@ -163,7 +163,8 @@ export function Hats() {
               disabled={!canClaimHat2}
               className="btn btn-secondary btn-sm font-normal gap-1"
               onClick={async () => {
-                await claimHat2();
+                await writeMultiClaimsHatterAsync({ functionName: "claimHat", args: [BigInt(claimableHatId2)] });
+
                 await refetchBalance2();
               }}
             >
@@ -187,7 +188,8 @@ export function Hats() {
               disabled={!canClaimHat3}
               className="btn btn-secondary btn-sm font-normal gap-1"
               onClick={async () => {
-                await claimHat3();
+                await writeMultiClaimsHatterAsync({ functionName: "claimHat", args: [BigInt(claimableHatId3)] });
+
                 await refetchBalance3();
               }}
             >

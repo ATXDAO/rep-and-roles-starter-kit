@@ -7,9 +7,11 @@
     "compile": "forge compile",
     "deploy": "forge build --build-info --build-info-path out/build-info/ && forge script script/Deploy.s.sol --rpc-url ${1:-default_network} --broadcast --legacy && node script/generateTsAbis.js",
     "deploy:verify": "forge build --build-info --build-info-path out/build-info/ && forge script script/Deploy.s.sol --rpc-url ${1:-default_network} --broadcast --legacy --verify ; node script/generateTsAbis.js",
+    "flatten": "forge flatten",
     "fork": "anvil --fork-url ${0:-mainnet} --chain-id 31337 --config-out localhost.json",
+    "format": "forge fmt && prettier --write ./script/**/*.js",
     "generate": "node script/generateAccount.js",
-    "lint": "forge fmt",
+    "lint": "forge fmt --check && prettier --check ./script/**/*.js",
     "test": "forge test",
     "verify": "forge build --build-info --build-info-path out/build-info/ && forge script script/VerifyAll.s.sol --ffi --rpc-url ${1:-default_network}"
   },

@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokens: {
-      address: "0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690",
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       abi: [
         {
           type: "constructor",
@@ -41,19 +41,6 @@ const deployedContracts = {
         {
           type: "function",
           name: "MINTER_ROLE",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "bytes32",
-              internalType: "bytes32",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "TOKEN_CREATOR_ROLE",
           inputs: [],
           outputs: [
             {
@@ -1404,7 +1391,7 @@ const deployedContracts = {
       },
     },
     ReputationFaucet: {
-      address: "0x70e0bA845a1A0F2DA3359C97E0285013525FFC49",
+      address: "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
       abi: [
         {
           type: "constructor",
@@ -1522,10 +1509,14 @@ const deployedContracts = {
           stateMutability: "view",
         },
       ],
-      inheritedFunctions: {},
+      inheritedFunctions: {
+        onERC1155BatchReceived: "lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol",
+        onERC1155Received: "lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol",
+        supportsInterface: "lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol",
+      },
     },
     Hats: {
-      address: "0x1291Be112d480055DaFd8a610b7d1e203891C274",
+      address: "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
       abi: [
         {
           type: "constructor",
@@ -3486,7 +3477,7 @@ const deployedContracts = {
       },
     },
     MultiClaimsHatter: {
-      address: "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+      address: "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1",
       abi: [
         {
           type: "constructor",
@@ -3812,7 +3803,7 @@ const deployedContracts = {
       },
     },
     ActiveModule: {
-      address: "0x2bdCC0de6bE1f7D2ee689a0342D76F52E8EFABa3",
+      address: "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f",
       abi: [
         {
           type: "function",
@@ -3842,7 +3833,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ERC1155EligibiltiyModule: {
-      address: "0xc351628EB244ec633d5f21fBD6621e1a683B1181",
+      address: "0x09635F643e140090A9A8Dcd712eD6285858ceBef",
       abi: [
         {
           type: "constructor",

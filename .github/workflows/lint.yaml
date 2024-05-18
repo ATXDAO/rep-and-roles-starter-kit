@@ -17,7 +17,6 @@ jobs:
         os: [ubuntu-latest]
         node: [lts/*]
 
-
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -26,26 +25,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-          cache : yarn
+          cache: yarn
 
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@v1
-
-      - name: Run foundry node, deploy contracts (& generate contracts typescript output)
-        env:
-          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+      - name: Run hardhat node, deploy contracts (& generate contracts typescript output)
         run: yarn chain & yarn deploy
-        id: build
-
-      - name: Run tests
-        run: yarn test -vvv
 
       - name: Run nextjs lint
         run: yarn next:lint --max-warnings=0
 
       - name: Check typings on nextjs
         run: yarn next:check-types
-      
+
+      - name: Run hardhat lint
+        run: yarn hardhat:lint --max-warnings=0

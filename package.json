@@ -13,19 +13,22 @@
     "compile": "yarn workspace @se-2/foundry compile",
     "deploy": "yarn workspace @se-2/foundry deploy",
     "deploy:verify": "yarn workspace @se-2/foundry deploy:verify",
+    "flatten": "yarn workspace @se-2/foundry flatten",
     "fork": "yarn workspace @se-2/foundry fork",
+    "format": "yarn next:format && yarn foundry:format",
+    "foundry:format": "yarn workspace @se-2/foundry format",
     "foundry:lint": "yarn workspace @se-2/foundry lint",
     "foundry:test": "yarn workspace @se-2/foundry test",
-    "foundry:snapshot": "yarn workspace @se-2/foundry snapshot",
     "generate": "yarn workspace @se-2/foundry generate",
     "postinstall": "husky install",
+    "next:build": "yarn workspace @se-2/nextjs build",
     "next:check-types": "yarn workspace @se-2/nextjs check-types",
     "next:format": "yarn workspace @se-2/nextjs format",
     "next:lint": "yarn workspace @se-2/nextjs lint",
+    "next:serve": "yarn workspace @se-2/nextjs serve",
     "precommit": "lint-staged",
     "prepare": "install-self-peers -- --ignore-scripts",
     "start": "yarn workspace @se-2/nextjs dev",
-    "snapshot": "yarn foundry:snapshot",
     "test": "yarn foundry:test",
     "vercel": "yarn workspace @se-2/nextjs vercel",
     "vercel:yolo": "yarn workspace @se-2/nextjs vercel:yolo",
@@ -36,7 +39,12 @@
   },
   "devDependencies": {
     "husky": "~8.0.3",
-    "lint-staged": "~13.2.2"
+    "lint-staged": "~13.2.2",
+    "next": "~14.0.4",
+    "vercel": "~32.4.1"
   },
-  "packageManager": "yarn@3.2.3"
+  "packageManager": "yarn@3.2.3",
+  "engines": {
+    "node": ">=18.17.0"
+  }
 }

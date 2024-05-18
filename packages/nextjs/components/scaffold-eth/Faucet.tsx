@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import { Address as AddressType, createWalletClient, http, parseEther } from "viem";
 import { hardhat } from "viem/chains";
-import { useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
 import { Address, AddressInput, Balance, EtherInput } from "~~/components/scaffold-eth";
 import { useTransactor } from "~~/hooks/scaffold-eth";
-import { getParsedError, notification } from "~~/utils/scaffold-eth";
+import { notification } from "~~/utils/scaffold-eth";
 
 // Account index to use from generated hardhat accounts.
 const FAUCET_ACCOUNT_INDEX = 0;
@@ -26,7 +26,7 @@ export const Faucet = () => {
   const [faucetAddress, setFaucetAddress] = useState<AddressType>();
   const [sendValue, setSendValue] = useState("");
 
-  const { chain: ConnectedChain } = useNetwork();
+  const { chain: ConnectedChain } = useAccount();
 
   const faucetTxn = useTransactor(localWalletClient);
 
@@ -55,7 +55,7 @@ export const Faucet = () => {
   }, []);
 
   const sendETH = async () => {
-    if (!faucetAddress) {
+    if (!faucetAddress || !inputAddress) {
       return;
     }
     try {
@@ -64,15 +64,12 @@ export const Faucet = () => {
         to: inputAddress,
         value: parseEther(sendValue as `${number}`),
         account: faucetAddress,
-        chain: hardhat,
       });
       setLoading(false);
       setInputAddress(undefined);
       setSendValue("");
     } catch (error) {
-      const parsedError = getParsedError(error);
       console.error("⚡️ ~ file: Faucet.tsx:sendETH ~ error", error);
-      notification.error(parsedError);
       setLoading(false);
     }
   };

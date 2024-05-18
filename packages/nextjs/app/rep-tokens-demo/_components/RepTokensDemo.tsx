@@ -12,7 +12,7 @@ import { ImageCard } from "~~/components/rep-tokens/cards/token-properties/Image
 import { NameCard } from "~~/components/rep-tokens/cards/token-properties/NameCard";
 import { TokenTypeCard } from "~~/components/rep-tokens/cards/token-properties/TokenTypeCard";
 import { useGetRepToken, useRepTokens } from "~~/components/rep-tokens/hooks/Hooks";
-import { useScaffoldContract, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useScaffoldContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
 export function RepTokensDemo() {
   const { address } = useAccount();
@@ -25,10 +25,7 @@ export function RepTokensDemo() {
 
   const { data: reputationTokens } = useScaffoldContract({ contractName: "ReputationTokens" });
   const { token, refetchBalance } = useGetRepToken(address, BigInt(0), "nftstorage");
-  const { writeAsync: claim } = useScaffoldContractWrite({
-    contractName: "ReputationFaucet",
-    functionName: "claim",
-  });
+  const { writeContractAsync: writeFaucetAsync } = useScaffoldWriteContract("ReputationFaucet");
 
   const { data: faucet } = useScaffoldContract({ contractName: "ReputationFaucet" });
   const { tokens: faucetTokens, refetchBalances: refetchFaucetBalances } = useRepTokens(
@@ -116,7 +113,8 @@ export function RepTokensDemo() {
                 <button
                   className="btn btn-primary btn-sm font-normal gap-1"
                   onClick={async () => {
-                    await claim();
+                    await writeFaucetAsync({ functionName: "claim" });
+
                     await refetchUserBalances();
                     await refetchFaucetBalances();
                     await refetchBalance();

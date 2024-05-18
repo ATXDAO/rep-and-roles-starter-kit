@@ -10,7 +10,7 @@ import { useRepTokens } from "./rep-tokens/hooks/Hooks";
 import { useAccount } from "wagmi";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
-import { useOutsideClick, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
+import { useOutsideClick, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 type HeaderMenuLink = {
   label: string;
@@ -34,11 +34,7 @@ export const menuLinks: HeaderMenuLink[] = [
   },
 ];
 
-type Props = {
-  menuLinks: HeaderMenuLink[];
-};
-
-export const HeaderMenuLinks = ({ menuLinks }: Props) => {
+export const HeaderMenuLinks = () => {
   const pathname = usePathname();
 
   return (
@@ -68,14 +64,14 @@ export const HeaderMenuLinks = ({ menuLinks }: Props) => {
  * Site header
  */
 export const Header = () => {
-  const [instancedHeaderLinks, setInstancedHeaderLinks] = useState(menuLinks);
-
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const burgerMenuRef = useRef<HTMLDivElement>(null);
   useOutsideClick(
     burgerMenuRef,
     useCallback(() => setIsDrawerOpen(false), []),
   );
+
+  const [instancedHeaderLinks, setInstancedHeaderLinks] = useState(menuLinks);
 
   const { address } = useAccount();
 
@@ -85,7 +81,7 @@ export const Header = () => {
 
   const claimableHatId2 = "26960358055844173566950915356986848857678722938711691764997516427264";
 
-  const { data: balanceOfClaimableHat2 } = useScaffoldContractRead({
+  const { data: balanceOfClaimableHat2 } = useScaffoldReadContract({
     contractName: "Hats",
     functionName: "balanceOf",
     args: [address, BigInt(claimableHatId2)],
@@ -126,25 +122,26 @@ export const Header = () => {
                 setIsDrawerOpen(false);
               }}
             >
-              <HeaderMenuLinks menuLinks={instancedHeaderLinks} />
+              <HeaderMenuLinks />
             </ul>
           )}
         </div>
         <Link href="/" passHref className="hidden lg:flex items-center gap-2 ml-4 mr-6 shrink-0">
           <div className="flex relative w-10 h-10">
-            <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo-transparent.png" />
+            <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold leading-tight">Reputation & Roles</span>
-            <span className="text-xs">Onchain tracking of trust</span>
+            <span className="font-bold leading-tight">Scaffold-ETH</span>
+            <span className="text-xs">Ethereum dev stack</span>
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
-          <HeaderMenuLinks menuLinks={instancedHeaderLinks} />
+          <HeaderMenuLinks />
         </ul>
       </div>
       <div className="navbar-end flex-grow mr-4">
         <ReputationTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" />
+
         <RainbowKitCustomConnectButton />
         <FaucetButton />
       </div>

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useFetch } from "usehooks-ts";
 // import { useFetch } from "usehooks-ts";
-import { useScaffoldContract, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
+import { useScaffoldContract, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 const replacement = {
   ipfs: "https://ipfs.io/ipfs/",
@@ -25,7 +25,7 @@ export type Token = {
 // }
 
 export const useUri = (tokenId?: number) => {
-  return useScaffoldContractRead({
+  return useScaffoldReadContract({
     contractName: "ReputationTokens",
     functionName: "uri",
     args: [BigInt(Number(tokenId))],
@@ -33,7 +33,7 @@ export const useUri = (tokenId?: number) => {
 };
 
 export const useBalanceOf = (address?: string, tokenId?: number) => {
-  return useScaffoldContractRead({
+  return useScaffoldReadContract({
     contractName: "ReputationTokens",
     functionName: "balanceOf",
     args: [address, BigInt(Number(tokenId))],
@@ -141,7 +141,7 @@ function useFetches(uris: string[]) {
 export const useGetRepToken = (address?: string, tokenId?: bigint, replacementType: ReplacementType = "ipfs") => {
   const { data: repTokensInstance } = useScaffoldContract({ contractName: "ReputationTokens" });
 
-  const { data: balanceOf, refetch: refetchBalance } = useScaffoldContractRead({
+  const { data: balanceOf, refetch: refetchBalance } = useScaffoldReadContract({
     contractName: "ReputationTokens",
     functionName: "balanceOf",
     args: [address, tokenId],
@@ -149,7 +149,7 @@ export const useGetRepToken = (address?: string, tokenId?: bigint, replacementTy
 
   const { tokenProperties } = useGetTokenProperties(repTokensInstance, tokenId || BigInt(0));
 
-  const { data: uri } = useScaffoldContractRead({
+  const { data: uri } = useScaffoldReadContract({
     contractName: "ReputationTokens",
     functionName: "uri",
     args: [tokenId],
@@ -221,7 +221,7 @@ export const useRepTokens = (tokenIds: bigint[], address?: string, replacementTy
   // console.log(addresses);
   // console.log(tokenIds);
 
-  const { data: balanceOfBatch, refetch: refetchBalances } = useScaffoldContractRead({
+  const { data: balanceOfBatch, refetch: refetchBalances } = useScaffoldReadContract({
     contractName: "ReputationTokens",
     functionName: "balanceOfBatch",
     args: [addresses, tokenIds],

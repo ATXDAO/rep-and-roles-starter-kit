@@ -70,7 +70,6 @@ On the home page, you should see many colorful and variable cards and widgets wh
 
 By navigating to the `Debug Contracts` page, you can interact with and view the properties of your deployed Reputation System!
 
-
 <!-- # 🏗 Scaffold-ETH 2
 
 🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
