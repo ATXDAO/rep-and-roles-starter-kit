@@ -41,7 +41,7 @@ export const Collection = ({
       mainContent = (
         <>
           <div className="w-full">
-            <CollectionDetails collection={collection} />
+            <CollectionDetails collection={collection} renderOrder={["Address"]} />
           </div>
           <div className="flex flex-wrap justify-center m-1 p-1 bg-base-100 rounded lg:max-w-[1300px]">
             {tokensComponents}

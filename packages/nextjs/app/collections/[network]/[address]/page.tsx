@@ -45,7 +45,12 @@ export default function CollectionPage({ params }: { params: { network: string; 
   return (
     <div className="flex flex-col items-center justify-center">
       {/* {advancedOutput} */}
-      <Collection collection={collection} isLoading={isLoading} isError={isError} />
+      <Collection
+        collection={collection}
+        isLoading={isLoading}
+        isError={isError}
+        renderOrder={["Image", "Token Id", "Name", "Description", "Attributes"]}
+      />
     </div>
   );
 }

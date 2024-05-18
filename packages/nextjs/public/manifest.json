@@ -1,5 +1,5 @@
 {
-  "name": "Scaffold-ETH 2 DApp",
-  "description": "A DApp built with Scaffold-ETH",
-  "iconPath": "logo.svg"
+  "name": "Reputation & Roles",
+  "description": "Onchain trust tracking and permissionless roles & authorities",
+  "iconPath": "logo-transparent.png"
 }
