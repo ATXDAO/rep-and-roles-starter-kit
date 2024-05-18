@@ -18,12 +18,7 @@ type HeaderMenuLink = {
   icon?: React.ReactNode;
 };
 
-export const menuLinks: HeaderMenuLink[] = [
-  {
-    label: "Home",
-    href: "/",
-  },
-];
+export const menuLinks: HeaderMenuLink[] = [];
 
 export const HeaderMenuLinks = () => {
   const pathname = usePathname();
@@ -91,6 +86,11 @@ export const Header = () => {
     const linksToAdd: any = [];
 
     if (location?.hostname === "localhost" || location?.hostname === "127.0.0.1") {
+      linksToAdd.push({
+        label: "Home",
+        href: "/",
+      });
+
       linksToAdd.push({
         label: "Roles",
         href: "/hats",
