@@ -131,11 +131,20 @@ export const useTokens = (
               args: [userAddress, tokenIds[i]],
             });
           } catch (e) {
-            console.log("NYEUH22222");
-            console.log(userAddress);
-
             console.log(e);
-            console.log("NYEUH");
+          }
+
+          let tokenType;
+
+          try {
+            tokenType = await publicClient?.readContract({
+              address,
+              abi: erc1155Abi,
+              functionName: "getTokenType",
+              args: [tokenIds[i]],
+            });
+          } catch (e) {
+            console.log(e);
           }
 
           const token = {} as any;
@@ -144,6 +153,7 @@ export const useTokens = (
           token.id = tokenIds[i];
           token.balanceOf = balanceOf;
           token.uri = tokenURIFormatted;
+          token.tokenType = tokenType;
           // token.collectionName = collectionName;
           // token.collectionSymbol = collectionSymbol;
           arr.push(token);

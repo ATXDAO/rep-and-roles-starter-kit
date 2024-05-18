@@ -61,9 +61,21 @@ export const Nft = ({
       );
     }
 
-    console.log(token);
+    if (renderOrder[i] === "Type") {
+      let i = "";
 
-    if (renderOrder[i] === "balanceOf") {
+      if (token?.tokenType === 0) {
+        i += "Transferable";
+      } else if (token?.tokenType === 1) {
+        i += "Soulbound";
+      } else if (token?.tokenType === 2) {
+        i += "Redeemable";
+      }
+
+      selectedElement = <Text value={i} size={size} valueClassName={bigAndBoldTextStyleMap[size]} />;
+    }
+
+    if (renderOrder[i] === "Balance") {
       selectedElement = (
         <Text value={token?.balanceOf?.toString()} size={size} valueClassName={bigAndBoldTextStyleMap[size]} />
       );

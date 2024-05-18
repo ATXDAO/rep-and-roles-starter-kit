@@ -49,7 +49,7 @@ export default function CollectionPage({ params }: { params: { network: string; 
         collection={collection}
         isLoading={isLoading}
         isError={isError}
-        renderOrder={["balanceOf", "Image", "Token Id", "Name", "Description", "Attributes"]}
+        renderOrder={["Balance", "Image", "Token Id", "Name", "Description", "Type", "Attributes"]}
       />
     </div>
   );

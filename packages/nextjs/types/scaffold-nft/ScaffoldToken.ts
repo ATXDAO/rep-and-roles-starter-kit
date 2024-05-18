@@ -5,6 +5,8 @@ export type ScaffoldToken = {
   id?: bigint;
   uri?: string;
   balanceOf?: bigint;
+  tokenType?: any;
+
   metadata?: {
     name?: string;
     description?: string;
