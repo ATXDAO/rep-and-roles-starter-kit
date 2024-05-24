@@ -190,8 +190,6 @@ export const useRepTokens = (tokenIds: bigint[], address?: string, replacementTy
     }
   }
 
-  console.log(addresses);
-
   // const { addresses } = useMemo(() => {
   //   const addresses: string[] = [];
 

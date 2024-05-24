@@ -20,8 +20,14 @@ type HeaderMenuLink = {
 
 export const menuLinks: HeaderMenuLink[] = [];
 
-export const HeaderMenuLinks = () => {
+type Props = {
+  menuLinks: HeaderMenuLink[];
+};
+
+export const HeaderMenuLinks = ({ menuLinks }: Props) => {
   const pathname = usePathname();
+
+  console.log(menuLinks);
 
   return (
     <>
@@ -97,6 +103,11 @@ export const Header = () => {
       });
 
       linksToAdd.push({
+        label: "Factory",
+        href: "/factory",
+      });
+
+      linksToAdd.push({
         label: "Debug Contracts",
         href: "/debug",
         icon: <BugAntIcon className="h-4 w-4" />,
@@ -131,11 +142,14 @@ export const Header = () => {
           href: "/stewards-hideout",
         },
       ]);
-
-      setInstancedHeaderLinks([...instancedHeaderLinks, linksToAdd]);
     }
+
+    console.log(linksToAdd);
+
+    if (linksToAdd.length > 0) setInstancedHeaderLinks([...instancedHeaderLinks, ...linksToAdd]);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [balanceOfClaimableHat2]);
+  }, []);
 
   const [output, setOutput] = useState<any>();
 
@@ -160,7 +174,7 @@ export const Header = () => {
                 setIsDrawerOpen(false);
               }}
             >
-              <HeaderMenuLinks />
+              <HeaderMenuLinks menuLinks={instancedHeaderLinks} />
             </ul>
           )}
         </div>
@@ -174,7 +188,7 @@ export const Header = () => {
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
-          <HeaderMenuLinks />
+          <HeaderMenuLinks menuLinks={instancedHeaderLinks} />
         </ul>
       </div>
       <div className="navbar-end flex-grow mr-4">
