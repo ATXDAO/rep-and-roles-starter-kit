@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useAccount } from "wagmi";
 import { useScaffoldWatchContractEvent, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
@@ -22,6 +23,35 @@ export function Factory() {
     },
   });
 
+  async function onSubmit(event: any) {
+    event.preventDefault();
+    const target = event.target;
+    console.log(target.name.value);
+    console.log(target.symbol.value);
+    console.log(target.uri.value);
+
+    // await instance.updateToken(0, tokenType);
+    // await instance.updateToken(1, tokenType);
+    // await instance.setBaseURI(baseURI);
+  }
+
+  const [tokens, setTokens] = useState<string[]>([]);
+
+  async function addToken(tokenType: string) {
+    setTokens([...tokens, tokenType]);
+  }
+
+  const tokensOutputMapped = tokens.map((type, index) => {
+    return (
+      <div key={index}>
+        <p>
+          Token {index}: {type}
+        </p>
+      </div>
+    );
+  });
+
+  console.log(tokens);
   return (
     <>
       <div className="py-5 space-y-5 flex flex-col justify-center items-center bg-primary bg-[length:100%_100%] py-1 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
@@ -39,6 +69,45 @@ export function Factory() {
               Create Reputation Smart Contract
             </button>
             <p>{"hello"}</p>
+            <div className="flex items-center flex-col flex-grow pt-2">
+              <form className="flex flex-col" onSubmit={onSubmit}>
+                <p>Base URI</p>
+                <input type="text" name="baseURI" />
+                {/* <p>Symbol</p>
+          <input type="text" name="symbol" />
+          <p>URI</p>
+          <input type="text" name="uri" className="w-[600px]" /> */}
+                <button className="btn btn-secondary" type="submit">
+                  Submit
+                </button>
+              </form>
+
+              <button
+                className="btn btn-secondary"
+                onClick={() => {
+                  addToken("Lifetime");
+                }}
+              >
+                Add Lifetime
+              </button>
+              <button
+                className="btn btn-secondary"
+                onClick={() => {
+                  addToken("Redeemable");
+                }}
+              >
+                Add Redeemable
+              </button>
+              <button
+                className="btn btn-secondary"
+                onClick={() => {
+                  addToken("Transferable");
+                }}
+              >
+                Add Transferable
+              </button>
+              {tokensOutputMapped}
+            </div>
           </div>
         </div>
       </div>

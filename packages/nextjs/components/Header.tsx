@@ -27,8 +27,6 @@ type Props = {
 export const HeaderMenuLinks = ({ menuLinks }: Props) => {
   const pathname = usePathname();
 
-  console.log(menuLinks);
-
   return (
     <>
       {menuLinks.map(({ label, href, icon }) => {
@@ -143,8 +141,6 @@ export const Header = () => {
         },
       ]);
     }
-
-    console.log(linksToAdd);
 
     if (linksToAdd.length > 0) setInstancedHeaderLinks([...instancedHeaderLinks, ...linksToAdd]);
 
