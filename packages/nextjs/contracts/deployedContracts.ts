@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokens: {
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      address: "0x9e545e3c0baab3e08cdfd552c960a1050f373042",
       abi: [
         {
           type: "constructor",
@@ -1447,7 +1447,7 @@ const deployedContracts = {
       },
     },
     ReputationFaucet: {
-      address: "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
+      address: "0x99bba657f2bbc93c02d617f8ba121cb8fc104acf",
       abi: [
         {
           type: "constructor",
@@ -1572,7 +1572,7 @@ const deployedContracts = {
       },
     },
     Hats: {
-      address: "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
+      address: "0xb7278a61aa25c888815afc32ad3cc52ff24fe575",
       abi: [
         {
           type: "constructor",
@@ -3533,7 +3533,7 @@ const deployedContracts = {
       },
     },
     MultiClaimsHatter: {
-      address: "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1",
+      address: "0x2bdcc0de6be1f7d2ee689a0342d76f52e8efaba3",
       abi: [
         {
           type: "constructor",
@@ -3859,7 +3859,7 @@ const deployedContracts = {
       },
     },
     ActiveModule: {
-      address: "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f",
+      address: "0x7bc06c482dead17c0e297afbc32f6e63d3846650",
       abi: [
         {
           type: "function",
@@ -3889,7 +3889,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ERC1155EligibiltiyModule: {
-      address: "0x09635F643e140090A9A8Dcd712eD6285858ceBef",
+      address: "0xcbeaf3bde82155f56486fb5a1072cb8baaf547cc",
       abi: [
         {
           type: "constructor",
@@ -3940,7 +3940,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ReputationTokensUpgradeable: {
-      address: "0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690",
+      address: "0x922d6956c99e12dfeb3224dea977d0939758a1fe",
       abi: [
         {
           type: "function",
@@ -5400,7 +5400,7 @@ const deployedContracts = {
       },
     },
     ReputationTokensFactory: {
-      address: "0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB",
+      address: "0x5081a39b8a5f0e35a8d959395a630b68b74dd30f",
       abi: [
         {
           type: "constructor",
@@ -5411,12 +5411,7 @@ const deployedContracts = {
               internalType: "address[]",
             },
             {
-              name: "_controllers",
-              type: "address[]",
-              internalType: "address[]",
-            },
-            {
-              name: "_implementation",
+              name: "implementation",
               type: "address",
               internalType: "address",
             },
@@ -5549,19 +5544,6 @@ const deployedContracts = {
         },
         {
           type: "function",
-          name: "implementation",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
           name: "instances",
           inputs: [
             {
@@ -5617,6 +5599,32 @@ const deployedContracts = {
         },
         {
           type: "function",
+          name: "s_implementation",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "setImplementation",
+          inputs: [
+            {
+              name: "implementation",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
           name: "supportsInterface",
           inputs: [
             {
@@ -5639,7 +5647,7 @@ const deployedContracts = {
           name: "CreatedNewInstance",
           inputs: [
             {
-              name: "",
+              name: "instance",
               type: "address",
               indexed: false,
               internalType: "address",
@@ -5749,15 +5757,7 @@ const deployedContracts = {
           inputs: [],
         },
       ],
-      inheritedFunctions: {
-        DEFAULT_ADMIN_ROLE: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-        getRoleAdmin: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-        grantRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-        hasRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-        renounceRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-        revokeRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-        supportsInterface: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
-      },
+      inheritedFunctions: {},
     },
   },
 } as const;

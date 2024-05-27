@@ -4,10 +4,8 @@ pragma solidity ^0.8.19;
 import {console} from "forge-std/console.sol";
 
 import {ScaffoldETHDeploy} from "./DeployHelpers.s.sol";
-import {ReputationTokensFactory} from
-    "@atxdao/contracts/reputation/ReputationTokensFactory.sol";
-import {ReputationTokensUpgradeable} from
-    "@atxdao/contracts/reputation/ReputationTokensUpgradeable.sol";
+import {ReputationTokensFactory} from "@atxdao/contracts/reputation/ReputationTokensFactory.sol";
+import {ReputationTokensUpgradeable} from "@atxdao/contracts/reputation/ReputationTokensUpgradeable.sol";
 
 contract DeployFactoryScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
@@ -28,9 +26,10 @@ contract DeployFactoryScript is ScaffoldETHDeploy {
         admins[0] = deployerPubKey;
         admins[1] = controller;
 
-        ReputationTokensUpgradeable implementation =
-            new ReputationTokensUpgradeable();
-        ReputationTokensFactory factory =
-            new ReputationTokensFactory(admins, admins, address(implementation));
+        ReputationTokensUpgradeable implementation = new ReputationTokensUpgradeable();
+        ReputationTokensFactory factory = new ReputationTokensFactory(
+            admins,
+            address(implementation)
+        );
     }
 }
