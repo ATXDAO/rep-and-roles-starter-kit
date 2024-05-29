@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokens: {
-      address: "0xe6e340d132b5f46d1e472debcd681b2abc16e57e",
+      address: "0x7bc06c482dead17c0e297afbc32f6e63d3846650",
       abi: [
         {
           type: "constructor",
@@ -1370,10 +1370,47 @@ const deployedContracts = {
           inputs: [],
         },
       ],
-      inheritedFunctions: {},
+      inheritedFunctions: {
+        owner: "lib/reputation/lib/solidstate-solidity/contracts/access/ownable/Ownable.sol",
+        transferOwnership: "lib/reputation/lib/solidstate-solidity/contracts/access/ownable/Ownable.sol",
+        MINTER_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
+        TOKEN_MIGRATOR_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
+        TOKEN_UPDATER_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
+        accountsByToken: "lib/reputation/contracts/ReputationTokensBase.sol",
+        balanceOf: "lib/reputation/contracts/ReputationTokensBase.sol",
+        balanceOfBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
+        burnedBalanceOf: "lib/reputation/contracts/ReputationTokensBase.sol",
+        distributableBalanceOf: "lib/reputation/contracts/ReputationTokensBase.sol",
+        distribute: "lib/reputation/contracts/ReputationTokensBase.sol",
+        distributeBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getRoleAdmin: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getRoleMember: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getRoleMemberCount: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getTokenType: "lib/reputation/contracts/ReputationTokensBase.sol",
+        grantRole: "lib/reputation/contracts/ReputationTokensBase.sol",
+        hasRole: "lib/reputation/contracts/ReputationTokensBase.sol",
+        honestBalanceOf: "lib/reputation/contracts/ReputationTokensBase.sol",
+        isApprovedForAll: "lib/reputation/contracts/ReputationTokensBase.sol",
+        migrate: "lib/reputation/contracts/ReputationTokensBase.sol",
+        migrateBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
+        mint: "lib/reputation/contracts/ReputationTokensBase.sol",
+        mintBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
+        renounceRole: "lib/reputation/contracts/ReputationTokensBase.sol",
+        revokeRole: "lib/reputation/contracts/ReputationTokensBase.sol",
+        safeBatchTransferFrom: "lib/reputation/contracts/ReputationTokensBase.sol",
+        safeTransferFrom: "lib/reputation/contracts/ReputationTokensBase.sol",
+        setApprovalForAll: "lib/reputation/contracts/ReputationTokensBase.sol",
+        supportsInterface: "lib/reputation/contracts/ReputationTokensBase.sol",
+        tokensByAccount: "lib/reputation/contracts/ReputationTokensBase.sol",
+        totalHolders: "lib/reputation/contracts/ReputationTokensBase.sol",
+        totalSupply: "lib/reputation/contracts/ReputationTokensBase.sol",
+        updateToken: "lib/reputation/contracts/ReputationTokensBase.sol",
+        updateTokenBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
+        uri: "lib/reputation/contracts/ReputationTokensBase.sol",
+      },
     },
     ReputationFaucet: {
-      address: "0xf5059a5d33d5853360d16c683c16e67980206f36",
+      address: "0x922d6956c99e12dfeb3224dea977d0939758a1fe",
       abi: [
         {
           type: "constructor",
@@ -1491,10 +1528,14 @@ const deployedContracts = {
           stateMutability: "view",
         },
       ],
-      inheritedFunctions: {},
+      inheritedFunctions: {
+        onERC1155BatchReceived: "lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol",
+        onERC1155Received: "lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol",
+        supportsInterface: "lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol",
+      },
     },
     Hats: {
-      address: "0x0e801d84fa97b50751dbf25036d067dcf18858bf",
+      address: "0x21df544947ba3e8b3c32561399e88b52dc8b2823",
       abi: [
         {
           type: "constructor",
@@ -3455,7 +3496,7 @@ const deployedContracts = {
       },
     },
     MultiClaimsHatter: {
-      address: "0x5eb3bc0a489c5a8288765d2336659ebca68fcd00",
+      address: "0xdc11f7e700a4c898ae5caddb1082cffa76512add",
       abi: [
         {
           type: "constructor",
@@ -3781,7 +3822,7 @@ const deployedContracts = {
       },
     },
     ActiveModule: {
-      address: "0x809d550fca64d94bd9f66e60752a544199cfac3d",
+      address: "0x36b58f5c1969b7b6591d752ea6f5486d069010ab",
       abi: [
         {
           type: "function",
@@ -3811,7 +3852,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ERC1155EligibiltiyModule: {
-      address: "0x5f3f1dbd7b74c6b46e8c44f98792a1daf8d69154",
+      address: "0x202cce504e04bed6fc0521238ddf04bc9e8e15ab",
       abi: [
         {
           type: "constructor",
@@ -3862,7 +3903,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ReputationTokensUpgradeable: {
-      address: "0x2bdcc0de6be1f7d2ee689a0342d76f52e8efaba3",
+      address: "0xbec49fa140acaa83533fb00a2bb19bddd0290f25",
       abi: [
         {
           type: "function",
@@ -5245,10 +5286,47 @@ const deployedContracts = {
           inputs: [],
         },
       ],
-      inheritedFunctions: {},
+      inheritedFunctions: {
+        owner: "lib/reputation/lib/solidstate-solidity/contracts/access/ownable/Ownable.sol",
+        transferOwnership: "lib/reputation/lib/solidstate-solidity/contracts/access/ownable/Ownable.sol",
+        MINTER_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
+        TOKEN_MIGRATOR_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
+        TOKEN_UPDATER_ROLE: "lib/reputation/contracts/ReputationTokensBase.sol",
+        accountsByToken: "lib/reputation/contracts/ReputationTokensBase.sol",
+        balanceOf: "lib/reputation/contracts/ReputationTokensBase.sol",
+        balanceOfBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
+        burnedBalanceOf: "lib/reputation/contracts/ReputationTokensBase.sol",
+        distributableBalanceOf: "lib/reputation/contracts/ReputationTokensBase.sol",
+        distribute: "lib/reputation/contracts/ReputationTokensBase.sol",
+        distributeBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getRoleAdmin: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getRoleMember: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getRoleMemberCount: "lib/reputation/contracts/ReputationTokensBase.sol",
+        getTokenType: "lib/reputation/contracts/ReputationTokensBase.sol",
+        grantRole: "lib/reputation/contracts/ReputationTokensBase.sol",
+        hasRole: "lib/reputation/contracts/ReputationTokensBase.sol",
+        honestBalanceOf: "lib/reputation/contracts/ReputationTokensBase.sol",
+        isApprovedForAll: "lib/reputation/contracts/ReputationTokensBase.sol",
+        migrate: "lib/reputation/contracts/ReputationTokensBase.sol",
+        migrateBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
+        mint: "lib/reputation/contracts/ReputationTokensBase.sol",
+        mintBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
+        renounceRole: "lib/reputation/contracts/ReputationTokensBase.sol",
+        revokeRole: "lib/reputation/contracts/ReputationTokensBase.sol",
+        safeBatchTransferFrom: "lib/reputation/contracts/ReputationTokensBase.sol",
+        safeTransferFrom: "lib/reputation/contracts/ReputationTokensBase.sol",
+        setApprovalForAll: "lib/reputation/contracts/ReputationTokensBase.sol",
+        supportsInterface: "lib/reputation/contracts/ReputationTokensBase.sol",
+        tokensByAccount: "lib/reputation/contracts/ReputationTokensBase.sol",
+        totalHolders: "lib/reputation/contracts/ReputationTokensBase.sol",
+        totalSupply: "lib/reputation/contracts/ReputationTokensBase.sol",
+        updateToken: "lib/reputation/contracts/ReputationTokensBase.sol",
+        updateTokenBatch: "lib/reputation/contracts/ReputationTokensBase.sol",
+        uri: "lib/reputation/contracts/ReputationTokensBase.sol",
+      },
     },
     ReputationTokensFactory: {
-      address: "0x7969c5ed335650692bc04293b07f5bf2e7a673c0",
+      address: "0xd84379ceae14aa33c123af12424a37803f885889",
       abi: [
         {
           type: "constructor",
@@ -5260,6 +5338,11 @@ const deployedContracts = {
             },
             {
               name: "implementation",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "op",
               type: "address",
               internalType: "address",
             },

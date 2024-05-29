@@ -26,10 +26,22 @@ contract DeployFactoryScript is ScaffoldETHDeploy {
         admins[0] = deployerPubKey;
         admins[1] = controller;
 
+        address tokensAddr = address(0);
+
+        uint256 chainId;
+        assembly {
+            chainId := chainid()
+        }
+
+        if (chainId == 10) {
+            tokensAddr = 0x4200000000000000000000000000000000000042;
+        }
+
         ReputationTokensUpgradeable implementation = new ReputationTokensUpgradeable();
         ReputationTokensFactory factory = new ReputationTokensFactory(
             admins,
-            address(implementation)
+            address(implementation),
+            address(0)
         );
     }
 }
