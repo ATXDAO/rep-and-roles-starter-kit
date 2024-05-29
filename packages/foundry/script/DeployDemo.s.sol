@@ -31,7 +31,11 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         admins[0] = deployerPubKey;
         admins[1] = controller;
 
-        ReputationTokens instance = new ReputationTokens(controller, admins);
+        ReputationTokens instance = new ReputationTokens(
+            controller,
+            admins,
+            admins
+        );
 
         setupAccountWithAllRoles(instance, deployerPubKey);
         setupAccountWithAllRoles(instance, controller);
@@ -41,7 +45,7 @@ contract DeployDemoScript is ScaffoldETHDeploy {
 
         batchCreateTokens(instance);
 
-        batchSetTokenURIs(instance);
+        // batchSetTokenURIs(instance);
 
         uint256[] memory tokenIds = new uint256[](3);
         tokenIds[0] = 0;
@@ -65,20 +69,43 @@ contract DeployDemoScript is ScaffoldETHDeploy {
 
             console.log(deployerPubKey);
 
-            uint256 topHatId = hatsInstance.mintTopHat(deployerPubKey, "Top Hat", "TopHat IPFS");
+            uint256 topHatId = hatsInstance.mintTopHat(
+                deployerPubKey,
+                "Top Hat",
+                "TopHat IPFS"
+            );
             console.log(topHatId);
 
-            uint256 hatterHatId =
-                hatsInstance.createHat(topHatId, "Hatter", 5, deployerPubKey, deployerPubKey, true, "Hatter IPFS");
+            uint256 hatterHatId = hatsInstance.createHat(
+                topHatId,
+                "Hatter",
+                5,
+                deployerPubKey,
+                deployerPubKey,
+                true,
+                "Hatter IPFS"
+            );
 
-            MultiClaimsHatter hatter = new MultiClaimsHatter("v0.1", address(hatsInstance));
+            MultiClaimsHatter hatter = new MultiClaimsHatter(
+                "v0.1",
+                address(hatsInstance)
+            );
 
             hatsInstance.mintHat(hatterHatId, address(hatter));
 
             ActiveModule activeModule = new ActiveModule();
-            ERC1155EligibiltiyModule eligibilityModule = new ERC1155EligibiltiyModule(address(instance), 100);
-            ERC1155EligibiltiyModule eligibilityModule2 = new ERC1155EligibiltiyModule(address(instance), 500);
-            ERC1155EligibiltiyModule eligibilityModule3 = new ERC1155EligibiltiyModule(address(instance), 1500);
+            ERC1155EligibiltiyModule eligibilityModule = new ERC1155EligibiltiyModule(
+                    address(instance),
+                    100
+                );
+            ERC1155EligibiltiyModule eligibilityModule2 = new ERC1155EligibiltiyModule(
+                    address(instance),
+                    500
+                );
+            ERC1155EligibiltiyModule eligibilityModule3 = new ERC1155EligibiltiyModule(
+                    address(instance),
+                    1500
+                );
 
             uint256 claimableHatId1 = hatsInstance.createHat(
                 hatterHatId,
@@ -122,9 +149,11 @@ contract DeployDemoScript is ScaffoldETHDeploy {
     // HELPER FUNCTIONS
     ///////////////////////////////////
 
-    function setupAccountWithAllRoles(ReputationTokens instance, address addr) public {
+    function setupAccountWithAllRoles(
+        ReputationTokens instance,
+        address addr
+    ) public {
         instance.grantRole(instance.TOKEN_UPDATER_ROLE(), addr);
-        instance.grantRole(instance.TOKEN_URI_SETTER_ROLE(), addr);
         instance.grantRole(instance.MINTER_ROLE(), addr);
         instance.grantRole(instance.TOKEN_MIGRATOR_ROLE(), addr);
     }
@@ -135,19 +164,34 @@ contract DeployDemoScript is ScaffoldETHDeploy {
         tokenIds[1] = 1;
         tokenIds[2] = 2;
 
-        IReputationTokensTypes.TokenType[] memory tokenTypes = new IReputationTokensTypes.TokenType[](3);
+        IReputationTokensTypes.TokenType[]
+            memory tokenTypes = new IReputationTokensTypes.TokenType[](3);
         tokenTypes[0] = IReputationTokensTypes.TokenType.Soulbound;
         tokenTypes[1] = IReputationTokensTypes.TokenType.Redeemable;
         tokenTypes[2] = IReputationTokensTypes.TokenType.Transferable;
 
-        instance.updateTokenBatch(tokenIds, tokenTypes);
+        string
+            memory BASE_URI = "ipfs://bafybeiaz55w6kf7ar2g5vzikfbft2qoexknstfouu524l7q3mliutns2u4/";
+
+        string[] memory uris = new string[](3);
+        uris[0] = string.concat(BASE_URI, "0");
+        uris[1] = string.concat(BASE_URI, "1");
+        uris[
+            2
+        ] = "ipfs://bafkreiheocygb3ty4uo3znjw2wz2asjzavn56owlqjoz4cvxvspg64egtq";
+
+        instance.updateTokenBatch(tokenIds, tokenTypes, uris);
     }
 
-    function batchSetTokenURIs(ReputationTokens instance) public {
-        string memory BASE_URI = "ipfs://bafybeiaz55w6kf7ar2g5vzikfbft2qoexknstfouu524l7q3mliutns2u4/";
+    // function batchSetTokenURIs(ReputationTokens instance) public {
+    //     string
+    //         memory BASE_URI = "ipfs://bafybeiaz55w6kf7ar2g5vzikfbft2qoexknstfouu524l7q3mliutns2u4/";
 
-        instance.setTokenURI(0, string.concat(BASE_URI, "0"));
-        instance.setTokenURI(1, string.concat(BASE_URI, "1"));
-        instance.setTokenURI(2, "ipfs://bafkreiheocygb3ty4uo3znjw2wz2asjzavn56owlqjoz4cvxvspg64egtq");
-    }
+    //     instance.setTokenURI(0, string.concat(BASE_URI, "0"));
+    //     instance.setTokenURI(1, string.concat(BASE_URI, "1"));
+    //     instance.setTokenURI(
+    //         2,
+    //         "ipfs://bafkreiheocygb3ty4uo3znjw2wz2asjzavn56owlqjoz4cvxvspg64egtq"
+    //     );
+    // }
 }

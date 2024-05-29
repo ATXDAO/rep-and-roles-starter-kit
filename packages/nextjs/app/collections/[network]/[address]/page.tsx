@@ -42,6 +42,8 @@ export default function CollectionPage({ params }: { params: { network: string; 
     //chosenOption2,
   );
 
+  console.log(collection);
+
   return (
     <div className="flex flex-col items-center justify-center">
       {/* {advancedOutput} */}

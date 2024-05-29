@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import erc1155Abi from "./erc1155Abi.json";
+// import erc1155Abi from "./erc1155Abi.json";
+import { abi as repAbi } from "../../app/factory/repAbi";
 // import { erc721Abi } from "viem";
 import * as allChains from "viem/chains";
 import { usePublicClient } from "wagmi";
@@ -41,6 +42,8 @@ export const useTokens = (
 
   useEffect(() => {
     async function get() {
+      if (!userAddress) return;
+
       setIsLoading(true);
       setIsError(false);
 
@@ -82,17 +85,18 @@ export const useTokens = (
 
         const arr = [];
 
-        for (let i = 0; i < tokenIds.length; i++) {
+        for (let i = 0; i < 10; i++) {
           let tokenURI: any;
           try {
             tokenURI = await publicClient?.readContract({
               address,
-              abi: erc1155Abi,
+              abi: repAbi,
               functionName: "uri",
-              args: [tokenIds[i]],
+              args: [BigInt(i)],
             });
           } catch (e) {
             console.log(e);
+            break;
           }
 
           // if (loadType === "base64") {
@@ -112,7 +116,12 @@ export const useTokens = (
             metadataJson = await metadata.json();
           } catch (e) {
             console.log(e);
-            metadataJson = JSON.parse(tokenURI?.substring(27));
+
+            try {
+              metadataJson = JSON.parse(tokenURI?.substring(27));
+            } catch (e) {
+              break;
+            }
           }
 
           metadataJson.image = metadataJson.image.replace("ipfs://", replacement[replacementType as replacementType]);
@@ -124,11 +133,13 @@ export const useTokens = (
 
           let balanceOf;
           try {
+            console.log(i);
+            console.log(userAddress);
             balanceOf = await publicClient?.readContract({
               address,
-              abi: erc1155Abi,
+              abi: repAbi,
               functionName: "balanceOf",
-              args: [userAddress, tokenIds[i]],
+              args: [userAddress, BigInt(i)],
             });
           } catch (e) {
             console.log(e);
@@ -139,9 +150,9 @@ export const useTokens = (
           try {
             tokenType = await publicClient?.readContract({
               address,
-              abi: erc1155Abi,
+              abi: repAbi,
               functionName: "getTokenType",
-              args: [tokenIds[i]],
+              args: [BigInt(i)],
             });
           } catch (e) {
             console.log(e);
@@ -150,7 +161,7 @@ export const useTokens = (
           const token = {} as any;
           token.address = address;
           token.metadata = metadataJson;
-          token.id = tokenIds[i];
+          token.id = i;
           token.balanceOf = balanceOf;
           token.uri = tokenURIFormatted;
           token.tokenType = tokenType;
