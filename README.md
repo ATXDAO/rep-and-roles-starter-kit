@@ -21,11 +21,10 @@ cd reputation-and-roles-monorepo
 yarn install
 ```
 
-2. In your terminal, clone the environemnt example
+2. In your terminal, setup the environment by cloning the environemnt example
 
 ```
-cd packages/foundry
-cp .env.example .env
+yarn setup
 ```
 
 3. On the first terminal, run a local network:
