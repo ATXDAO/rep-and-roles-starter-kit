@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 // import erc1155Abi from "./erc1155Abi.json";
-import { abi as repAbi } from "../../app/factory/repAbi";
+import { abi as repAbi } from "../../z_app/factory/repAbi";
 // import { erc721Abi } from "viem";
 import * as allChains from "viem/chains";
 import { usePublicClient } from "wagmi";
