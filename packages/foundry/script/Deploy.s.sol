@@ -7,8 +7,7 @@ import {ScaffoldETHDeploy} from "./DeployHelpers.s.sol";
 import {Hats} from "../contracts/Hats/Hats.sol";
 
 import {DeployDemoScript} from "./DeployDemo.s.sol";
-
-// import {DeployFactoryScript} from "./DeployFactory.s.sol";
+import {DeployFactoryScript} from "./DeployFactory.s.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
