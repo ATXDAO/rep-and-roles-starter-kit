@@ -78,11 +78,11 @@ export const Header = () => {
   });
 
   useEffect(() => {
-    // if (location?.hostname === "localhost" || location?.hostname === "127.0.0.1") {
-    //   setOutput(
-    //     <ReputationTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" />,
-    //   );
-    // }
+    if (location?.hostname === "localhost" || location?.hostname === "127.0.0.1") {
+      setOutput(
+        <ReputationTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" />,
+      );
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tokens.length]);
 
@@ -100,10 +100,10 @@ export const Header = () => {
         href: "/hats",
       });
 
-      // linksToAdd.push({
-      //   label: "Factory",
-      //   href: "/factory",
-      // });
+      linksToAdd.push({
+        label: "Factory",
+        href: "/factory",
+      });
 
       linksToAdd.push({
         label: "Debug Contracts",
@@ -147,7 +147,7 @@ export const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const [output, setOutput] = useState<any>();
+  const [output, setOutput] = useState<any>();
 
   return (
     <div className="sticky lg:static top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2">
@@ -188,8 +188,8 @@ export const Header = () => {
         </ul>
       </div>
       <div className="navbar-end flex-grow mr-4">
-        {/* {output} */}
-        <ReputationTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" />
+        {output}
+        {/* <ReputationTokenGroupCard tokens={tokens} components={widgetComponents} isBalanceOverlayed={true} size="xs" /> */}
 
         <RainbowKitCustomConnectButton />
         <FaucetButton />
