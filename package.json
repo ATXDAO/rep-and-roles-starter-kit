@@ -8,6 +8,7 @@
     ]
   },
   "scripts": {
+    "setup": "yarn workspace @se-2/foundry setup",
     "account": "yarn workspace @se-2/foundry account",
     "chain": "yarn workspace @se-2/foundry chain",
     "compile": "yarn workspace @se-2/foundry compile",

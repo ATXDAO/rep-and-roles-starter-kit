@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "setup": "cp .env .example",
     "account": "node script/ListAccount.js",
     "chain": "anvil --config-out localhost.json",
     "compile": "forge compile",
