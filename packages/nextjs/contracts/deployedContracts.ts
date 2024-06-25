@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     ReputationTokens: {
-      address: "0x7bc06c482dead17c0e297afbc32f6e63d3846650",
+      address: "0x8bee2037448f096900fd9affc427d38ae6cc0350",
       abi: [
         {
           type: "constructor",
@@ -1410,7 +1410,7 @@ const deployedContracts = {
       },
     },
     ReputationFaucet: {
-      address: "0x922d6956c99e12dfeb3224dea977d0939758a1fe",
+      address: "0xe1708fa6bb2844d5384613ef0846f9bc1e8ec55e",
       abi: [
         {
           type: "constructor",
@@ -1535,7 +1535,7 @@ const deployedContracts = {
       },
     },
     Hats: {
-      address: "0x21df544947ba3e8b3c32561399e88b52dc8b2823",
+      address: "0x683d9cdd3239e0e01e8dc6315fa50ad92ab71d2d",
       abi: [
         {
           type: "constructor",
@@ -3496,7 +3496,7 @@ const deployedContracts = {
       },
     },
     MultiClaimsHatter: {
-      address: "0xdc11f7e700a4c898ae5caddb1082cffa76512add",
+      address: "0x71a0b8a2245a9770a4d887ce1e4ecc6c1d4ff28c",
       abi: [
         {
           type: "constructor",
@@ -3822,7 +3822,7 @@ const deployedContracts = {
       },
     },
     ActiveModule: {
-      address: "0x36b58f5c1969b7b6591d752ea6f5486d069010ab",
+      address: "0xae120f0df055428e45b264e7794a18c54a2a3faf",
       abi: [
         {
           type: "function",
@@ -3852,7 +3852,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ERC1155EligibiltiyModule: {
-      address: "0x202cce504e04bed6fc0521238ddf04bc9e8e15ab",
+      address: "0x01e21d7b8c39dc4c764c19b308bd8b14b1ba139e",
       abi: [
         {
           type: "constructor",
@@ -3903,7 +3903,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ReputationTokensUpgradeable: {
-      address: "0xbec49fa140acaa83533fb00a2bb19bddd0290f25",
+      address: "0x547382c0d1b23f707918d3c83a77317b71aa8470",
       abi: [
         {
           type: "function",
@@ -5326,7 +5326,7 @@ const deployedContracts = {
       },
     },
     ReputationTokensFactory: {
-      address: "0xd84379ceae14aa33c123af12424a37803f885889",
+      address: "0x7c8baafa542c57ff9b2b90612bf8ab9e86e22c09",
       abi: [
         {
           type: "constructor",
@@ -5699,7 +5699,15 @@ const deployedContracts = {
           inputs: [],
         },
       ],
-      inheritedFunctions: {},
+      inheritedFunctions: {
+        DEFAULT_ADMIN_ROLE: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+        getRoleAdmin: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+        grantRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+        hasRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+        renounceRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+        revokeRole: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+        supportsInterface: "lib/openzeppelin-contracts/contracts/access/AccessControl.sol",
+      },
     },
   },
 } as const;
