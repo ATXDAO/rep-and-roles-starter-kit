@@ -7,6 +7,10 @@
 
 An open-source toolkit used to quickly and easily deploy your own Reputation & Roles smart contracts along with a decentralized application to interact with them.
 
+## Requirements
+
+Mac or Linux OS. Windows Subsystem for Linux on Windows OS.
+
 ## Quickstart
 
 [Quickstart Tutorial Video](https://www.youtube.com/watch?v=-XbTq4sp37Q&t=3s)
@@ -68,6 +72,14 @@ Refresh the page if you need to!
 On the home page, you should see many colorful and variable cards and widgets which display your Reputation Tokens in full force!
 
 By navigating to the `Debug Contracts` page, you can interact with and view the properties of your deployed Reputation System!
+
+### Deployments
+
+To deploy to the default network (typically locahost):
+`yarn deploy`
+
+To deploy to a specific network:
+`yarn deploy --network <NETWORK_NAME>`
 
 <!-- # 🏗 Scaffold-ETH 2
 
