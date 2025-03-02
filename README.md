@@ -2,7 +2,8 @@
 
 <h4 align="center">
   <a href="https://hotmanics.github.io/rep-and-roles-docs/starter-kit/overview.html">Documentation</a> |
-  <a href="https://github.com/atxdao/rep-and-roles-starter-kit/">Core Smart Contract Repo</a>
+  <a href="https://github.com/atxdao/rep-and-roles-starter-kit/">Core Smart Contract Repo</a> |
+  <a href="https://app.charmverse.io/op-grants/page-23303127376120303">Grant</a>
 </h4>
 
 An open-source toolkit used to quickly and easily deploy your own Reputation & Roles smart contracts along with a decentralized application to interact with them.
